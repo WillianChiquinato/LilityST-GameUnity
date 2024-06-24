@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine;
+using UnityEditor;
+using Unity.VisualScripting;
+
+public class DontDestroy : MonoBehaviour
+{
+    public Sistema_Pause sistema_Pause;
+    public GameObject sistemaPausePrefab;
+    public GameObject[] objs;
+    
+
+    public void Awake()
+    {
+        sistema_Pause = FindObjectOfType<Sistema_Pause>();
+        if (sistema_Pause == null && sistemaPausePrefab != null)
+        {
+            GameObject sistemaPauseInstance = Instantiate(sistemaPausePrefab);
+            sistema_Pause = sistemaPauseInstance.GetComponent<Sistema_Pause>();
+        }
+
+        // Verifica se já existe uma instância desse objeto na cena
+        objs = GameObject.FindGameObjectsWithTag("DontDestroy");
+
+        if (objs.Length > 8)
+        {
+            // Se já existir, destrói o objeto atual para evitar duplicados
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            // Se não existir, mantém o objeto ao mudar de cena
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+        if (sistema_Pause != null && sistema_Pause.IrMenu == true)
+        {
+            foreach (var longLifeObj in objs)
+            {
+                Destroy(longLifeObj);
+            }
+        }
+    }
+}
