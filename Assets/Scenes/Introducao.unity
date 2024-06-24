@@ -4581,14 +4581,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1493379162}
     - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
-      propertyPath: damageDroggo
-      value: 
-      objectReference: {fileID: 4052458029977843963, guid: cc82820473c546244a43f7094576bb99, type: 3}
-    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
-      propertyPath: droggoScript
-      value: 
-      objectReference: {fileID: 2547169932492054389, guid: cc82820473c546244a43f7094576bb99, type: 3}
-    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
       propertyPath: playerMoviment
       value: 
       objectReference: {fileID: 724983144}
@@ -5611,26 +5603,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 146697918}
-    - target: {fileID: 697170366803379095, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Exit
-      objectReference: {fileID: 0}
     - target: {fileID: 1708189799342570907, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 146697918}
-    - target: {fileID: 1708189799342570907, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResumeGame
-      objectReference: {fileID: 0}
     - target: {fileID: 3238898927508379689, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 146697918}
-    - target: {fileID: 3238898927508379689, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ParaOMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 6025220677256197359, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5843,10 +5823,6 @@ PrefabInstance:
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4277583068603929381, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: FiltroCeiling.layerMask.m_Bits
-      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 5072506259676923957, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: "Invent\xE1rioUI"

@@ -961,6 +961,7 @@ MonoBehaviour:
   CoracoesLility2: {fileID: 0}
   CoracoesLility3: {fileID: 0}
   CoracoesLility4: {fileID: 0}
+  playerDamage: {fileID: 0}
 --- !u!1 &5860674215431972208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sistema_Pause: {fileID: 0}
+  sistemaPausePrefab: {fileID: 0}
   objs: []
 --- !u!1 &6976391188285351394
 GameObject:

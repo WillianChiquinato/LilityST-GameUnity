@@ -49,6 +49,7 @@ MonoBehaviour:
   bossFight: {fileID: 0}
   Camera_Size: {fileID: 0}
   Size_Camera: {fileID: 0}
+  playerMoviment: {fileID: 0}
   Acordou: 0
   _Combate: 0
 --- !u!61 &3371684209645627863
@@ -187,8 +188,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -2.098137, y: -0.61289215}
-      - {x: -2.0316, y: -2.4618933}
+    - - {x: -2.4898682, y: -0.7741909}
+      - {x: -2.7187958, y: -1.8141365}
+      - {x: -2.535819, y: -2.6306422}
       - {x: -1.3321548, y: -2.6904106}
       - {x: -1.2607864, y: -1.3881624}
       - {x: -1.609849, y: -0.5121518}
@@ -340,8 +342,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.83916366, y: -1.5939362}
-  m_Size: {x: 4.5370345, y: 2.2197382}
+  m_Offset: {x: 0.9938118, y: -1.5939363}
+  m_Size: {x: 4.2278433, y: 2.2197382}
   m_Direction: 1
 --- !u!50 &5742402354408800046
 Rigidbody2D:
@@ -385,11 +387,13 @@ MonoBehaviour:
   animator: {fileID: 3430317690629350114}
   player: {fileID: 0}
   rb: {fileID: 5742402354408800046}
+  droggoHits: {fileID: 0}
   detectionZone: {fileID: 2242078223239584046}
   damage: {fileID: 0}
   acorda_Boss: {fileID: 0}
-  distanciaRanged: 10
+  distancia: 0
   Fireball: {fileID: 7778116084953109236, guid: 4a49f6f668336aa43a4cd76c34285879, type: 3}
+  FireballRB: {fileID: 0}
   FirebalLocal: {fileID: 5116305251157675524}
   Fireball2: {fileID: 0}
   VelocidadeFireBall: 22
@@ -400,6 +404,7 @@ MonoBehaviour:
   DashCooldown: 2
   _Target: 0
   state: 0
+  HitsCounts: 0
 --- !u!114 &4052458029977843963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,10 +432,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 10
-  _health: 10
+  _maxHealth: 20
+  _health: 20
   isInvicible: 0
-  invicibilityTimer: 0.25
+  invicibilityTimer: 0.75
   _IsAlive: 1
 --- !u!1 &5409845463114245619
 GameObject:
@@ -459,7 +464,7 @@ Transform:
   m_GameObject: {fileID: 5409845463114245619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 0, z: 0}
+  m_LocalPosition: {x: 0.49, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -569,7 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 1
-  knockback: {x: -10, y: 5}
+  knockback: {x: -15, y: 12}
 --- !u!60 &4728381888780155927
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -614,12 +619,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.950737, y: -0.37335968}
-      - {x: -2.5347137, y: -1.1500835}
-      - {x: -2.3079824, y: -2.4987452}
+    - - {x: -2.2049103, y: -0.3348484}
+      - {x: -3.5519867, y: -0.78380394}
+      - {x: -3.5065756, y: -2.613352}
       - {x: -0.92678976, y: -2.5982819}
       - {x: -0.9106964, y: -1.2407568}
-      - {x: -1.0386438, y: -0.16206366}
+      - {x: -1.0386438, y: -0.2666493}
   m_UseDelaunayMesh: 0
 --- !u!1 &9066925843926673266
 GameObject:
