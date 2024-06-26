@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class FadeStartGame : MonoBehaviour
 {
     public bool permissao = false;
-
+    public DontDestroy dontDestroy;
     private fadeUI fadeUI;
 
     [SerializeField]
@@ -16,11 +16,7 @@ public class FadeStartGame : MonoBehaviour
     {
         fadeUI = GetComponent<fadeUI>();
         fadeUI.FadeUIOut(fadeTime);
-    }
-    
-    void Update()
-    {
-
+        dontDestroy = GameObject.FindAnyObjectByType<DontDestroy>();
     }
 
     public void ChamarStartGame(string SceneEntrar)
@@ -33,6 +29,6 @@ public class FadeStartGame : MonoBehaviour
         permissao = true;
         fadeUI.FadeUIIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene(SceneEntrar);
+        SceneManager.LoadScene(dontDestroy.CurrentSceneName);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEditorInternal;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerMoviment : MonoBehaviour
     [HideInInspector]
     public Acorda_Boss acorda_Boss;
     public PlayerInput playerInput;
+    public SavePoint savePoint;
 
     public bool entrar;
 
@@ -92,7 +94,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             return _IsAcordada;
         }
-        private set
+        set
         {
             _IsAcordada = value;
             animacao.SetBool(animationstrings.IsAcordada, value);
@@ -151,6 +153,9 @@ public class PlayerMoviment : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
         dialogosIntro = GameObject.FindAnyObjectByType<Dialogos>();
+        savePoint = GameObject.FindObjectOfType<SavePoint>();
+
+        transform.position = SavePoint.CheckpointPosition;
     }
 
     private void Update()
@@ -288,6 +293,7 @@ public class PlayerMoviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        ContagemJump = 0;
     }
 
     public void OnLook(InputAction.CallbackContext context)

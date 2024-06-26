@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Damage : MonoBehaviour
     public UnityEvent<int, Vector2> DamageHit;
     Animator animator;
     PlayerMoviment playerMoviment;
+    Damage playerMovimento;
 
 
     [SerializeField]
@@ -41,7 +43,6 @@ public class Damage : MonoBehaviour
             if (_health <= 0)
             {
                 IsAlive = false;
-                playerMoviment.rb.sharedMaterial = null;
             }
         }
     }
@@ -85,7 +86,6 @@ public class Damage : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
     }
 

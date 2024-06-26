@@ -435,8 +435,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 6
-  _health: 6
+  _maxHealth: 4
+  _health: 4
   isInvicible: 0
   invicibilityTimer: 0.25
   _IsAlive: 1

@@ -11,15 +11,19 @@ public class Patrulha_Attack : MonoBehaviour
     {
         Damage damage = Collision.GetComponent<Damage>();
 
-        if(damage != null) 
+        if (damage != null)
         {
             Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
             // ataque ao alvo
             bool goHit = damage.hit(attackDamage, flipknockback);
-            if(goHit)
+            if (goHit)
             {
                 Debug.Log("AtaqueInimigo");
+                if (DontDestroy.Instance != null)
+                {
+                    Debug.Log("Cena atual: " + DontDestroy.Instance.CurrentSceneName);
+                }
             }
         }
     }

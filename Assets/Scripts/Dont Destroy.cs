@@ -7,6 +7,12 @@ using Unity.VisualScripting;
 
 public class DontDestroy : MonoBehaviour
 {
+    [SerializeField]
+    public static DontDestroy Instance { get; private set; }
+    
+    [SerializeField]
+    public string CurrentSceneName { get; private set; }
+
     public Sistema_Pause sistema_Pause;
     public GameObject sistemaPausePrefab;
     public GameObject[] objs;
@@ -42,5 +48,27 @@ public class DontDestroy : MonoBehaviour
                 Destroy(longLifeObj);
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        // Inicializa com a cena atual
+        CurrentSceneName = SceneManager.GetActiveScene().name;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Atualiza o nome da cena atual quando uma nova cena é carregada
+        CurrentSceneName = scene.name;
     }
 }

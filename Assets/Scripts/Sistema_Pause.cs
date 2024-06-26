@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class Sistema_Pause : MonoBehaviour
 {
+    public SavePoint savePoint;
     public PlayerMoviment playerMoviment;
+    public DontDestroy dontDestroy;
     public GameObject pauseMenu;
     public GameObject MainCamera;
+    public Damage playerHealth;
     public bool IsPaused;
     private LevelTransicao transicao;
     public string sceneName;
@@ -20,13 +23,18 @@ public class Sistema_Pause : MonoBehaviour
         transicao = GameObject.FindObjectOfType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerHealth = playerMoviment.GetComponent<Damage>();
+        dontDestroy = GameObject.FindObjectOfType<DontDestroy>();
+        savePoint = GameObject.FindObjectOfType<SavePoint>();
     }
 
     void Update()
     {
+
         if (playerMoviment.IsAlive == false)
         {
             StartCoroutine(TempoMorte());
+            playerMoviment.rb.sharedMaterial = null;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
