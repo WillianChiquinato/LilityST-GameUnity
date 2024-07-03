@@ -9,14 +9,16 @@ public class DontDestroy : MonoBehaviour
 {
     [SerializeField]
     public static DontDestroy Instance { get; private set; }
-    
-    [SerializeField]
+
     public string CurrentSceneName { get; private set; }
+
+    [SerializeField]
+    private string initialSceneName;
 
     public Sistema_Pause sistema_Pause;
     public GameObject sistemaPausePrefab;
     public GameObject[] objs;
-    
+
 
     public void Awake()
     {
@@ -62,9 +64,10 @@ public class DontDestroy : MonoBehaviour
 
     private void Start()
     {
-        // Inicializa com a cena atual
-        CurrentSceneName = SceneManager.GetActiveScene().name;
+        // Inicializa com a cena especificada
+        CurrentSceneName = initialSceneName;
     }
+
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

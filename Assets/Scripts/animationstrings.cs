@@ -11,6 +11,7 @@ internal class animationstrings
     internal static string IsGrouded = "IsGrouded";
     internal static string IsOnWall = "IsOnWall";
     internal static string IsOnCeiling = "IsOnCeiling";
+    internal static string IsIdlePatrulha = "IsIdlePatrulha";
     internal static string Target = "Target";
     internal static string Combate = "Combate";
     internal static string Ranged = "Ranged";

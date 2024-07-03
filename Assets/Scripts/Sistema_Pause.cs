@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Sistema_Pause : MonoBehaviour
 {
+    public BossFight bossFight;
     public SavePoint savePoint;
     public PlayerMoviment playerMoviment;
     public DontDestroy dontDestroy;
     public GameObject pauseMenu;
     public GameObject MainCamera;
+    public GameObject CutSceneDroggo;
     public Damage playerHealth;
     public bool IsPaused;
     private LevelTransicao transicao;
@@ -26,10 +28,23 @@ public class Sistema_Pause : MonoBehaviour
         playerHealth = playerMoviment.GetComponent<Damage>();
         dontDestroy = GameObject.FindObjectOfType<DontDestroy>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
+        bossFight = FindAnyObjectByType<BossFight>();
+
+
+        CutSceneDroggo = GameObject.FindWithTag("CutScene");
+        CutSceneDroggo.SetActive(false);
     }
 
     void Update()
     {
+        if(bossFight.SceneDroggo == true)
+        {
+            CutSceneDroggo.SetActive(true);
+        }
+        else
+        {
+            CutSceneDroggo.SetActive(false);
+        }
 
         if (playerMoviment.IsAlive == false)
         {

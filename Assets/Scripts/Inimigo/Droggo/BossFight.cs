@@ -7,6 +7,7 @@ public class BossFight : MonoBehaviour
 {
     private CinemachineConfiner2D confiner;
     public GameObject CutSceneDroggo;
+    public bool SceneDroggo;
     public GameObject Camera_Referencia;
     public PolygonCollider2D polygonCollider2;
     public GameObject LimiteBoss;
@@ -18,8 +19,6 @@ public class BossFight : MonoBehaviour
     {
         canvasHUD = GameObject.FindGameObjectWithTag("Sumir");
         confiner = FindObjectOfType<CinemachineConfiner2D>();
-        CutSceneDroggo = GameObject.FindWithTag("CutScene");
-        CutSceneDroggo.SetActive(false);
         canvasHUD.SetActive(true);
 
         Camera_Referencia = GameObject.FindWithTag("LimiteMap");
@@ -27,6 +26,8 @@ public class BossFight : MonoBehaviour
 
         LimiteBoss = GameObject.FindWithTag("Finish");
         LimiteBoss.SetActive(false);
+
+        CutSceneDroggo = GameObject.FindWithTag("CutScene");
     }
 
     void Update()
@@ -46,7 +47,7 @@ public class BossFight : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            CutSceneDroggo.SetActive(true);
+            SceneDroggo = true;
             canvasHUD.SetActive(false);
         }
     }

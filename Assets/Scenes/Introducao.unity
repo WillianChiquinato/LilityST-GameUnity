@@ -991,6 +991,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &305548260
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2217988344540909225, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_Name
+      value: GolemPatrulha
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -54.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
 --- !u!1 &317192193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea93cf39f09b904d9fa8ed24ae69ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSceneName: 
   sistema_Pause: {fileID: 0}
   sistemaPausePrefab: {fileID: 0}
   objs: []
@@ -4277,6 +4335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea93cf39f09b904d9fa8ed24ae69ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSceneName: 
   sistema_Pause: {fileID: 0}
   sistemaPausePrefab: {fileID: 0}
   objs: []
@@ -4309,7 +4368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20248b317e6fa894a856cf900558b145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckpointPosition: {x: 0, y: 0}
 --- !u!4 &1485204628
 Transform:
   m_ObjectHideFlags: 0
@@ -4995,20 +5053,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1493379162}
     - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
-      propertyPath: sceneName
-      value: Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
       propertyPath: playerMoviment
       value: 
       objectReference: {fileID: 724983144}
-    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
-      propertyPath: CheckpointPosition.x
-      value: -71.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
-      propertyPath: CheckpointPosition.y
-      value: 29.55
+    - target: {fileID: 6995312225043282409, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6536,3 +6586,4 @@ SceneRoots:
   - {fileID: 398022048}
   - {fileID: 324054199}
   - {fileID: 2036217614}
+  - {fileID: 305548260}

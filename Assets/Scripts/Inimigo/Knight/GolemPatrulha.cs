@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
-public class Knight_Moviment : MonoBehaviour
+public class GolemPatrulha_Moviment : MonoBehaviour
 {
+    [SerializeField]
+    private float IdleDuracao;
+    [SerializeField]
+    private float IdleTimer;
+
     TouchingDistance touching;
 
     Rigidbody2D rb;
@@ -26,6 +31,9 @@ public class Knight_Moviment : MonoBehaviour
         {
             if (_WalkDirecao != value)
             {
+                IdleTimer = 0;
+                animator.SetBool(animationstrings.IsIdlePatrulha, false);
+
                 // Definir o Flip
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
 
@@ -37,6 +45,7 @@ public class Knight_Moviment : MonoBehaviour
                 {
                     vectorDirecao = Vector2.left;
                 }
+
             }
 
             _WalkDirecao = value;
@@ -115,17 +124,23 @@ public class Knight_Moviment : MonoBehaviour
 
     private void FlipDirecao()
     {
-        if (WalkDirecao == WalkAbleDirecao.Right)
+        IdleTimer += Time.deltaTime;
+        animator.SetBool(animationstrings.IsIdlePatrulha, true);
+
+        if (IdleTimer > IdleDuracao)
         {
-            WalkDirecao = WalkAbleDirecao.Left;
-        }
-        else if (WalkDirecao == WalkAbleDirecao.Left)
-        {
-            WalkDirecao = WalkAbleDirecao.Right;
-        }
-        else
-        {
-            Debug.LogError("A direcao atual vc vai se fuder");
+            if (WalkDirecao == WalkAbleDirecao.Right)
+            {
+                WalkDirecao = WalkAbleDirecao.Left;
+            }
+            else if (WalkDirecao == WalkAbleDirecao.Left)
+            {
+                WalkDirecao = WalkAbleDirecao.Right;
+            }
+            else
+            {
+                Debug.LogError("A direcao atual vc vai se fuder");
+            }
         }
     }
 

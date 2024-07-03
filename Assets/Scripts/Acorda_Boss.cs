@@ -9,6 +9,7 @@ public class Acorda_Boss : MonoBehaviour
     public BossFight bossFight;
 
     public GameObject Camera_Size;
+    public GameObject CutSceneDroggo;
     public Animator Size_Camera;
     public PlayerMoviment playerMoviment;
 
@@ -58,6 +59,7 @@ public class Acorda_Boss : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
+        bossFight.SceneDroggo = false;
         bossFight.CutSceneDroggo.SetActive(false);
         bossFight.canvasHUD.SetActive(true);
         Size_Camera.SetBool(animationstrings.Boss_Fight, true);
