@@ -106,7 +106,6 @@ public class SlimeMoviment : MonoBehaviour
                 ContagemJump = 0.2f;
                 rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0), rb.velocity.y);
             }
-
         }
     }
 

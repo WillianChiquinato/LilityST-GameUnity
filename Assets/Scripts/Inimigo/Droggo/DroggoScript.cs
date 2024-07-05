@@ -22,7 +22,6 @@ public class DroggoScript : MonoBehaviour
     //Fireball droggo
     [SerializeField]
     private Rigidbody2D Fireball;
-
     [HideInInspector]
     public Rigidbody2D FireballRB;
     public Transform FirebalLocal;
@@ -33,6 +32,7 @@ public class DroggoScript : MonoBehaviour
     private float shootTimerDroggo = 2f;
     public float shootTempo;
     public bool shootTimer;
+    
 
     //Para o Dash
     public bool CanDash = true;
