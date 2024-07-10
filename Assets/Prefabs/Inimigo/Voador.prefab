@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 665934657, guid: 46c61586b95a7274197a65d3ea02adde, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86e179ddcddf0a8469013c8ae0813ec8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,9 +150,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15514162, y: -0.10558249}
-  m_Size: {x: 0.7415299, y: 1.0044086}
-  m_Direction: 0
+  m_Offset: {x: 1.0271803, y: -0.14942856}
+  m_Size: {x: 2.4561913, y: 0.8582673}
+  m_Direction: 1
 --- !u!114 &212000396974219426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   distanciaAttack: 0
-  perseguindo: 0
+  distanciaAttack2: 0
   Shooting: 0
+  shootTempo: 0
   playerMoviment: {fileID: 0}
   attackZona: {fileID: 709048735570710725}
   projetil: {fileID: 7978135216938519004, guid: 435359b6bb4789f4cb9ff3b6439b3d29, type: 3}
@@ -323,7 +324,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.2692232}
+  m_Offset: {x: 0, y: -1.8182735}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -334,7 +335,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.01886, y: 8.261431}
+  m_Size: {x: 25.42361, y: 9.359526}
   m_EdgeRadius: 0
 --- !u!114 &709048735570710725
 MonoBehaviour:
@@ -350,3 +351,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectColliders: []
   voador_Moviment: {fileID: 0}
+  perseguindo: 0

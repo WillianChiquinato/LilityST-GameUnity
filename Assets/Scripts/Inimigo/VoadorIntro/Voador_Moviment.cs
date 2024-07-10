@@ -6,7 +6,7 @@ public class Voador_Moviment : MonoBehaviour
 {
     public float speed;
     public float distanciaAttack;
-    // public bool perseguindo = false;
+    public float distanciaAttack2;
     public bool Shooting;
     private float shootTimerTarget = 1f;
     public float shootTempo;
@@ -15,6 +15,7 @@ public class Voador_Moviment : MonoBehaviour
     public DetectionVoador attackZona;
     public GameObject projetil;
     public Transform projetilPos;
+    public Vector3 direction;
 
 
     Damage DamageScript;
@@ -61,6 +62,8 @@ public class Voador_Moviment : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
+
+        direction = (playerMoviment.transform.position - transform.position).normalized;
     }
 
 
@@ -68,11 +71,12 @@ public class Voador_Moviment : MonoBehaviour
     {
         shootTempo += Time.deltaTime;
         distanciaAttack = Mathf.Abs(transform.position.x - playerMoviment.transform.position.x);
+        distanciaAttack2 = Mathf.Abs(transform.position.y - playerMoviment.transform.position.y);
 
-        if (distanciaAttack < 5 || distanciaAttack < 7)
+        if (distanciaAttack < 8 && distanciaAttack2 < 5)
         {
             Target = true;
-            if(Shooting == true && shootTempo >= shootTimerTarget) 
+            if (Shooting == true && shootTempo >= shootTimerTarget)
             {
                 Projetil();
 
@@ -83,7 +87,7 @@ public class Voador_Moviment : MonoBehaviour
         {
             Target = false;
         }
-        
+
         if (attackCooldown > 0)
         {
             attackCooldown -= Time.deltaTime;
@@ -105,18 +109,28 @@ public class Voador_Moviment : MonoBehaviour
 
     public void Perseguir()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerMoviment.transform.position, speed * Time.deltaTime);
+        if (distanciaAttack2 < 4 && distanciaAttack < 7)
+        {
+            // Fica parado na posicao Y
+            transform.position += new Vector3(direction.x, 0.2f, direction.z) * speed * Time.deltaTime;
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, playerMoviment.transform.position, speed * Time.deltaTime);
+        }
+
+        rb.MovePosition(transform.position);
     }
 
     public void Flip()
     {
         if (transform.position.x > playerMoviment.transform.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -127,6 +141,6 @@ public class Voador_Moviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        rb.velocity = new Vector2(knockback.x, knockback.y);
     }
 }

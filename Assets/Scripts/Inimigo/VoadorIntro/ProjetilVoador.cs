@@ -8,6 +8,7 @@ public class ProjetilVoador : MonoBehaviour
     public Voador_Moviment voador_Moviment;
     private Rigidbody2D rb;
     public Transform rbVoador;
+    public TrailRenderer tr;
     public float forcaProjetil;
 
     public float timer;
@@ -24,6 +25,8 @@ public class ProjetilVoador : MonoBehaviour
     
         float rotacao = Mathf.Atan2(-direcao.y, -direcao.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotacao + 90);
+
+        tr.emitting = true;
     }
 
     // Update is called once per frame

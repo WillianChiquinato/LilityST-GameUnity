@@ -3635,6 +3635,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64f6baff8539db3499dffdf70cafe701, type: 3}
+--- !u!1001 &1275374247
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 199548986204628357, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_Name
+      value: Voador
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -55.327362
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 33.474792
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368759172707053041, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e7c4898d763f564687ae781f14527a9, type: 3}
 --- !u!1001 &1294994157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6551,6 +6608,10 @@ PrefabInstance:
       propertyPath: "Invent\xE1rioUI"
       value: 
       objectReference: {fileID: 6125435361271633562}
+    - target: {fileID: 5837603893653372796, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6587,3 +6648,4 @@ SceneRoots:
   - {fileID: 324054199}
   - {fileID: 2036217614}
   - {fileID: 305548260}
+  - {fileID: 1275374247}
