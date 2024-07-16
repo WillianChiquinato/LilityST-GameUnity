@@ -26,10 +26,6 @@ public class Attack_Projetil : MonoBehaviour, Defender
 
     private void OnTriggerEnter2D(Collider2D Collision)
     {
-        if (Collision.CompareTag("Player"))
-        {
-            Debug.Log("EntrouPlayer");
-        }
         Damage damage = Collision.GetComponent<Damage>();
 
         if (damage != null)

@@ -20,10 +20,6 @@ public class Patrulha_Attack : MonoBehaviour
             if (goHit)
             {
                 Debug.Log("AtaqueInimigo");
-                if (DontDestroy.Instance != null)
-                {
-                    Debug.Log("Cena atual: " + DontDestroy.Instance.CurrentSceneName);
-                }
             }
         }
     }

@@ -13,12 +13,14 @@ public class PlayerMoviment : MonoBehaviour
     public Acorda_Boss acorda_Boss;
     public PlayerInput playerInput;
     public SavePoint savePoint;
+    public Bow bow;
 
     public bool entrar;
+    public bool ArcoTime;
 
     //Variaveis
     public Rigidbody2D rb;
-    Animator animacao;
+    public Animator animacao;
     TouchingDistance touching;
     Damage DamageScript;
     Dialogos dialogosIntro;
@@ -29,6 +31,11 @@ public class PlayerMoviment : MonoBehaviour
     public bool IsJumping;
     public float jumpImpulso = 10f;
     public float ContagemJump = 0.5f;
+
+    //Sobre o arco
+    public bool Atirar = false;
+    public bool SlowArco = false;
+
 
     private bool isWallSliding;
     public float wallSlidingSpeed;
@@ -154,6 +161,7 @@ public class PlayerMoviment : MonoBehaviour
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
         dialogosIntro = GameObject.FindAnyObjectByType<Dialogos>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
+        bow = GameObject.FindObjectOfType<Bow>();
 
         transform.position = SavePoint.CheckpointPosition;
     }
@@ -276,17 +284,19 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             animacao.SetTrigger(animationstrings.attack);
         }
     }
 
-    public void OnParry(InputAction.CallbackContext context)
+    public void OnPowers(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            animacao.SetTrigger(animationstrings.Parry);
+            animacao.SetBool(animationstrings.Powers, true);
+            bow.gameObject.SetActive(true);
+            Time.timeScale = 0.4f;
         }
     }
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2569623328268047450}
   m_Layer: 8
   m_Name: Voador
-  m_TagString: Untagged
+  m_TagString: Inimigos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,6 +174,7 @@ MonoBehaviour:
   attackZona: {fileID: 709048735570710725}
   projetil: {fileID: 7978135216938519004, guid: 435359b6bb4789f4cb9ff3b6439b3d29, type: 3}
   projetilPos: {fileID: 8993587348195629510}
+  direction: {x: 0, y: 0, z: 0}
   _Target: 0
 --- !u!114 &4202014534044570717
 MonoBehaviour:

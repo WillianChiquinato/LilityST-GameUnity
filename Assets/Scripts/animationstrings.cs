@@ -25,6 +25,7 @@ internal class animationstrings
     internal static string attack = "attack";
     internal static string Parry = "Parry";
     internal static string IsWallSliding = "IsWallSliding";
+    internal static string Powers = "Powers";
 
     //Universal
     internal static string ProximaParry = "ProximaParry";

@@ -9,8 +9,7 @@ public class DontDestroy : MonoBehaviour
 {
     [SerializeField]
     public static DontDestroy Instance { get; private set; }
-
-    public string CurrentSceneName { get; private set; }
+    public string CurrentSceneName { get; set; }
 
     [SerializeField]
     private string initialSceneName;
@@ -52,6 +51,12 @@ public class DontDestroy : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Inicializa com a cena especificada
+        CurrentSceneName = initialSceneName;
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -61,13 +66,6 @@ public class DontDestroy : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-    private void Start()
-    {
-        // Inicializa com a cena especificada
-        CurrentSceneName = initialSceneName;
-    }
-
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
