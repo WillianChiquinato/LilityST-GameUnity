@@ -53,7 +53,7 @@ public class ProjetilVoador : MonoBehaviour
     {
         if(collision.CompareTag("Player")) 
         {
-            Destroy(gameObject);  
+            Destroy(gameObject);
         }
     }
 }

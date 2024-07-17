@@ -9,10 +9,12 @@ public class Bow : MonoBehaviour
     public float ForceArrow;
     public Transform ShotPoint;
     public Rigidbody2D NewArrow;
-    
+    public Animator animator;
+
 
     //Caminho da Flecha
     public GameObject point;
+    public GameObject posicaoGO;
     GameObject[] points;
     public int numeroDePoints;
     public float SpaceEntreEles;
@@ -24,11 +26,13 @@ public class Bow : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        cameraArco = FindAnyObjectByType<Camera>();
-        playerMoviment = FindAnyObjectByType<PlayerMoviment>();
+        cameraArco = FindObjectOfType<Camera>();
+        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        animator = GetComponent<Animator>();
 
         points = new GameObject[numeroDePoints];
-        for(int i = 0; i < numeroDePoints; i++)
+
+        for (int i = 0; i < numeroDePoints; i++)
         {
             points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
         }
@@ -37,24 +41,36 @@ public class Bow : MonoBehaviour
 
     void Update()
     {
+        if (playerMoviment.transform.localScale.x == 1)
+        {
+            this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            posicaoGO.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            this.gameObject.transform.localScale = new Vector3(-1, -1, 1);
+            posicaoGO.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
         Vector2 BowPosition = transform.position;
         Vector2 mousePosition = cameraArco.ScreenToWorldPoint(Input.mousePosition);
         Direcao = mousePosition - BowPosition;
         transform.right = Direcao;
 
-        if(Input.GetMouseButtonDown(0) && playerMoviment.Atirar == true) 
+        if (Input.GetMouseButtonDown(0) && playerMoviment.Atirar == true)
         {
-            Shoot();   
+            Shoot();
         }
 
-        for(int i = 0; i < numeroDePoints; i++)
+        for (int i = 0; i < numeroDePoints; i++)
         {
             points[i].transform.position = PointPosition(i * SpaceEntreEles);
         }
 
-        if(NewArrow) 
+        if (NewArrow)
         {
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
+            animator.SetBool(animationstrings.PowersBraco, false);
             gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
@@ -63,6 +79,15 @@ public class Bow : MonoBehaviour
     public void Shoot()
     {
         NewArrow = Instantiate(Arrow, ShotPoint.position, ShotPoint.rotation);
+        if (playerMoviment.transform.localScale.x == 1)
+        {
+            NewArrow.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            NewArrow.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
         NewArrow.velocity = NewArrow.transform.right * ForceArrow;
     }
 

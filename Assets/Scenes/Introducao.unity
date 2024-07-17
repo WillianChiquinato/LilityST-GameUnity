@@ -4755,6 +4755,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1706556594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4646848358048255676, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+  m_PrefabInstance: {fileID: 7941424040776721489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1707258171
 GameObject:
   m_ObjectHideFlags: 0
@@ -6334,6 +6339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3475526681380040559, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: posicaoGO
+      value: 
+      objectReference: {fileID: 1706556594}
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -71.73
@@ -6378,8 +6387,25 @@ PrefabInstance:
       propertyPath: "Invent\xE1rioUI"
       value: 
       objectReference: {fileID: 6125435361271633562}
+    - target: {fileID: 5507222364198214594, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507222364198214594, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800160888074072192, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.653
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800160888074072192, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.131
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2301251858234969072, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}

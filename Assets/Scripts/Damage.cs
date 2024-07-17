@@ -8,8 +8,6 @@ public class Damage : MonoBehaviour
 {
     public UnityEvent<int, Vector2> DamageHit;
     Animator animator;
-    PlayerMoviment playerMoviment;
-    Damage playerMovimento;
 
 
     [SerializeField]

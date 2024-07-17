@@ -24,6 +24,5 @@ public class DetectionVoador : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision) 
     {
         detectColliders.Remove(collision);
-        perseguindo = false;
     }
 }

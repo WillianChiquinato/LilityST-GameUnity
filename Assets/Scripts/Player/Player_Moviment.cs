@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEditorInternal;
+using Cinemachine;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -35,6 +37,8 @@ public class PlayerMoviment : MonoBehaviour
     //Sobre o arco
     public bool Atirar = false;
     public bool SlowArco = false;
+    public float zOffset = -10f;
+    public float followSpeed = 10f;
 
 
     private bool isWallSliding;
@@ -292,11 +296,11 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnPowers(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && touching.IsGrouded)
         {
             animacao.SetBool(animationstrings.Powers, true);
             bow.gameObject.SetActive(true);
-            Time.timeScale = 0.4f;
+            Time.timeScale = 0.3f;
         }
     }
 
