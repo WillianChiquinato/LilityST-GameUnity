@@ -15,6 +15,7 @@ public class Bow : MonoBehaviour
 
 
     //Caminho da Flecha
+    public GameObject shotPoint;
     public GameObject point;
     public GameObject posicaoGO;
     GameObject[] points;
@@ -46,6 +47,8 @@ public class Bow : MonoBehaviour
 
     void Update()
     {
+
+
         if (playerMoviment.transform.localScale.x == 1)
         {
             this.gameObject.transform.localScale = new Vector3(1, 1, 1);
@@ -68,10 +71,6 @@ public class Bow : MonoBehaviour
             {
                 //Projetil do voador
                 Shoot();
-                foreach (var DestruirCaminho in points)
-                {
-                    Destroy(DestruirCaminho);
-                }
             }
         }
 
@@ -84,17 +83,12 @@ public class Bow : MonoBehaviour
         {
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
             animator.SetBool(animationstrings.PowersBraco, false);
-            gameObject.SetActive(false);
+            StartCoroutine(delayAnimation());
             Time.timeScale = 1f;
+            playerMoviment.tempo = false;
+            playerMoviment.elapsedTime = 0f;
+            NewArrow = null;
             Destroy(NewArrow, 2f);
-            
-            if (Respawn)
-            {
-                for (int i = 0; i < numeroDePoints; i++)
-                {
-                    points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
-                }
-            }
         }
 
         if (Direcao.x >= 1)
@@ -129,5 +123,25 @@ public class Bow : MonoBehaviour
     {
         Vector2 position = (Vector2)ShotPoint.position + (Direcao.normalized * ForceArrow * T) + 0.5f * Physics2D.gravity * (T * T);
         return position;
+    }
+
+    private IEnumerator delayAnimation()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.SetActive(false);
+
+        foreach (var DestruirCaminho in points)
+        {
+            Destroy(DestruirCaminho);
+        }
+
+        if (Respawn)
+        {
+            for (int i = 0; i < numeroDePoints; i++)
+            {
+                points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+            }
+        }
     }
 }

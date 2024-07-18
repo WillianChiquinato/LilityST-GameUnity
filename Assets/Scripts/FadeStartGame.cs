@@ -29,6 +29,6 @@ public class FadeStartGame : MonoBehaviour
         permissao = true;
         fadeUI.FadeUIIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene(dontDestroy.CurrentSceneName);
+        SceneManager.LoadScene("Introducao");
     }
 }

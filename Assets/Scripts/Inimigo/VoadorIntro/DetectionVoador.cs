@@ -9,19 +9,22 @@ public class DetectionVoador : MonoBehaviour
     public Voador_Moviment voador_Moviment;
     public bool perseguindo = false;
 
-    private void Awake() 
+    private void Awake()
     {
         Col = GetComponent<Collider2D>();
         voador_Moviment = GameObject.FindAnyObjectByType<Voador_Moviment>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        detectColliders.Add(collision);
-        perseguindo = true;
+        if (collision.CompareTag("Player") || collision.CompareTag("Parry"))
+        {
+            detectColliders.Add(collision);
+            perseguindo = true;
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) 
+    private void OnTriggerExit2D(Collider2D collision)
     {
         detectColliders.Remove(collision);
     }

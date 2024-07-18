@@ -39,6 +39,10 @@ public class PlayerMoviment : MonoBehaviour
     public bool SlowArco = false;
     public float zOffset = -10f;
     public float followSpeed = 10f;
+    public bool tempo;
+    public float targetTimeScale = 0.3f;
+    public float duration = 1f;
+    public float elapsedTime = 0f;
 
 
     private bool isWallSliding;
@@ -175,6 +179,7 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Current TimeScale: " + Time.timeScale);
         if (!canMove)
         {
             playerInput.enabled = false;
@@ -186,6 +191,21 @@ public class PlayerMoviment : MonoBehaviour
 
             animacao.SetBool(animationstrings.IsAcordada, true);
             dialogosIntro.animator.SetBool("Sumir", true);
+        }
+
+        if (tempo)
+        {
+            // Atualiza o tempo decorrido
+            elapsedTime += Time.unscaledDeltaTime; // Usar Time.unscaledDeltaTime para garantir que a interpolação não seja afetada por timeScale
+
+            // Calcula a fração do tempo decorrido em relação à duração total
+            float t = elapsedTime / duration;
+
+            // Interpola suavemente o Time.timeScale do valor inicial para o targetTimeScale
+            Time.timeScale = Mathf.Lerp(1f, targetTimeScale, t);
+
+            // Opcional: Debug para verificar o valor atual do Time.timeScale
+            Debug.Log("Current TimeScale: " + Time.timeScale);
         }
     }
 
@@ -303,9 +323,10 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (context.started && touching.IsGrouded && bow.NewArrow == null)
         {
+            tempo = true;
             animacao.SetBool(animationstrings.Powers, true);
             bow.gameObject.SetActive(true);
-            Time.timeScale = 0.3f;
+            bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
         }
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SeguirMouse : MonoBehaviour
 {
-    public float zOffset = -10f; // Deslocamento no eixo Z (caso 2D)
     public Camera cameraMouse;
 
     void Start()
@@ -13,11 +12,9 @@ public class SeguirMouse : MonoBehaviour
     }
     void Update()
     {
-        // Obter a posição do mouse em coordenadas de tela
-        Vector3 mouseScreenPosition = Input.mousePosition;
-
         // Converter a posição da tela para a posição do mundo
-        Vector3 mouseWorldPosition = cameraMouse.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, 0));
+        Vector3 mouseWorldPosition = cameraMouse.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0f;
 
         // Atualizar a posição do GameObject para a posição do mouse
         transform.position = mouseWorldPosition;

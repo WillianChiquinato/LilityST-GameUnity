@@ -18,6 +18,9 @@ public class DontDestroy : MonoBehaviour
 
     public void Awake()
     {
+        //Cena do começo
+        CurrentSceneName = initialSceneName;
+        
         sistema_Pause = FindObjectOfType<Sistema_Pause>();
         if (sistema_Pause == null && sistemaPausePrefab != null)
         {
@@ -46,21 +49,5 @@ public class DontDestroy : MonoBehaviour
                 Destroy(longLifeObj);
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Atualiza o nome da cena atual quando uma nova cena é carregada
-        CurrentSceneName = scene.name;
     }
 }
