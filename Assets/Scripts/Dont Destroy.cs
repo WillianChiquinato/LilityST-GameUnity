@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor;
-using Unity.VisualScripting;
 
 public class DontDestroy : MonoBehaviour
 {
@@ -17,7 +15,6 @@ public class DontDestroy : MonoBehaviour
     public Sistema_Pause sistema_Pause;
     public GameObject sistemaPausePrefab;
     public GameObject[] objs;
-
 
     public void Awake()
     {
@@ -49,12 +46,6 @@ public class DontDestroy : MonoBehaviour
                 Destroy(longLifeObj);
             }
         }
-    }
-
-    private void Start()
-    {
-        // Inicializa com a cena especificada
-        CurrentSceneName = initialSceneName;
     }
 
     private void OnEnable()

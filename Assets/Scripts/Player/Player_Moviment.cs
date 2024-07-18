@@ -48,6 +48,9 @@ public class PlayerMoviment : MonoBehaviour
 
     Vector2 moveInput;
 
+    //Ataque combo da lility
+    public bool Atacar;
+
     public float CurrentMoveSpeed
     {
         get
@@ -182,6 +185,7 @@ public class PlayerMoviment : MonoBehaviour
             DialogosIntro = true;
 
             animacao.SetBool(animationstrings.IsAcordada, true);
+            dialogosIntro.animator.SetBool("Sumir", true);
         }
     }
 
@@ -288,15 +292,16 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
-            animacao.SetTrigger(animationstrings.attack);
+            animacao.SetTrigger(animationstrings.attack1);
+            Atacar = true;
         }
     }
 
     public void OnPowers(InputAction.CallbackContext context)
     {
-        if (context.started && touching.IsGrouded)
+        if (context.started && touching.IsGrouded && bow.NewArrow == null)
         {
             animacao.SetBool(animationstrings.Powers, true);
             bow.gameObject.SetActive(true);

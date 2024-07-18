@@ -7,11 +7,13 @@ public class Dialogos : MonoBehaviour
     public PlayerMoviment playerMoviment;
     public Vector3 offset;
     public Transform player;
+    public Animator animator;
 
     void Awake()
     {
         playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         player = playerMoviment.GetComponent<Transform>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()

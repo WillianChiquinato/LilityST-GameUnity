@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SavePoint : MonoBehaviour
 {
-    public static Vector2 CheckpointPosition = new Vector2(-71.73f, 29.55f);
+    public static Vector2 CheckpointPosition = new Vector2(-71.73f, 28.01f);
 }

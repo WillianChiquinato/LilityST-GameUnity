@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
     public PlayerMoviment playerMoviment;
     public Rigidbody2D Arrow;
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
     public float ForceArrow;
     public Transform ShotPoint;
     public Rigidbody2D NewArrow;
@@ -18,10 +20,12 @@ public class Bow : MonoBehaviour
     GameObject[] points;
     public int numeroDePoints;
     public float SpaceEntreEles;
+    public bool Respawn;
 
 
     public Camera cameraArco;
     Vector2 Direcao;
+    public Transform FollowArco;
 
     void Start()
     {
@@ -29,6 +33,7 @@ public class Bow : MonoBehaviour
         cameraArco = FindObjectOfType<Camera>();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         animator = GetComponent<Animator>();
+        cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
 
         points = new GameObject[numeroDePoints];
 
@@ -57,9 +62,17 @@ public class Bow : MonoBehaviour
         Direcao = mousePosition - BowPosition;
         transform.right = Direcao;
 
-        if (Input.GetMouseButtonDown(0) && playerMoviment.Atirar == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            if (playerMoviment.Atirar == true)
+            {
+                //Projetil do voador
+                Shoot();
+                foreach (var DestruirCaminho in points)
+                {
+                    Destroy(DestruirCaminho);
+                }
+            }
         }
 
         for (int i = 0; i < numeroDePoints; i++)
@@ -73,11 +86,32 @@ public class Bow : MonoBehaviour
             animator.SetBool(animationstrings.PowersBraco, false);
             gameObject.SetActive(false);
             Time.timeScale = 1f;
+            Destroy(NewArrow, 2f);
+            
+            if (Respawn)
+            {
+                for (int i = 0; i < numeroDePoints; i++)
+                {
+                    points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+                }
+            }
+        }
+
+        if (Direcao.x >= 1)
+        {
+            playerMoviment.transform.localScale = new Vector3(1, 1, 1);
+            playerMoviment._IsRight = true;
+        }
+        else
+        {
+            playerMoviment.transform.localScale = new Vector3(-1, 1, 1);
+            playerMoviment._IsRight = false;
         }
     }
 
     public void Shoot()
     {
+        Respawn = true;
         NewArrow = Instantiate(Arrow, ShotPoint.position, ShotPoint.rotation);
         if (playerMoviment.transform.localScale.x == 1)
         {

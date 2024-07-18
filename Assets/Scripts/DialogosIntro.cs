@@ -7,7 +7,7 @@ public class DialogosIntro : MonoBehaviour
     DialogosIntro dialogosIntro;
     PlayerMoviment playerMoviment;
     Dialogos dialogos;
-    Animator animator;
+    public Animator animator;
 
     void Awake()
     {
