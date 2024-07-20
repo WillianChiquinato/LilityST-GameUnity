@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea93cf39f09b904d9fa8ed24ae69ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSceneName: 
   sistema_Pause: {fileID: 0}
   sistemaPausePrefab: {fileID: 0}
   objs: []

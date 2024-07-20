@@ -11,19 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Introducao.unity
     guid: d76b2fb99ea61ba45972d19317dd75c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Front_Screen.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Caverna.unity
     guid: 24c5feef7f434d44cae5d3f945c75786
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Chegada_BIG.unity
     guid: 37e8308a0542cd74fbbb6a24967cddaf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Big_Finger.unity
     guid: c438eea8eb4e68540a48aaea23b9751d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Droggo.unity
     guid: 44ecef80a5248ec418d6e7a12baa2b71
   m_configObjects: {}

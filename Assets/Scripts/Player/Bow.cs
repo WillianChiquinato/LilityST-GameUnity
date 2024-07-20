@@ -8,6 +8,8 @@ public class Bow : MonoBehaviour
     public PlayerMoviment playerMoviment;
     public Rigidbody2D Arrow;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
+    [SerializeField]
+    public CinemachineFramingTransposer transposer;
     public float ForceArrow;
     public Transform ShotPoint;
     public Rigidbody2D NewArrow;
@@ -27,6 +29,15 @@ public class Bow : MonoBehaviour
     public Camera cameraArco;
     Vector2 Direcao;
     public Transform FollowArco;
+    public Vector3 newOffset;
+
+    //Virada da camera
+    public float targetOffsetX = 2f; // O valor alvo para o offset X
+    public float transitionDuration = 2f; // Duração da transição em segundos
+
+    private float initialOffsetX;
+    private float transitionStartTime;
+    public bool bodyCamera;
 
     void Start()
     {
@@ -35,6 +46,7 @@ public class Bow : MonoBehaviour
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         animator = GetComponent<Animator>();
         cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         points = new GameObject[numeroDePoints];
 
@@ -47,7 +59,17 @@ public class Bow : MonoBehaviour
 
     void Update()
     {
+        // Calcula o tempo decorrido desde o início da transição
+        float elapsedTime = Time.time - transitionStartTime;
+        // Calcula a fração completada da transição
+        float t = elapsedTime / transitionDuration;
+        // Faz a interpolação linear do offset X
+        float newXOffset = Mathf.Lerp(initialOffsetX, targetOffsetX, t);
 
+        for (int i = 0; i < numeroDePoints; i++)
+        {
+            points[i].transform.position = PointPosition(i * SpaceEntreEles);
+        }
 
         if (playerMoviment.transform.localScale.x == 1)
         {
@@ -74,16 +96,15 @@ public class Bow : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < numeroDePoints; i++)
-        {
-            points[i].transform.position = PointPosition(i * SpaceEntreEles);
-        }
 
         if (NewArrow)
         {
+            StartCoroutine(delayAnimation());
+            bodyCamera = false;
+            newOffset = new Vector3(0, 0, 0);
+            transposer.m_TrackedObjectOffset = newOffset;
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
             animator.SetBool(animationstrings.PowersBraco, false);
-            StartCoroutine(delayAnimation());
             Time.timeScale = 1f;
             playerMoviment.tempo = false;
             playerMoviment.elapsedTime = 0f;
@@ -95,11 +116,23 @@ public class Bow : MonoBehaviour
         {
             playerMoviment.transform.localScale = new Vector3(1, 1, 1);
             playerMoviment._IsRight = true;
+
+            if (bodyCamera)
+            {
+                newOffset = new Vector3(newXOffset, 0, 0);
+                transposer.m_TrackedObjectOffset = newOffset;
+            }
         }
         else
         {
             playerMoviment.transform.localScale = new Vector3(-1, 1, 1);
             playerMoviment._IsRight = false;
+
+            if (bodyCamera)
+            {
+                newOffset = new Vector3(-newXOffset, 0, 0);
+                transposer.m_TrackedObjectOffset = newOffset;
+            }
         }
     }
 
@@ -125,7 +158,7 @@ public class Bow : MonoBehaviour
         return position;
     }
 
-    private IEnumerator delayAnimation()
+    public IEnumerator delayAnimation()
     {
         yield return new WaitForSeconds(0.4f);
 

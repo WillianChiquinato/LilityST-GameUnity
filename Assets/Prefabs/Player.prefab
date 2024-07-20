@@ -100,10 +100,12 @@ MonoBehaviour:
   playerMoviment: {fileID: 0}
   Arrow: {fileID: 9159523752139700350, guid: d29b74d90d55dd34abd45d4880fe3013, type: 3}
   cinemachineVirtualCamera: {fileID: 0}
+  transposer: {fileID: 0}
   ForceArrow: 50
   ShotPoint: {fileID: 8800160888074072192}
   NewArrow: {fileID: 0}
   animator: {fileID: 0}
+  shotPoint: {fileID: 4646848358048255676}
   point: {fileID: 5490552178343658587, guid: 460c299a4633978419fd7ed020ad9c77, type: 3}
   posicaoGO: {fileID: 4646848358048255676}
   numeroDePoints: 20
@@ -111,6 +113,8 @@ MonoBehaviour:
   Respawn: 0
   cameraArco: {fileID: 0}
   FollowArco: {fileID: 23754814573624094}
+  targetOffsetX: 2
+  transitionDuration: 0.5
 --- !u!212 &4896083527215736194
 SpriteRenderer:
   m_ObjectHideFlags: 0

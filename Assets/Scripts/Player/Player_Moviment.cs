@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEditorInternal;
-using Cinemachine;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -324,6 +320,7 @@ public class PlayerMoviment : MonoBehaviour
         if (context.started && touching.IsGrouded && bow.NewArrow == null)
         {
             tempo = true;
+            bow.bodyCamera = true;
             animacao.SetBool(animationstrings.Powers, true);
             bow.gameObject.SetActive(true);
             bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
@@ -334,6 +331,17 @@ public class PlayerMoviment : MonoBehaviour
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
         ContagemJump = 0;
+
+        bow.bodyCamera = false;
+        bow.newOffset = new Vector3(0, 0, 0);
+        bow.transposer.m_TrackedObjectOffset = bow.newOffset;
+        
+        animacao.SetBool(animationstrings.Powers, false);
+        bow.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        tempo = false;
+        elapsedTime = 0f;
+        bow.NewArrow = null;
     }
 
     public void OnLook(InputAction.CallbackContext context)
