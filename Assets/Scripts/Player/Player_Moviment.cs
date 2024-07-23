@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -32,9 +33,6 @@ public class PlayerMoviment : MonoBehaviour
 
     //Sobre o arco
     public bool Atirar = false;
-    public bool SlowArco = false;
-    public float zOffset = -10f;
-    public float followSpeed = 10f;
     public bool tempo;
     public float targetTimeScale = 0.3f;
     public float duration = 1f;
@@ -49,7 +47,33 @@ public class PlayerMoviment : MonoBehaviour
     Vector2 moveInput;
 
     //Ataque combo da lility
+    public float startTimerAtt;
+    public float TargetTimeAtt;
+
+
     public bool Atacar;
+    private int ataqueCounterAtual;
+    public int AtaqueCounterAtual
+    {
+        get
+        {
+            return ataqueCounterAtual;
+        }
+        private set
+        {
+            if (value >= numeroDeAttcks)
+            {
+                ataqueCounterAtual = 0;
+            }
+            else
+            {
+                ataqueCounterAtual = value;
+            }
+        }
+    }
+
+    [SerializeField]
+    private int numeroDeAttcks;
 
     public float CurrentMoveSpeed
     {
@@ -308,10 +332,18 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && touching.IsGrouded)
         {
-            animacao.SetTrigger(animationstrings.attack1);
             Atacar = true;
+            animacao.SetTrigger(animationstrings.attack);
+            animacao.SetInteger(animationstrings.counterAtt, AtaqueCounterAtual);
+
+            AtaqueCounterAtual++;
+        }
+        else if(context.started)
+        {
+            Atacar = true;
+            animacao.SetTrigger(animationstrings.attack);
         }
     }
 
@@ -335,7 +367,7 @@ public class PlayerMoviment : MonoBehaviour
         bow.bodyCamera = false;
         bow.newOffset = new Vector3(0, 0, 0);
         bow.transposer.m_TrackedObjectOffset = bow.newOffset;
-        
+
         animacao.SetBool(animationstrings.Powers, false);
         bow.gameObject.SetActive(false);
         Time.timeScale = 1f;

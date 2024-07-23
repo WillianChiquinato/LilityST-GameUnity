@@ -19,6 +19,7 @@ TagManager:
   - Fireball
   - DialogoIntro
   - Inimigos
+  - Target_Tiles
   layers:
   - Default
   - TransparentFX

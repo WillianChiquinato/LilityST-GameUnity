@@ -9,12 +9,14 @@ public class Arrow : MonoBehaviour
     public Animator animator;
     CapsuleCollider2D ColliderArrow;
     SpriteRenderer spriteRenderer;
+    Tiles_Entrelacados tiles_Entrelacados;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ColliderArrow = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        tiles_Entrelacados = GameObject.FindObjectOfType<Tiles_Entrelacados>();
     }
 
 
