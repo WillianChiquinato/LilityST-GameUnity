@@ -44,4 +44,7 @@ internal class animationstrings
 
     internal static string Acordou = "Acordou";
     internal static string Boss_Fight = "Boss_Fight";
+
+    internal static string Ativador_Ativo = "Ativador_Ativo";
+    internal static string Fim_TimeTile = "Fim_TimeTile";
 }

@@ -52,6 +52,9 @@ public class PlayerMoviment : MonoBehaviour
 
 
     public bool Atacar;
+    public bool Reset = false;
+    public float ResetTimer;
+    public float ResetTimerLimite;
     private int ataqueCounterAtual;
     public int AtaqueCounterAtual
     {
@@ -227,6 +230,18 @@ public class PlayerMoviment : MonoBehaviour
             // Opcional: Debug para verificar o valor atual do Time.timeScale
             Debug.Log("Current TimeScale: " + Time.timeScale);
         }
+
+        if(Reset == true) 
+        {
+            ResetTimer += Time.deltaTime;
+            if(ResetTimer >= ResetTimerLimite) 
+            {
+                Reset = false;
+                ResetTimer = 0;
+                ataqueCounterAtual = 0;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -335,6 +350,7 @@ public class PlayerMoviment : MonoBehaviour
         if (context.started && touching.IsGrouded)
         {
             Atacar = true;
+            Reset = true;
             animacao.SetTrigger(animationstrings.attack);
             animacao.SetInteger(animationstrings.counterAtt, AtaqueCounterAtual);
 
