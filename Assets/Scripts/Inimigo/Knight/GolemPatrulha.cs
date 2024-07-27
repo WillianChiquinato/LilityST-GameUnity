@@ -11,11 +11,21 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     private float IdleTimer;
 
     TouchingDistance touching;
+    SetBoolBehavior setBoolBehavior;
 
     Rigidbody2D rb;
     Animator animator;
     Damage DamageScript;
     private Vector2 vectorDirecao = Vector2.right;
+
+    //Sobre a piscada do hit
+    public int contagemHit = 0;
+    public float contagemStagger;
+    public bool contagemStaggerBool = false;
+    public Renderer characterRenderer;
+    private Color originalColor;
+    public float blinkDuration = 0.1f;
+    public int blinkCount = 1;
 
     public float speed = 4f;
     public float StopRate = 0.2f;
@@ -90,6 +100,9 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
+
+        characterRenderer = GetComponent<Renderer>();
+        originalColor = characterRenderer.material.color;
     }
 
     void Update()
@@ -99,6 +112,21 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         {
             attackCooldown -= Time.deltaTime;
         }
+
+        if (contagemHit == 5)
+        {
+            StartCoroutine(ContagemHitAnim());
+        }
+
+        if (contagemStaggerBool)
+        {
+            contagemStagger += Time.deltaTime;
+            if (contagemStagger >= 2)
+            {
+                contagemHit = 0;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -147,5 +175,35 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        contagemStaggerBool = true;
+        contagemStagger = 0f;
+        StartCoroutine(OnHitPatrulha());
+    }
+
+    IEnumerator OnHitPatrulha()
+    {
+        contagemHit++;
+        characterRenderer.material.color = Color.green;
+        yield return new WaitForSeconds(blinkDuration);
+
+        characterRenderer.material.color = originalColor;
+        yield return new WaitForSeconds(blinkDuration);
+
+        yield return new WaitForSeconds(0.2f);
+
+        animator.SetBool(animationstrings.VelocityLock, false);
+        animator.SetTrigger(animationstrings.hit);
+    }
+
+    IEnumerator ContagemHitAnim()
+    {
+        animator.SetBool(animationstrings.ContagemHit, true);
+        rb.gravityScale = 10;
+
+        yield return new WaitForSeconds(1.5f);
+
+        rb.gravityScale = 1;
+        contagemHit = 0;
+        animator.SetBool(animationstrings.ContagemHit, false);
     }
 }

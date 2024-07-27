@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3425042184667170357}
   - component: {fileID: 6855855869532028543}
   - component: {fileID: 635103073602144480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tiles_Entrelacados_Solo
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

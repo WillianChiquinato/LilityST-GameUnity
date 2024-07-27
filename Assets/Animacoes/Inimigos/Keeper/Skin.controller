@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerFade: 0.6
+  DelayFade: 0
 --- !u!1102 &3006987071585180402
 AnimatorState:
   serializedVersion: 6

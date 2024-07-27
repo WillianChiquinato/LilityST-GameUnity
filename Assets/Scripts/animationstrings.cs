@@ -16,6 +16,7 @@ internal class animationstrings
     internal static string Combate = "Combate";
     internal static string Ranged = "Ranged";
     internal static string Dash = "Dash";
+    internal static string ContagemHit = "ContagemHit";
 
     // Player
     internal static string IsAcordada = "IsAcordada";

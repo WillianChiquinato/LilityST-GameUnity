@@ -117,6 +117,7 @@ public class Damage : MonoBehaviour
 
             return true;
         }
+
         return false;
     }
 

@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.02, y: -4.05, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2823927542856159198}
@@ -81,9 +81,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2103146337, guid: b57758811ecea24449068ccc84d4e358, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7137bd47d48ab9a4c8fc6860f10ddedf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 3.75, y: 3.75}
@@ -151,8 +151,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0112419175, y: -0.03321015}
-  m_Size: {x: 0.68954086, y: 1.2057215}
+  m_Offset: {x: 0.013809204, y: -0.50869465}
+  m_Size: {x: 1.8338623, y: 2.1566906}
   m_Direction: 0
 --- !u!114 &4089715156144825067
 MonoBehaviour:
@@ -228,7 +228,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 2049
+      m_Bits: 6145
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 5377258394000927251}
   m_Layer: 10
   m_Name: RangeZona
-  m_TagString: Knight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,7 +350,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2478227, y: 0.15695436}
+  m_Offset: {x: 0.35028845, y: -0.6115227}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -361,7 +361,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4956452, y: 1.3139086}
+  m_Size: {x: 1.7005767, y: 1.6896095}
   m_EdgeRadius: 0
 --- !u!114 &5377258394000927251
 MonoBehaviour:
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 6533574634423323963}
   m_Layer: 10
   m_Name: Attack
-  m_TagString: Knight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,16 +453,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.2058553, y: 0.6503736}
-      - {x: 0.5007837, y: 0.6765735}
-      - {x: 0.9842108, y: 0.16686566}
-      - {x: 0.5519795, y: 0.00020755827}
-      - {x: 0.07259807, y: -0.19816221}
-      - {x: 0.595753, y: -0.3830885}
-      - {x: 1.1584518, y: -0.35349008}
-      - {x: 1.6443195, y: -0.16666088}
-      - {x: 1.82835, y: 0.1379236}
-      - {x: 1.7144816, y: 0.4338078}
+    - - {x: 0.67826843, y: 0.1552887}
+      - {x: 0.51434326, y: -0.34562302}
+      - {x: 0.37207484, y: -1.6182282}
+      - {x: 1.4176807, y: -1.6246268}
+      - {x: 1.6848258, y: -1.5995489}
+      - {x: 1.6011698, y: 0.1467461}
   m_UseDelaunayMesh: 0
 --- !u!114 &6533574634423323963
 MonoBehaviour:
