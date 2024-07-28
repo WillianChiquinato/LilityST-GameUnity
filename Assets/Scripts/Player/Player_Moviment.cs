@@ -10,16 +10,18 @@ public class PlayerMoviment : MonoBehaviour
 {
     [HideInInspector]
     public Acorda_Boss acorda_Boss;
-    public PlayerInput playerInput;
     public SavePoint savePoint;
-    public Bow bow;
+    [HideInInspector]
+    public PlayerInput playerInput;
+    Bow bow;
 
     public bool entrar;
-    public bool ArcoTime;
 
     //Variaveis
-    public Rigidbody2D rb;
+    [HideInInspector]
     public Animator animacao;
+    [HideInInspector]
+    public Rigidbody2D rb;
     TouchingDistance touching;
     Damage DamageScript;
     Dialogos dialogosIntro;
@@ -33,6 +35,7 @@ public class PlayerMoviment : MonoBehaviour
 
     //Sobre o arco
     public bool Atirar = false;
+    [HideInInspector]
     public bool tempo;
     public float targetTimeScale = 0.3f;
     public float duration = 1f;
@@ -42,16 +45,16 @@ public class PlayerMoviment : MonoBehaviour
     private bool isWallSliding;
     public float wallSlidingSpeed;
 
+    [HideInInspector]
     public bool DialogosIntro;
 
     Vector2 moveInput;
 
-    //Ataque combo da lility
-    public float startTimerAtt;
-    public float TargetTimeAtt;
 
-
+    [HideInInspector]
     public bool Atacar;
+    [SerializeField]
+    private int numeroDeAttcks;
     public bool Reset = false;
     public float ResetTimer;
     public float ResetTimerLimite;
@@ -74,9 +77,6 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
     }
-
-    [SerializeField]
-    private int numeroDeAttcks;
 
     public float CurrentMoveSpeed
     {

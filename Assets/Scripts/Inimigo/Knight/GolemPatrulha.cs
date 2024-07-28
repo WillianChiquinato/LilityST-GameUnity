@@ -135,6 +135,10 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         {
             FlipDirecao();
         }
+        if(!touching.IsOnWall)
+        {
+            animator.SetBool(animationstrings.IsIdlePatrulha, false);
+        }
 
         if (!DamageScript.VelocityLock)
         {
@@ -155,7 +159,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         IdleTimer += Time.deltaTime;
         animator.SetBool(animationstrings.IsIdlePatrulha, true);
 
-        if (IdleTimer > IdleDuracao)
+        if (IdleTimer > IdleDuracao && canMove)
         {
             if (WalkDirecao == WalkAbleDirecao.Right)
             {
@@ -175,6 +179,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        animator.SetBool(animationstrings.IsIdlePatrulha, false);
         contagemStaggerBool = true;
         contagemStagger = 0f;
         StartCoroutine(OnHitPatrulha());

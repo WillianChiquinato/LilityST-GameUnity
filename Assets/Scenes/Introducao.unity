@@ -840,6 +840,10 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4089715156144825067, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4453484402137162113, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
       propertyPath: m_GravityScale
       value: 1
