@@ -185,6 +185,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         StartCoroutine(OnHitPatrulha());
     }
 
+    //Pensar melhor nessa logica
     IEnumerator OnHitPatrulha()
     {
         contagemHit++;
@@ -192,12 +193,9 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         yield return new WaitForSeconds(blinkDuration);
 
         characterRenderer.material.color = originalColor;
-        yield return new WaitForSeconds(blinkDuration);
-
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
 
         animator.SetBool(animationstrings.VelocityLock, false);
-        animator.SetTrigger(animationstrings.hit);
     }
 
     IEnumerator ContagemHitAnim()

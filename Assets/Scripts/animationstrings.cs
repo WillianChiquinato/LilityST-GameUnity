@@ -7,16 +7,37 @@ using System.Threading.Tasks;
 
 internal class animationstrings
 {
-    // Inimigos
+    // Inimigos / Universal
     internal static string IsGrouded = "IsGrouded";
     internal static string IsOnWall = "IsOnWall";
     internal static string IsOnCeiling = "IsOnCeiling";
-    internal static string IsIdlePatrulha = "IsIdlePatrulha";
     internal static string Target = "Target";
+    internal static string canMove = "canMove";
+    internal static string IsAlive = "IsAlive";
+    internal static string hit = "hit";
+    internal static string VelocityLock = "VelocityLock";
+
+    //Dialogos
+    internal static string Aparece = "Aparece";
+    internal static string ProximaParry = "ProximaParry";
+
+    //Patrulha
+    internal static string IsIdlePatrulha = "IsIdlePatrulha";
+    internal static string ContagemHit = "ContagemHit";
+
+    //Droggo
     internal static string Combate = "Combate";
     internal static string Ranged = "Ranged";
     internal static string Dash = "Dash";
-    internal static string ContagemHit = "ContagemHit";
+    internal static string Acordou = "Acordou";
+    internal static string Boss_Fight = "Boss_Fight";
+    internal static string attackCooldown = "attackCooldown";
+    internal static string attackCooldownRanged = "attackCooldownRanged";
+    internal static string attackCooldownDash = "attackCooldownDash";
+
+    //Lagartin
+    internal static string DireitaLagartin = "DireitaLagartin";
+    internal static string Comeco = "Comeco";
 
     // Player
     internal static string IsAcordada = "IsAcordada";
@@ -31,21 +52,7 @@ internal class animationstrings
     internal static string Impacto = "Impacto";
     internal static string counterAtt = "counterAtt";
 
-    //Universal
-    internal static string ProximaParry = "ProximaParry";
-    internal static string Aparece = "Aparece";
-    internal static string canMove = "canMove";
-    internal static string IsAlive = "IsAlive";
-    internal static string hit = "hit";
-    internal static string VelocityLock = "VelocityLock";
-
-    internal static string attackCooldown = "attackCooldown";
-    internal static string attackCooldownRanged = "attackCooldownRanged";
-    internal static string attackCooldownDash = "attackCooldownDash";
-
-    internal static string Acordou = "Acordou";
-    internal static string Boss_Fight = "Boss_Fight";
-
+    //Tiles
     internal static string Ativador_Ativo = "Ativador_Ativo";
     internal static string Fim_TimeTile = "Fim_TimeTile";
 }
