@@ -20,7 +20,7 @@ public class Bow : MonoBehaviour
     public GameObject shotPoint;
     public GameObject point;
     public GameObject posicaoGO;
-    GameObject[] points;
+    public GameObject[] points;
     public int numeroDePoints;
     public float SpaceEntreEles;
     public bool Respawn;
@@ -53,6 +53,7 @@ public class Bow : MonoBehaviour
         for (int i = 0; i < numeroDePoints; i++)
         {
             points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+            points[i].gameObject.SetActive(false);
         }
     }
 
@@ -69,6 +70,7 @@ public class Bow : MonoBehaviour
         for (int i = 0; i < numeroDePoints; i++)
         {
             points[i].transform.position = PointPosition(i * SpaceEntreEles);
+            points[i].gameObject.SetActive(true);
         }
 
         if (playerMoviment.transform.localScale.x == 1)
@@ -174,6 +176,7 @@ public class Bow : MonoBehaviour
             for (int i = 0; i < numeroDePoints; i++)
             {
                 points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+                points[i].gameObject.SetActive(false);
             }
         }
     }

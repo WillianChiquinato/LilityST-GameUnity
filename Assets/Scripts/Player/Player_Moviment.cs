@@ -40,6 +40,7 @@ public class PlayerMoviment : MonoBehaviour
     public float targetTimeScale = 0.3f;
     public float duration = 1f;
     public float elapsedTime = 0f;
+    public float tempoCooldown;
 
 
     private bool isWallSliding;
@@ -231,10 +232,10 @@ public class PlayerMoviment : MonoBehaviour
             Debug.Log("Current TimeScale: " + Time.timeScale);
         }
 
-        if(Reset == true) 
+        if (Reset == true)
         {
             ResetTimer += Time.deltaTime;
-            if(ResetTimer >= ResetTimerLimite) 
+            if (ResetTimer >= ResetTimerLimite)
             {
                 Reset = false;
                 ResetTimer = 0;
@@ -242,6 +243,24 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
+        if (elapsedTime >= 5)
+        {
+            //ARCO
+            bow.bodyCamera = false;
+            bow.newOffset = new Vector3(0, 0, 0);
+            bow.transposer.m_TrackedObjectOffset = bow.newOffset;
+
+            animacao.SetBool(animationstrings.Powers, false);
+            bow.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+            tempo = false;
+            elapsedTime = 0f;
+            bow.NewArrow = null;
+            foreach (var nuss in bow.points)
+            {
+                nuss.SetActive(false);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -356,7 +375,7 @@ public class PlayerMoviment : MonoBehaviour
 
             AtaqueCounterAtual++;
         }
-        else if(context.started)
+        else if (context.started)
         {
             Atacar = true;
             animacao.SetTrigger(animationstrings.attack);
@@ -377,9 +396,12 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
+        //KNOCKBACK
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        //JUMP
         ContagemJump = 0;
 
+        //ARCO
         bow.bodyCamera = false;
         bow.newOffset = new Vector3(0, 0, 0);
         bow.transposer.m_TrackedObjectOffset = bow.newOffset;
@@ -390,6 +412,10 @@ public class PlayerMoviment : MonoBehaviour
         tempo = false;
         elapsedTime = 0f;
         bow.NewArrow = null;
+        foreach (var nuss in bow.points)
+        {
+            nuss.SetActive(false);
+        }
     }
 
     public void OnLook(InputAction.CallbackContext context)

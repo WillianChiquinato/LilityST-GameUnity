@@ -22,10 +22,14 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     public int contagemHit = 0;
     public float contagemStagger;
     public bool contagemStaggerBool = false;
-    public Renderer characterRenderer;
-    private Color originalColor;
     public float blinkDuration = 0.1f;
     public int blinkCount = 1;
+
+    //Efeito da piscada
+    public Material newMaterial;  // O novo material que você quer usar temporariamente
+    private Material originalMaterial;  // Para armazenar o material original
+    private SpriteRenderer spriteRenderer;
+    
 
     public float speed = 4f;
     public float StopRate = 0.2f;
@@ -101,8 +105,8 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
 
-        characterRenderer = GetComponent<Renderer>();
-        originalColor = characterRenderer.material.color;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
     }
 
     void Update()
@@ -185,17 +189,17 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         StartCoroutine(OnHitPatrulha());
     }
 
-    //Pensar melhor nessa logica
+    //Piscando e tomando o HIT
     IEnumerator OnHitPatrulha()
     {
         contagemHit++;
-        characterRenderer.material.color = Color.green;
-        yield return new WaitForSeconds(blinkDuration);
+        spriteRenderer.material = newMaterial;
+        yield return new WaitForSeconds(0.2f);
 
-        characterRenderer.material.color = originalColor;
-        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.material = originalMaterial;
+        yield return new WaitForSeconds(0.1f);
 
-        animator.SetBool(animationstrings.VelocityLock, false);
+        DamageScript.VelocityLock = false;
     }
 
     IEnumerator ContagemHitAnim()

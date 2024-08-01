@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -168,7 +168,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IdleDuracao: 1
   IdleTimer: 0
-  speed: 4
+  contagemHit: 0
+  contagemStagger: 0
+  contagemStaggerBool: 0
+  blinkDuration: 0.1
+  blinkCount: 1
+  newMaterial: {fileID: 2100000, guid: c0735df25586cad49aedbc0c00e290be, type: 2}
+  speed: 3
   StopRate: 0.2
   attackZona: {fileID: 5377258394000927251}
   _Target: 0
@@ -228,7 +234,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 6145
+      m_Bits: 2056
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -280,8 +286,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 4
-  _health: 4
+  _maxHealth: 15
+  _health: 15
   isInvicible: 0
   invicibilityTimer: 0.25
   _IsAlive: 1
@@ -350,7 +356,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35028845, y: -0.6115227}
+  m_Offset: {x: 0.3039208, y: -0.6115227}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -361,7 +367,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7005767, y: 1.6896095}
+  m_Size: {x: 1.6078414, y: 1.6896095}
   m_EdgeRadius: 0
 --- !u!114 &5377258394000927251
 MonoBehaviour:
@@ -457,8 +463,8 @@ PolygonCollider2D:
       - {x: 0.51434326, y: -0.34562302}
       - {x: 0.37207484, y: -1.6182282}
       - {x: 1.4176807, y: -1.6246268}
-      - {x: 1.6848258, y: -1.5995489}
-      - {x: 1.6011698, y: 0.1467461}
+      - {x: 1.8988303, y: -1.6138159}
+      - {x: 1.8865168, y: 0.1966824}
   m_UseDelaunayMesh: 0
 --- !u!114 &6533574634423323963
 MonoBehaviour:

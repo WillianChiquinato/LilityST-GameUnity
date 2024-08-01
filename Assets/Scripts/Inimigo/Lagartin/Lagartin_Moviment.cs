@@ -87,12 +87,12 @@ public class Lagartin_Moviment : MonoBehaviour
             if (transform.position.x > playerMoviment.transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                animator.SetBool(animationstrings.DireitaLagartin, true);
+                animator.SetTrigger(animationstrings.DireitaLagartin);
             }
             else
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-                animator.SetBool(animationstrings.DireitaLagartin, false);
+                animator.SetTrigger(animationstrings.DireitaLagartin);
             }
         }
     }
