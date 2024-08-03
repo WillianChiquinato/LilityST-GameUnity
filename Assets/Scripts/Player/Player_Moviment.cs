@@ -29,9 +29,19 @@ public class PlayerMoviment : MonoBehaviour
     public float speed = 7f;
     public float airSpeed = 7f;
 
+
+    //Jump
     public bool IsJumping;
-    public float jumpImpulso = 10f;
-    public float ContagemJump = 0.5f;
+    public float jumpImpulso = 20f;
+    public float ContagemJump = 0.05f;
+
+    public float CoyoteTime = 0.2f;
+    public float coyoteTimeContador;
+
+    public float jumpBufferTimer = 0.2f;
+    public float jumpBufferContador;
+    public bool jumpBufferFinal;
+
 
     //Sobre o arco
     public bool Atirar = false;
@@ -54,6 +64,7 @@ public class PlayerMoviment : MonoBehaviour
 
     [HideInInspector]
     public bool Atacar;
+    public bool RecuarAtirar;
     [SerializeField]
     private int numeroDeAttcks;
     public bool Reset = false;
@@ -243,7 +254,7 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        if (elapsedTime >= 5)
+        if (elapsedTime >= 5 || Input.GetMouseButtonDown(1) && RecuarAtirar == true)
         {
             //ARCO
             bow.bodyCamera = false;
@@ -256,10 +267,15 @@ public class PlayerMoviment : MonoBehaviour
             tempo = false;
             elapsedTime = 0f;
             bow.NewArrow = null;
+            RecuarAtirar = false;
             foreach (var nuss in bow.points)
             {
                 nuss.SetActive(false);
             }
+        }
+        if (elapsedTime >= 2f)
+        {
+            RecuarAtirar = true;
         }
     }
 
@@ -269,6 +285,32 @@ public class PlayerMoviment : MonoBehaviour
         {
             rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
 
+            if (touching.IsGrouded)
+            {
+                coyoteTimeContador = CoyoteTime;
+            }
+            else
+            {
+                coyoteTimeContador -= Time.deltaTime;
+            }
+
+            if (jumpBufferFinal)
+            {
+                jumpBufferContador -= Time.deltaTime;
+                if (jumpBufferContador <= 0f)
+                {
+                    jumpBufferFinal = false;
+                }
+                if (jumpBufferFinal && touching.IsGrouded)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+                }
+            }
+            else
+            {
+                jumpBufferContador = jumpBufferTimer;
+            }
+
             if (IsJumping)
             {
                 if (Input.GetKey(KeyCode.W))
@@ -276,7 +318,7 @@ public class PlayerMoviment : MonoBehaviour
                     ContagemJump -= Time.deltaTime;
                 }
 
-                if (ContagemJump > 0)
+                if (ContagemJump >= 0)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
                 }
@@ -342,21 +384,39 @@ public class PlayerMoviment : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //Checar se esta no chao e tbm vivo
-        if (context.started && touching.IsGrouded && canMove || !isWallSliding && touching.IsOnWall)
+        if (context.started)
         {
-            animacao.SetTrigger(animationstrings.jump);
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
-            IsJumping = true;
+            if (coyoteTimeContador > 0f)
+            {
+                IsJumping = true;
+            }
+            if (touching.IsGrouded && canMove || !isWallSliding && touching.IsOnWall)
+            {
+                IsJumping = true;
+                animacao.SetTrigger(animationstrings.jump);
+                rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+            }
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (context.started && !touching.IsGrouded)
+        {
+            jumpBufferFinal = true;
+        }
+        else if (touching.IsGrouded)
+        {
+            jumpBufferFinal = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
         {
             IsJumping = false;
-            ContagemJump = 0.4f;
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpulso * 0.3f);
+            ContagemJump = 0.05f;
+            coyoteTimeContador = 0f;
         }
         else if (DamageScript.isInvicible == false)
         {
-            ContagemJump = 0.4f;
+            ContagemJump = 0.05f;
         }
         else if (isWallSliding && touching.IsOnWall)
         {
@@ -384,13 +444,16 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnPowers(InputAction.CallbackContext context)
     {
-        if (context.started && touching.IsGrouded && bow.NewArrow == null)
+        if (context.started)
         {
-            tempo = true;
-            bow.bodyCamera = true;
-            animacao.SetBool(animationstrings.Powers, true);
-            bow.gameObject.SetActive(true);
-            bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+            if (touching.IsGrouded && bow.NewArrow == null)
+            {
+                tempo = true;
+                bow.bodyCamera = true;
+                animacao.SetBool(animationstrings.Powers, true);
+                bow.gameObject.SetActive(true);
+                bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+            }
         }
     }
 

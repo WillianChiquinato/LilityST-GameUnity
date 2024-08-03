@@ -873,6 +873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GolemPatrulha
       objectReference: {fileID: 0}
+    - target: {fileID: 2217988344540909225, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6137527300949013392, guid: 3ad6b014ccf5fad40801fe991f296b70, type: 3}
       propertyPath: m_LocalPosition.x
       value: -102.93
@@ -25876,7 +25880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.32
+      value: 30.99
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26113,6 +26117,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3583350418226193328, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: CoyoteTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583350418226193328, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: jumpBufferTimer
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -71.73
@@ -26152,10 +26164,6 @@ PrefabInstance:
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4646848358048255676, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5072506259676923957, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: "Invent\xE1rioUI"

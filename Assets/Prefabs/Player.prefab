@@ -108,6 +108,7 @@ MonoBehaviour:
   shotPoint: {fileID: 4646848358048255676}
   point: {fileID: 5490552178343658587, guid: 460c299a4633978419fd7ed020ad9c77, type: 3}
   posicaoGO: {fileID: 4646848358048255676}
+  points: []
   numeroDePoints: 20
   SpaceEntreEles: 0.02
   Respawn: 0
@@ -247,32 +248,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acorda_Boss: {fileID: 0}
-  playerInput: {fileID: 0}
   savePoint: {fileID: 0}
-  bow: {fileID: 0}
+  playerInput: {fileID: 0}
   entrar: 0
-  ArcoTime: 0
-  rb: {fileID: 0}
   animacao: {fileID: 0}
+  rb: {fileID: 0}
   speed: 7
   airSpeed: 7
   IsJumping: 0
-  jumpImpulso: 10
-  ContagemJump: 0.5
+  jumpImpulso: 20
+  ContagemJump: 0.05
+  CoyoteTime: 0.2
+  coyoteTimeContador: 0
+  jumpBufferTimer: 1
+  jumpBufferContador: 0
   Atirar: 0
   tempo: 0
   targetTimeScale: 0.3
   duration: 1
   elapsedTime: 0
+  tempoCooldown: 0
   wallSlidingSpeed: 1
   DialogosIntro: 0
-  startTimerAtt: 0
-  TargetTimeAtt: 2
   Atacar: 0
+  numeroDeAttcks: 2
   Reset: 0
   ResetTimer: 0
   ResetTimerLimite: 0.7
-  numeroDeAttcks: 2
   _IsMoving: 0
   _IsAcordada: 0
   _IsRight: 1

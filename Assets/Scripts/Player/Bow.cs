@@ -141,6 +141,7 @@ public class Bow : MonoBehaviour
     public void Shoot()
     {
         Respawn = true;
+        playerMoviment.RecuarAtirar = false;
         NewArrow = Instantiate(Arrow, ShotPoint.position, ShotPoint.rotation);
         if (playerMoviment.transform.localScale.x == 1)
         {
