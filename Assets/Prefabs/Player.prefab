@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea93cf39f09b904d9fa8ed24ae69ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifier: 
   initialSceneName: 
   sistema_Pause: {fileID: 0}
   sistemaPausePrefab: {fileID: 0}
@@ -258,10 +259,11 @@ MonoBehaviour:
   IsJumping: 0
   jumpImpulso: 20
   ContagemJump: 0.05
-  CoyoteTime: 0.2
+  CoyoteTime: 0.1
   coyoteTimeContador: 0
-  jumpBufferTimer: 1
+  jumpBufferTimer: 0.1
   jumpBufferContador: 0
+  jumpBufferFinal: 0
   Atirar: 0
   tempo: 0
   targetTimeScale: 0.3
@@ -271,6 +273,7 @@ MonoBehaviour:
   wallSlidingSpeed: 1
   DialogosIntro: 0
   Atacar: 0
+  RecuarAtirar: 0
   numeroDeAttcks: 2
   Reset: 0
   ResetTimer: 0

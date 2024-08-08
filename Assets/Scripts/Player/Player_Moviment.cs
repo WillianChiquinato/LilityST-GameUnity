@@ -225,7 +225,6 @@ public class PlayerMoviment : MonoBehaviour
             DialogosIntro = true;
 
             animacao.SetBool(animationstrings.IsAcordada, true);
-            dialogosIntro.animator.SetBool("Sumir", true);
         }
 
         if (tempo)

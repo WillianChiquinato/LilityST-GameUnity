@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
+    private static List<string> existingObjects = new List<string>();
+    public string identifier;
+
     [SerializeField]
     public static DontDestroy Instance { get; private set; }
     public string CurrentSceneName { get; set; }
@@ -20,7 +23,9 @@ public class DontDestroy : MonoBehaviour
     {
         //Cena do começo
         CurrentSceneName = initialSceneName;
-        
+        identifier = this.gameObject.name;
+
+
         sistema_Pause = FindObjectOfType<Sistema_Pause>();
         if (sistema_Pause == null && sistemaPausePrefab != null)
         {
@@ -48,6 +53,18 @@ public class DontDestroy : MonoBehaviour
             {
                 Destroy(longLifeObj);
             }
+        }
+    }
+
+    void Update()
+    {
+        if (sistema_Pause.IrRestart == true)
+        {
+            foreach (var obj in objs)
+            {
+                Destroy(obj);
+            }
+            Instantiate(sistema_Pause.prefabSpawn, SavePoint.CheckpointPosition, Quaternion.identity);
         }
     }
 }
