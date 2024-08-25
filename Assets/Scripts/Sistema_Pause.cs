@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Sistema_Pause : MonoBehaviour
 {
-    public GameObject prefabSpawn;
+    public GameObject[] objs;
+    private Damage playerDamage;
 
     public BossFight bossFight;
     public SavePoint savePoint;
     public PlayerMoviment playerMoviment;
-    public DontDestroy[] dontDestroy;
+    public DontDestroy dontDestroy;
     public GameObject pauseMenu;
     public GameObject MainCamera;
     public GameObject CutSceneDroggo;
@@ -28,11 +29,16 @@ public class Sistema_Pause : MonoBehaviour
     void Start()
     {
         pauseMenu.SetActive(false);
+
+        // Verifica se já existe uma instância desse objeto na cena
+        objs = GameObject.FindGameObjectsWithTag("DontDestroy");
+
         transicao = GameObject.FindObjectOfType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerDamage = playerMoviment.GetComponent<Damage>();
         playerHealth = playerMoviment.GetComponent<Damage>();
-        dontDestroy = GameObject.FindObjectsOfType<DontDestroy>();
+        dontDestroy = GameObject.FindObjectOfType<DontDestroy>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
         bossFight = FindAnyObjectByType<BossFight>();
 
@@ -116,11 +122,32 @@ public class Sistema_Pause : MonoBehaviour
         CurrentSceneName = scene.name;
     }
 
+
+
+    //Parte de reiniciar
     public IEnumerator TempoMorte()
     {
         yield return new WaitForSeconds(2f);
 
-        IrRestart = true;
+    //Apenas para testes;
+        // DestruirCena();
+        // RespawnCena();
         SceneManager.LoadScene(CurrentSceneName);
+    }
+
+    void RespawnCena()
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {   
+            Instantiate(objs[i], SavePoint.CheckpointPosition, Quaternion.identity);
+        }
+    }
+
+    void DestruirCena()
+    {
+        foreach (var obj in objs)
+        {
+            Destroy(obj);
+        }
     }
 }

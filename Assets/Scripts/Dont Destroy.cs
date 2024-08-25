@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
-    private static List<string> existingObjects = new List<string>();
-    public string identifier;
-
     [SerializeField]
     public static DontDestroy Instance { get; private set; }
     public string CurrentSceneName { get; set; }
@@ -17,14 +14,11 @@ public class DontDestroy : MonoBehaviour
 
     public Sistema_Pause sistema_Pause;
     public GameObject sistemaPausePrefab;
-    public GameObject[] objs;
 
     public void Awake()
     {
         //Cena do começo
         CurrentSceneName = initialSceneName;
-        identifier = this.gameObject.name;
-
 
         sistema_Pause = FindObjectOfType<Sistema_Pause>();
         if (sistema_Pause == null && sistemaPausePrefab != null)
@@ -33,10 +27,20 @@ public class DontDestroy : MonoBehaviour
             sistema_Pause = sistemaPauseInstance.GetComponent<Sistema_Pause>();
         }
 
-        // Verifica se já existe uma instância desse objeto na cena
-        objs = GameObject.FindGameObjectsWithTag("DontDestroy");
+        if (sistema_Pause != null && sistema_Pause.IrMenu == true)
+        {
+            foreach (var longLifeObj in sistema_Pause.objs)
+            {
+                Destroy(longLifeObj);
+            }
+        }
+    }
 
-        if (objs.Length > 8)
+
+    //Deixando para teste, apenas para a build
+    public void ResetDestroy()
+    {
+        if (sistema_Pause.objs.Length > 6)
         {
             // Se já existir, destrói o objeto atual para evitar duplicados
             Destroy(this.gameObject);
@@ -45,26 +49,6 @@ public class DontDestroy : MonoBehaviour
         {
             // Se não existir, mantém o objeto ao mudar de cena
             DontDestroyOnLoad(this.gameObject);
-        }
-
-        if (sistema_Pause != null && sistema_Pause.IrMenu == true)
-        {
-            foreach (var longLifeObj in objs)
-            {
-                Destroy(longLifeObj);
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (sistema_Pause.IrRestart == true)
-        {
-            foreach (var obj in objs)
-            {
-                Destroy(obj);
-            }
-            Instantiate(sistema_Pause.prefabSpawn, SavePoint.CheckpointPosition, Quaternion.identity);
         }
     }
 }

@@ -36,7 +36,7 @@ TagManager:
   - Cenas
   - MiniMap
   - EnemyPatrulha
-  - 
+  - Background
   - 
   - 
   - 
@@ -57,11 +57,17 @@ TagManager:
   - name: FundoCor
     uniqueID: 1917697117
     locked: 0
-  - name: Ground
-    uniqueID: 3003573675
+  - name: Background3
+    uniqueID: 2496179921
+    locked: 0
+  - name: Background2
+    uniqueID: 652321767
     locked: 0
   - name: Background
     uniqueID: 1171906793
+    locked: 0
+  - name: Ground
+    uniqueID: 3003573675
     locked: 0
   - name: EfeitosJogo
     uniqueID: 2001586325
@@ -71,6 +77,9 @@ TagManager:
     locked: 0
   - name: CenarioFrente
     uniqueID: 1870702793
+    locked: 0
+  - name: CenarioFrente2
+    uniqueID: 2398361145
     locked: 0
   - name: transicoes
     uniqueID: 46218139
