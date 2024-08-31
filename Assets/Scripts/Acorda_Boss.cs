@@ -7,7 +7,6 @@ public class Acorda_Boss : MonoBehaviour
 {
     public DroggoScript droggoScript;
     public BossFight bossFight;
-
     public GameObject Camera_Size;
     public GameObject CutSceneDroggo;
     public Animator Size_Camera;
