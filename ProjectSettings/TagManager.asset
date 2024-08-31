@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - DontDestroy
+  - LimiteMap
+  - CutScene
+  - Waking
+  - Vida
+  - Vida2
+  - Vida3
+  - Vida4
+  - Sumir
+  - Parry
+  - Fireball
+  - DialogoIntro
+  - Inimigos
+  - Target_Tiles
+  - Patrulha
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Patrulha
+  - Water
+  - UI
+  - Ground
+  - Player
+  - Enemy
+  - PlayerHitbox
+  - EnemyHitbox
+  - GroundParede
+  - Cenas
+  - MiniMap
+  - EnemyPatrulha
+  - Background
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - ArcoLimite
+  m_SortingLayers:
+  - name: FundoCor
+    uniqueID: 1917697117
+    locked: 0
+  - name: Background3
+    uniqueID: 2496179921
+    locked: 0
+  - name: Background2
+    uniqueID: 652321767
+    locked: 0
+  - name: Background
+    uniqueID: 1171906793
+    locked: 0
+  - name: Ground
+    uniqueID: 3003573675
+    locked: 0
+  - name: EfeitosJogo
+    uniqueID: 2001586325
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: CenarioFrente
+    uniqueID: 1870702793
+    locked: 0
+  - name: CenarioFrente2
+    uniqueID: 2398361145
+    locked: 0
+  - name: transicoes
+    uniqueID: 46218139
+    locked: 0
