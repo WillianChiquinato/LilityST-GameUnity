@@ -6,12 +6,10 @@ using UnityEngine.UIElements;
 public class SeguirMouse : MonoBehaviour
 {
     public Camera cameraMouse;
-    public Bow bow;
 
     void Start()
     {
         cameraMouse = FindObjectOfType<Camera>();
-        bow = GameObject.FindObjectOfType<Bow>();
     }
     void Update()
     {

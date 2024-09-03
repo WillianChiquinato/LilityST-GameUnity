@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
@@ -27,9 +28,12 @@ public class Bow : MonoBehaviour
 
 
     public Camera cameraArco;
+    public Vector2 offset;
+    [HideInInspector]
     public Vector2 Direcao;
     public Transform FollowArco;
     public Vector3 newOffset;
+
 
     //Virada da camera
     public float targetOffsetX = 2f; // O valor alvo para o offset X
@@ -84,8 +88,11 @@ public class Bow : MonoBehaviour
             posicaoGO.transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        // Logica para arrumar o arco
+        Vector3 mousePositionArco = cameraArco.ScreenToWorldPoint(Input.mousePosition);
         Vector2 BowPosition = transform.position;
-        Vector2 mousePosition = cameraArco.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = new Vector2(mousePositionArco.x + offset.x, mousePositionArco.y + offset.y);
+
         Direcao = mousePosition - BowPosition;
         transform.right = Direcao;
 

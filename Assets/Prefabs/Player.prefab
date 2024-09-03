@@ -1298,4 +1298,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMouse: {fileID: 0}
-  bow: {fileID: 3475526681380040559}
+  offset: {x: 0, y: -0.5}
