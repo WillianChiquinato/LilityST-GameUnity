@@ -38,6 +38,7 @@ public class Bow : MonoBehaviour
     //Virada da camera
     public float targetOffsetX = 2f; // O valor alvo para o offset X
     public float transitionDuration = 2f; // Duração da transição em segundos
+    public GameObject bowTorax;
 
     private float initialOffsetX;
     private float transitionStartTime;
@@ -46,6 +47,7 @@ public class Bow : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
+        bowTorax.gameObject.SetActive(false);
         cameraArco = FindObjectOfType<Camera>();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         animator = GetComponent<Animator>();
@@ -81,11 +83,13 @@ public class Bow : MonoBehaviour
         {
             this.gameObject.transform.localScale = new Vector3(1, 1, 1);
             posicaoGO.transform.localScale = new Vector3(1, 1, 1);
+            bowTorax.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
             this.gameObject.transform.localScale = new Vector3(-1, -1, 1);
             posicaoGO.transform.localScale = new Vector3(-1, 1, 1);
+            bowTorax.transform.localScale = new Vector3(-1, -1, 1);
         }
 
         // Logica para arrumar o arco
@@ -173,6 +177,7 @@ public class Bow : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         gameObject.SetActive(false);
+        bowTorax.gameObject.SetActive(false);
 
         foreach (var DestruirCaminho in points)
         {

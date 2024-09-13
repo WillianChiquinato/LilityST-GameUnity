@@ -1,50 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Sistema_Pause sistema_Pause;
+    //Referencia do damage
+    Damage playerDamage;
+    public Slider slider;
 
-    public GameObject CoracoesLility;
-    public GameObject CoracoesLility2;
-    public GameObject CoracoesLility3;
-    public GameObject CoracoesLility4;
-    public Damage playerDamage;
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        sistema_Pause = GameObject.FindObjectOfType<Sistema_Pause>();
-
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.Log("Nao achei o player");
+        }
         playerDamage = player.GetComponent<Damage>();
-
-        CoracoesLility = GameObject.FindGameObjectWithTag("Vida");
-        CoracoesLility2 = GameObject.FindGameObjectWithTag("Vida2");
-        CoracoesLility3 = GameObject.FindGameObjectWithTag("Vida3");
-        CoracoesLility4 = GameObject.FindGameObjectWithTag("Vida4");
-
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (playerDamage.Health == 3)
-        {
-            CoracoesLility.gameObject.SetActive(false);
-        }
-        if (playerDamage.Health == 2)
-        {
-            CoracoesLility2.gameObject.SetActive(false);
-        }
-        if (playerDamage.Health == 1)
-        {
-            CoracoesLility3.gameObject.SetActive(false);
-        }
-        if (playerDamage.Health == 0)
-        {
-            CoracoesLility4.gameObject.SetActive(false);
-        }
+        slider.value = CalcularPorcentagem(playerDamage.Health, playerDamage.maxHealth);
+    }
+
+    public void OnEnable()
+    {
+        playerDamage.healthChange.AddListener(OnPlayerChange);
+    }
+
+    public void OnDisable()
+    {
+        playerDamage.healthChange.RemoveListener(OnPlayerChange);
+    }
+
+    public float CalcularPorcentagem(float currentHealth, float maxHealth)
+    {
+        return currentHealth / maxHealth;
+    }
+
+    private void OnPlayerChange(int newHealth, int maxHealth)
+    {
+        slider.value = CalcularPorcentagem(newHealth, maxHealth);
     }
 }

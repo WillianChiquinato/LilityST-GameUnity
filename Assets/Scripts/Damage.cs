@@ -7,11 +7,13 @@ using UnityEngine.Events;
 public class Damage : MonoBehaviour
 {
     public UnityEvent<int, Vector2> DamageHit;
+    public UnityEvent<int, int> healthChange;
     Animator animator;
 
 
     [SerializeField]
-    private int _maxHealth = 100;
+    //Teste
+    private int _maxHealth = 4;
 
     public int maxHealth
     {
@@ -26,7 +28,7 @@ public class Damage : MonoBehaviour
     }
 
     [SerializeField]
-    private int _health = 100;
+    private int _health = 4;
     public int Health
     {
         get
@@ -36,6 +38,7 @@ public class Damage : MonoBehaviour
         set
         {
             _health = value;
+            healthChange?.Invoke(_health, maxHealth);
 
             //if for 0, nao esta mais vivo
             if (_health <= 0)

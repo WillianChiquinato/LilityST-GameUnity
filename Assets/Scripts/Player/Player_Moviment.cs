@@ -14,6 +14,7 @@ public class PlayerMoviment : MonoBehaviour
     [HideInInspector]
     public Acorda_Boss acorda_Boss;
     public SavePoint savePoint;
+    public HealthBar healthBar;
 
     [HideInInspector]
     public PlayerInput playerInput;
@@ -216,6 +217,7 @@ public class PlayerMoviment : MonoBehaviour
         dialogosIntro = GameObject.FindAnyObjectByType<Dialogos>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
         bow = GameObject.FindObjectOfType<Bow>();
+        healthBar = GameObject.FindObjectOfType<HealthBar>();
 
         transform.position = SavePoint.CheckpointPosition;
     }
@@ -233,7 +235,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             animacao.SetBool(animationstrings.IsAcordada, true);
         }
-        else if(SavePoint.CheckpointAnim == true && SavePoint.CheckpointAnim2 == true) 
+        else if (SavePoint.CheckpointAnim == true && SavePoint.CheckpointAnim2 == true)
         {
             animacao.SetBool(animationstrings.IsAcordada, true);
             animacao.SetBool("Checkpoint", true);
@@ -274,6 +276,7 @@ public class PlayerMoviment : MonoBehaviour
 
             animacao.SetBool(animationstrings.Powers, false);
             bow.gameObject.SetActive(false);
+            bow.bowTorax.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tempo = false;
             elapsedTime = 0f;
@@ -346,7 +349,7 @@ public class PlayerMoviment : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, -wallSlidingSpeed);
                 }
             }
-            else if(isWallSliding && canWallJump)
+            else if (isWallSliding && canWallJump)
             {
                 wallJump();
             }
@@ -475,6 +478,7 @@ public class PlayerMoviment : MonoBehaviour
                 bow.bodyCamera = true;
                 animacao.SetBool(animationstrings.Powers, true);
                 bow.gameObject.SetActive(true);
+                bow.bowTorax.gameObject.SetActive(true);
                 bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
             }
         }
@@ -494,6 +498,7 @@ public class PlayerMoviment : MonoBehaviour
 
         animacao.SetBool(animationstrings.Powers, false);
         bow.gameObject.SetActive(false);
+        bow.bowTorax.gameObject.SetActive(false);
         Time.timeScale = 1f;
         tempo = false;
         elapsedTime = 0f;
@@ -513,6 +518,25 @@ public class PlayerMoviment : MonoBehaviour
         else
         {
             entrar = false;
+        }
+    }
+
+    public void OnHealing(InputAction.CallbackContext context)
+    {
+        if (context.started && touching.IsGrouded)
+        {
+            //Logica para slider
+            if (DamageScript.Health == DamageScript.maxHealth)
+            {
+                //Logica ainda para 
+                //Ver mais tarde no projeto
+                Debug.Log("Nada curado");
+            }
+            else
+            {
+                animacao.SetBool(animationstrings.IsHealing, true);
+                DamageScript.Health++;
+            }
         }
     }
 }

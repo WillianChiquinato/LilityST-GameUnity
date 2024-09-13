@@ -40,6 +40,7 @@ internal class animationstrings
     internal static string Comeco = "Comeco";
 
     // Player
+    internal static string IsHealing = "IsHealing";
     internal static string IsAcordada = "IsAcordada";
     internal static string IsMoving = "IsMoving";
     internal static string yVelocity = "yVelocity";
