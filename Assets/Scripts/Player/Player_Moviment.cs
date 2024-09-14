@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
 {
+    //teste
+    public float cuzin;
     public static PlayerMoviment Instance { get; private set; }
     public float currentZRotation;
     public bool isFollowing = true;
