@@ -17,10 +17,13 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            //Todas as questões sobre "Salvar" no checkpoint, ou reset 
             SavePoint.CheckpointPosition = transform.position;
             SavePoint.CheckpointAnim = true;
             SavePoint.CheckpointAnim2 = true;
-            Debug.Log("Salve");
+            playerMoviment.potion_Script.potionInt = playerMoviment.potion_Script.maxPotionsInt;
+            playerMoviment.DamageScript.Health = playerMoviment.DamageScript.maxHealth;
+            Debug.Log("Checkpoint");
         }
     }
 }

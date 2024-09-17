@@ -7,11 +7,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
 {
-    //teste
-    public float cuzin;
     public static PlayerMoviment Instance { get; private set; }
     public float currentZRotation;
     public bool isFollowing = true;
+
+    //Healing
+    public potion_script potion_Script;
+    public bool healing = false;
+    public float healingTimer;
 
     [HideInInspector]
     public Acorda_Boss acorda_Boss;
@@ -220,6 +223,7 @@ public class PlayerMoviment : MonoBehaviour
         savePoint = GameObject.FindObjectOfType<SavePoint>();
         bow = GameObject.FindObjectOfType<Bow>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
+        potion_Script = GameObject.FindObjectOfType<potion_script>();
 
         transform.position = SavePoint.CheckpointPosition;
     }
@@ -292,6 +296,16 @@ public class PlayerMoviment : MonoBehaviour
         if (elapsedTime >= 2f)
         {
             RecuarAtirar = true;
+        }
+
+        if (healing == true)
+        {
+            healingTimer -= Time.deltaTime;
+            if (healingTimer <= 0)
+            {
+                healing = false;
+                healingTimer = 2;
+            }
         }
     }
 
@@ -525,10 +539,10 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnHealing(InputAction.CallbackContext context)
     {
-        if (context.started && touching.IsGrouded)
+        if (context.started && touching.IsGrouded && healingTimer >= 2)
         {
             //Logica para slider
-            if (DamageScript.Health == DamageScript.maxHealth)
+            if (DamageScript.Health == DamageScript.maxHealth || potion_Script.potionInt <= 0)
             {
                 //Logica ainda para 
                 //Ver mais tarde no projeto
@@ -536,6 +550,8 @@ public class PlayerMoviment : MonoBehaviour
             }
             else
             {
+                healing = true;
+                potion_Script.HealigMetod();
                 animacao.SetBool(animationstrings.IsHealing, true);
                 DamageScript.Health++;
             }
