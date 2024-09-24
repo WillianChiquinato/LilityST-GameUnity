@@ -18,8 +18,8 @@ internal class animationstrings
     internal static string VelocityLock = "VelocityLock";
 
     //Dialogos
-    internal static string Aparece = "Aparece";
-    internal static string ProximaParry = "ProximaParry";
+    internal static string isDialog = "isDialog";
+    internal static string IsDialogFinish = "IsDialogFinish";
 
     //Patrulha
     internal static string IsIdlePatrulha = "IsIdlePatrulha";
@@ -56,4 +56,5 @@ internal class animationstrings
     //Tiles
     internal static string Ativador_Ativo = "Ativador_Ativo";
     internal static string Fim_TimeTile = "Fim_TimeTile";
+
 }

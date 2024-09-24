@@ -34,7 +34,6 @@ public class PlayerMoviment : MonoBehaviour
     public Rigidbody2D rb;
     public Damage DamageScript;
     TouchingDistance touching;
-    Dialogos dialogosIntro;
 
     public float speed = 7f;
     public float airSpeed = 7f;
@@ -219,7 +218,6 @@ public class PlayerMoviment : MonoBehaviour
         DamageScript = GetComponent<Damage>();
         playerInput = GetComponent<PlayerInput>();
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
-        dialogosIntro = GameObject.FindAnyObjectByType<Dialogos>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
         bow = GameObject.FindObjectOfType<Bow>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
