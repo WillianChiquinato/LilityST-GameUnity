@@ -7,6 +7,7 @@ public class DialogoTriggerCaracter
 {
     public string nome;
     public Sprite icone;
+    public bool isLeft;
 }
 
 [System.Serializable]

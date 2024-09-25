@@ -8,6 +8,10 @@ public class Dialogos_Manager : MonoBehaviour
 {
     public static Dialogos_Manager dialogos_Manager;
 
+    public DialogoTexto dialogoTexto;
+    public GameObject ImagemRotate;
+
+    public bool isLeft;
     public Image iconeCaracter;
     public TextMeshProUGUI nomeCaracter;
     public TextMeshProUGUI dialogoArea;
@@ -62,6 +66,19 @@ public class Dialogos_Manager : MonoBehaviour
 
         iconeCaracter.sprite = linhaAtual.caracter.icone;
         nomeCaracter.text = linhaAtual.caracter.nome;
+        isLeft = linhaAtual.caracter.isLeft;
+
+        Debug.Log($"isLeft: {isLeft}");
+
+        if (isLeft)
+        {
+            ImagemRotate.transform.localScale = new Vector3(-9, 9, 9);
+            Debug.Log("Oi");
+        }
+        else
+        {
+            ImagemRotate.transform.localScale = new Vector3(9, 9, 9);
+        }
 
         StopAllCoroutines();
 
