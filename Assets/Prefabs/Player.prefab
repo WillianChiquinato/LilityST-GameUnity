@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 8925139293431017860}
   - component: {fileID: 4277583068603929381}
   - component: {fileID: 5150228129046689077}
+  - component: {fileID: 8028374232826561430}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Player
@@ -347,6 +348,7 @@ Transform:
   - {fileID: 5507222364198214594}
   - {fileID: 2585913691473361408}
   - {fileID: 3395427879429395890}
+  - {fileID: 9076710696975144262}
   m_Father: {fileID: 3979624237456724338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3583350418226193328
@@ -363,13 +365,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentZRotation: 0
   isFollowing: 1
+  potion_Script: {fileID: 0}
+  healing: 0
+  healingTimer: 2
   acorda_Boss: {fileID: 0}
   savePoint: {fileID: 0}
+  healthBar: {fileID: 0}
   playerInput: {fileID: 0}
   entrar: 0
   animacao: {fileID: 0}
   rb: {fileID: 0}
   DamageScript: {fileID: 0}
+  touching: {fileID: 0}
   speed: 7
   airSpeed: 7
   IsJumping: 0
@@ -680,6 +687,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 16a9a249-7b1f-4408-bf4b-95dd3a8da547
     m_ActionName: Player/Parry[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3583350418226193328}
+        m_TargetAssemblyTypeName: PlayerMoviment, Assembly-CSharp
+        m_MethodName: OnHealing
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d302575a-da54-4812-91ab-a3bdeb7a9616
+    m_ActionName: Player/Healing[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -706,7 +729,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 131136
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -780,6 +803,24 @@ MonoBehaviour:
   isInvicible: 0
   invicibilityTimer: 0.5
   _IsAlive: 1
+--- !u!114 &8028374232826561430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793249064160061137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c70f05aaaedc174a85f993ff1951774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentOneWayPlat: {fileID: 0}
+  oficialOneWayPlat: []
+  oneWayStart: {fileID: 8136294069147344273}
+  playerMoviment: {fileID: 0}
+  playerCollider: {fileID: 7555501881526404652}
+  plataformOneWay: 0
 --- !u!1 &2877492617240880508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,3 +1456,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMouse: {fileID: 0}
+--- !u!1 &8136294069147344273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9076710696975144262}
+  m_Layer: 7
+  m_Name: OneWay
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9076710696975144262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136294069147344273}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.152, y: -1.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1915257998463922209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

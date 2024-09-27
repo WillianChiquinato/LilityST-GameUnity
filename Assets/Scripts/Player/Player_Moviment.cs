@@ -33,7 +33,7 @@ public class PlayerMoviment : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     public Damage DamageScript;
-    TouchingDistance touching;
+    public TouchingDistance touching;
 
     public float speed = 7f;
     public float airSpeed = 7f;
@@ -432,7 +432,6 @@ public class PlayerMoviment : MonoBehaviour
             }
             if (touching.IsGrouded && canMove || !isWallSliding && touching.IsOnWall)
             {
-                IsJumping = true;
                 animacao.SetTrigger(animationstrings.jump);
                 rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
             }
@@ -449,7 +448,6 @@ public class PlayerMoviment : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
         {
-            IsJumping = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulso * 0.3f);
             ContagemJump = 0.05f;
             coyoteTimeContador = 0f;

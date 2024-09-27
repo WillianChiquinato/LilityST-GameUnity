@@ -20,6 +20,7 @@ TagManager:
   - Inimigos
   - Target_Tiles
   - Patrulha
+  - OneWayPlataforma
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - EnemyPatrulha
   - Background
   - Enemy2
-  - 
+  - PlataformOneWay
   - 
   - 
   - 

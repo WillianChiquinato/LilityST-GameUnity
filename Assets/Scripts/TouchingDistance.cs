@@ -22,7 +22,7 @@ public class TouchingDistance : MonoBehaviour
         {
             return _IsGrouded;
         }
-        private set
+        set
         {
             _IsGrouded = value;
             animator.SetBool(animationstrings.IsGrouded, value);
@@ -44,7 +44,7 @@ public class TouchingDistance : MonoBehaviour
             animator.SetBool(animationstrings.IsOnWall, value);
         }
     }
-    
+
     [SerializeField]
     private bool _IsOnCeiling;
     public bool IsOnCeiling
@@ -75,7 +75,7 @@ public class TouchingDistance : MonoBehaviour
         WallDistancia = colliderWidth / 4 + 0.01f;
         CeilingDistancia = colliderHeight / 4 + 0.01f;
     }
-        
+
     void FixedUpdate()
     {
         RaycastHit2D[] groundHits = new RaycastHit2D[10];
