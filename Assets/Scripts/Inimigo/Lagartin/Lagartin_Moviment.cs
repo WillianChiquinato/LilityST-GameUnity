@@ -65,7 +65,7 @@ public class Lagartin_Moviment : MonoBehaviour
                 if (touching.IsGrouded && canMove)
                 {
                     attackDetector.SetActive(false);
-                    if (distanciaAttack < 12)
+                    if (distanciaAttack < 20)
                     {
                         transform.position = Vector2.MoveTowards(transform.position, playerMoviment.transform.position, speed * Time.deltaTime);
                     }

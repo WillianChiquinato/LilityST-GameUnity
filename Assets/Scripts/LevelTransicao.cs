@@ -17,8 +17,8 @@ public class LevelTransicao : MonoBehaviour
     {
         animator.SetTrigger("start");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.1f);
 
         SceneManager.LoadScene(sceneName);
-    } 
+    }
 }

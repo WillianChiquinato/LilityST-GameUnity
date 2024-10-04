@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Introducao.unity
     guid: d76b2fb99ea61ba45972d19317dd75c6
+  - enabled: 1
+    path: Assets/Scenes/NPCs.unity
+    guid: 4278abfdeb57ca3499f8511872bab1d4
   - enabled: 0
     path: Assets/Scenes/Front_Screen.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
