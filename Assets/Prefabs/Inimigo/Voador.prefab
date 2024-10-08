@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 212000396974219426}
   - component: {fileID: 4202014534044570717}
   - component: {fileID: 2569623328268047450}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Voador
   m_TagString: Inimigos
   m_Icon: {fileID: 0}
@@ -203,6 +203,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthChange:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHealth: 3
   _health: 3
   isInvicible: 0
@@ -351,5 +354,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectColliders: []
-  voador_Moviment: {fileID: 0}
   perseguindo: 0

@@ -40,6 +40,7 @@ TagManager:
   - Background
   - Enemy2
   - PlataformOneWay
+  - Enemy3
   - 
   - 
   - 
@@ -53,7 +54,6 @@ TagManager:
   - 
   - 
   - 
-  - ArcoLimite
   m_SortingLayers:
   - name: FundoCor
     uniqueID: 1917697117

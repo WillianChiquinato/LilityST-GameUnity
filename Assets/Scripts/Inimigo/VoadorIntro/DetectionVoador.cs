@@ -18,6 +18,7 @@ public class DetectionVoador : MonoBehaviour
         if (collision.CompareTag("Player") || collision.CompareTag("Parry"))
         {
             detectColliders.Add(collision);
+            //Ver mais pra frente
             perseguindo = true;
         }
     }

@@ -879,7 +879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 220617755}
   - component: {fileID: 220617754}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Global Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1661,7 +1661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478072871}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: Background_Fundo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1699,7 +1699,7 @@ GameObject:
   - component: {fileID: 495430173}
   - component: {fileID: 495430175}
   - component: {fileID: 495430174}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Passagem_Esquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2264,7 +2264,7 @@ GameObject:
   - component: {fileID: 711937213}
   - component: {fileID: 711937214}
   - component: {fileID: 711937215}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Predios_Descida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2749,7 +2749,7 @@ GameObject:
   - component: {fileID: 979902283}
   - component: {fileID: 979902285}
   - component: {fileID: 979902284}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rocha_Esquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3273,7 +3273,7 @@ GameObject:
   - component: {fileID: 1180054459}
   - component: {fileID: 1180054460}
   - component: {fileID: 1180054461}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Passagem_Rocha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3467,7 +3467,7 @@ GameObject:
   - component: {fileID: 1334130111}
   - component: {fileID: 1334130113}
   - component: {fileID: 1334130112}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pilares_Escuros
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3713,7 +3713,7 @@ GameObject:
   - component: {fileID: 1491071714}
   - component: {fileID: 1491071716}
   - component: {fileID: 1491071715}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Camada_fundo_predios
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3874,7 +3874,7 @@ GameObject:
   - component: {fileID: 1554442662}
   - component: {fileID: 1554442664}
   - component: {fileID: 1554442663}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Predios_Fundo_Descida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4234,7 +4234,7 @@ GameObject:
   - component: {fileID: 1781108699}
   - component: {fileID: 1781108701}
   - component: {fileID: 1781108700}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pilares_rocha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4927,7 +4927,7 @@ GameObject:
   - component: {fileID: 2060975739}
   - component: {fileID: 2060975741}
   - component: {fileID: 2060975740}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Camada_predios
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72617,45 +72617,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 30.918346
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 16.414629
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.2395
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.1635
-      objectReference: {fileID: 0}
-    - target: {fileID: 2610040644647711386, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: orthographic size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4233647720179074865, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4233647720179074865, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_Color.b
-      value: 0.8156863
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9490196
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.90588236
       objectReference: {fileID: 0}
     - target: {fileID: 5139996195594453128, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72697,29 +72661,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6865865892790138429, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 32768
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165662482633513674, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_CameraType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165662482633513674, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_ClearDepth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165662482633513674, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+    - target: {fileID: 8913563799997345986, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_VolumeLayerMask.m_Bits
-      value: 32768
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836975975891169499, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
-      propertyPath: m_Layer
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8836975975891169499, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36484f53472f714c899d25b5ba775a9, type: 3}

@@ -16,6 +16,7 @@ internal class animationstrings
     internal static string IsAlive = "IsAlive";
     internal static string hit = "hit";
     internal static string VelocityLock = "VelocityLock";
+    internal static string IsAttackMaga = "IsAttackMaga";
 
     //Dialogos
     internal static string isDialog = "isDialog";
