@@ -32,6 +32,10 @@ public class Sistema_Cenas : MonoBehaviour
             {
                 SavePoint.CheckpointPosition = new Vector3(-72.84f, 28.74f, 0f);
             }
+            else if (sceneName == "Green_phase")
+            {
+                SavePoint.CheckpointPosition = new Vector3(-80.84f, 28.74f, 0f);
+            }
         }
     }
 }

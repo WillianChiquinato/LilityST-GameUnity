@@ -7,11 +7,12 @@ public class HealthBar : MonoBehaviour
 {
     //Referencia do damage
     Damage playerDamage;
+    public PlayerMoviment player;
     public Slider slider;
 
     void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindObjectOfType<PlayerMoviment>();
 
         if (player == null)
         {

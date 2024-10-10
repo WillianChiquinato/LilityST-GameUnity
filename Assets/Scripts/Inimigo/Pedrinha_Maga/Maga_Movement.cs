@@ -9,7 +9,7 @@ public class Maga_Movement : MonoBehaviour
     public Maga_RangedAttack maga_RangedAttack;
     Animator animator;
     Rigidbody2D rb;
-    Damage damageScript;
+    public Damage damageScript;
     Trigger_Rolar trigger_Rolar;
 
 
@@ -114,7 +114,7 @@ public class Maga_Movement : MonoBehaviour
             {
                 transform.position += Vector3.right * 10 * Time.deltaTime;
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.4f);
 
                 //Trocar essa linha dps
                 transform.position += Vector3.right * 0 * Time.deltaTime;
@@ -125,7 +125,7 @@ public class Maga_Movement : MonoBehaviour
             {
                 transform.position += Vector3.left * 10 * Time.deltaTime;
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.4f);
 
                 //Trocar essa linha dps
                 transform.position += Vector3.left * 0 * Time.deltaTime;

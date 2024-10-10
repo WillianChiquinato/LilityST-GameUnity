@@ -22,15 +22,18 @@ public class MoveSet_PedrinhaAttack : MonoBehaviour
 
     void Update()
     {
-        if (subindo)
+        if (maga_Movement.damageScript.IsAlive)
         {
-            // Mover o objeto para cima
-            transform.position += Vector3.up * velocidade * Time.deltaTime;
-        }
-        else
-        {
-            // Mover o objeto para baixo
-            transform.position += Vector3.down * velocidadeInitial * Time.deltaTime;
+            if (subindo)
+            {
+                // Mover o objeto para cima
+                transform.position += Vector3.up * velocidade * Time.deltaTime;
+            }
+            else
+            {
+                // Mover o objeto para baixo
+                transform.position += Vector3.down * velocidadeInitial * Time.deltaTime;
+            }
         }
     }
 
