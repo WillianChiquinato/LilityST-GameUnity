@@ -339,23 +339,6 @@ public class PlayerMoviment : MonoBehaviour
                 jumpBufferContador = jumpBufferTimer;
             }
 
-            if (IsJumping)
-            {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    ContagemJump -= Time.deltaTime;
-                }
-
-                if (ContagemJump >= 0)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
-                }
-                else
-                {
-                    IsJumping = false;
-                }
-            }
-
             if (isWallSliding)
             {
                 if (rb.velocity.y < -wallSlidingSpeed)
@@ -423,43 +406,38 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        //Checar se esta no chao e tbm vivo
         if (context.started)
         {
-            if (coyoteTimeContador > 0f)
+            if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
-                IsJumping = true;
-            }
-            if (touching.IsGrouded && canMove || !isWallSliding && touching.IsOnWall)
-            {
-                animacao.SetTrigger(animationstrings.jump);
-                rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+                if (touching.IsGrouded || (touching.IsOnWall && isWallSliding))
+                {
+                    Jump();
+                }
             }
         }
 
-        if (context.started && !touching.IsGrouded)
+        if (!touching.IsGrouded)
         {
             jumpBufferFinal = true;
         }
-        else if (touching.IsGrouded)
+        else
         {
             jumpBufferFinal = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
+        if (context.canceled && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulso * 0.3f);
-            ContagemJump = 0.05f;
-            coyoteTimeContador = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-        else if (DamageScript.isInvicible == false)
-        {
-            ContagemJump = 0.05f;
-        }
-        else if (isWallSliding && touching.IsOnWall)
-        {
-            isWallSliding = false;
-        }
+    }
+
+    private void Jump()
+    {
+        animacao.SetTrigger(animationstrings.jump);
+        rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+        coyoteTimeContador = 0f;
+        isWallSliding = false;
     }
 
     public void OnAttack(InputAction.CallbackContext context)

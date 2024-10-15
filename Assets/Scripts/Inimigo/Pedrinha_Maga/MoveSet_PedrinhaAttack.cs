@@ -8,8 +8,8 @@ public class MoveSet_PedrinhaAttack : MonoBehaviour
     public Transform player;
     public Maga_Movement maga_Movement;
     private float tempoAtraso = 0.5f;
-    private float velocidade = 20.0f;
-    private float velocidadeInitial = 5.0f;
+    private float velocidade = 0.5f;
+    private float velocidadeInitial = 1.0f;
     public bool subindo = false;
 
     void Start()

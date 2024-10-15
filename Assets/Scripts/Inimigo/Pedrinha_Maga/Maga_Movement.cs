@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Maga_Movement : MonoBehaviour
@@ -16,7 +15,8 @@ public class Maga_Movement : MonoBehaviour
     public GameObject objetoInvocacao;
     public Transform Player;
     public bool podeInvocar = false;
-    private float distanciaAbaixo = 3.0f;
+    private float distanciaAbaixo = 1.0f;
+    public float speedRolar;
 
     public float timingRolar;
     public float timingRolarCounter;
@@ -46,20 +46,19 @@ public class Maga_Movement : MonoBehaviour
 
     void Update()
     {
-        if (trigger_Rolar.distanciaRolar)
-        {
-            timingRolar -= Time.deltaTime;
-            //Metodo para fazer o inimigo rolar pra tras.
-            StartCoroutine(rolar());
-        }
-        else
-        {
-            //Testes
-            timingRolar = timingRolarCounter;
-        }
-
         if (damageScript.IsAlive)
         {
+            if (trigger_Rolar.distanciaRolar)
+            {
+                timingRolar -= Time.deltaTime;
+                //Metodo para fazer o inimigo rolar pra tras.
+                StartCoroutine(rolar());
+            }
+            else
+            {
+                //Testes
+                timingRolar = timingRolarCounter;
+            }
             if (maga_RangedAttack.rangedAttack)
             {
                 timingAttack -= Time.deltaTime;
@@ -90,19 +89,19 @@ public class Maga_Movement : MonoBehaviour
 
                 podeInvocar = false;
             }
+            Flip();
         }
-        Flip();
     }
 
     public void Flip()
     {
         if (transform.position.x > Player.transform.position.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -110,28 +109,25 @@ public class Maga_Movement : MonoBehaviour
     {
         if (timingRolar < 0)
         {
+            Vector2 moveDirection;
+
             if (transform.position.x > Player.transform.position.x)
             {
-                transform.position += Vector3.right * 10 * Time.deltaTime;
-
-                yield return new WaitForSeconds(0.4f);
-
-                //Trocar essa linha dps
-                transform.position += Vector3.right * 0 * Time.deltaTime;
-                timingRolar = timingRolarCounter;
-                trigger_Rolar.distanciaRolar = false;
+                moveDirection = Vector2.right;
             }
             else
             {
-                transform.position += Vector3.left * 10 * Time.deltaTime;
-
-                yield return new WaitForSeconds(0.4f);
-
-                //Trocar essa linha dps
-                transform.position += Vector3.left * 0 * Time.deltaTime;
-                timingRolar = timingRolarCounter;
-                trigger_Rolar.distanciaRolar = false;
+                moveDirection = Vector2.left;
             }
+
+            rb.MovePosition(rb.position + moveDirection * speedRolar * Time.deltaTime);
+            animator.SetBool("MakeDash", true);
+
+            yield return new WaitForSeconds(0.4f);
+
+            animator.SetBool("MakeDash", false);
+            timingRolar = timingRolarCounter;
+            trigger_Rolar.distanciaRolar = false;
         }
     }
 

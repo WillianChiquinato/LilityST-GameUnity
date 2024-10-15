@@ -123,7 +123,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -122.5, y: 27, z: 0.17337386}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6159498521096373750}
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7b0bc43b155098e41958e5346a8a0b20, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5524932cf6121864aa9edce65211ed5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -241,8 +241,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.27731323, y: -0.64475536}
-  m_Size: {x: 1.0546265, y: 2.2895107}
+  m_Offset: {x: 1.0091782, y: -0.57841015}
+  m_Size: {x: 1.4496001, y: 1.970953}
   m_Direction: 0
 --- !u!114 &3477836576219909279
 MonoBehaviour:
@@ -292,13 +292,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maga_RangedAttack: {fileID: 0}
+  damageScript: {fileID: 0}
   objetoInvocacao: {fileID: 7508367049874666806, guid: 0d32994cd4b0492499eae273f30c012b, type: 3}
   Player: {fileID: 0}
   podeInvocar: 0
+  speedRolar: 22
   timingRolar: 0
-  timingRolarCounter: 0.4
+  timingRolarCounter: 0.7
   timingAttack: 0
-  timingAttackCount: 3
+  timingAttackCount: 4
 --- !u!95 &8488412010279393709
 Animator:
   serializedVersion: 5
@@ -330,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6159498521096373750}
   - component: {fileID: 3153686205638007712}
-  - component: {fileID: 2781140587502053489}
+  - component: {fileID: 1577756244224417133}
   m_Layer: 10
   m_Name: RangedAttack
   m_TagString: Untagged
@@ -347,8 +349,8 @@ Transform:
   m_GameObject: {fileID: 7750721504941771526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.58, y: 1.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.89, y: 1.27, z: 0}
+  m_LocalScale: {x: 1.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6137365337177335636}
@@ -366,8 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangedAttack: 0
---- !u!58 &2781140587502053489
-CircleCollider2D:
+--- !u!70 &1577756244224417133
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -398,6 +400,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.5962467, y: -0.1531105}
-  serializedVersion: 2
-  m_Radius: 10.577604
+  m_Offset: {x: -16.54648, y: -4.0996056}
+  m_Size: {x: 21.693308, y: 16.715204}
+  m_Direction: 1

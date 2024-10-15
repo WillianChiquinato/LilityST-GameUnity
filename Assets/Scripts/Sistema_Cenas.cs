@@ -32,9 +32,10 @@ public class Sistema_Cenas : MonoBehaviour
             {
                 SavePoint.CheckpointPosition = new Vector3(-72.84f, 28.74f, 0f);
             }
+            //Teste krleo
             else if (sceneName == "Green_phase")
             {
-                SavePoint.CheckpointPosition = new Vector3(-80.84f, 28.74f, 0f);
+                SavePoint.CheckpointPosition = new Vector3(-67.50f, 28.74f, 0f);
             }
         }
     }

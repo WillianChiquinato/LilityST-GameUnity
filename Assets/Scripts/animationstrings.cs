@@ -21,6 +21,7 @@ internal class animationstrings
     //Dialogos
     internal static string isDialog = "isDialog";
     internal static string IsDialogFinish = "IsDialogFinish";
+    internal static string InicioDialogo = "InicioDialogo";
 
     //Patrulha
     internal static string IsIdlePatrulha = "IsIdlePatrulha";

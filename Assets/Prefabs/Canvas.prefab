@@ -114,9 +114,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288b9551d186b7f49a8ffeb453b41312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linhaAtual:
+    caracter:
+      nome: 
+      icone: {fileID: 0}
+      isLeft: 0
+    linhaTexto: 
+  dialogo_Trigger: {fileID: 0}
+  ImagemRotate: {fileID: 7133072271003277063}
+  isLeft: 0
   iconeCaracter: {fileID: 3699793834251542754}
   nomeCaracter: {fileID: 6233168627272394386}
   dialogoArea: {fileID: 7385901668431661675}
+  rectTransform: {fileID: 5920773000385205575}
+  isTextComplete: 0
   isDialogoAtivo: 0
   speedTexto: 0.05
   animator: {fileID: 0}
@@ -223,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8d00926ec629e4281e30823ab9a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   slider: {fileID: 4699295787057609854}
 --- !u!1 &1539982627485440160
 GameObject:
@@ -1556,10 +1568,10 @@ RectTransform:
   m_Father: {fileID: 5636221962249346628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -350, y: 649}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -806.51953, y: 649}
+  m_SizeDelta: {x: -1257, y: 100}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &1676925661879185409
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2265,7 +2277,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1579138681488084018}
         m_TargetAssemblyTypeName: Dialogos_Manager, Assembly-CSharp
-        m_MethodName: DisplayNextLinha
+        m_MethodName: buttonDialog
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

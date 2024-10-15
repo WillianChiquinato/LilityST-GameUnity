@@ -337,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 2793249064160061137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.58, z: 0}
+  m_LocalPosition: {x: 0, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -384,7 +384,7 @@ MonoBehaviour:
   ContagemJump: 0.05
   CoyoteTime: 0.1
   coyoteTimeContador: 0
-  jumpBufferTimer: 0.1
+  jumpBufferTimer: 0.05
   jumpBufferContador: 0
   jumpBufferFinal: 0
   Atirar: 0
@@ -467,7 +467,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &5189278162127038452
 Animator:
@@ -757,7 +757,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 2048
+      m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Intensity: 1.2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 5dbc4d72e9e0d945abe506b395c84d7700000000d1aec894e7a3e126
+  m_ApplyToSortingLayers: e9e0d945abe506b395c84d7700000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 1
@@ -891,8 +891,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1.33
-  m_PointLightOuterRadius: 3.52
+  m_PointLightInnerRadius: 3.2
+  m_PointLightOuterRadius: 8.76
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 2239804428615128802}
   - component: {fileID: 6879054267154154192}
   - component: {fileID: 8424176527619744530}
-  m_Layer: 31
+  m_Layer: 5
   m_Name: TelaEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1367,9 +1367,9 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 1
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 2001586325
-  m_SortingOrder: 10
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &7628890421655516045
 MonoBehaviour:

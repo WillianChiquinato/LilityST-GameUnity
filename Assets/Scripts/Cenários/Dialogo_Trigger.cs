@@ -28,10 +28,12 @@ public class Dialogo_Trigger : MonoBehaviour
 {
     public Dialogos dialogos;
     public PlayerMoviment playerMoviment;
+    public Animator animator;
 
     private void Start()
     {
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        animator = GetComponent<Animator>();
     }
 
     public void TriggerDialogo()
@@ -44,6 +46,7 @@ public class Dialogo_Trigger : MonoBehaviour
         if (collision.CompareTag("Player") && playerMoviment.entrar == true)
         {
             TriggerDialogo();
+            animator.SetBool(animationstrings.InicioDialogo, true);   
         }
     }
 }

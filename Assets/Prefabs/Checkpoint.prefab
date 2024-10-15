@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePoint: {fileID: 0}
+  playerMoviment: {fileID: 0}
 --- !u!61 &7252059216555288383
 BoxCollider2D:
   m_ObjectHideFlags: 0

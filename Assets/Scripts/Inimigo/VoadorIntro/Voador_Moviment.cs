@@ -69,12 +69,14 @@ public class Voador_Moviment : MonoBehaviour
 
     void Update()
     {
+        Flip();
         shootTempo += Time.deltaTime;
         distanciaAttack = Mathf.Abs(transform.position.x - playerMoviment.transform.position.x);
         distanciaAttack2 = Mathf.Abs(transform.position.y - playerMoviment.transform.position.y);
 
-        if (distanciaAttack < 8 && distanciaAttack2 < 5)
+        if (distanciaAttack < 10 && distanciaAttack2 < 6)
         {
+            //teste
             Target = true;
             if (Shooting == true && shootTempo >= shootTimerTarget)
             {
@@ -104,7 +106,6 @@ public class Voador_Moviment : MonoBehaviour
         {
             rb.gravityScale = 2f;
         }
-        Flip();
     }
 
     public void Perseguir()

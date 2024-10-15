@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9177650488138035075}
   - component: {fileID: 543037215359344904}
   - component: {fileID: 8251178630008749723}
+  - component: {fileID: 1823161039555317262}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f52d79ab65bbd534c91ba895abd26110, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,18 +133,26 @@ MonoBehaviour:
         nome: Lility
         icone: {fileID: 21300000, guid: 64e963eb23a4a56478cc859e6f42b026, type: 3}
         isLeft: 0
-      linhaTexto: Ola tudo bem, vc sempre vem por aqui?
+      linhaTexto: "Oi.. \xE9\xE9 tudo bem?"
     - caracter:
-        nome: Cuzin
-        icone: {fileID: -1531380603, guid: 9ad44f7398fdb054ba448003b028e329, type: 3}
+        nome: Galthera
+        icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
         isLeft: 1
-      linhaTexto: Nao venho nao OH PUTA
+      linhaTexto: "Ol\xE1, uma boa tarde, me chamo galthera, nesse mundo vazio e
+        doloroso..."
     - caracter:
-        nome: Cuzin
-        icone: {fileID: -1531380603, guid: 9ad44f7398fdb054ba448003b028e329, type: 3}
-        isLeft: 0
-      linhaTexto: Nao venho nao OH PUTA
+        nome: Gathera
+        icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
+        isLeft: 1
+      linhaTexto: "O que voc\xEA faz por aqui menina? voc\xEA esta bem vestida, nao
+        parece ser daqui de baixo."
+    - caracter:
+        nome: Gathera
+        icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
+        isLeft: 1
+      linhaTexto: Faz tanto tempo que nao vejo ninguem.
   playerMoviment: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!61 &8251178630008749723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,16 +185,37 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35196877, y: -0.039738536}
+  m_Offset: {x: -0.3815689, y: -0.039738536}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2, y: 1.88}
+    oldSize: {x: 4, y: 2.88}
     newSize: {x: 1.72, y: 1.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3095436, y: 1.5594771}
+  m_Size: {x: 4.315872, y: 1.5594771}
   m_EdgeRadius: 0
+--- !u!95 &1823161039555317262
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122730016155630691}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92051755c0625c544a7aed51321a61da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
