@@ -12,7 +12,6 @@ public class Voador_Moviment : MonoBehaviour
     public float shootTimerTarget;
 
     public PlayerMoviment playerMoviment;
-    public DetectionVoador attackZona;
     public GameObject projetil;
     public Transform projetilPos;
     public Vector3 direction;
