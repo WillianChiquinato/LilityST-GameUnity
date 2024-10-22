@@ -336,7 +336,6 @@ AnimatorState:
   - {fileID: 637082795738378202}
   m_StateMachineBehaviours:
   - {fileID: 90358508965847620}
-  - {fileID: 6384210935635218523}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -400,23 +399,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &6384210935635218523
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cfc61eee88f59e4eaac2c5c71469e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boolName: VelocityLock
-  updateOnState: 1
-  updateStateMachine: 0
-  valueOnEnter: 1
-  valueOnExit: 0
 --- !u!1101 &6781576440211056818
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

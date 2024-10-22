@@ -9,13 +9,13 @@ public class DetectionLagartin : MonoBehaviour
     public Lagartin_Moviment lagartin_Moviment;
     public bool perseguir = false;
 
-    private void Awake() 
+    private void Awake()
     {
         Col = GetComponent<Collider2D>();
         lagartin_Moviment = GameObject.FindObjectOfType<Lagartin_Moviment>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {

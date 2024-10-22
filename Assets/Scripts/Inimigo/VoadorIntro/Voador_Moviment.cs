@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +7,24 @@ public class Voador_Moviment : MonoBehaviour
 {
     public float speed;
     public float distanciaAttack;
-    public float distanciaAttack2;
     public bool Shooting;
-    private float shootTimerTarget = 1f;
     public float shootTempo;
+    public float shootTimerTarget;
 
     public PlayerMoviment playerMoviment;
     public DetectionVoador attackZona;
     public GameObject projetil;
     public Transform projetilPos;
     public Vector3 direction;
+
+
+    [Header("Field of View")]
+    public Transform playerTransform;
+    public float detectionRange = 10f;
+    public LayerMask obstacleLayer;
+    [SerializeField]
+    private bool isPlayerInSight;
+    public RaycastHit2D hit;
 
 
     Damage DamageScript;
@@ -59,6 +68,7 @@ public class Voador_Moviment : MonoBehaviour
     void Start()
     {
         playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
+        playerTransform = playerMoviment.GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
@@ -69,48 +79,51 @@ public class Voador_Moviment : MonoBehaviour
 
     void Update()
     {
-        Flip();
         shootTempo += Time.deltaTime;
         distanciaAttack = Mathf.Abs(transform.position.x - playerMoviment.transform.position.x);
-        distanciaAttack2 = Mathf.Abs(transform.position.y - playerMoviment.transform.position.y);
 
-        if (distanciaAttack < 10 && distanciaAttack2 < 6)
+        CheckPlayerInSight();
+
+        if (isPlayerInSight)
         {
-            //teste
-            Target = true;
-            if (Shooting == true && shootTempo >= shootTimerTarget)
+            if (DamageScript.IsAlive)
             {
-                Projetil();
-
-                shootTempo = 0;
+                if (canMove)
+                {
+                    Perseguir();
+                    Flip();
+                }
             }
-        }
-        else
-        {
-            Target = false;
+            else
+            {
+                rb.gravityScale = 2f;
+            }
+
+            if (distanciaAttack < 10)
+            {
+                Target = true;
+                if (Shooting == true && shootTempo >= shootTimerTarget)
+                {
+                    Projetil();
+
+                    shootTempo = 0;
+                }
+            }
+            else
+            {
+                Target = false;
+            }
         }
 
         if (attackCooldown > 0)
         {
             attackCooldown -= Time.deltaTime;
         }
-
-        if (DamageScript.IsAlive)
-        {
-            if (attackZona.perseguindo == true && canMove == true)
-            {
-                Perseguir();
-            }
-        }
-        else
-        {
-            rb.gravityScale = 2f;
-        }
     }
 
     public void Perseguir()
     {
-        if (distanciaAttack2 < 4 && distanciaAttack < 7)
+        if (distanciaAttack < 7)
         {
             // Fica parado na posicao Y
             transform.position += new Vector3(direction.x, 0.2f, direction.z) * speed * Time.deltaTime;
@@ -142,6 +155,69 @@ public class Voador_Moviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, knockback.y);
+        if (isPlayerInSight)
+        {
+            rb.velocity = new Vector2(knockback.x, knockback.y);
+        }
+        else
+        {
+            Debug.Log("Atacou");
+        }
+    }
+
+    void CheckPlayerInSight()
+    {
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+
+        if (distanceToPlayer <= detectionRange)
+        {
+            Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+            hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleLayer);
+
+            if (hit.collider == null)
+            {
+                if (distanciaAttack < 10)
+                {
+                    Target = true;
+                    if (Shooting == true && shootTempo >= shootTimerTarget)
+                    {
+                        Projetil();
+
+                        shootTempo = 0;
+                    }
+                }
+                isPlayerInSight = true;
+                return;
+            }
+        }
+
+        Target = false;
+        isPlayerInSight = false;
+    }
+
+
+    //Para depuração.
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        if (playerTransform != null)
+        {
+            Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+            float distanceToDraw = hit.collider == null
+                ? Vector2.Distance(transform.position, playerTransform.position)
+                : Vector2.Distance(transform.position, hit.point);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3)directionToPlayer * distanceToDraw);
+
+            if (hit.collider != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(hit.point, 0.2f);
+            }
+        }
     }
 }

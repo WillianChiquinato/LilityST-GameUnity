@@ -23,6 +23,7 @@ public class PlayerMoviment : MonoBehaviour
 
     [HideInInspector]
     public PlayerInput playerInput;
+    public bow_Torax bow_Torax;
     Bow bow;
 
     public bool entrar;
@@ -220,6 +221,7 @@ public class PlayerMoviment : MonoBehaviour
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
         savePoint = GameObject.FindObjectOfType<SavePoint>();
         bow = GameObject.FindObjectOfType<Bow>();
+        bow_Torax = GameObject.FindObjectOfType<bow_Torax>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
         potion_Script = GameObject.FindObjectOfType<potion_script>();
 
@@ -273,7 +275,7 @@ public class PlayerMoviment : MonoBehaviour
 
         if (elapsedTime >= 5 || Input.GetMouseButtonDown(1) && RecuarAtirar == true)
         {
-            //ARCO
+            //ARCO arrumar
             bow.bodyCamera = false;
             bow.newOffset = new Vector3(0, 0, 0);
             bow.transposer.m_TrackedObjectOffset = bow.newOffset;
@@ -313,8 +315,9 @@ public class PlayerMoviment : MonoBehaviour
         {
             rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
 
-            if (touching.IsGrouded)
+            if (touching.IsGrouded && rb.velocity.y <= 2f)
             {
+                IsJumping = true;
                 coyoteTimeContador = CoyoteTime;
             }
             else
@@ -338,39 +341,9 @@ public class PlayerMoviment : MonoBehaviour
             {
                 jumpBufferContador = jumpBufferTimer;
             }
-
-            if (isWallSliding)
-            {
-                if (rb.velocity.y < -wallSlidingSpeed)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, -wallSlidingSpeed);
-                }
-            }
-            else if (isWallSliding && canWallJump)
-            {
-                wallJump();
-            }
-
-            if (touching.IsOnWall && !touching.IsGrouded && rb.velocity.y < 0)
-            {
-                isWallSliding = true;
-                animacao.SetBool(animationstrings.IsWallSliding, isWallSliding);
-            }
-            else
-            {
-                isWallSliding = false;
-                animacao.SetBool(animationstrings.IsWallSliding, isWallSliding);
-            }
         }
 
         animacao.SetFloat(animationstrings.yVelocity, rb.velocity.y);
-    }
-
-    public void wallJump()
-    {
-        Vector2 direcao = new Vector2(wallJumpDirecao.x * -facingDirecao, wallJumpDirecao.y);
-
-        rb.AddForce(direcao, ForceMode2D.Impulse);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -406,14 +379,11 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && IsJumping)
         {
             if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
-                if (touching.IsGrouded || (touching.IsOnWall && isWallSliding))
-                {
-                    Jump();
-                }
+                Jump();
             }
         }
 
@@ -438,6 +408,7 @@ public class PlayerMoviment : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
         isWallSliding = false;
+        IsJumping = false;
     }
 
     public void OnAttack(InputAction.CallbackContext context)

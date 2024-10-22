@@ -133,6 +133,7 @@ MonoBehaviour:
   cameraArco: {fileID: 0}
   bow: {fileID: 0}
   playerMoviment: {fileID: 0}
+  animator: {fileID: 0}
   offset: {x: 0, y: -2}
   Direcao: {x: 0, y: 0, z: 0}
   canRotate: 1
@@ -372,6 +373,7 @@ MonoBehaviour:
   savePoint: {fileID: 0}
   healthBar: {fileID: 0}
   playerInput: {fileID: 0}
+  bow_Torax: {fileID: 0}
   entrar: 0
   animacao: {fileID: 0}
   rb: {fileID: 0}

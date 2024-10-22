@@ -7,6 +7,7 @@ public class bow_Torax : MonoBehaviour
     public Camera cameraArco;
     public Bow bow;
     public PlayerMoviment playerMoviment;
+    public Animator animator;
 
     public Vector2 offset;
     [HideInInspector]
@@ -17,6 +18,7 @@ public class bow_Torax : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         cameraArco = FindObjectOfType<Camera>();
         bow = GameObject.FindObjectOfType<Bow>();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
@@ -31,7 +33,6 @@ public class bow_Torax : MonoBehaviour
         if (angle < -10f)
         {
             canRotate = false;
-            transform.rotation = Quaternion.Euler(0, 0, -10);
         }
         else
         {
