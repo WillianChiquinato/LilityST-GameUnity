@@ -23,6 +23,8 @@ public class Maga_Movement : MonoBehaviour
     public float timingAttack;
     public float timingAttackCount;
 
+    public LayerMask groundLayer;
+
     public bool canMove
     {
         get
@@ -83,9 +85,14 @@ public class Maga_Movement : MonoBehaviour
             //invocação do objeto
             if (podeInvocar)
             {
-                Vector3 posicaoAbaixo = Player.transform.position - new Vector3(0, distanciaAbaixo, 0);
+                RaycastHit2D hit = Physics2D.Raycast(Player.position, Vector2.down, Mathf.Infinity, groundLayer);
 
-                Instantiate(objetoInvocacao, posicaoAbaixo, Quaternion.identity);
+                if (hit.collider != null)
+                {
+                    Vector3 posicaoChao = hit.point;
+                    posicaoChao.y += distanciaAbaixo;
+                    Instantiate(objetoInvocacao, posicaoChao, Quaternion.identity);
+                }
 
                 podeInvocar = false;
             }

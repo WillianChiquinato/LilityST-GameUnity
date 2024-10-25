@@ -85,6 +85,12 @@ public class PlayerMoviment : MonoBehaviour
     public float ResetTimer;
     public float ResetTimerLimite;
     private int ataqueCounterAtual;
+
+    [Header("CameraFollowAnimation")]
+    [SerializeField] private GameObject _cameraFollow;
+    private camerafollowObject camerafollowObject;
+
+
     public int AtaqueCounterAtual
     {
         get
@@ -226,6 +232,7 @@ public class PlayerMoviment : MonoBehaviour
         potion_Script = GameObject.FindObjectOfType<potion_script>();
 
         transform.position = SavePoint.CheckpointPosition;
+        camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
     }
 
     private void Update()
@@ -277,7 +284,6 @@ public class PlayerMoviment : MonoBehaviour
         {
             //ARCO arrumar
             bow.bodyCamera = false;
-            bow.newOffset = new Vector3(0, 0, 0);
             bow.transposer.m_TrackedObjectOffset = bow.newOffset;
 
             animacao.SetBool(animationstrings.Powers, false);
@@ -369,11 +375,13 @@ public class PlayerMoviment : MonoBehaviour
         {
             // olhar para a direita
             IsRight = true;
+            camerafollowObject.chamarTurn();
         }
         else if (moveInput.x < 0 && IsRight)
         {
             // olhar para a esquerda
             IsRight = false;
+            camerafollowObject.chamarTurn();
         }
     }
 

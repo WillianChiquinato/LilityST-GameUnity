@@ -301,6 +301,9 @@ MonoBehaviour:
   timingRolarCounter: 0.7
   timingAttack: 0
   timingAttackCount: 4
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!95 &8488412010279393709
 Animator:
   serializedVersion: 5
@@ -331,8 +334,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6159498521096373750}
-  - component: {fileID: 3153686205638007712}
   - component: {fileID: 1577756244224417133}
+  - component: {fileID: 8855495412742889970}
   m_Layer: 10
   m_Name: RangedAttack
   m_TagString: Untagged
@@ -355,19 +358,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6137365337177335636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3153686205638007712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7750721504941771526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1eec276d5097944d8e21343233f35f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedAttack: 0
 --- !u!70 &1577756244224417133
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -403,3 +393,16 @@ CapsuleCollider2D:
   m_Offset: {x: -16.54648, y: -4.0996056}
   m_Size: {x: 21.693308, y: 16.715204}
   m_Direction: 1
+--- !u!114 &8855495412742889970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7750721504941771526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1eec276d5097944d8e21343233f35f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangedAttack: 0

@@ -114,8 +114,7 @@ public class Bow : MonoBehaviour
         {
             StartCoroutine(delayAnimation());
             bodyCamera = false;
-            newOffset = new Vector3(0, 0, 0);
-            transposer.m_TrackedObjectOffset = newOffset;
+            transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
             animator.SetBool(animationstrings.PowersBraco, false);
             Time.timeScale = 1f;
@@ -132,8 +131,7 @@ public class Bow : MonoBehaviour
 
             if (bodyCamera)
             {
-                newOffset = new Vector3(newXOffset, 0, 0);
-                transposer.m_TrackedObjectOffset = newOffset;
+                transposer.m_TrackedObjectOffset = new Vector3(newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             }
         }
         else
@@ -143,8 +141,7 @@ public class Bow : MonoBehaviour
 
             if (bodyCamera)
             {
-                newOffset = new Vector3(-newXOffset, 0, 0);
-                transposer.m_TrackedObjectOffset = newOffset;
+                transposer.m_TrackedObjectOffset = new Vector3(-newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             }
         }
     }
