@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4129205707539066291}
   m_Layer: 0
   m_Name: CameraFollowObject
-  m_TagString: Untagged
+  m_TagString: CameraFollow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,27 +359,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
-      value: 6
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -44.27407
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 44.17647
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -97.72256
+      value: -113.5717
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 44.17647
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: -97.722565
+      value: -113.5717
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: 10.39047
+      value: 23.63324
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: -75.73891
+      value: -44.27407
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: 10.390471
+      value: 23.63324
       objectReference: {fileID: 0}
     - target: {fileID: 7563467221288976878, guid: 9fd8b02199615da419d7d0c8180752ed, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x

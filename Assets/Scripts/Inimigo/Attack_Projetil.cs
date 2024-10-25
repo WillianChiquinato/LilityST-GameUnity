@@ -60,7 +60,7 @@ public class Attack_Projetil : MonoBehaviour, Defender
         rb.velocity = direcao * returnSpeed;
         TrocarLayer(myObject, novaLayer);
 
-        if(transform.localScale.x == -1) 
+        if(transform.localScale.x == -1)
         {
             Debug.Log("Esquerda");
             transform.localScale = new Vector3(1, 1, 1);

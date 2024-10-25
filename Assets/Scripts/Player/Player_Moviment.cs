@@ -88,7 +88,7 @@ public class PlayerMoviment : MonoBehaviour
 
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
-    private camerafollowObject camerafollowObject;
+    [SerializeField] private camerafollowObject camerafollowObject;
 
 
     public int AtaqueCounterAtual
@@ -230,6 +230,7 @@ public class PlayerMoviment : MonoBehaviour
         bow_Torax = GameObject.FindObjectOfType<bow_Torax>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
         potion_Script = GameObject.FindObjectOfType<potion_script>();
+        _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();

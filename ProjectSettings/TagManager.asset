@@ -9,10 +9,6 @@ TagManager:
   - LimiteMap
   - CutScene
   - Waking
-  - Vida
-  - Vida2
-  - Vida3
-  - Vida4
   - Sumir
   - Parry
   - Fireball
@@ -21,6 +17,7 @@ TagManager:
   - Target_Tiles
   - Patrulha
   - OneWayPlataforma
+  - CameraFollow
   layers:
   - Default
   - TransparentFX
