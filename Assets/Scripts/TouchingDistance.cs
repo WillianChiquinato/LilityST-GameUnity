@@ -78,9 +78,9 @@ public class TouchingDistance : MonoBehaviour
 
     void FixedUpdate()
     {
-        RaycastHit2D[] groundHits = new RaycastHit2D[10];
-        RaycastHit2D[] WallHits = new RaycastHit2D[10];
-        RaycastHit2D[] CeilingHits = new RaycastHit2D[10];
+        RaycastHit2D[] groundHits = new RaycastHit2D[1];
+        RaycastHit2D[] WallHits = new RaycastHit2D[1];
+        RaycastHit2D[] CeilingHits = new RaycastHit2D[1];
 
 
         // Cast para o chão

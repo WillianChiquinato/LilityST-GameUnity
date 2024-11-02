@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEditor;
 
 public class CameraControllerTrigger : MonoBehaviour
 {
@@ -66,6 +65,7 @@ public enum PanDirecao
 }
 
 //Aqui so colei, PQP que bgl dificil, mas sao propriedades da UNITY em si;
+#if UNITY_EDITOR
 [CustomEditor(typeof(CameraControllerTrigger))]
 public class myScriptEditor : Editor
 {
@@ -101,3 +101,4 @@ public class myScriptEditor : Editor
         }
     }
 }
+#endif

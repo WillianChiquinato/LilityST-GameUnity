@@ -8,10 +8,31 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public static PlayerMoviment Instance { get; private set; }
+
+
+    [Header("Instances")]
     public float currentZRotation;
     public bool isFollowing = true;
+    public float maxSpeed = 7f;
+    public float speed = 2f;
+    public float acelerationSpeed;
+    public float airSpeed = 7f;
+    public Vector2 moveInput;
+    [HideInInspector]
+    public bool Atacar;
+    public bool RecuarAtirar;
+    [SerializeField]
+    private int numeroDeAttcks;
+    public bool Reset = false;
+    public float ResetTimer;
+    public float ResetTimerLimite;
+    private int ataqueCounterAtual;
+
+    [Header("CursorMouse")]
+    public bool isCursorVisible = false;
 
     //Healing
+    [Header("Healing")]
     public potion_script potion_Script;
     public bool healing = false;
     public float healingTimer;
@@ -21,26 +42,18 @@ public class PlayerMoviment : MonoBehaviour
     public SavePoint savePoint;
     public HealthBar healthBar;
 
-    [HideInInspector]
-    public PlayerInput playerInput;
-    public bow_Torax bow_Torax;
-    Bow bow;
-
-    public bool entrar;
-
     //Variaveis
+    [Header("Variaveis")]
     [HideInInspector]
     public Animator animacao;
     [HideInInspector]
     public Rigidbody2D rb;
     public Damage DamageScript;
     public TouchingDistance touching;
-
-    public float speed = 7f;
-    public float airSpeed = 7f;
-
+    public bool entrar;
 
     //Jump
+    [Header("Jump")]
     public bool IsJumping;
     public float jumpImpulso = 20f;
     public float ContagemJump = 0.05f;
@@ -52,8 +65,11 @@ public class PlayerMoviment : MonoBehaviour
     public float jumpBufferContador;
     public bool jumpBufferFinal;
 
-
     //Sobre o arco
+    [Header("Bow")]
+    public PlayerInput playerInput;
+    public bow_Torax bow_Torax;
+    Bow bow;
     public bool Atirar = false;
     [HideInInspector]
     public bool tempo;
@@ -63,28 +79,14 @@ public class PlayerMoviment : MonoBehaviour
     public float tempoCooldown;
 
 
-    public bool canWallJump = true;
+    [Header("Wall Slide / Wall Jump")]
     public int facingDirecao = 1;
-    private bool isWallSliding;
-    public float wallSlidingSpeed;
-    [SerializeField]
-    private Vector2 wallJumpDirecao;
+    public bool wallSlide = false;
+    public float WallstateTimer = .4f;
+    public bool canJump;
+    public bool isWallJumping = false;
+    public float wallJumpTimer;
 
-    [HideInInspector]
-    public bool DialogosIntro;
-
-    Vector2 moveInput;
-
-
-    [HideInInspector]
-    public bool Atacar;
-    public bool RecuarAtirar;
-    [SerializeField]
-    private int numeroDeAttcks;
-    public bool Reset = false;
-    public float ResetTimer;
-    public float ResetTimerLimite;
-    private int ataqueCounterAtual;
 
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
@@ -119,8 +121,9 @@ public class PlayerMoviment : MonoBehaviour
                 playerInput.enabled = true;
                 if (IsMoving && !touching.IsOnWall)
                 {
-                    if (touching.IsGrouded)
+                    if (touching.IsGrouded && speed < maxSpeed)
                     {
+                        speed += Time.deltaTime * acelerationSpeed;
                         return speed;
                     }
                     else
@@ -131,6 +134,7 @@ public class PlayerMoviment : MonoBehaviour
                 else
                 {
                     //idle speed é 0;
+                    speed = 2f;
                     return 0;
                 }
             }
@@ -238,6 +242,14 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Update()
     {
+        if (touching.IsGrouded)
+        {
+            isWallJumping = false;
+        }
+
+        canJump = (touching.IsOnWall && wallSlide) ? true : false;
+        WallSlide();
+
         currentZRotation = bow.transform.eulerAngles.z;
 
         if (!canMove)
@@ -320,9 +332,23 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (!DamageScript.VelocityLock)
         {
-            rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+            if (isWallJumping)
+            {
+                wallJumpTimer -= Time.deltaTime;
+                if (wallJumpTimer < 0f)
+                {
+                    isWallJumping = false;
+                    wallJumpTimer = 0.1f;
+                    speed = 2f;
+                }
+            }
 
-            if (touching.IsGrouded && rb.velocity.y <= 2f)
+            if (!isWallJumping)
+            {
+                rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+            }
+
+            if (touching.IsGrouded && rb.velocity.y <= 0f)
             {
                 IsJumping = true;
                 coyoteTimeContador = CoyoteTime;
@@ -337,9 +363,10 @@ public class PlayerMoviment : MonoBehaviour
                 jumpBufferContador -= Time.deltaTime;
                 if (jumpBufferContador <= 0f)
                 {
+                    //teste
                     jumpBufferFinal = false;
                 }
-                if (jumpBufferFinal && touching.IsGrouded)
+                if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
                 }
@@ -371,19 +398,19 @@ public class PlayerMoviment : MonoBehaviour
 
     private void setDirection(Vector2 moveInput)
     {
-        facingDirecao = facingDirecao * -1;
         if (moveInput.x > 0 && !IsRight)
         {
-            // olhar para a direita
+            facingDirecao = 1;
             IsRight = true;
             camerafollowObject.chamarTurn();
         }
         else if (moveInput.x < 0 && IsRight)
         {
-            // olhar para a esquerda
+            facingDirecao = -1;
             IsRight = false;
             camerafollowObject.chamarTurn();
         }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -416,8 +443,44 @@ public class PlayerMoviment : MonoBehaviour
         animacao.SetTrigger(animationstrings.jump);
         rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
-        isWallSliding = false;
         IsJumping = false;
+    }
+
+    private void WallSlide()
+    {
+        if (!touching.IsGrouded && rb.velocity.y < 0f && touching.IsOnWall)
+        {
+            WallstateTimer -= Time.deltaTime;
+            wallSlide = true;
+            animacao.SetBool(animationstrings.IsWallSliding, true);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
+
+            if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
+            {
+                WallJump();
+            }
+        }
+        else
+        {
+            wallSlide = false;
+            animacao.SetBool(animationstrings.IsWallSliding, false);
+            WallstateTimer = 0.2f;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && touching.IsOnWall && !touching.IsGrouded)
+        {
+            float jumpDirection = (facingDirecao == 1) ? -1 : 1;
+            rb.velocity = new Vector2(jumpDirection * 7f, jumpImpulso);
+
+            coyoteTimeContador = 0f;
+            IsJumping = false;
+            isWallJumping = true;
+            animacao.SetTrigger(animationstrings.jump);
+            Debug.Log("WallJump executado com direção: " + jumpDirection);
+        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)

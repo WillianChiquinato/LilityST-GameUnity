@@ -366,21 +366,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentZRotation: 0
   isFollowing: 1
+  maxSpeed: 7
+  speed: 2
+  acelerationSpeed: 50
+  airSpeed: 7
+  moveInput: {x: 0, y: 0}
+  Atacar: 0
+  RecuarAtirar: 0
+  numeroDeAttcks: 2
+  Reset: 0
+  ResetTimer: 0
+  ResetTimerLimite: 0.7
+  isCursorVisible: 0
   potion_Script: {fileID: 0}
   healing: 0
   healingTimer: 2
   acorda_Boss: {fileID: 0}
   savePoint: {fileID: 0}
   healthBar: {fileID: 0}
-  playerInput: {fileID: 0}
-  bow_Torax: {fileID: 0}
-  entrar: 0
   animacao: {fileID: 0}
   rb: {fileID: 0}
   DamageScript: {fileID: 0}
   touching: {fileID: 0}
-  speed: 7
-  airSpeed: 7
+  entrar: 0
   IsJumping: 0
   jumpImpulso: 20
   ContagemJump: 0.05
@@ -389,6 +397,8 @@ MonoBehaviour:
   jumpBufferTimer: 0.05
   jumpBufferContador: 0
   jumpBufferFinal: 0
+  playerInput: {fileID: 0}
+  bow_Torax: {fileID: 0}
   Atirar: 0
   tempo: 0
   targetTimeScale: 0.3
@@ -399,13 +409,8 @@ MonoBehaviour:
   facingDirecao: 1
   wallSlidingSpeed: 1
   wallJumpDirecao: {x: 5, y: 15}
-  DialogosIntro: 0
-  Atacar: 0
-  RecuarAtirar: 0
-  numeroDeAttcks: 2
-  Reset: 0
-  ResetTimer: 0
-  ResetTimerLimite: 0.7
+  _cameraFollow: {fileID: 0}
+  camerafollowObject: {fileID: 0}
   _IsMoving: 0
   _IsAcordada: 0
   _IsRight: 1

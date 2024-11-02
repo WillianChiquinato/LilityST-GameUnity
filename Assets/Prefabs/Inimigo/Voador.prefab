@@ -171,7 +171,6 @@ MonoBehaviour:
   shootTempo: 0
   shootTimerTarget: 3
   playerMoviment: {fileID: 0}
-  attackZona: {fileID: 0}
   projetil: {fileID: 7978135216938519004, guid: 435359b6bb4789f4cb9ff3b6439b3d29, type: 3}
   projetilPos: {fileID: 8993587348195629510}
   direction: {x: 0, y: 0, z: 0}
@@ -179,7 +178,7 @@ MonoBehaviour:
   detectionRange: 27
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 10304
   isPlayerInSight: 0
   _Target: 0
 --- !u!114 &4202014534044570717
