@@ -54,6 +54,7 @@ internal class animationstrings
     internal static string PowersBraco = "PowersBraco";
     internal static string Impacto = "Impacto";
     internal static string counterAtt = "counterAtt";
+    internal static string isDashing = "isDashing";
 
     //Tiles
     internal static string Ativador_Ativo = "Ativador_Ativo";

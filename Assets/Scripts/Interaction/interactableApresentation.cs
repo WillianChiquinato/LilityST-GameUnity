@@ -17,42 +17,66 @@ public class interactableApresentation : CollidableObjects
 
     public string GetInput;
     public bool ativo = false;
+    public bool timerApres = false;
 
     protected override void Start()
     {
         base.Start();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         ApresInput.SetActive(false);
+
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.W) && ativo)
+        if (ativo)
         {
-            if (GetInput == "Jump")
+            StartCoroutine(Countdown());
+            if (Input.GetKeyDown(KeyCode.W) && timerApres)
             {
-                SavePoint.JumpApres = true;
-                Time.timeScale = 1f;
-                playerMoviment.playerInput.enabled = true;
-                ApresInput.SetActive(false);
+                if (GetInput == "Jump")
+                {
+                    SavePoint.JumpApres = true;
+                    Time.timeScale = 1f;
+                    playerMoviment.playerInput.enabled = true;
+                    ApresInput.SetActive(false);
 
-                Destroy(this.gameObject);
-                ativo = false;
-            }
+                    Destroy(this.gameObject);
+                    ativo = false;
+                }
 
-            if (GetInput == "WallJump")
-            {
-                SavePoint.WallApres = true;
-                Time.timeScale = 1f;
-                playerMoviment.playerInput.enabled = true;
-                ApresInput.SetActive(false);
+                if (GetInput == "WallJump")
+                {
+                    SavePoint.WallApres = true;
+                    Time.timeScale = 1f;
+                    playerMoviment.playerInput.enabled = true;
+                    ApresInput.SetActive(false);
 
-                Destroy(this.gameObject);
-                ativo = false;
+                    Destroy(this.gameObject);
+                    ativo = false;
+                }
+
+                if (GetInput == "Dash")
+                {
+                    SavePoint.DashApres = true;
+                    Time.timeScale = 1f;
+                    playerMoviment.playerInput.enabled = true;
+                    ApresInput.SetActive(false);
+
+                    Destroy(this.gameObject);
+                    ativo = false;
+                }
             }
         }
+    }
+
+    private IEnumerator Countdown()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+
+        timerApres = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -72,10 +96,17 @@ public class interactableApresentation : CollidableObjects
 
         if (GetInput == "WallJump")
         {
-            //
             SavePoint.WallApres = true;
             texto01.text = "Vá na parede, press W";
             texto02.text = "Para WallJump";
+            imagem.texture = referenciaImg;
+        }
+
+        if (GetInput == "Dash")
+        {
+            SavePoint.WallApres = true;
+            texto01.text = "Pressione SHIFT";
+            texto02.text = "Para Dash";
             imagem.texture = referenciaImg;
         }
 

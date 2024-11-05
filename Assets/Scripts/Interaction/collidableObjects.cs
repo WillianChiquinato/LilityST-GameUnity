@@ -25,6 +25,6 @@ public class CollidableObjects : MonoBehaviour
 
     protected virtual void OnCollider(GameObject ColliderObject)
     {
-        Debug.Log("Ola " + ColliderObject.name);
+        
     }
 }

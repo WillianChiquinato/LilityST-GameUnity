@@ -12,6 +12,7 @@ public class Sistema_Pause : MonoBehaviour
     public BossFight bossFight;
     public SavePoint savePoint;
     public PlayerMoviment playerMoviment;
+    public FadeStartGame fadeStartGame;
     public GameObject pauseMenu;
     public GameObject MainCamera;
     public GameObject CutSceneDroggo;
@@ -37,13 +38,10 @@ public class Sistema_Pause : MonoBehaviour
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         playerDamage = playerMoviment.GetComponent<Damage>();
         playerHealth = playerMoviment.GetComponent<Damage>();
-        savePoint = GameObject.FindObjectOfType<SavePoint>();
         bossFight = FindAnyObjectByType<BossFight>();
 
         CutSceneDroggo = GameObject.FindWithTag("CutScene");
         CutSceneDroggo.SetActive(false);
-
-        CurrentSceneName = SceneManager.GetActiveScene().name;
     }
 
     void Update()
@@ -85,8 +83,10 @@ public class Sistema_Pause : MonoBehaviour
 
     public void ParaOMenu()
     {
+        //Teste
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
+        Debug.Log("Cena: " + SavePoint.nomeCenaMenu);
         IrMenu = true;
     }
 

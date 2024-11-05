@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public static PlayerMoviment Instance { get; private set; }
+    public string currentScene;
 
 
     [Header("Instances")]
@@ -87,10 +88,19 @@ public class PlayerMoviment : MonoBehaviour
     public bool isWallJumping = false;
     public float wallJumpTimer;
 
+    [Header("Dash States")]
+    public bool isDashing;
+    public float dashSpeed;
+    public float dashDuration;
+    private float stateTimerDash;
+    public float timerDash;
+    public float dashCooldown;
+
+
 
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
-    [SerializeField] private camerafollowObject camerafollowObject;
+    [SerializeField] public camerafollowObject camerafollowObject;
 
 
     public int AtaqueCounterAtual
@@ -229,7 +239,6 @@ public class PlayerMoviment : MonoBehaviour
         DamageScript = GetComponent<Damage>();
         playerInput = GetComponent<PlayerInput>();
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
-        savePoint = GameObject.FindObjectOfType<SavePoint>();
         bow = GameObject.FindObjectOfType<Bow>();
         bow_Torax = GameObject.FindObjectOfType<bow_Torax>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
@@ -238,10 +247,32 @@ public class PlayerMoviment : MonoBehaviour
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
+        stateTimerDash = dashDuration;
+
+        //saber qual cena o jogador esta.
+        currentScene = SceneManager.GetActiveScene().name;
+        SavePoint.nomeCenaMenu = currentScene;
+        Debug.Log("Nome da cena atual: " + currentScene);
     }
 
     private void Update()
     {
+        //Dash cooldown
+        timerDash -= Time.deltaTime;
+        //Tempo do dash
+        if (isDashing)
+        {
+            stateTimerDash -= Time.deltaTime;
+            if (stateTimerDash < 0f)
+            {
+                animacao.SetBool(animationstrings.isDashing, false);
+                isDashing = false;
+                stateTimerDash = dashDuration;
+                rb.gravityScale = 4.5f;
+            }
+        }
+
+
         if (touching.IsGrouded)
         {
             isWallJumping = false;
@@ -343,7 +374,7 @@ public class PlayerMoviment : MonoBehaviour
                 }
             }
 
-            if (!isWallJumping)
+            if (!isWallJumping && !isDashing)
             {
                 rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
             }
@@ -411,6 +442,29 @@ public class PlayerMoviment : MonoBehaviour
             camerafollowObject.chamarTurn();
         }
 
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (SavePoint.DashApres)
+        {
+            if (context.started && timerDash < 0f)
+            {
+                if (touching.IsOnWall)
+                {
+                    return;
+                }
+
+                isDashing = true;
+                animacao.SetBool(animationstrings.isDashing, true);
+                timerDash = dashCooldown;
+                DamageScript.isInvicible = true;
+
+                rb.velocity = new Vector2(dashSpeed * facingDirecao, 0);
+
+                rb.gravityScale = 0f;
+            }
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)

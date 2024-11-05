@@ -61,7 +61,6 @@ public class GoraflixMoviment : MonoBehaviour
     void Update()
     {
         FlipDirecao();
-        Vector3 offSet = new Vector3(5f, 0f, 0f);
 
         if (atacar)
         {
@@ -69,7 +68,7 @@ public class GoraflixMoviment : MonoBehaviour
             paredes_pretas.SetActive(true);
             nomeBoss.SetActive(true);
             playerMoviment.canMove = false;
-            cinemachineVirtualCamera.Follow = secondTarget;
+            StartCoroutine(TransicaoCamera(secondTarget));
 
             if (timingAttack < 0f)
             {
@@ -79,13 +78,28 @@ public class GoraflixMoviment : MonoBehaviour
         }
     }
 
+    IEnumerator TransicaoCamera(Transform target)
+    {
+        cinemachineVirtualCamera.Follow = target;
+
+        while (Vector3.Distance(cinemachineVirtualCamera.Follow.position, target.position) > 0.1f)
+        {
+            transposer.m_XDamping = 2;
+            transposer.m_YDamping = 2;
+            transposer.m_ZDamping = 2;
+            cinemachineVirtualCamera.Follow = target;
+            yield return null;
+        }
+    }
+
     private void ataqueGeneral()
     {
         paredes_pretas.SetActive(false);
         nomeBoss.SetActive(false);
         Vector2 targetPosition = new Vector2(playerMoviment.transform.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        cinemachineVirtualCamera.Follow = firstTarget;
+        StartCoroutine(TransicaoCamera(firstTarget));
+
         playerMoviment.canMove = true;
     }
 

@@ -10,23 +10,26 @@ public class FadeStartGame : MonoBehaviour
 
     [SerializeField]
     private float fadeTime;
+    public string nomeCena;
 
     void Start()
     {
         fadeUI = GetComponent<fadeUI>();
         fadeUI.FadeUIOut(fadeTime);
+
+        nomeCena = SavePoint.nomeCenaMenu;
     }
 
-    public void ChamarStartGame(string SceneEntrar)
+    public void ChamarStartGame()
     {
-        StartCoroutine(FadeParaStartGame(SceneEntrar));
+        StartCoroutine(FadeParaStartGame());
     }
 
-    IEnumerator FadeParaStartGame(string SceneEntrar)
+    IEnumerator FadeParaStartGame()
     {
         permissao = true;
         fadeUI.FadeUIIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene(SceneEntrar);
+        SceneManager.LoadScene(nomeCena);
     }
 }
