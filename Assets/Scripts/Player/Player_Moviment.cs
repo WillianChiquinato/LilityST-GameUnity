@@ -220,7 +220,7 @@ public class PlayerMoviment : MonoBehaviour
         }
     }
 
-    // Chamado antes do start
+    // Chamado antes do start, isso
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -415,7 +415,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && IsJumping)
+        if (context.started && IsJumping && SavePoint.JumpApres)
         {
             if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
@@ -485,24 +485,29 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started && touching.IsGrouded)
+        if (SavePoint.AttackApres)
         {
-            Atacar = true;
-            Reset = true;
-            animacao.SetTrigger(animationstrings.attack);
-            animacao.SetInteger(animationstrings.counterAtt, AtaqueCounterAtual);
+            if (context.started && touching.IsGrouded)
+            {
+                Debug.Log(SavePoint.AttackApres);
+                Atacar = true;
+                Reset = true;
+                animacao.SetTrigger(animationstrings.attack);
+                animacao.SetInteger(animationstrings.counterAtt, AtaqueCounterAtual);
 
-            AtaqueCounterAtual++;
-        }
-        else if (context.started)
-        {
-            Atacar = true;
-            animacao.SetTrigger(animationstrings.attack);
+                AtaqueCounterAtual++;
+            }
+            else if (context.started)
+            {
+                Atacar = true;
+                animacao.SetTrigger(animationstrings.attack);
+            }
         }
     }
 
     public void OnPowers(InputAction.CallbackContext context)
     {
+        //Add Savepoint.PowerUpApress
         if (context.started)
         {
             if (touching.IsGrouded && bow.NewArrow == null)

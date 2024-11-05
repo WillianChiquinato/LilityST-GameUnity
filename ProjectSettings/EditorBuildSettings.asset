@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 8fea9ca6281027941ad1bb0f65312db0
   - enabled: 1
+    path: Assets/Scenes/Altior-Quarto.unity
+    guid: 7837a240decbfd943bbb0742ee1fd7db
+  - enabled: 1
+    path: Assets/Scenes/Altior-Fuga.unity
+    guid: 42383e925b55e4c4b907a5984a2a08fc
+  - enabled: 1
     path: Assets/Scenes/Introducao.unity
     guid: d76b2fb99ea61ba45972d19317dd75c6
   - enabled: 1

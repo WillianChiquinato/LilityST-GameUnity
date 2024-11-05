@@ -10,7 +10,7 @@ public class FadeStartGame : MonoBehaviour
 
     [SerializeField]
     private float fadeTime;
-    
+
     void Start()
     {
         fadeUI = GetComponent<fadeUI>();
@@ -27,6 +27,6 @@ public class FadeStartGame : MonoBehaviour
         permissao = true;
         fadeUI.FadeUIIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene("Introducao");
+        SceneManager.LoadScene(SceneEntrar);
     }
 }

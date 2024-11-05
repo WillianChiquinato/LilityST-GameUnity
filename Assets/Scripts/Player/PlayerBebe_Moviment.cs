@@ -10,6 +10,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
 
     [Header("Instances")]
+    public PlayerInput playerInput;
     public float speed;
     public float airSpeed;
     public Vector2 moveInput;
@@ -26,7 +27,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
-    [SerializeField] private cameraFollowBaby camerafollowObject;
+    public cameraFollowBaby camerafollowObject;
 
     public bool canMove
     {
@@ -122,6 +123,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         animacao = GetComponent<Animator>();
         touching = GetComponent<TouchingDistance>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
+        playerInput = GetComponent<PlayerInput>();
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<cameraFollowBaby>();
