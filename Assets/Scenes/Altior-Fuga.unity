@@ -452,7 +452,7 @@ MonoBehaviour:
   Camera_Size: {fileID: 0}
   Size_Camera: {fileID: 0}
   player: {fileID: 0}
-  sceneName: NPCs
+  sceneName: Introducao
 --- !u!61 &164584533
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -514,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -390.82, y: 20.23}
+  m_AnchoredPosition: {x: -514.35, y: 13.79}
   m_SizeDelta: {x: 19.2631, y: 14.2106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &220617753
@@ -831,11 +831,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412861742125223407, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_Size.x
-      value: 50.95305
+      value: 75.881195
       objectReference: {fileID: 0}
     - target: {fileID: 7412861742125223407, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_Offset.x
-      value: -22.876457
+      value: -35.34053
       objectReference: {fileID: 0}
     - target: {fileID: 7551957516903944931, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: customInspectorObje.panTime
@@ -851,11 +851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -147.9
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 39.9
+      value: 33.4
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -90756,11 +90756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -257.5
+      value: -397.7
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 43.5
+      value: 35.7
       objectReference: {fileID: 0}
     - target: {fileID: 8869275688824652959, guid: f6019f78ca4a7da4f8a9a0c5b9103e5b, type: 3}
       propertyPath: m_LocalPosition.z

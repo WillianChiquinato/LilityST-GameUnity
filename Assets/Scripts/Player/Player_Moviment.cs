@@ -562,7 +562,7 @@ public class PlayerMoviment : MonoBehaviour
     public void OnPowers(InputAction.CallbackContext context)
     {
         //Add Savepoint.PowerUpApress
-        if (context.started)
+        if (context.started && SavePoint.ArcoApres)
         {
             if (touching.IsGrouded && bow.NewArrow == null)
             {

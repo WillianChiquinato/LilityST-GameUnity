@@ -13,6 +13,7 @@ public class SavePoint : MonoBehaviour
     public static bool AttackApres = false;
     public static bool WallApres = false;
     public static bool DashApres = false;
+    public static bool ArcoApres = false;
 
     //Menu / Reset Checkpoint
     public static string nomeCenaMenu = "Altior-Quarto";

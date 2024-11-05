@@ -28,6 +28,12 @@ public class Sistema_Cenas : MonoBehaviour
             Debug.Log("Esta na cena " + sceneName);
 
             //Arrumar depois, nao esta manutenivel (Colocar alguma logica para cada saida)
+            if (sceneName == "Introducao")
+            {
+                SavePoint.CheckpointPosition = new Vector3(-72.84f, 27.18f, 0f);
+                SavePoint.AttackApres = true;
+                SavePoint.ArcoApres = true;
+            }
             if (sceneName == "NPCs")
             {
                 SavePoint.CheckpointPosition = new Vector3(-72.84f, 28.74f, 0f);
