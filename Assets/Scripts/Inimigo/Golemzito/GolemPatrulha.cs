@@ -29,7 +29,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     public Material newMaterial;  // O novo material que você quer usar temporariamente
     private Material originalMaterial;  // Para armazenar o material original
     private SpriteRenderer spriteRenderer;
-    
+
 
     public float speed = 4f;
     public float StopRate = 0.2f;
@@ -139,7 +139,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         {
             FlipDirecao();
         }
-        if(!touching.IsOnWall)
+        if (!touching.IsOnWall)
         {
             animator.SetBool(animationstrings.IsIdlePatrulha, false);
         }

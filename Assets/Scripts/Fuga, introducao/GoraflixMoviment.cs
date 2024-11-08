@@ -7,10 +7,21 @@ public class GoraflixMoviment : MonoBehaviour
 {
     TouchingDistance touching;
     public PlayerMoviment playerMoviment;
+    public Transform playerTransform;
     private float speed = 5.5f;
     public Animator animator;
+    public Rigidbody2D rb;
     public bool atacar = false;
     public float timingAttack;
+    public bool flipDelayed = false;
+    public bool SpeedDelayed = false;
+
+    //Idle
+    public float obstacleCheckDistance = 2f;
+    private float stopDistance = 2f;
+    public float distanceToPlayer;
+    private float timerTP = 2f;
+
 
     [Header("Targets")]
     public GameObject paredes_pretas;
@@ -18,25 +29,14 @@ public class GoraflixMoviment : MonoBehaviour
     public Transform firstTarget;
     public Transform secondTarget;
     public CinemachineFramingTransposer transposer;
-    public bool offsetAjustado = false;
+    public DetectionZone attackZona;
+    public Vector3 originalPosition;
 
-    //
+
+    public bool playerSeguir = false;
+
     public CinemachineVirtualCamera cinemachineVirtualCamera;
-
-
-    public bool _Target = false;
-    public bool Target
-    {
-        get
-        {
-            return _Target;
-        }
-        private set
-        {
-            _Target = value;
-            animator.SetBool(animationstrings.Target, value);
-        }
-    }
+    public float targetOrthographicSize = 6f;
 
     public bool canMove
     {
@@ -46,11 +46,34 @@ public class GoraflixMoviment : MonoBehaviour
         }
     }
 
+    public bool _Target = false;
+    public bool Target
+    {
+        get { return _Target; }
+        private set
+        {
+            _Target = value;
+            animator.SetBool(animationstrings.Target, value);
+        }
+    }
+    public float attackCooldown
+    {
+        get
+        {
+            return animator.GetFloat(animationstrings.attackCooldown);
+        }
+        private set
+        {
+            animator.SetFloat(animationstrings.attackCooldown, Mathf.Max(value, 0));
+        }
+    }
+
 
     void Start()
     {
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
         cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -60,7 +83,23 @@ public class GoraflixMoviment : MonoBehaviour
 
     void Update()
     {
+        Target = attackZona.detectColliders.Count > 0;
+
+        if (Target && attackCooldown == 0)
+        {
+            Time.timeScale = 0.35f;
+            StartCoroutine(FlipDelayed());
+        }
+        else if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+            Time.timeScale = 1f;
+            playerMoviment.EsquivaPress = false;
+        }
+
         FlipDirecao();
+        //Sobre o idle.
+        distanceToPlayer = Mathf.Abs(playerTransform.position.x - transform.position.x);
 
         if (atacar)
         {
@@ -73,9 +112,33 @@ public class GoraflixMoviment : MonoBehaviour
             if (timingAttack < 0f)
             {
                 ataqueGeneral();
-                animator.SetBool("SeguirPlayer", true);
             }
         }
+
+        if (speed == 0f)
+        {
+            if (playerSeguir && !playerMoviment.IsMoving)
+            {
+                timerTP -= Time.deltaTime;
+                if (timerTP < 0f)
+                {
+                    StartCoroutine(TpOnPlayer());
+                    timerTP = 2f;
+                }
+            }
+        }
+    }
+
+    IEnumerator TpOnPlayer()
+    {
+        originalPosition = transform.position;
+        yield return new WaitForSeconds(0.1f);
+
+        transform.position = playerTransform.position;
+
+        yield return new WaitForSeconds(1f);
+
+        transform.position = originalPosition;
     }
 
     IEnumerator TransicaoCamera(Transform target)
@@ -94,18 +157,30 @@ public class GoraflixMoviment : MonoBehaviour
 
     private void ataqueGeneral()
     {
+        playerSeguir = true;
         paredes_pretas.SetActive(false);
         nomeBoss.SetActive(false);
-        Vector2 targetPosition = new Vector2(playerMoviment.transform.position.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        StartCoroutine(TransicaoCamera(firstTarget));
+        if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
+        {
+            speed = 5.5f;
+            Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
+            transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
+            animator.SetBool("SeguirPlayer", true);
+        }
+        else
+        {
+            speed = 0f;
+            animator.SetBool("SeguirPlayer", false);
+        }
 
+        StartCoroutine(TransicaoCamera(firstTarget));
         playerMoviment.canMove = true;
+
     }
 
     private void FlipDirecao()
     {
-        if (touching.IsGrouded)
+        if (touching.IsGrouded && !flipDelayed)
         {
             if (transform.position.x > playerMoviment.transform.position.x)
             {
@@ -116,5 +191,23 @@ public class GoraflixMoviment : MonoBehaviour
                 transform.localScale = new Vector3(8, 8, 8);
             }
         }
+    }
+
+    IEnumerator FlipDelayed()
+    {
+        flipDelayed = true;
+
+        yield return new WaitForSeconds(0.2f);
+
+        playerMoviment.EsquivaPress = true;
+
+        yield return new WaitForSeconds(0.2f);
+
+        SpeedDelayed = true;
+
+        yield return new WaitForSeconds(1f);
+
+        flipDelayed = false;
+        SpeedDelayed = false;
     }
 }

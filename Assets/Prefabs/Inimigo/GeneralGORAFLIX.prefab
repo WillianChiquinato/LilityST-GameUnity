@@ -123,8 +123,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003900528, y: -0.08581483}
-  m_Size: {x: 0.21868896, y: 0.36086154}
+  m_Offset: {x: 0.003900528, y: -0.09530723}
+  m_Size: {x: 0.21868896, y: 0.3256042}
   m_Direction: 0
 --- !u!50 &1623117687341651676
 Rigidbody2D:
@@ -141,7 +141,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -187,13 +187,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMoviment: {fileID: 0}
+  playerTransform: {fileID: 0}
   animator: {fileID: 0}
+  rb: {fileID: 0}
   atacar: 0
   timingAttack: 3
+  obstacleCheckDistance: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  distanceToPlayer: 0
   paredes_pretas: {fileID: 0}
+  nomeBoss: {fileID: 0}
   firstTarget: {fileID: 0}
+  secondTarget: {fileID: 2291744627871594659}
   transposer: {fileID: 0}
-  offsetAjustado: 0
+  targetDistance: 0
   cinemachineVirtualCamera: {fileID: 0}
   _Target: 0
 --- !u!114 &6270855651540930220
@@ -268,7 +277,7 @@ GameObject:
   m_Layer: 10
   m_Name: ObjectCamera
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -281,7 +290,7 @@ Transform:
   m_GameObject: {fileID: 1120977887152306840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.615, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 5172986490349848943}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.195, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
