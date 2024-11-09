@@ -81,34 +81,36 @@ public class interactableApresentation : CollidableObjects
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ativo = true;
-        Time.timeScale = 0f;
-        ApresInput.SetActive(true);
-        playerMoviment.playerInput.enabled = false;
-
-        if (GetInput == "Jump")
+        if (other.gameObject.CompareTag("Player"))
         {
-            SavePoint.JumpApres = true;
-            texto01.text = "Pressione";
-            texto02.text = "Para pular";
-            imagem.texture = referenciaImg;
-        }
+            ativo = true;
+            Time.timeScale = 0f;
+            ApresInput.SetActive(true);
+            playerMoviment.playerInput.enabled = false;
 
-        if (GetInput == "WallJump")
-        {
-            SavePoint.WallApres = true;
-            texto01.text = "Vá na parede, press W";
-            texto02.text = "Para WallJump";
-            imagem.texture = referenciaImg;
-        }
+            if (GetInput == "Jump")
+            {
+                SavePoint.JumpApres = true;
+                texto01.text = "Pressione";
+                texto02.text = "Para pular";
+                imagem.texture = referenciaImg;
+            }
 
-        if (GetInput == "Dash")
-        {
-            SavePoint.WallApres = true;
-            texto01.text = "Pressione SHIFT";
-            texto02.text = "Para Dash";
-            imagem.texture = referenciaImg;
-        }
+            if (GetInput == "WallJump")
+            {
+                SavePoint.WallApres = true;
+                texto01.text = "Vá na parede, press W";
+                texto02.text = "Para WallJump";
+                imagem.texture = referenciaImg;
+            }
 
+            if (GetInput == "Dash")
+            {
+                SavePoint.WallApres = true;
+                texto01.text = "Pressione SHIFT";
+                texto02.text = "Para Dash";
+                imagem.texture = referenciaImg;
+            }
+        }
     }
 }

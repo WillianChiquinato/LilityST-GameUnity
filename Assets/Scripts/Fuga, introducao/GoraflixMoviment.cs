@@ -8,7 +8,7 @@ public class GoraflixMoviment : MonoBehaviour
     TouchingDistance touching;
     public PlayerMoviment playerMoviment;
     public Transform playerTransform;
-    private float speed = 5.5f;
+    private float speed = 6.5f;
     public Animator animator;
     public Rigidbody2D rb;
     public bool atacar = false;
@@ -120,10 +120,14 @@ public class GoraflixMoviment : MonoBehaviour
             if (playerSeguir && !playerMoviment.IsMoving)
             {
                 timerTP -= Time.deltaTime;
-                if (timerTP < 0f)
+                if (timerTP < 1f)
                 {
-                    StartCoroutine(TpOnPlayer());
-                    timerTP = 2f;
+                    animator.SetBool("Teleporte", true);
+                    if (timerTP < 0f)
+                    {
+                        StartCoroutine(TpOnPlayer());
+                        timerTP = 2f;
+                    }
                 }
             }
         }
@@ -134,6 +138,7 @@ public class GoraflixMoviment : MonoBehaviour
         originalPosition = transform.position;
         yield return new WaitForSeconds(0.1f);
 
+        animator.SetBool("Teleporte", false);
         transform.position = playerTransform.position;
 
         yield return new WaitForSeconds(1f);
@@ -162,7 +167,7 @@ public class GoraflixMoviment : MonoBehaviour
         nomeBoss.SetActive(false);
         if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
         {
-            speed = 5.5f;
+            speed = 6.5f;
             Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
             transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
             animator.SetBool("SeguirPlayer", true);
@@ -175,7 +180,6 @@ public class GoraflixMoviment : MonoBehaviour
 
         StartCoroutine(TransicaoCamera(firstTarget));
         playerMoviment.canMove = true;
-
     }
 
     private void FlipDirecao()

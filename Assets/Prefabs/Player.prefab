@@ -595,6 +595,12 @@ MonoBehaviour:
   dashCooldown: 1
   _cameraFollow: {fileID: 0}
   camerafollowObject: {fileID: 0}
+  EsquivaPress: 0
+  EsquivaPressSolution: 0
+  EsquivaSpeed: 15
+  EsquivaDuration: 0.3
+  stateTimerEsquiva: 0
+  timerEsquiva: 2
   _IsMoving: 0
   _IsAcordada: 0
   _IsRight: 1
@@ -1005,7 +1011,7 @@ MonoBehaviour:
   healthChange:
     m_PersistentCalls:
       m_Calls: []
-  _maxHealth: 4
+  _maxHealth: 3
   _health: 4
   isInvicible: 0
   invicibilityTimer: 0.5

@@ -270,7 +270,7 @@ public class PlayerMoviment : MonoBehaviour
         timerDash -= Time.deltaTime;
         timerEsquiva -= Time.deltaTime;
         //Tempo do dash
-        if (isDashing)
+        if (isDashing && !touching.IsOnWall)
         {
             stateTimerDash -= Time.deltaTime;
             if (stateTimerDash < 0f)
@@ -280,6 +280,13 @@ public class PlayerMoviment : MonoBehaviour
                 stateTimerDash = dashDuration;
                 rb.gravityScale = 4.5f;
             }
+        }
+        else
+        {
+            animacao.SetBool(animationstrings.isDashing, false);
+            isDashing = false;
+            stateTimerDash = dashDuration;
+            rb.gravityScale = 4.5f;
         }
 
         if (EsquivaPressSolution)
@@ -465,21 +472,6 @@ public class PlayerMoviment : MonoBehaviour
 
     }
 
-    //Esquiva por enquanto apenas na introdução;
-    public void OnEsquiva(InputAction.CallbackContext context)
-    {
-        if (context.started && EsquivaPress && timerEsquiva < 0f)
-        {
-            EsquivaPressSolution = true;
-
-            //Reutilização (Arrumar After)
-            animacao.SetBool(animationstrings.isDashing, true);
-            rb.velocity = new Vector2(EsquivaSpeed * facingDirecao, 0);
-            timerEsquiva = 2f;
-            DamageScript.isInvicible = true;
-        }
-    }
-
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -487,11 +479,6 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (context.started && timerDash < 0f)
             {
-                if (touching.IsOnWall)
-                {
-                    return;
-                }
-
                 isDashing = true;
                 animacao.SetBool(animationstrings.isDashing, true);
                 timerDash = dashCooldown;
@@ -511,6 +498,10 @@ public class PlayerMoviment : MonoBehaviour
             if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
                 Jump();
+            }
+            if (isDashing)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.7f);
             }
         }
 
