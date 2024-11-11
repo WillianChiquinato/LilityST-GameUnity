@@ -18,6 +18,10 @@ internal class animationstrings
     internal static string VelocityLock = "VelocityLock";
     internal static string IsAttackMaga = "IsAttackMaga";
 
+    //General
+    internal static string Teleporte = "Teleporte";
+    internal static string SeguirPlayer = "SeguirPlayer";
+
     //Dialogos
     internal static string isDialog = "isDialog";
     internal static string IsDialogFinish = "IsDialogFinish";

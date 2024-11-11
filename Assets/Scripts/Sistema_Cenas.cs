@@ -36,7 +36,7 @@ public class Sistema_Cenas : MonoBehaviour
             }
             if (sceneName == "NPCs")
             {
-                SavePoint.CheckpointPosition = new Vector3(-72.84f, 28.74f, 0f);
+                SavePoint.CheckpointPosition = new Vector3(-72.84f, 45.35f, 0f);
             }
             //Teste krleo
             else if (sceneName == "Green_phase")

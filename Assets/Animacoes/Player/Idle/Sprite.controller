@@ -435,8 +435,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsAcordada
     m_EventTreshold: 0
-  - m_ConditionMode: 2
+  - m_ConditionMode: 1
     m_ConditionEvent: Checkpoint
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: QuedaStart
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1747597968255707183}
@@ -1126,6 +1129,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: QuedaStart
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1785,13 +1794,13 @@ AnimatorStateMachine:
   - first: {fileID: -1333555863451227767}
     second:
     - {fileID: -506700333533347992}
+  - first: {fileID: -8299105760499116959}
+    second:
+    - {fileID: 7435483900817128822}
   - first: {fileID: 36490579749515629}
     second:
     - {fileID: -2279064570856881921}
     - {fileID: -3876177975567471149}
-  - first: {fileID: -8299105760499116959}
-    second:
-    - {fileID: 7435483900817128822}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 600, y: 50, z: 0}
   m_EntryPosition: {x: -190, y: 100, z: 0}
@@ -1811,6 +1820,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: IsAcordada
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: QuedaStart
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 8545933262860255431}
   m_DstState: {fileID: 0}

@@ -6,20 +6,24 @@ public class parallax_Introducao : MonoBehaviour
 {
     public GameObject cam;
 
-    [SerializeField] private float parallaxEffect;
+    [SerializeField] private float parallaxEffectX;
+    [SerializeField] private float parallaxEffectY;
     private float xPosition;
+    private float yPosition;
 
     void Start()
     {
         cam = GameObject.Find("Main Camera");
 
         xPosition = transform.position.x;
+        yPosition = transform.position.y;
     }
 
     void Update()
     {
-        float distanceMove = cam.transform.position.x * parallaxEffect;
+        float distanceMoveX = cam.transform.position.x * parallaxEffectX;
+        float distanceMoveY = cam.transform.position.y * parallaxEffectY;
 
-        transform.position = new Vector3(xPosition + distanceMove, transform.position.y);
+        transform.position = new Vector3(xPosition + distanceMoveX, yPosition + distanceMoveY);
     }
 }

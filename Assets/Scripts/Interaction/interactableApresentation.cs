@@ -34,39 +34,44 @@ public class interactableApresentation : CollidableObjects
         if (ativo)
         {
             StartCoroutine(Countdown());
-            if (Input.GetKeyDown(KeyCode.W) && timerApres)
+            if (timerApres)
             {
-                if (GetInput == "Jump")
+                if (Input.GetKeyDown(KeyCode.W))
                 {
-                    SavePoint.JumpApres = true;
-                    Time.timeScale = 1f;
-                    playerMoviment.playerInput.enabled = true;
-                    ApresInput.SetActive(false);
+                    if (GetInput == "Jump")
+                    {
+                        SavePoint.JumpApres = true;
+                        Time.timeScale = 1f;
+                        playerMoviment.playerInput.enabled = true;
+                        ApresInput.SetActive(false);
 
-                    Destroy(this.gameObject);
-                    ativo = false;
+                        Destroy(this.gameObject);
+                        ativo = false;
+                    }
+
+                    if (GetInput == "WallJump")
+                    {
+                        SavePoint.WallApres = true;
+                        Time.timeScale = 1f;
+                        playerMoviment.playerInput.enabled = true;
+                        ApresInput.SetActive(false);
+
+                        Destroy(this.gameObject);
+                        ativo = false;
+                    }
                 }
-
-                if (GetInput == "WallJump")
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    SavePoint.WallApres = true;
-                    Time.timeScale = 1f;
-                    playerMoviment.playerInput.enabled = true;
-                    ApresInput.SetActive(false);
+                    if (GetInput == "Dash")
+                    {
+                        SavePoint.DashApres = true;
+                        Time.timeScale = 1f;
+                        playerMoviment.playerInput.enabled = true;
+                        ApresInput.SetActive(false);
 
-                    Destroy(this.gameObject);
-                    ativo = false;
-                }
-
-                if (GetInput == "Dash")
-                {
-                    SavePoint.DashApres = true;
-                    Time.timeScale = 1f;
-                    playerMoviment.playerInput.enabled = true;
-                    ApresInput.SetActive(false);
-
-                    Destroy(this.gameObject);
-                    ativo = false;
+                        Destroy(this.gameObject);
+                        ativo = false;
+                    }
                 }
             }
         }

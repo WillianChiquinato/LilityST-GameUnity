@@ -95,7 +95,6 @@ public class GoraflixMoviment : MonoBehaviour
         {
             attackCooldown -= Time.deltaTime;
             Time.timeScale = 1f;
-            playerMoviment.EsquivaPress = false;
         }
 
         FlipDirecao();
@@ -124,7 +123,7 @@ public class GoraflixMoviment : MonoBehaviour
                 timerTP -= Time.deltaTime;
                 if (timerTP < 0.6f && distanceToPlayerPlayerY > 5f)
                 {
-                    animator.SetBool("Teleporte", true);
+                    animator.SetBool(animationstrings.Teleporte, true);
                     if (timerTP < 0f)
                     {
                         StartCoroutine(TpOnPlayer());
@@ -141,11 +140,10 @@ public class GoraflixMoviment : MonoBehaviour
         originalPosition = transform.position;
         yield return new WaitForSeconds(0.1f);
 
-        animator.SetBool("Teleporte", false);
+        animator.SetBool(animationstrings.Teleporte, false);
         transform.position = playerTransform.position;
 
-        yield return new WaitForSeconds(1f);
-
+        yield return new WaitForSeconds(1.7f);
         transform.position = originalPosition;
     }
 
@@ -173,13 +171,13 @@ public class GoraflixMoviment : MonoBehaviour
             speed = 6.5f;
             Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
             transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
-            animator.SetBool("SeguirPlayer", true);
-            animator.SetBool("Teleporte", false);
+            animator.SetBool(animationstrings.SeguirPlayer, true);
+            animator.SetBool(animationstrings.Teleporte, false);
         }
         else
         {
             speed = 0f;
-            animator.SetBool("SeguirPlayer", false);
+            animator.SetBool(animationstrings.SeguirPlayer, false);
         }
 
         StartCoroutine(TransicaoCamera(firstTarget));
@@ -192,11 +190,11 @@ public class GoraflixMoviment : MonoBehaviour
         {
             if (transform.position.x > playerMoviment.transform.position.x)
             {
-                transform.localScale = new Vector3(-8, 8, 8);
+                transform.localScale = new Vector3(-1, 1, 1);
             }
             else
             {
-                transform.localScale = new Vector3(8, 8, 8);
+                transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
@@ -204,16 +202,9 @@ public class GoraflixMoviment : MonoBehaviour
     IEnumerator FlipDelayed()
     {
         flipDelayed = true;
-
-        yield return new WaitForSeconds(0.2f);
-
-        playerMoviment.EsquivaPress = true;
-
-        yield return new WaitForSeconds(0.2f);
-
         SpeedDelayed = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         flipDelayed = false;
         SpeedDelayed = false;
