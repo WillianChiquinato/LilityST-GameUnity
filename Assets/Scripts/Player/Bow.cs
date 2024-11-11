@@ -14,11 +14,14 @@ public class Bow : MonoBehaviour
     public float ForceArrow;
     public Transform ShotPoint;
     public Rigidbody2D NewArrow;
-    public Animator animator;
+
+    [Header("Animators")]
+    public Animator animatorBD;
+    public Animator animatorBE;
+    public Animator animatorARCO;
 
 
     //Caminho da Flecha
-    public GameObject shotPoint;
     public GameObject point;
     public GameObject posicaoGO;
     public GameObject[] points;
@@ -36,9 +39,8 @@ public class Bow : MonoBehaviour
 
 
     //Virada da camera
-    public float targetOffsetX = 2f; // O valor alvo para o offset X
-    public float transitionDuration = 2f; // Duração da transição em segundos
-    public GameObject bowTorax;
+    public float targetOffsetX = 2f;
+    public float transitionDuration = 2f;
 
     private float initialOffsetX;
     private float transitionStartTime;
@@ -47,10 +49,8 @@ public class Bow : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        bowTorax.gameObject.SetActive(false);
         cameraArco = FindObjectOfType<Camera>();
         playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
-        animator = GetComponent<Animator>();
         cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
@@ -83,13 +83,11 @@ public class Bow : MonoBehaviour
         {
             this.gameObject.transform.localScale = new Vector3(1, 1, 1);
             posicaoGO.transform.localScale = new Vector3(1, 1, 1);
-            bowTorax.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
             this.gameObject.transform.localScale = new Vector3(-1, -1, 1);
             posicaoGO.transform.localScale = new Vector3(-1, 1, 1);
-            bowTorax.transform.localScale = new Vector3(-1, -1, 1);
         }
 
         // Logica para arrumar o arco
@@ -116,7 +114,9 @@ public class Bow : MonoBehaviour
             bodyCamera = false;
             transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
-            animator.SetBool(animationstrings.PowersBraco, false);
+            animatorBD.SetBool(animationstrings.PowersBraco, false);
+            animatorBE.SetBool(animationstrings.PowersBraco, false);
+            animatorARCO.SetBool(animationstrings.PowersBraco, false);
             Time.timeScale = 1f;
             playerMoviment.tempo = false;
             playerMoviment.elapsedTime = 0f;
@@ -174,7 +174,6 @@ public class Bow : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         gameObject.SetActive(false);
-        bowTorax.gameObject.SetActive(false);
 
         foreach (var DestruirCaminho in points)
         {

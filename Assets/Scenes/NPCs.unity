@@ -3006,6 +3006,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 478072871}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1581878308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1425635153256002575, guid: 5ff76306ab7d53c4ca0d788962af4dce, type: 3}
+  m_PrefabInstance: {fileID: 959582116547322374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1707258171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,6 +3135,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1493379162}
+    - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
+      propertyPath: apresentaocao
+      value: 
+      objectReference: {fileID: 1581878308}
     - target: {fileID: 6547576418419454379, guid: 63de0c8b7bc6a3b4aa90168160911c5b, type: 3}
       propertyPath: playerMoviment
       value: 
@@ -21831,7 +21840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.62
+      value: 27.97
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21878,9 +21887,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1868588000817237285, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610040644647711386, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: field of view
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610040644647711386, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4233647720179074865, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592299982021988868, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.90588236
       objectReference: {fileID: 0}
     - target: {fileID: 5139996195594453128, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21921,6 +21954,10 @@ PrefabInstance:
     - target: {fileID: 5139996195594453128, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975514464254789891, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.39
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22238,10 +22275,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2436492943533295347, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -70.75
@@ -22281,22 +22314,6 @@ PrefabInstance:
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4277583068603929381, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: FiltroCeiling.layerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136294069147344273, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441106876800685670, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441106876800685670, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 8.76
       objectReference: {fileID: 0}
     - target: {fileID: 8925139293431017860, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_Camera

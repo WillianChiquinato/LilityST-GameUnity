@@ -20,7 +20,8 @@ public class GoraflixMoviment : MonoBehaviour
     public float obstacleCheckDistance = 2f;
     private float stopDistance = 2f;
     public float distanceToPlayer;
-    private float timerTP = 2f;
+    public float distanceToPlayerPlayerY;
+    public float timerTP = 2f;
 
 
     [Header("Targets")]
@@ -100,6 +101,7 @@ public class GoraflixMoviment : MonoBehaviour
         FlipDirecao();
         //Sobre o idle.
         distanceToPlayer = Mathf.Abs(playerTransform.position.x - transform.position.x);
+        distanceToPlayerPlayerY = Mathf.Abs(playerMoviment.transform.position.y - transform.position.y);
 
         if (atacar)
         {
@@ -120,7 +122,7 @@ public class GoraflixMoviment : MonoBehaviour
             if (playerSeguir && !playerMoviment.IsMoving)
             {
                 timerTP -= Time.deltaTime;
-                if (timerTP < 1f)
+                if (timerTP < 0.6f && distanceToPlayerPlayerY > 5f)
                 {
                     animator.SetBool("Teleporte", true);
                     if (timerTP < 0f)
@@ -129,6 +131,7 @@ public class GoraflixMoviment : MonoBehaviour
                         timerTP = 2f;
                     }
                 }
+
             }
         }
     }
@@ -171,6 +174,7 @@ public class GoraflixMoviment : MonoBehaviour
             Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
             transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
             animator.SetBool("SeguirPlayer", true);
+            animator.SetBool("Teleporte", false);
         }
         else
         {

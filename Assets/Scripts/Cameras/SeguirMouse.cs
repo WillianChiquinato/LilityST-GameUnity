@@ -11,13 +11,13 @@ public class SeguirMouse : MonoBehaviour
     {
         cameraMouse = FindObjectOfType<Camera>();
     }
+    
     void Update()
     {
-        // Converter a posição da tela para a posição do mundo
-        Vector3 mouseWorldPosition = cameraMouse.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0f;
+        Vector3 mousePosition = cameraMouse.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePosition - transform.position;
 
-        // Atualizar a posição do GameObject para a posição do mouse
-        transform.position = mouseWorldPosition;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

@@ -632,6 +632,10 @@ PrefabInstance:
       propertyPath: Tiles
       value: 
       objectReference: {fileID: 299357077}
+    - target: {fileID: 1920468838968426726, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
+      propertyPath: Tempo_Animacao
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5207257851534014432, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -90.19
@@ -1247,6 +1251,10 @@ PrefabInstance:
       propertyPath: Tiles
       value: 
       objectReference: {fileID: 1143296581}
+    - target: {fileID: 1920468838968426726, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
+      propertyPath: Tempo_Animacao
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5207257851534014432, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -72.43
@@ -1628,6 +1636,10 @@ PrefabInstance:
       propertyPath: Tiles
       value: 
       objectReference: {fileID: 29614966}
+    - target: {fileID: 1920468838968426726, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
+      propertyPath: Tempo_Animacao
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5207257851534014432, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -128.22
@@ -1700,6 +1712,10 @@ PrefabInstance:
       propertyPath: Tiles
       value: 
       objectReference: {fileID: 689690775}
+    - target: {fileID: 1920468838968426726, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
+      propertyPath: Tempo_Animacao
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5207257851534014432, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -70.84
@@ -2292,6 +2308,10 @@ PrefabInstance:
       propertyPath: Tiles
       value: 
       objectReference: {fileID: 127749894}
+    - target: {fileID: 1920468838968426726, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
+      propertyPath: Tempo_Animacao
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5207257851534014432, guid: 8f590907d00d2e744afa491e09fc276b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -104.6
@@ -2466,7 +2486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.77
+      value: 32.94
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19459,7 +19479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.61
+      value: 27.79
       objectReference: {fileID: 0}
     - target: {fileID: 7480794334532562266, guid: 2890fd41109f6814789d241adb9f75b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19506,6 +19526,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1868588000817237285, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.79
+      objectReference: {fileID: 0}
     - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_LocalScale.x
       value: 30.918346
@@ -19521,6 +19545,10 @@ PrefabInstance:
     - target: {fileID: 2219247611435584466, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.1635
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610040644647711386, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: field of view
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2610040644647711386, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: orthographic size
@@ -19605,6 +19633,10 @@ PrefabInstance:
     - target: {fileID: 8836975975891169499, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
       propertyPath: m_Layer
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975514464254789891, guid: c36484f53472f714c899d25b5ba775a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -19847,26 +19879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1171048611473371047, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2298708724628945917, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2298708724628945917, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_PixelPerfect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2298708724628945917, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2001586325
-      objectReference: {fileID: 0}
-    - target: {fileID: 2436492943533295347, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -67.67
@@ -19906,50 +19922,6 @@ PrefabInstance:
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4277583068603929381, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: FiltroCeiling.layerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6879054267154154192, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136294069147344273, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Color.a
-      value: 0.94509804
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Color.b
-      value: 0.09433961
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Color.g
-      value: 0.09433961
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Color.r
-      value: 0.09433961
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424176527619744530, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441106876800685670, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441106876800685670, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 8.76
       objectReference: {fileID: 0}
     - target: {fileID: 8925139293431017860, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_Camera

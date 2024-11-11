@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8316849071499683318}
   - component: {fileID: 6786781544067643197}
   - component: {fileID: 1623117687341651676}
-  - component: {fileID: 8882058847312758012}
   - component: {fileID: 4743708318716065413}
+  - component: {fileID: 8882058847312758012}
   - component: {fileID: 6270855651540930220}
   m_Layer: 8
   m_Name: GeneralGORAFLIX
@@ -156,27 +156,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!95 &8882058847312758012
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809180199915578811}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68a3dfe0abcd2ef4f9b597a62a397eea, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4743708318716065413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +189,27 @@ MonoBehaviour:
   cinemachineVirtualCamera: {fileID: 0}
   targetOrthographicSize: 6
   _Target: 0
+--- !u!95 &8882058847312758012
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809180199915578811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68a3dfe0abcd2ef4f9b597a62a397eea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6270855651540930220
 MonoBehaviour:
   m_ObjectHideFlags: 0

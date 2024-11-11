@@ -22,12 +22,20 @@ public class Sistema_Pause : MonoBehaviour
     public string sceneName;
     public bool IrMenu = false;
 
+    public GameObject[] apresentaocao;
+
+    [Header("Savepoint")]
     //Savepoint
     public bool IrRestart = false;
     public string CurrentSceneName { get; private set; }
 
     void Start()
     {
+        apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
+        foreach (var obj in apresentaocao)
+        {
+            obj.SetActive(false);
+        }
         pauseMenu.SetActive(false);
 
         // Verifica se já existe uma instância desse objeto na cena

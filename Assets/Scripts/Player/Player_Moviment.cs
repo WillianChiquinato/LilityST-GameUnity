@@ -69,7 +69,6 @@ public class PlayerMoviment : MonoBehaviour
     //Sobre o arco
     [Header("Bow")]
     public PlayerInput playerInput;
-    public bow_Torax bow_Torax;
     Bow bow;
     public bool Atirar = false;
     [HideInInspector]
@@ -248,7 +247,6 @@ public class PlayerMoviment : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
         bow = GameObject.FindObjectOfType<Bow>();
-        bow_Torax = GameObject.FindObjectOfType<bow_Torax>();
         healthBar = GameObject.FindObjectOfType<HealthBar>();
         potion_Script = GameObject.FindObjectOfType<potion_script>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
@@ -356,11 +354,9 @@ public class PlayerMoviment : MonoBehaviour
         {
             //ARCO arrumar
             bow.bodyCamera = false;
-            bow.transposer.m_TrackedObjectOffset = bow.newOffset;
 
             animacao.SetBool(animationstrings.Powers, false);
             bow.gameObject.SetActive(false);
-            bow.bowTorax.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tempo = false;
             elapsedTime = 0f;
@@ -457,19 +453,18 @@ public class PlayerMoviment : MonoBehaviour
 
     private void setDirection(Vector2 moveInput)
     {
+        facingDirecao = transform.localScale.x == 1 ? 1 : -1;
+
         if (moveInput.x > 0 && !IsRight)
         {
-            facingDirecao = 1;
             IsRight = true;
             camerafollowObject.chamarTurn();
         }
         else if (moveInput.x < 0 && IsRight)
         {
-            facingDirecao = -1;
             IsRight = false;
             camerafollowObject.chamarTurn();
         }
-
     }
 
 
@@ -598,7 +593,6 @@ public class PlayerMoviment : MonoBehaviour
                 bow.bodyCamera = true;
                 animacao.SetBool(animationstrings.Powers, true);
                 bow.gameObject.SetActive(true);
-                bow.bowTorax.gameObject.SetActive(true);
                 bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
             }
         }
@@ -614,11 +608,9 @@ public class PlayerMoviment : MonoBehaviour
         //ARCO
         bow.bodyCamera = false;
         bow.newOffset = new Vector3(0, 0, 0);
-        bow.transposer.m_TrackedObjectOffset = bow.newOffset;
 
         animacao.SetBool(animationstrings.Powers, false);
         bow.gameObject.SetActive(false);
-        bow.bowTorax.gameObject.SetActive(false);
         Time.timeScale = 1f;
         tempo = false;
         elapsedTime = 0f;
