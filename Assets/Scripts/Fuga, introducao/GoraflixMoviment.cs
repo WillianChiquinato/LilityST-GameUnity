@@ -15,6 +15,7 @@ public class GoraflixMoviment : MonoBehaviour
     public float timingAttack;
     public bool flipDelayed = false;
     public bool SpeedDelayed = false;
+    public bool ataqueState = false;
 
     //Idle
     public float obstacleCheckDistance = 2f;
@@ -173,11 +174,18 @@ public class GoraflixMoviment : MonoBehaviour
             transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
             animator.SetBool(animationstrings.SeguirPlayer, true);
             animator.SetBool(animationstrings.Teleporte, false);
+
         }
         else
         {
             speed = 0f;
             animator.SetBool(animationstrings.SeguirPlayer, false);
+
+            if (ataqueState)
+            {
+                Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
+                transform.position = Vector2.MoveTowards(rb.position, targetPosition, 10 * Time.deltaTime);
+            }
         }
 
         StartCoroutine(TransicaoCamera(firstTarget));

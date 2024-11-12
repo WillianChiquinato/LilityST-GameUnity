@@ -90578,10 +90578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeneralGORAFLIX
       objectReference: {fileID: 0}
-    - target: {fileID: 4519776068733489926, guid: 1cb8cee51c1e6ef40835fac94afdfcd8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.67
-      objectReference: {fileID: 0}
     - target: {fileID: 4547830752931842687, guid: 1cb8cee51c1e6ef40835fac94afdfcd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -213.26
@@ -90638,10 +90634,6 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 554460313}
-    - target: {fileID: 5800039623464151185, guid: 1cb8cee51c1e6ef40835fac94afdfcd8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.47
-      objectReference: {fileID: 0}
     - target: {fileID: 6510015234620810227, guid: 1cb8cee51c1e6ef40835fac94afdfcd8, type: 3}
       propertyPath: imagem
       value: 
@@ -91276,6 +91268,10 @@ PrefabInstance:
     - target: {fileID: 3979624237456724338, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844949802469335203, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.78
       objectReference: {fileID: 0}
     - target: {fileID: 8925139293431017860, guid: b7d4e1e809a82a64b99392eb36b509a7, type: 3}
       propertyPath: m_Camera
