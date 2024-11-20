@@ -435,11 +435,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsAcordada
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: Checkpoint
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: QuedaStart
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1747597968255707183}

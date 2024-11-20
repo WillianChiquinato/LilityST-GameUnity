@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Item_drop : MonoBehaviour
+{
+    [SerializeField] private int amountOfItens;
+    [SerializeField] private ItemData[] possibleDrop;
+    private List<ItemData> droplist = new List<ItemData>();
+
+
+    [SerializeField] private GameObject dropPrefab;
+
+    public virtual void GenerateDrop()
+    {
+        for (int i = 0; i < possibleDrop.Length; i++)
+        {
+            if (Random.Range(0, 100) <= possibleDrop[i].dropChance)
+            {
+                droplist.Add(possibleDrop[i]);
+            }
+        }
+
+        for (int i = 0; i < amountOfItens; i++)
+        {
+            ItemData randomIten = droplist[Random.Range(0, droplist.Count - 1)];
+
+            droplist.Remove(randomIten);
+            DropItem(randomIten);
+        }
+    }
+
+    protected void DropItem(ItemData _itemData)
+    {
+        GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+
+        Vector2 randomVelo = new Vector2(Random.Range(-5, 5), Random.Range(10, 15));
+
+        newDrop.GetComponent<itemObject>().SetupItem(_itemData, randomVelo);
+    }
+}

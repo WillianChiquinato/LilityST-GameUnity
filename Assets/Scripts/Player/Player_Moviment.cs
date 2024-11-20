@@ -264,6 +264,21 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+        {
+            playerInput.enabled = false;
+        }
+
+        if (Input.anyKeyDown)
+        {
+            animacao.SetBool(animationstrings.IsAcordada, true);
+        }
+        else if (SavePoint.CheckpointAnim == true && SavePoint.CheckpointAnim2 == true)
+        {
+            animacao.SetBool(animationstrings.IsAcordada, true);
+            animacao.SetBool("Checkpoint", true);
+        }
+
         //Dash cooldown
         timerDash -= Time.deltaTime;
         timerEsquiva -= Time.deltaTime;
@@ -308,21 +323,6 @@ public class PlayerMoviment : MonoBehaviour
         WallSlide();
 
         currentZRotation = bow.transform.eulerAngles.z;
-
-        if (!canMove)
-        {
-            playerInput.enabled = false;
-        }
-
-        if (Input.anyKeyDown)
-        {
-            animacao.SetBool(animationstrings.IsAcordada, true);
-        }
-        else if (SavePoint.CheckpointAnim == true && SavePoint.CheckpointAnim2 == true)
-        {
-            animacao.SetBool(animationstrings.IsAcordada, true);
-            animacao.SetBool("Checkpoint", true);
-        }
 
         if (tempo)
         {
@@ -602,22 +602,30 @@ public class PlayerMoviment : MonoBehaviour
     {
         //KNOCKBACK
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
-        //JUMP
-        IsJumping = false;
-
-        //ARCO
-        bow.bodyCamera = false;
-        bow.newOffset = new Vector3(0, 0, 0);
-
-        animacao.SetBool(animationstrings.Powers, false);
-        bow.gameObject.SetActive(false);
-        Time.timeScale = 1f;
-        tempo = false;
-        elapsedTime = 0f;
-        bow.NewArrow = null;
-        foreach (var nuss in bow.points)
+        
+        if (DamageScript.IsAlive)
         {
-            nuss.SetActive(false);
+            //JUMP
+            IsJumping = false;
+
+            //ARCO
+            bow.bodyCamera = false;
+            bow.newOffset = new Vector3(0, 0, 0);
+
+            animacao.SetBool(animationstrings.Powers, false);
+            bow.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+            tempo = false;
+            elapsedTime = 0f;
+            bow.NewArrow = null;
+            foreach (var nuss in bow.points)
+            {
+                nuss.SetActive(false);
+            }
+        }
+        else
+        {
+            GetComponent<PlayerItemDrop>().GenerateDrop();
         }
     }
 

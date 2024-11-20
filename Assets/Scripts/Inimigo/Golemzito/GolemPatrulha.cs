@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class GolemPatrulha_Moviment : MonoBehaviour
 {
+    private Item_drop dropInimigo;
     [SerializeField]
     private float IdleDuracao;
     [SerializeField]
@@ -104,6 +105,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
+        dropInimigo = GetComponent<Item_drop>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
@@ -111,26 +113,28 @@ public class GolemPatrulha_Moviment : MonoBehaviour
 
     void Update()
     {
-        Target = attackZona.detectColliders.Count > 0;
-        if (attackCooldown > 0)
+        if (DamageScript.IsAlive)
         {
-            attackCooldown -= Time.deltaTime;
-        }
-
-        if (contagemHit == 5)
-        {
-            StartCoroutine(ContagemHitAnim());
-        }
-
-        if (contagemStaggerBool)
-        {
-            contagemStagger += Time.deltaTime;
-            if (contagemStagger >= 2)
+            Target = attackZona.detectColliders.Count > 0;
+            if (attackCooldown > 0)
             {
-                contagemHit = 0;
+                attackCooldown -= Time.deltaTime;
+            }
+
+            if (contagemHit == 5)
+            {
+                StartCoroutine(ContagemHitAnim());
+            }
+
+            if (contagemStaggerBool)
+            {
+                contagemStagger += Time.deltaTime;
+                if (contagemStagger >= 2)
+                {
+                    contagemHit = 0;
+                }
             }
         }
-
     }
 
     private void FixedUpdate()
@@ -182,11 +186,18 @@ public class GolemPatrulha_Moviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
-        animator.SetBool(animationstrings.IsIdlePatrulha, false);
-        contagemStaggerBool = true;
-        contagemStagger = 0f;
-        StartCoroutine(OnHitPatrulha());
+        if (!DamageScript.IsAlive)
+        {
+            dropInimigo.GenerateDrop();
+        }
+        else
+        {
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+            animator.SetBool(animationstrings.IsIdlePatrulha, false);
+            contagemStaggerBool = true;
+            contagemStagger = 0f;
+            StartCoroutine(OnHitPatrulha());
+        }
     }
 
     //Piscando e tomando o HIT

@@ -6,6 +6,7 @@ using UnityEngine;
 public class SlimeMoviment : MonoBehaviour
 {
     TouchingDistance touching;
+    private Item_drop dropInimigo;
 
     Rigidbody2D rb;
     Animator animator;
@@ -73,6 +74,7 @@ public class SlimeMoviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
+        dropInimigo = GetComponent<Item_drop>();
     }
 
     void Update()
@@ -127,6 +129,13 @@ public class SlimeMoviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        if (!DamageScript.IsAlive)
+        {
+            dropInimigo.GenerateDrop();
+        }
+        else
+        {
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        }
     }
 }

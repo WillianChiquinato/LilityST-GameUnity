@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 739762794942778083}
   - component: {fileID: 7545245533409083752}
   - component: {fileID: 9187434290441640467}
+  - component: {fileID: 2659287409267497591}
   m_Layer: 8
   m_Name: Lagartin
   m_TagString: Inimigos
@@ -291,6 +292,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2659287409267497591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289687482987543339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfItens: 0
+  possibleDrop:
+  - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
+  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
+  - {fileID: 11400000, guid: d5b5c33630e714e448ae402a6ed78fc6, type: 2}
+  dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
+  itemData: {fileID: 11400000, guid: d5b5c33630e714e448ae402a6ed78fc6, type: 2}
 --- !u!1 &4201303834130942059
 GameObject:
   m_ObjectHideFlags: 0

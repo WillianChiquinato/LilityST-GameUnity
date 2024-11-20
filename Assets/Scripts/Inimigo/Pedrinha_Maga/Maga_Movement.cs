@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Maga_Movement : MonoBehaviour
 {
+    private Item_drop dropInimigo;
     public Maga_RangedAttack maga_RangedAttack;
     Animator animator;
     Rigidbody2D rb;
@@ -41,6 +42,7 @@ public class Maga_Movement : MonoBehaviour
         maga_RangedAttack = GameObject.FindObjectOfType<Maga_RangedAttack>();
         trigger_Rolar = GameObject.FindObjectOfType<Trigger_Rolar>();
         damageScript = GetComponent<Damage>();
+        dropInimigo = GetComponent<Item_drop>();
 
         timingAttack = timingAttackCount;
         timingRolar = timingRolarCounter;
@@ -140,7 +142,14 @@ public class Maga_Movement : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
-        timingAttack = timingAttackCount;
+        if (!damageScript.IsAlive)
+        {
+            dropInimigo.GenerateDrop();
+        }
+        else
+        {
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+            timingAttack = timingAttackCount;
+        }
     }
 }

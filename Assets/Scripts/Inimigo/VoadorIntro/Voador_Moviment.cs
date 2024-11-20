@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Voador_Moviment : MonoBehaviour
 {
+
     public float speed;
     public float distanciaAttack;
     public bool Shooting;
@@ -12,6 +13,7 @@ public class Voador_Moviment : MonoBehaviour
     public float shootTimerTarget;
 
     public PlayerMoviment playerMoviment;
+    private Item_drop dropInimigo;
     public GameObject projetil;
     public Transform projetilPos;
     public Vector3 direction;
@@ -71,6 +73,7 @@ public class Voador_Moviment : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
+        dropInimigo = GetComponent<Item_drop>();
 
         direction = (playerMoviment.transform.position - transform.position).normalized;
     }
@@ -154,7 +157,11 @@ public class Voador_Moviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        if (isPlayerInSight)
+        if (!DamageScript.IsAlive)
+        {
+            dropInimigo.GenerateDrop();
+        }
+        else if (isPlayerInSight)
         {
             rb.velocity = new Vector2(knockback.x, knockback.y);
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lagartin_Moviment : MonoBehaviour
 {
+    private Item_drop dropInimigo;
     public float speed;
     public float distanciaAttack;
     public bool perseguir;
@@ -47,6 +48,7 @@ public class Lagartin_Moviment : MonoBehaviour
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
         touching = GetComponent<TouchingDistance>();
+        dropInimigo = GetComponent<Item_drop>();
     }
 
 
@@ -99,6 +101,13 @@ public class Lagartin_Moviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        if (!DamageScript.IsAlive)
+        {
+            dropInimigo.GenerateDrop();
+        }
+        else
+        {
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        }
     }
 }
