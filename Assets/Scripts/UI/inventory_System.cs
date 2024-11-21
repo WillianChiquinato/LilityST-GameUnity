@@ -79,7 +79,7 @@ public class inventory_System : MonoBehaviour
 
     public void AddItem(ItemData _item)
     {
-        if (_item.itensType == itensType.Documentos && LimiteItens())
+        if (_item.itensType == itensType.Documentos)
         {
             AddToDocuments(_item);
         }

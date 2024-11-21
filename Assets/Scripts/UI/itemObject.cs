@@ -37,10 +37,6 @@ public class itemObject : MonoBehaviour
 
     public void PickUpItem()
     {
-        if (inventory_System.instance.LimiteItens())
-        {
-            return;
-        }
         Debug.Log("Pegou " + itemData.ItemName);
         inventory_System.instance.AddItem(itemData);
         Destroy(this.gameObject);

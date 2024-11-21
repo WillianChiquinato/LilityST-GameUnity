@@ -21,7 +21,7 @@ public class Checkpoint : MonoBehaviour
             SavePoint.CheckpointPosition = transform.position;
             SavePoint.CheckpointAnim = true;
             SavePoint.CheckpointAnim2 = true;
-            playerMoviment.potion_Script.potionInt = playerMoviment.potion_Script.maxPotionsInt;
+            // playerMoviment.potion_Script.potionInt = playerMoviment.potion_Script.maxPotionsInt;
             // playerMoviment.DamageScript.Health = playerMoviment.DamageScript.maxHealth;
             Debug.Log("Checkpoint");
         }

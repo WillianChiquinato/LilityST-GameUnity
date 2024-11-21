@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImagem: {fileID: 5173243328574402439}
-  originalSprite: {fileID: 5173243328574402439}
+  originalSprite: {fileID: 21300000, guid: bcec7a0c3c761ed4f831502d58dbf63a, type: 3}
   itemTexto: {fileID: 2596357365981050666}
   item:
     itemData: {fileID: 0}

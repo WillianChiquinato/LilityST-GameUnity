@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Item_SlotUI : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private Image itemImagem;
-    [SerializeField] private Image originalSprite;
+    [SerializeField] private Sprite originalSprite;
     [SerializeField] private TextMeshProUGUI itemTexto;
 
     public Inventory_item item;
@@ -35,7 +35,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler
     public void CleanUpSlot()
     {
         item = null;
-        itemImagem = originalSprite;
+        itemImagem.sprite = originalSprite;
         itemTexto.text = "";
     }
 
