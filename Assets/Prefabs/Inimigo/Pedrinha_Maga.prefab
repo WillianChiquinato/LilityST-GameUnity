@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3477836576219909279}
   - component: {fileID: 5101386480827167611}
   - component: {fileID: 8488412010279393709}
+  - component: {fileID: 1721462345629277619}
   m_Layer: 8
   m_Name: Pedrinha_Maga
   m_TagString: Inimigos
@@ -325,6 +326,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1721462345629277619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960984656513833924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfItens: 1
+  possibleDrop:
+  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
+  - {fileID: 11400000, guid: d5b5c33630e714e448ae402a6ed78fc6, type: 2}
+  dropPrefab: {fileID: 0}
 --- !u!1 &7750721504941771526
 GameObject:
   m_ObjectHideFlags: 0

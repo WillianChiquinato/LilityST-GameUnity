@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1541492789648868809}
   - component: {fileID: 6363077883080595520}
   - component: {fileID: 2265574669856053783}
+  - component: {fileID: 5965486042000198713}
   m_Layer: 16
   m_Name: GolemPatrulha
   m_TagString: Inimigos
@@ -286,11 +287,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthChange:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHealth: 15
   _health: 15
   isInvicible: 0
   invicibilityTimer: 0.25
   _IsAlive: 1
+--- !u!114 &5965486042000198713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217988344540909225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfItens: 2
+  possibleDrop:
+  - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
+  - {fileID: 11400000, guid: d5b5c33630e714e448ae402a6ed78fc6, type: 2}
+  - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
+  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
+  - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
+  dropPrefab: {fileID: 0}
 --- !u!1 &7440349492610671475
 GameObject:
   m_ObjectHideFlags: 0

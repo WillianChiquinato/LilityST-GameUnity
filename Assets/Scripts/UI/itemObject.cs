@@ -41,12 +41,4 @@ public class itemObject : MonoBehaviour
         inventory_System.instance.AddItem(itemData);
         Destroy(this.gameObject);
     }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.GetComponent<PlayerMoviment>() != null && playerMoviment.entrar)
-        {
-            PickUpItem();
-        }
-    }
 }

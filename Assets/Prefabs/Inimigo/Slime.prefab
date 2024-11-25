@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 4311165511901390189}
   - component: {fileID: 1987329482526583937}
   - component: {fileID: 8797803709643801127}
+  - component: {fileID: 6592993667841515994}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Inimigos
@@ -435,6 +436,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthChange:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHealth: 4
   _health: 4
   isInvicible: 0
@@ -457,3 +461,19 @@ MonoBehaviour:
   ContagemJump: 0.2
   IsJumping: 0
   _Target: 0
+--- !u!114 &6592993667841515994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7583541454023338770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfItens: 1
+  possibleDrop:
+  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
+  dropPrefab: {fileID: 0}

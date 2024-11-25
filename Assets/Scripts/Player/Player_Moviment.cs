@@ -424,6 +424,7 @@ public class PlayerMoviment : MonoBehaviour
                 if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+                    jumpBufferFinal = false;
                 }
             }
             else
@@ -434,6 +435,7 @@ public class PlayerMoviment : MonoBehaviour
 
         animacao.SetFloat(animationstrings.yVelocity, rb.velocity.y);
     }
+
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -511,7 +513,7 @@ public class PlayerMoviment : MonoBehaviour
 
         if (context.canceled && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, 0f, 0.5f));
         }
     }
 
@@ -602,7 +604,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         //KNOCKBACK
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
-        
+
         if (DamageScript.IsAlive)
         {
             //JUMP

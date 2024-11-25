@@ -21,12 +21,18 @@ public class Item_drop : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < amountOfItens; i++)
-        {
-            ItemData randomIten = droplist[Random.Range(0, droplist.Count - 1)];
+        int dropsToGenerate = Mathf.Min(amountOfItens, droplist.Count);
 
-            droplist.Remove(randomIten);
-            DropItem(randomIten);
+        for (int i = 0; i < dropsToGenerate; i++)
+        {
+            if (droplist.Count > 0)
+            {
+                int randomIndex = Random.Range(0, droplist.Count);
+                ItemData randomIten = droplist[randomIndex];
+
+                droplist.RemoveAt(randomIndex);
+                DropItem(randomIten);
+            }
         }
     }
 
