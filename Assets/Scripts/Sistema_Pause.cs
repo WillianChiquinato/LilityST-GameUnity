@@ -77,7 +77,7 @@ public class Sistema_Pause : MonoBehaviour
     {
         playerMoviment.playerInput.enabled = false;
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        // Time.timeScale = 0f;
         IsPaused = true;
     }
 

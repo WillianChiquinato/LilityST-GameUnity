@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void SwitchTo(GameObject _menu)
     {
         for (int i = 0; i < transform.childCount; i++)
