@@ -1,64 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Livro : MonoBehaviour
 {
-    [SerializeField] float pageSpeed = 0.5f;
-    [SerializeField] List<Transform> pages;
-    [SerializeField] int index = 0;
-    [SerializeField] bool rotate = false;
+    public RectTransform[] pages;
+    public float flipSpeed = 2f;
+
+    private int currentPage = 0;
+    public bool rotate = false;
+
+    void Awake()
+    {
+        InitialState();
+    }
 
     public void InitialState()
     {
-        for (int i = 0; i < pages.Count; i++)
+        for (int i = 0; i < pages.Length; i++)
         {
-            pages[i].rotation = Quaternion.identity;
+            pages[i].transform.rotation = Quaternion.identity;
         }
-
         pages[0].SetAsLastSibling();
     }
 
-    public void GoToPage(int targetIndex)
+    public void FlipToPage(int targetPage)
     {
-        if (rotate || targetIndex < 0 || targetIndex >= pages.Count || targetIndex == index)
+        if (targetPage < 0 || targetPage >= pages.Length || targetPage == currentPage)
+        {
+            Debug.LogWarning("já está na página alvo!");
+            return;
+        }
+
+        if (rotate)
         {
             return;
         }
 
-        float angle = targetIndex > index ? 180 : 0;
-        int previousIndex = index;
-        index = targetIndex;
-
-        pages[targetIndex].SetAsLastSibling();
-        pages[previousIndex].SetAsLastSibling();
-
-
-        StartCoroutine(Rotate(pages[previousIndex], pages[targetIndex], angle));
+        if (targetPage > currentPage)
+        {
+            StartCoroutine(FlipPagesForward(targetPage));
+        }
+        else
+        {
+            StartCoroutine(FlipPagesBackward(targetPage));
+        }
     }
 
-    private IEnumerator Rotate(Transform currentPage, Transform targetPage, float targetAngle)
+    private IEnumerator FlipPagesForward(int targetPage)
+    {
+        while (currentPage < targetPage)
+        {
+            yield return StartCoroutine(FlipPage(pages[currentPage], 0, 180));
+            currentPage++;
+            pages[currentPage].SetAsLastSibling();
+        }
+    }
+
+    private IEnumerator FlipPagesBackward(int targetPage)
+    {
+        while (currentPage > targetPage)
+        {
+            currentPage--;
+            yield return StartCoroutine(FlipPage(pages[currentPage], 180, 0));
+        }
+    }
+
+    private IEnumerator FlipPage(RectTransform page, float startAngle, float endAngle)
     {
         rotate = true;
 
-
-        float currentAngle = currentPage.localRotation.eulerAngles.y;
-        float elapsed = 0;
-
-        while (elapsed < pageSpeed)
+        pages[currentPage].SetAsLastSibling();
+        float time = 0f;
+        while (time < 1f)
         {
-            elapsed += Time.deltaTime;
-
-            float angle = Mathf.Lerp(currentAngle, targetAngle, elapsed / pageSpeed);
-            currentPage.localRotation = Quaternion.Euler(0, angle, 0);
-            targetPage.localRotation = Quaternion.Euler(0, targetAngle == 180 ? 0 : 180, 0);
-
+            time += Time.unscaledDeltaTime * flipSpeed;
+            float angle = Mathf.Lerp(startAngle, endAngle, time);
+            page.localEulerAngles = new Vector3(0, angle, 0);
+            rotate = false;
             yield return null;
         }
 
-        currentPage.localRotation = Quaternion.Euler(0, targetAngle, 0);
-        targetPage.localRotation = Quaternion.Euler(0, targetAngle == 180 ? 0 : 180, 0);
-
+        page.localEulerAngles = new Vector3(0, endAngle, 0);
         rotate = false;
     }
 }

@@ -43,15 +43,12 @@ namespace HasanSadikin.Carousel
         {
             if (_isStatic) return;
 
-            // Calcula o valor final da posição X
             float endValue = index * _gap + _offsetX;
-
-            // Define a duração mínima para a animação
             float duration = Mathf.Clamp(_duration, 0.1f, 1f);
 
-            // Executa a animação para a nova posição
             rectTransform.DOAnchorPosX(endValue, duration)
                 .SetEase(_ease)
+                .SetUpdate(true)
                 .OnStart(() => Debug.Log($"Animando {rectTransform.name} para posição {endValue}"))
                 .OnComplete(() => Debug.Log($"{rectTransform.name} alcançou a posição {endValue}"));
         }

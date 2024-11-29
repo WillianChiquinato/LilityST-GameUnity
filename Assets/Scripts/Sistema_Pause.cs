@@ -23,6 +23,7 @@ public class Sistema_Pause : MonoBehaviour
     public bool IrMenu = false;
 
     public GameObject[] apresentaocao;
+    public GameObject SistemaUI;
 
     [Header("Savepoint")]
     //Savepoint
@@ -31,6 +32,7 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
+        SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
         foreach (var obj in apresentaocao)
         {
@@ -77,7 +79,7 @@ public class Sistema_Pause : MonoBehaviour
     {
         playerMoviment.playerInput.enabled = false;
         pauseMenu.SetActive(true);
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
         IsPaused = true;
     }
 
@@ -87,6 +89,11 @@ public class Sistema_Pause : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
+    }
+
+    public void AbrirHUD()
+    {
+        SistemaUI.SetActive(true);
     }
 
     public void ParaOMenu()
