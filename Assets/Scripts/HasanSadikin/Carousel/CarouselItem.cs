@@ -13,10 +13,11 @@ namespace HasanSadikin.Carousel
         public event Action<CarouselItem<T>> OnSelected;
 
         public RectTransform _rectTransform;
-        public T Data 
-        { 
-            get => _data; 
-            set 
+        public GameObject objetoAtivado;
+        public T Data
+        {
+            get => _data;
+            set
             {
                 _data = value;
                 OnDataUpdated(_data);
@@ -25,7 +26,7 @@ namespace HasanSadikin.Carousel
 
         protected virtual void OnValidate()
         {
-            if(_rectTransform == null)   _rectTransform = GetComponent<RectTransform>();
+            if (_rectTransform == null) _rectTransform = GetComponent<RectTransform>();
         }
 
         protected virtual void OnDataUpdated(T data) { }
@@ -36,8 +37,20 @@ namespace HasanSadikin.Carousel
             else OnDeactivated();
         }
 
-        protected virtual void OnActivated() { }
-        protected virtual void OnDeactivated() { }
+        protected virtual void OnActivated()
+        {
+            if (objetoAtivado != null)
+            {
+                objetoAtivado.SetActive(true);
+            }
+        }
+        protected virtual void OnDeactivated()
+        {
+            if (objetoAtivado != null)
+            {
+                objetoAtivado.SetActive(false);
+            }
+        }
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             OnSelected?.Invoke(this);

@@ -49,8 +49,14 @@ namespace HasanSadikin.Carousel
             rectTransform.DOAnchorPosX(endValue, duration)
                 .SetEase(_ease)
                 .SetUpdate(true)
-                .OnStart(() => Debug.Log($"Animando {rectTransform.name} para posição {endValue}"))
-                .OnComplete(() => Debug.Log($"{rectTransform.name} alcançou a posição {endValue}"));
+                .OnStart(() =>
+                {
+                    // Debug.Log($"Animando");
+                })
+                .OnComplete(() =>
+                {
+                    // Debug.Log($"Animando");
+                });
         }
 
         public bool IsItemAfter(RectTransform a, RectTransform b)

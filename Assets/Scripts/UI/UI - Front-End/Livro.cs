@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Livro : MonoBehaviour
 {
@@ -79,11 +77,48 @@ public class Livro : MonoBehaviour
             time += Time.unscaledDeltaTime * flipSpeed;
             float angle = Mathf.Lerp(startAngle, endAngle, time);
             page.localEulerAngles = new Vector3(0, angle, 0);
-            rotate = false;
+
+            UpdatePageContentVisibility(page, angle <= 90);
+
             yield return null;
         }
 
         page.localEulerAngles = new Vector3(0, endAngle, 0);
+        UpdatePageContentVisibility(page, endAngle == 0);
         rotate = false;
+    }
+
+    private void UpdatePageContentVisibility(RectTransform page, bool showFront)
+    {
+        Transform frontContent = page.Find("FrontContent");
+        Transform backContent = page.Find("BackContent");
+
+        if (frontContent != null)
+        {
+            frontContent.gameObject.SetActive(showFront);
+
+            Canvas frontCanvas = frontContent.GetComponent<Canvas>();
+            if (frontCanvas != null)
+            {
+                frontCanvas.overrideSorting = showFront;
+                frontCanvas.sortingOrder = showFront ? 1 : -1;
+
+                frontContent.GetComponent<GraphicRaycaster>().enabled = showFront;
+            }
+        }
+
+        if (backContent != null)
+        {
+            backContent.gameObject.SetActive(!showFront);
+
+            Canvas backCanvas = backContent.GetComponent<Canvas>();
+            if (backCanvas != null)
+            {
+                backCanvas.overrideSorting = !showFront;
+                backCanvas.sortingOrder = !showFront ? 1 : -1;
+
+                backContent.GetComponent<GraphicRaycaster>().enabled = !showFront;
+            }
+        }
     }
 }

@@ -3,18 +3,17 @@ Shader "Unlit/PaginaAolado"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
     }
     SubShader
     {
-        Tags {"Queue"="Transparent" "RenderType"="Transparent" }
-        Lighting Off ZWrite Off
-        Cull [_Cull]
-        
-        LOD 100
+        Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
+        Lighting Off
+        ZWrite On
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
+            Cull Back
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -30,18 +29,16 @@ Shader "Unlit/PaginaAolado"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = v.uv;
                 return o;
             }
 
