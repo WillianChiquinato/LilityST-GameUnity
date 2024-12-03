@@ -6,7 +6,6 @@ public class LocationData
 {
     public Sprite sprite;
     public int itemIndex;
-    public GameObject objectToActivate;
 }
 
 public class LocationScript : CarouselController<LocationData>
@@ -32,15 +31,15 @@ public class LocationScript : CarouselController<LocationData>
                 Debug.Log("Item 1 clicado");
                 break;
             case 2:
-                uI.FlipToPage(0);
+                uI.FlipToPage(2);
                 Debug.Log("Item 2 clicado");
                 break;
             case 3:
-                uI.FlipToPage(1);
+                uI.FlipToPage(3);
                 Debug.Log("Item 3 clicado");
                 break;
             case 4:
-                uI.FlipToPage(0);
+                uI.FlipToPage(4);
                 Debug.Log("Item 4 clicado");
                 break;
             default:
