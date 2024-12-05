@@ -131,7 +131,11 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+=======
+        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
     }
 
     public void OnMove(InputAction.CallbackContext context)

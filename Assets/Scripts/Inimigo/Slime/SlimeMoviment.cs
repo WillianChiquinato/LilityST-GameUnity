@@ -96,7 +96,11 @@ public class SlimeMoviment : MonoBehaviour
                 ContagemJump -= Time.deltaTime;
                 if (ContagemJump > 0)
                 {
+<<<<<<< HEAD
                     rb.linearVelocity = new Vector2(speed * vectorDirecao.x, 2);
+=======
+                    rb.velocity = new Vector2(speed * vectorDirecao.x, 2);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
                 }
                 else
                 {
@@ -106,7 +110,11 @@ public class SlimeMoviment : MonoBehaviour
             else
             {
                 ContagemJump = 0.2f;
+<<<<<<< HEAD
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, 0), rb.linearVelocity.y);
+=======
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0), rb.velocity.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
             }
         }
     }
@@ -135,7 +143,11 @@ public class SlimeMoviment : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
             rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+=======
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         }
     }
 }

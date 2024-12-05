@@ -187,11 +187,19 @@ public class DroggoScript : MonoBehaviour
                     FireballRB = Instantiate(Fireball, FirebalLocal.transform.position, FirebalLocal.transform.rotation);
                     if (transform.localScale.x == 1)
                     {
+<<<<<<< HEAD
                         FireballRB.linearVelocity = FireballRB.transform.right * -VelocidadeFireBall;
                     }
                     else
                     {
                         FireballRB.linearVelocity = FireballRB.transform.right * VelocidadeFireBall;
+=======
+                        FireballRB.velocity = FireballRB.transform.right * -VelocidadeFireBall;
+                    }
+                    else
+                    {
+                        FireballRB.velocity = FireballRB.transform.right * VelocidadeFireBall;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
                     }
                 }
 
@@ -217,7 +225,11 @@ public class DroggoScript : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         HitsCounts++;
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+=======
+        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
     }
 
     private IEnumerator Dash()
@@ -228,7 +240,11 @@ public class DroggoScript : MonoBehaviour
 
         float originalGravidade = rb.gravityScale;
         rb.gravityScale = 1f;
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(-transform.localScale.x * ForcaDash, 3f);
+=======
+        rb.velocity = new Vector2(-transform.localScale.x * ForcaDash, 3f);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
         yield return new WaitForSeconds(DashTimer);
         rb.gravityScale = originalGravidade;

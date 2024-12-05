@@ -400,10 +400,17 @@ public class PlayerMoviment : MonoBehaviour
 
             if (!isWallJumping && !isDashing && !EsquivaPressSolution)
             {
+<<<<<<< HEAD
                 rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
             }
 
             if (touching.IsGrouded && rb.linearVelocity.y <= 0f)
+=======
+                rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+            }
+
+            if (touching.IsGrouded && rb.velocity.y <= 0f)
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
             {
                 IsJumping = true;
                 coyoteTimeContador = CoyoteTime;
@@ -423,7 +430,11 @@ public class PlayerMoviment : MonoBehaviour
                 }
                 if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
                 {
+<<<<<<< HEAD
                     rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
+=======
+                    rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
                     jumpBufferFinal = false;
                 }
             }
@@ -433,7 +444,11 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
         animacao.SetFloat(animationstrings.yVelocity, rb.linearVelocity.y);
+=======
+        animacao.SetFloat(animationstrings.yVelocity, rb.velocity.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
     }
 
 
@@ -481,7 +496,11 @@ public class PlayerMoviment : MonoBehaviour
                 timerDash = dashCooldown;
                 DamageScript.isInvicible = true;
 
+<<<<<<< HEAD
                 rb.linearVelocity = new Vector2(dashSpeed * facingDirecao, 0);
+=======
+                rb.velocity = new Vector2(dashSpeed * facingDirecao, 0);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
                 rb.gravityScale = 0f;
             }
@@ -498,7 +517,11 @@ public class PlayerMoviment : MonoBehaviour
             }
             if (isDashing)
             {
+<<<<<<< HEAD
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.7f);
+=======
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.7f);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
             }
         }
 
@@ -511,28 +534,46 @@ public class PlayerMoviment : MonoBehaviour
             jumpBufferFinal = false;
         }
 
+<<<<<<< HEAD
         if (context.canceled && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Lerp(rb.linearVelocity.y, 0f, 0.5f));
+=======
+        if (context.canceled && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, 0f, 0.5f));
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         }
     }
 
     private void Jump()
     {
         animacao.SetTrigger(animationstrings.jump);
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
+=======
+        rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         coyoteTimeContador = 0f;
         IsJumping = false;
     }
 
     private void WallSlide()
     {
+<<<<<<< HEAD
         if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
+=======
+        if (!touching.IsGrouded && rb.velocity.y < 0f && touching.IsOnWall)
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         {
             WallstateTimer -= Time.deltaTime;
             wallSlide = true;
             animacao.SetBool(animationstrings.IsWallSliding, true);
+<<<<<<< HEAD
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
+=======
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
             if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
             {
@@ -552,7 +593,11 @@ public class PlayerMoviment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && touching.IsOnWall && !touching.IsGrouded)
         {
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
+<<<<<<< HEAD
             rb.linearVelocity = new Vector2(jumpDirection * 7f, jumpImpulso);
+=======
+            rb.velocity = new Vector2(jumpDirection * 7f, jumpImpulso);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
             coyoteTimeContador = 0f;
             IsJumping = false;
@@ -603,7 +648,11 @@ public class PlayerMoviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         //KNOCKBACK
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+=======
+        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
         if (DamageScript.IsAlive)
         {

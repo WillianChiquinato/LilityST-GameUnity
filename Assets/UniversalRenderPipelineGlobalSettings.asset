@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec995e51a6e251468d2a3fd8a686257, type: 3}
   m_Name: UniversalRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   m_ShaderStrippingSetting:
     m_Version: 0
     m_ExportShaderVariants: 1
@@ -58,6 +59,9 @@ MonoBehaviour:
       m_List: []
   m_AssetVersion: 8
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
+=======
+  k_AssetVersion: 3
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
   m_RenderingLayerNames:
   - Default
   m_ValidRenderingLayers: 1
@@ -69,6 +73,7 @@ MonoBehaviour:
   lightLayerName5: 
   lightLayerName6: 
   lightLayerName7: 
+<<<<<<< HEAD
   apvScenesData:
     obsoleteSceneBounds:
       m_Keys: []
@@ -246,3 +251,13 @@ MonoBehaviour:
         m_ExportShaderVariants: 1
         m_ShaderVariantLogLevel: 2
         m_StripRuntimeDebugShaders: 1
+=======
+  m_StripDebugVariants: 1
+  m_StripUnusedPostProcessingVariants: 0
+  m_StripUnusedVariants: 1
+  m_StripUnusedLODCrossFadeVariants: 1
+  m_StripScreenCoordOverrideVariants: 1
+  supportRuntimeDebugDisplay: 0
+  m_ShaderVariantLogLevel: 2
+  m_ExportShaderVariants: 1
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23

@@ -56,5 +56,9 @@
         "temp/": true,
         "Temp/": true
     },
+<<<<<<< HEAD
     "dotnet.defaultSolution": "LilityST-GameUnity-master.sln"
+=======
+    "dotnet.defaultSolution": "Lility-Search-Truth.sln"
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 }

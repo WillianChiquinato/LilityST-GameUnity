@@ -148,7 +148,11 @@ public class Maga_Movement : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
             rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+=======
+            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
             timingAttack = timingAttackCount;
         }
     }

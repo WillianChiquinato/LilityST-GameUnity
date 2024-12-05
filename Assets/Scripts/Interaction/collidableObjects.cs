@@ -16,7 +16,11 @@ public class CollidableObjects : MonoBehaviour
 
     protected virtual void Update()
     {
+<<<<<<< HEAD
         z_Collider.Overlap(z_filtro, z_ColliderObjects);
+=======
+        z_Collider.OverlapCollider(z_filtro, z_ColliderObjects);
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         foreach (var obj in z_ColliderObjects)
         {
             OnCollider(obj.gameObject);

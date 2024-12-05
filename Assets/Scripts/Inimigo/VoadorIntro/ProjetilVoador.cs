@@ -21,7 +21,11 @@ public class ProjetilVoador : MonoBehaviour
         voador_Moviment = GameObject.FindAnyObjectByType<Voador_Moviment>();
 
         Vector3 direcao = player.transform.position - transform.position;
+<<<<<<< HEAD
         rb.linearVelocity = new Vector2(direcao.x, direcao.y).normalized * forcaProjetil;
+=======
+        rb.velocity = new Vector2(direcao.x, direcao.y).normalized * forcaProjetil;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
         float rotacao = Mathf.Atan2(-direcao.y, -direcao.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotacao + 90);

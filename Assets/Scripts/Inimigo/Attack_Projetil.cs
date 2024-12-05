@@ -57,7 +57,11 @@ public class Attack_Projetil : MonoBehaviour, Defender
 
         int novaLayer = 9;
 
+<<<<<<< HEAD
         rb.linearVelocity = direcao * returnSpeed;
+=======
+        rb.velocity = direcao * returnSpeed;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         TrocarLayer(myObject, novaLayer);
 
         if (transform.localScale.x == -1)

@@ -22,7 +22,11 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
+=======
+        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (transform.localScale.x == 1)

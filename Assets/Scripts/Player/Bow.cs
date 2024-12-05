@@ -160,7 +160,11 @@ public class Bow : MonoBehaviour
             NewArrow.transform.localScale = new Vector3(-1, 1, 1);
         }
 
+<<<<<<< HEAD
         NewArrow.linearVelocity = NewArrow.transform.right * ForceArrow;
+=======
+        NewArrow.velocity = NewArrow.transform.right * ForceArrow;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
     }
 
     Vector2 PointPosition(float T)

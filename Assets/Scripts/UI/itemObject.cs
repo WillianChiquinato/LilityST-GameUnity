@@ -30,7 +30,11 @@ public class itemObject : MonoBehaviour
     public void SetupItem(ItemData _itemData, Vector2 _velocity)
     {
         itemData = _itemData;
+<<<<<<< HEAD
         rb.linearVelocity = _velocity;
+=======
+        rb.velocity = _velocity;
+>>>>>>> 22fa71694fc4d3eb86e284a7a5c186e2275aeb23
 
         SetupVisual();
     }
