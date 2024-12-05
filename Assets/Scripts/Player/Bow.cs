@@ -1,0 +1,192 @@
+using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
+using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEngine;
+
+public class Bow : MonoBehaviour
+{
+    public PlayerMoviment playerMoviment;
+    public Rigidbody2D Arrow;
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
+    [SerializeField]
+    public CinemachineFramingTransposer transposer;
+    public float ForceArrow;
+    public Transform ShotPoint;
+    public Rigidbody2D NewArrow;
+
+    [Header("Animators")]
+    public Animator animatorBD;
+    public Animator animatorBE;
+    public Animator animatorARCO;
+
+
+    //Caminho da Flecha
+    public GameObject point;
+    public GameObject posicaoGO;
+    public GameObject[] points;
+    public int numeroDePoints;
+    public float SpaceEntreEles;
+    public bool Respawn;
+
+
+    public Camera cameraArco;
+    public Vector2 offset;
+    [HideInInspector]
+    public Vector2 Direcao;
+    public Transform FollowArco;
+    public Vector3 newOffset;
+
+
+    //Virada da camera
+    public float targetOffsetX = 2f;
+    public float transitionDuration = 2f;
+
+    private float initialOffsetX;
+    private float transitionStartTime;
+    public bool bodyCamera;
+
+    void Start()
+    {
+        gameObject.SetActive(false);
+        cameraArco = FindObjectOfType<Camera>();
+        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+        points = new GameObject[numeroDePoints];
+
+        for (int i = 0; i < numeroDePoints; i++)
+        {
+            points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+            points[i].gameObject.SetActive(false);
+        }
+    }
+
+
+    void Update()
+    {
+        // Calcula o tempo decorrido desde o início da transição
+        float elapsedTime = Time.time - transitionStartTime;
+        // Calcula a fração completada da transição
+        float t = elapsedTime / transitionDuration;
+        // Faz a interpolação linear do offset X
+        float newXOffset = Mathf.Lerp(initialOffsetX, targetOffsetX, t);
+
+        for (int i = 0; i < numeroDePoints; i++)
+        {
+            points[i].transform.position = PointPosition(i * SpaceEntreEles);
+            points[i].gameObject.SetActive(true);
+        }
+
+        if (playerMoviment.transform.localScale.x == 1)
+        {
+            this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            posicaoGO.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            this.gameObject.transform.localScale = new Vector3(-1, -1, 1);
+            posicaoGO.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        // Logica para arrumar o arco
+        Vector3 mousePositionArco = cameraArco.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 BowPosition = transform.position;
+        Vector2 mousePosition = new Vector2(mousePositionArco.x + offset.x, mousePositionArco.y + offset.y);
+
+        Direcao = mousePosition - BowPosition;
+        transform.right = Direcao;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (playerMoviment.Atirar == true)
+            {
+                //Projetil do voador
+                Shoot();
+            }
+        }
+
+
+        if (NewArrow)
+        {
+            StartCoroutine(delayAnimation());
+            bodyCamera = false;
+            transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
+            playerMoviment.animacao.SetBool(animationstrings.Powers, false);
+            animatorBD.SetBool(animationstrings.PowersBraco, false);
+            animatorBE.SetBool(animationstrings.PowersBraco, false);
+            animatorARCO.SetBool(animationstrings.PowersBraco, false);
+            Time.timeScale = 1f;
+            playerMoviment.tempo = false;
+            playerMoviment.elapsedTime = 0f;
+            NewArrow = null;
+            Destroy(NewArrow, 2f);
+        }
+
+        if (Direcao.x >= 1)
+        {
+            playerMoviment.transform.localScale = new Vector3(1, 1, 1);
+            playerMoviment._IsRight = true;
+
+            if (bodyCamera)
+            {
+                transposer.m_TrackedObjectOffset = new Vector3(newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
+            }
+        }
+        else
+        {
+            playerMoviment.transform.localScale = new Vector3(-1, 1, 1);
+            playerMoviment._IsRight = false;
+
+            if (bodyCamera)
+            {
+                transposer.m_TrackedObjectOffset = new Vector3(-newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
+            }
+        }
+    }
+
+    public void Shoot()
+    {
+        Respawn = true;
+        playerMoviment.RecuarAtirar = false;
+        NewArrow = Instantiate(Arrow, ShotPoint.position, ShotPoint.rotation);
+        if (playerMoviment.transform.localScale.x == 1)
+        {
+            NewArrow.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            NewArrow.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        NewArrow.linearVelocity = NewArrow.transform.right * ForceArrow;
+    }
+
+    Vector2 PointPosition(float T)
+    {
+        Vector2 position = (Vector2)ShotPoint.position + (Direcao.normalized * ForceArrow * T) + 0.5f * Physics2D.gravity * (T * T);
+        return position;
+    }
+
+    public IEnumerator delayAnimation()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        gameObject.SetActive(false);
+
+        foreach (var DestruirCaminho in points)
+        {
+            Destroy(DestruirCaminho);
+        }
+
+        if (Respawn)
+        {
+            for (int i = 0; i < numeroDePoints; i++)
+            {
+                points[i] = Instantiate(point, ShotPoint.position, Quaternion.identity);
+                points[i].gameObject.SetActive(false);
+            }
+        }
+    }
+}
