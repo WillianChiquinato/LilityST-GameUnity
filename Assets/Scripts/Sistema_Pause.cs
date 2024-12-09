@@ -43,9 +43,9 @@ public class Sistema_Pause : MonoBehaviour
         // Verifica se já existe uma instância desse objeto na cena
         objs = GameObject.FindGameObjectsWithTag("DontDestroy");
 
-        transicao = GameObject.FindObjectOfType<LevelTransicao>();
+        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         playerDamage = playerMoviment.GetComponent<Damage>();
         playerHealth = playerMoviment.GetComponent<Damage>();
         bossFight = FindAnyObjectByType<BossFight>();

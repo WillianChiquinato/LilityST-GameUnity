@@ -12,7 +12,7 @@ public class DetectionLagartin : MonoBehaviour
     private void Awake()
     {
         Col = GetComponent<Collider2D>();
-        lagartin_Moviment = GameObject.FindObjectOfType<Lagartin_Moviment>();
+        lagartin_Moviment = GameObject.FindFirstObjectByType<Lagartin_Moviment>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

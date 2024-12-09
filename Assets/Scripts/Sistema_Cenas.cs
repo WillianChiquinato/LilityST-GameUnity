@@ -14,8 +14,8 @@ public class Sistema_Cenas : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindObjectOfType<PlayerMoviment>();
-        transicao = GameObject.FindObjectOfType<LevelTransicao>();
+        player = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         Camera_Size = GameObject.FindWithTag("MainCamera");
         Size_Camera = Camera_Size.GetComponentInChildren<CinemachineVirtualCamera>();
     }

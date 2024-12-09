@@ -32,8 +32,8 @@ public class Dialogos_Manager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTexto>();
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
-        dialogo_Trigger = GameObject.FindObjectOfType<Dialogo_Trigger>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        dialogo_Trigger = GameObject.FindFirstObjectByType<Dialogo_Trigger>();
 
         if (dialogos_Manager == null)
         {

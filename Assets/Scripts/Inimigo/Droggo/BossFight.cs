@@ -18,7 +18,7 @@ public class BossFight : MonoBehaviour
     void Awake()
     {
         canvasHUD = GameObject.FindGameObjectWithTag("Sumir");
-        confiner = FindObjectOfType<CinemachineConfiner2D>();
+        confiner = FindFirstObjectByType<CinemachineConfiner2D>();
         canvasHUD.SetActive(true);
 
         Camera_Referencia = GameObject.FindWithTag("LimiteMap");

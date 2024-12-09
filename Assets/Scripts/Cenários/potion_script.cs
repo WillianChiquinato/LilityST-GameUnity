@@ -18,7 +18,7 @@ public class potion_script : MonoBehaviour
 
     void Awake()
     {
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
 
         potionInt = maxPotionsInt;
     }

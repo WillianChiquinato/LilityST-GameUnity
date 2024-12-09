@@ -32,7 +32,7 @@ public class Dialogo_Trigger : MonoBehaviour
 
     private void Start()
     {
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
     }
 

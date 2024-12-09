@@ -12,8 +12,8 @@ public class Cena_Ponte : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindObjectOfType<PlayerMoviment>();
-        transicao = GameObject.FindObjectOfType<LevelTransicao>();
+        player = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         Camera_Size = GameObject.FindWithTag("MainCamera");
     }
 

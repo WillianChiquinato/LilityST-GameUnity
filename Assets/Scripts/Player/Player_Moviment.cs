@@ -245,10 +245,10 @@ public class PlayerMoviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         DamageScript = GetComponent<Damage>();
         playerInput = GetComponent<PlayerInput>();
-        acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
-        bow = GameObject.FindObjectOfType<Bow>();
-        healthBar = GameObject.FindObjectOfType<HealthBar>();
-        potion_Script = GameObject.FindObjectOfType<potion_script>();
+        acorda_Boss = GameObject.FindFirstObjectByType<Acorda_Boss>();
+        bow = GameObject.FindFirstObjectByType<Bow>();
+        healthBar = GameObject.FindFirstObjectByType<HealthBar>();
+        potion_Script = GameObject.FindFirstObjectByType<potion_script>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
 
         transform.position = SavePoint.CheckpointPosition;
@@ -400,10 +400,10 @@ public class PlayerMoviment : MonoBehaviour
 
             if (!isWallJumping && !isDashing && !EsquivaPressSolution)
             {
-                rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+                rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
             }
 
-            if (touching.IsGrouded && rb.velocity.y <= 0f)
+            if (touching.IsGrouded && rb.linearVelocity.y <= 0f)
             {
                 IsJumping = true;
                 coyoteTimeContador = CoyoteTime;
@@ -423,7 +423,7 @@ public class PlayerMoviment : MonoBehaviour
                 }
                 if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
                     jumpBufferFinal = false;
                 }
             }
@@ -433,7 +433,7 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        animacao.SetFloat(animationstrings.yVelocity, rb.velocity.y);
+        animacao.SetFloat(animationstrings.yVelocity, rb.linearVelocity.y);
     }
 
 
@@ -481,7 +481,7 @@ public class PlayerMoviment : MonoBehaviour
                 timerDash = dashCooldown;
                 DamageScript.isInvicible = true;
 
-                rb.velocity = new Vector2(dashSpeed * facingDirecao, 0);
+                rb.linearVelocity = new Vector2(dashSpeed * facingDirecao, 0);
 
                 rb.gravityScale = 0f;
             }
@@ -498,7 +498,7 @@ public class PlayerMoviment : MonoBehaviour
             }
             if (isDashing)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.7f);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.7f);
             }
         }
 
@@ -511,28 +511,28 @@ public class PlayerMoviment : MonoBehaviour
             jumpBufferFinal = false;
         }
 
-        if (context.canceled && rb.velocity.y > 0f)
+        if (context.canceled && rb.linearVelocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, 0f, 0.5f));
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Lerp(rb.linearVelocity.y, 0f, 0.5f));
         }
     }
 
     private void Jump()
     {
         animacao.SetTrigger(animationstrings.jump);
-        rb.velocity = new Vector2(rb.velocity.x, jumpImpulso);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
         IsJumping = false;
     }
 
     private void WallSlide()
     {
-        if (!touching.IsGrouded && rb.velocity.y < 0f && touching.IsOnWall)
+        if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
         {
             WallstateTimer -= Time.deltaTime;
             wallSlide = true;
             animacao.SetBool(animationstrings.IsWallSliding, true);
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.3f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
 
             if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
             {
@@ -552,7 +552,7 @@ public class PlayerMoviment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && touching.IsOnWall && !touching.IsGrouded)
         {
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
-            rb.velocity = new Vector2(jumpDirection * 7f, jumpImpulso);
+            rb.linearVelocity = new Vector2(jumpDirection * 7f, jumpImpulso);
 
             coyoteTimeContador = 0f;
             IsJumping = false;
@@ -603,7 +603,7 @@ public class PlayerMoviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         //KNOCKBACK
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
 
         if (DamageScript.IsAlive)
         {

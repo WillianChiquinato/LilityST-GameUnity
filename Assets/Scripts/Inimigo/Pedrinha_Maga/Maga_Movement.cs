@@ -36,11 +36,11 @@ public class Maga_Movement : MonoBehaviour
 
     void Start()
     {
-        Player = GameObject.FindObjectOfType<PlayerMoviment>().GetComponentInChildren<Transform>();
+        Player = GameObject.FindFirstObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        maga_RangedAttack = GameObject.FindObjectOfType<Maga_RangedAttack>();
-        trigger_Rolar = GameObject.FindObjectOfType<Trigger_Rolar>();
+        maga_RangedAttack = GameObject.FindFirstObjectByType<Maga_RangedAttack>();
+        trigger_Rolar = GameObject.FindFirstObjectByType<Trigger_Rolar>();
         damageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();
 
@@ -148,7 +148,7 @@ public class Maga_Movement : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+            rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
             timingAttack = timingAttackCount;
         }
     }

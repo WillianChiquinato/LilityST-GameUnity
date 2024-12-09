@@ -10,7 +10,7 @@ public class ItemObj_Trigger : MonoBehaviour
     void Awake()
     {
         itemObject = GetComponentInParent<itemObject>();
-        playerMoviment = FindObjectOfType<PlayerMoviment>();
+        playerMoviment = FindFirstObjectByType<PlayerMoviment>();
     }
 
     private void OnTriggerStay2D(Collider2D other)

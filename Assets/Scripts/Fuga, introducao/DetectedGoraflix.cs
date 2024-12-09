@@ -8,7 +8,7 @@ public class DetectedGoraflix : MonoBehaviour
 
     void Start()
     {
-        goraflixMoviment = GameObject.FindObjectOfType<GoraflixMoviment>();
+        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

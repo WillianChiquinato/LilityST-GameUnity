@@ -23,9 +23,9 @@ public class camerafollowObject : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         _playerTransform = playerMoviment.GetComponentInChildren<Transform>();
-        cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         _isfacingRight = playerMoviment.IsRight;

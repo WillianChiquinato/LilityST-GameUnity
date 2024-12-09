@@ -14,8 +14,8 @@ public class MoveSet_PedrinhaAttack : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMoviment>().GetComponentInChildren<Transform>();
-        maga_Movement = GameObject.FindObjectOfType<Maga_Movement>();
+        player = GameObject.FindFirstObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
+        maga_Movement = GameObject.FindFirstObjectByType<Maga_Movement>();
 
         Invoke("MudarDirecao", tempoAtraso);
     }

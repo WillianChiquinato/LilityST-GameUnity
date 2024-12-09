@@ -10,7 +10,7 @@ public class LoadScenes : MonoBehaviour
 
     void Start()
     {
-        transicao = GameObject.FindObjectOfType<LevelTransicao>();
+        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
     }
 
     public void MenuScene()

@@ -13,7 +13,7 @@ public class itemObject : MonoBehaviour
 
     void Awake()
     {
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
     }
 
     private void SetupVisual()
@@ -30,7 +30,7 @@ public class itemObject : MonoBehaviour
     public void SetupItem(ItemData _itemData, Vector2 _velocity)
     {
         itemData = _itemData;
-        rb.velocity = _velocity;
+        rb.linearVelocity = _velocity;
 
         SetupVisual();
     }

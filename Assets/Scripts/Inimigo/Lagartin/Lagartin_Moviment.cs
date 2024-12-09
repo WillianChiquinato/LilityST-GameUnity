@@ -107,7 +107,7 @@ public class Lagartin_Moviment : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+            rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
         }
     }
 }

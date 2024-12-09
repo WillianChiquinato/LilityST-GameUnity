@@ -41,7 +41,7 @@ public class TargetIntro : MonoBehaviour
 
                 TargetRB = Instantiate(TargetdaIntro, TargetLocal.transform.position, TargetLocal.transform.rotation);
 
-                TargetRB.velocity = TargetRB.transform.right * -VelocidadeTarget;
+                TargetRB.linearVelocity = TargetRB.transform.right * -VelocidadeTarget;
             }
         }
     }

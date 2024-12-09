@@ -22,7 +22,7 @@ public class interactableApresentation : CollidableObjects
     protected override void Start()
     {
         base.Start();
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         ApresInput.SetActive(false);
 
     }

@@ -96,7 +96,7 @@ public class DroggoScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         droggoHits = GetComponent<CapsuleCollider2D>();
         damage = GetComponent<Damage>();
-        acorda_Boss = GameObject.FindObjectOfType<Acorda_Boss>();
+        acorda_Boss = GameObject.FindFirstObjectByType<Acorda_Boss>();
         player = GameObject.FindAnyObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
 
         Fireball2 = Fireball.GetComponentInChildren<Transform>();
@@ -187,11 +187,11 @@ public class DroggoScript : MonoBehaviour
                     FireballRB = Instantiate(Fireball, FirebalLocal.transform.position, FirebalLocal.transform.rotation);
                     if (transform.localScale.x == 1)
                     {
-                        FireballRB.velocity = FireballRB.transform.right * -VelocidadeFireBall;
+                        FireballRB.linearVelocity = FireballRB.transform.right * -VelocidadeFireBall;
                     }
                     else
                     {
-                        FireballRB.velocity = FireballRB.transform.right * VelocidadeFireBall;
+                        FireballRB.linearVelocity = FireballRB.transform.right * VelocidadeFireBall;
                     }
                 }
 
@@ -217,7 +217,7 @@ public class DroggoScript : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         HitsCounts++;
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 
     private IEnumerator Dash()
@@ -228,7 +228,7 @@ public class DroggoScript : MonoBehaviour
 
         float originalGravidade = rb.gravityScale;
         rb.gravityScale = 1f;
-        rb.velocity = new Vector2(-transform.localScale.x * ForcaDash, 3f);
+        rb.linearVelocity = new Vector2(-transform.localScale.x * ForcaDash, 3f);
 
         yield return new WaitForSeconds(DashTimer);
         rb.gravityScale = originalGravidade;

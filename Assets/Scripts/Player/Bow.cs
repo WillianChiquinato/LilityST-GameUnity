@@ -49,9 +49,9 @@ public class Bow : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        cameraArco = FindObjectOfType<Camera>();
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
-        cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        cameraArco = FindFirstObjectByType<Camera>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         points = new GameObject[numeroDePoints];
@@ -160,7 +160,7 @@ public class Bow : MonoBehaviour
             NewArrow.transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        NewArrow.velocity = NewArrow.transform.right * ForceArrow;
+        NewArrow.linearVelocity = NewArrow.transform.right * ForceArrow;
     }
 
     Vector2 PointPosition(float T)

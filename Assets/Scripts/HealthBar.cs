@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindObjectOfType<PlayerMoviment>();
+        player = GameObject.FindFirstObjectByType<PlayerMoviment>();
 
         if (player == null)
         {

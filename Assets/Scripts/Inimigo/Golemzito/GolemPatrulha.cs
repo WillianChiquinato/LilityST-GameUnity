@@ -152,11 +152,11 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         {
             if (canMove)
             {
-                rb.velocity = new Vector2(speed * vectorDirecao.x, rb.velocity.y);
+                rb.linearVelocity = new Vector2(speed * vectorDirecao.x, rb.linearVelocity.y);
             }
             else
             {
-                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, StopRate), rb.velocity.y);
+                rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, StopRate), rb.linearVelocity.y);
             }
 
         }
@@ -192,7 +192,7 @@ public class GolemPatrulha_Moviment : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+            rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
             animator.SetBool(animationstrings.IsIdlePatrulha, false);
             contagemStaggerBool = true;
             contagemStagger = 0f;

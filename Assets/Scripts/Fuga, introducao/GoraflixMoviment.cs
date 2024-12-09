@@ -76,8 +76,8 @@ public class GoraflixMoviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        playerMoviment = GameObject.FindObjectOfType<PlayerMoviment>();
-        cinemachineVirtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         nomeBoss.SetActive(false);

@@ -163,7 +163,7 @@ public class Voador_Moviment : MonoBehaviour
         }
         else if (isPlayerInSight)
         {
-            rb.velocity = new Vector2(knockback.x, knockback.y);
+            rb.linearVelocity = new Vector2(knockback.x, knockback.y);
         }
         else
         {

@@ -16,13 +16,13 @@ public class Arrow : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ColliderArrow = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        tiles_Entrelacados = GameObject.FindObjectOfType<Tiles_Entrelacados>();
+        tiles_Entrelacados = GameObject.FindFirstObjectByType<Tiles_Entrelacados>();
     }
 
 
     void Update()
     {
-        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (transform.localScale.x == 1)
