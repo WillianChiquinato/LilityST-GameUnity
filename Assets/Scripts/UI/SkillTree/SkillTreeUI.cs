@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class SkillTreeUI : MonoBehaviour
 {
+    public skillTreeCheck skillTreeCheck;
+
     public bool unLocked;
     public bool alternativoAtivado = false;
     [SerializeField] private Color lockedSkillColor;
@@ -16,12 +19,15 @@ public class SkillTreeUI : MonoBehaviour
 
     [SerializeField] private Image skillImage;
 
+    [Header("ItensTransicoes")]
+    public Texture imagemRef;
+    public String textoRef;
+
     void Start()
     {
+        skillTreeCheck = GameObject.FindFirstObjectByType<skillTreeCheck>();
         skillImage = GetComponent<Image>();
         skillImage.color = lockedSkillColor;
-
-        GetComponent<Button>().onClick.AddListener(() => UnlockSkillSlot());
 
         if (habilidadeAlternativa.Length == 0)
         {
