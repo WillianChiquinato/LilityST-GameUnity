@@ -1,7 +1,3 @@
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -43,7 +39,6 @@ namespace HasanSadikin.Carousel
                 return;
             }
 
-            EditorApplication.delayCall += UpdateSizeDelta;
         }
 
         public void SetPosition(RectTransform rectTransform, int index)
@@ -72,17 +67,11 @@ namespace HasanSadikin.Carousel
                 if (_image.rectTransform.sizeDelta != newSize)
                 {
 #if UNITY_EDITOR
-                    Undo.RecordObject(_image.rectTransform, "Update RectTransform SizeDelta");
-#endif
-                     _image.rectTransform.sizeDelta = newSize;
-
-#if UNITY_EDITOR
-                    EditorUtility.SetDirty(_image.rectTransform);
+                UnityEditor.Undo.RecordObject(_image.rectTransform, "Update RectTransform SizeDelta");
+                UnityEditor.EditorUtility.SetDirty(_image.rectTransform);
 #endif
                 }
             }
-
-            EditorApplication.delayCall -= UpdateSizeDelta;
         }
     }
 }
