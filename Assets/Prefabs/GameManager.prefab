@@ -56,5 +56,7 @@ MonoBehaviour:
   IsPaused: 0
   sceneName: Menu
   IrMenu: 0
-  apresentaocao: {fileID: 0}
+  apresentaocao:
+  - {fileID: 0}
+  SistemaUI: {fileID: 0}
   IrRestart: 0

@@ -7,7 +7,7 @@ public class DialogoTriggerCaracter
 {
     public string nome;
     public Sprite icone;
-    public bool isLeft;
+    public bool isUpDialog;
 }
 
 [System.Serializable]

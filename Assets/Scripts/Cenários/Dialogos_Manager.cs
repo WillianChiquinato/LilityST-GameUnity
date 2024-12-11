@@ -10,18 +10,25 @@ public class Dialogos_Manager : MonoBehaviour
 
     public DialogoTexto linhaAtual;
     public Dialogo_Trigger dialogo_Trigger;
-    public GameObject ImagemRotate;
 
-    public bool isLeft;
+    public bool isUpDialog;
+
+    [Header("Dialogo1")]
+    public string initialName1;
     public Image iconeCaracter;
     public TextMeshProUGUI nomeCaracter;
     public TextMeshProUGUI dialogoArea;
-    public RectTransform rectTransform;
+
+    [Header("Dialogo2")]
+    public string initialName2;
+    public Image iconeCaracter2;
+    public TextMeshProUGUI nomeCaracter2;
+    public TextMeshProUGUI dialogoArea2;
+
     public bool isTextComplete = false;
 
-    //Igual listas, a unica diferença é que ele remove e adiciona sequencialmente
-    [SerializeField]
-    public Queue<DialogoTexto> linhas;
+    [Header("Situacoes Gerais")]
+    [SerializeField] public Queue<DialogoTexto> linhas;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;
@@ -68,33 +75,29 @@ public class Dialogos_Manager : MonoBehaviour
         }
 
         linhaAtual = linhas.Dequeue();
+        isUpDialog = linhaAtual.caracter.isUpDialog;
 
-        iconeCaracter.sprite = linhaAtual.caracter.icone;
-        nomeCaracter.text = linhaAtual.caracter.nome;
-        isLeft = linhaAtual.caracter.isLeft;
+        nomeCaracter.text = initialName1;
+        nomeCaracter2.text = initialName2;
 
-        Debug.Log($"isLeft: {isLeft}");
-
-        if (isLeft)
+        if (isUpDialog)
         {
-            //Area de NPC.
-            ImagemRotate.transform.localScale = new Vector3(-5, 5, 5);
-            rectTransform.offsetMin = new Vector2(764, rectTransform.offsetMin.y);
-            rectTransform.offsetMax = new Vector2(-493, rectTransform.offsetMax.y);
-            rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 428);
-            Debug.Log("Oi");
+            iconeCaracter.sprite = linhaAtual.caracter.icone;
+            nomeCaracter.text = linhaAtual.caracter.nome;
+            StopAllCoroutines();
+            StartCoroutine(Sequencial(linhaAtual));
+
+            dialogoArea2.text = "...";
         }
         else
         {
-            ImagemRotate.transform.localScale = new Vector3(9, 9, 9);
-            rectTransform.offsetMin = new Vector2(450.4805f, rectTransform.offsetMin.y);
-            rectTransform.offsetMax = new Vector2(-806.5195f, rectTransform.offsetMax.y);
-            rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 649);
+            iconeCaracter2.sprite = linhaAtual.caracter.icone;
+            nomeCaracter2.text = linhaAtual.caracter.nome;
+            StopAllCoroutines();
+            StartCoroutine(Sequencial2(linhaAtual));
+
+            dialogoArea.text = "...";
         }
-
-        StopAllCoroutines();
-
-        StartCoroutine(Sequencial(linhaAtual));
     }
 
     IEnumerator Sequencial(DialogoTexto dialogoTexto)
@@ -108,9 +111,19 @@ public class Dialogos_Manager : MonoBehaviour
         isTextComplete = true;
     }
 
+    IEnumerator Sequencial2(DialogoTexto dialogoTexto)
+    {
+        dialogoArea2.text = "";
+        foreach (char letter in dialogoTexto.linhaTexto.ToCharArray())
+        {
+            dialogoArea2.text += letter;
+            yield return new WaitForSeconds(speedTexto);
+        }
+        isTextComplete = true;
+    }
+
     public void EndDialogo()
     {
-        //Final aqui das animações e reset.
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
@@ -126,9 +139,18 @@ public class Dialogos_Manager : MonoBehaviour
         }
         else
         {
-            StopAllCoroutines();
-            dialogoArea.text = linhaAtual.linhaTexto;
-            isTextComplete = true;
+            if (isUpDialog)
+            {
+                StopAllCoroutines();
+                dialogoArea.text = linhaAtual.linhaTexto;
+                isTextComplete = true;
+            }
+            else
+            {
+                StopAllCoroutines();
+                dialogoArea2.text = linhaAtual.linhaTexto;
+                isTextComplete = true;
+            }
         }
     }
 }
