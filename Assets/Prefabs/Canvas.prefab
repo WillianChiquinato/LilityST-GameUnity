@@ -1732,9 +1732,11 @@ MonoBehaviour:
     linhaTexto: 
   dialogo_Trigger: {fileID: 0}
   isUpDialog: 0
+  initialName1: Galthera
   iconeCaracter: {fileID: 3699793834251542754}
   nomeCaracter: {fileID: 6233168627272394386}
   dialogoArea: {fileID: 7385901668431661675}
+  initialName2: Lility
   iconeCaracter2: {fileID: 8267922858256686165}
   nomeCaracter2: {fileID: 5409097838173716703}
   dialogoArea2: {fileID: 2076607031640138433}
@@ -13235,14 +13237,14 @@ RectTransform:
   m_GameObject: {fileID: 7133072271003277063}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9, y: 9, z: 9}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5636221962249346628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -806.51953, y: 649}
+  m_AnchoredPosition: {x: -1023, y: 269}
   m_SizeDelta: {x: -1257, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1676925661879185409
@@ -13273,7 +13275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64e963eb23a4a56478cc859e6f42b026, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
