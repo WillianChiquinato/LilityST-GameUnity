@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Ground
   - DontDestroy
@@ -74,6 +74,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Particulas
+    uniqueID: 1299547243
+    locked: 0
   - name: CenarioFrente
     uniqueID: 1870702793
     locked: 0
@@ -83,3 +86,5 @@ TagManager:
   - name: transicoes
     uniqueID: 46218139
     locked: 0
+  m_RenderingLayers:
+  - Default

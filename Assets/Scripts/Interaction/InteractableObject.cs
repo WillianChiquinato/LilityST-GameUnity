@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InteractableObjectMesa_Robert : CollidableObjects
 {
+    public Dialogos_Manager2 dialogos_Manager2;
     public PlayerBebe_Moviment playerBebe_Moviment;
     private bool z_interacted = false;
     public TextMeshPro textoPress;
@@ -18,6 +19,7 @@ public class InteractableObjectMesa_Robert : CollidableObjects
     protected override void Start()
     {
         base.Start();
+        dialogos_Manager2 = GameObject.FindFirstObjectByType<Dialogos_Manager2>();
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
 
         item_robert.SetActive(false);
@@ -38,12 +40,11 @@ public class InteractableObjectMesa_Robert : CollidableObjects
         if (z_interacted)
         {
             tempoExecucao += Time.deltaTime;
-            if (tempoExecucao > 4f)
+            if (tempoExecucao > 2f)
             {
                 transicao.Transicao(sceneName);
             }
         }
-
     }
 
     private void OnInteract()

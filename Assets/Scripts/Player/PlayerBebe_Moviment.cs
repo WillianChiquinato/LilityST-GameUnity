@@ -131,6 +131,11 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+        {
+            playerInput.enabled = false;
+        }
+
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
     }
 
