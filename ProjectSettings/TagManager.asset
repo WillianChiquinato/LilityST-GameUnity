@@ -19,6 +19,7 @@ TagManager:
   - OneWayPlataforma
   - CameraFollow
   - Apresentacao
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - PlataformOneWay
   - Enemy3
   - Itens
-  - 
+  - Ladder
   - 
   - 
   - 

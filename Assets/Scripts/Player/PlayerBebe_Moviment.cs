@@ -15,6 +15,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     public float airSpeed;
     public Vector2 moveInput;
     public int facingDirecao = 1;
+    public ladderScript ladderScript;
 
 
     [Header("Variaveis")]
@@ -124,6 +125,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
         playerInput = GetComponent<PlayerInput>();
+        ladderScript = GetComponent<ladderScript>();
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<cameraFollowBaby>();
@@ -143,7 +145,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        if (IsAlive)
+        if (IsAlive && touching.IsGrouded)
         {
             IsMoving = moveInput != Vector2.zero;
 
