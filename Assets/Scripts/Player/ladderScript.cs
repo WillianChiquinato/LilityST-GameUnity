@@ -3,7 +3,7 @@ using UnityEngine;
 public class ladderScript : MonoBehaviour
 {
     private float vertical;
-    private float speed = 8f;
+    private float speed = 10f;
     public bool isLadder;
     public bool isClimbing = false;
 
@@ -60,7 +60,7 @@ public class ladderScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
@@ -85,10 +85,12 @@ public class ladderScript : MonoBehaviour
             if (playerMoviment == null)
             {
                 playerBebe_Moviment.touching.groundDistancia = 0.36f;
+                playerBebe_Moviment.animacao.SetBool("IsClimbing", false);
             }
             else if (playerBebe_Moviment == null)
             {
                 playerMoviment.touching.groundDistancia = 0.36f;
+                playerMoviment.animacao.SetBool("IsClimbing", true);
             }
         }
     }

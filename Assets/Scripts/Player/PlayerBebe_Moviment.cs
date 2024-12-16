@@ -43,7 +43,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     }
 
     [SerializeField]
-    private bool _IsMoving = false;
+    public bool _IsMoving = false;
 
     public bool IsMoving
     {
