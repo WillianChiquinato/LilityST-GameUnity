@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,8 @@ public class PlayerBebe_Moviment : MonoBehaviour
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
     public cameraFollowBaby camerafollowObject;
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public GameObject cadeira;
 
     public bool canMove
     {
@@ -124,11 +127,14 @@ public class PlayerBebe_Moviment : MonoBehaviour
         animacao = GetComponent<Animator>();
         touching = GetComponent<TouchingDistance>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
+        cinemachineVirtualCamera = FindFirstObjectByType<CinemachineVirtualCamera>();
         playerInput = GetComponent<PlayerInput>();
         ladderScript = GetComponent<ladderScript>();
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<cameraFollowBaby>();
+
+        StartCoroutine(StartMachine());
     }
 
     private void Update()
@@ -136,6 +142,10 @@ public class PlayerBebe_Moviment : MonoBehaviour
         if (!canMove)
         {
             playerInput.enabled = false;
+        }
+        else
+        {
+            playerInput.enabled = true;
         }
 
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
@@ -145,7 +155,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        if (IsAlive && touching.IsGrouded)
+        if (IsAlive && touching.IsGrouded && canMove)
         {
             IsMoving = moveInput != Vector2.zero;
 
@@ -183,5 +193,13 @@ public class PlayerBebe_Moviment : MonoBehaviour
         {
             entrar = false;
         }
+    }
+
+    IEnumerator StartMachine()
+    {
+        yield return new WaitForSeconds(7.5f);
+
+        cadeira.SetActive(false);
+        cinemachineVirtualCamera.GetComponent<Animator>().SetBool("CameraStart", true);
     }
 }
