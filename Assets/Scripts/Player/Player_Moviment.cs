@@ -260,6 +260,8 @@ public class PlayerMoviment : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         SavePoint.nomeCenaMenu = currentScene;
         Debug.Log("Nome da cena atual: " + currentScene);
+
+        
     }
 
     private void Update()

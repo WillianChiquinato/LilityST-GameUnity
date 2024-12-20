@@ -30,7 +30,7 @@ public class Sistema_Cenas : MonoBehaviour
             //Arrumar depois, nao esta manutenivel (Colocar alguma logica para cada saida)
             if (sceneName == "Introducao")
             {
-                SavePoint.CheckpointPosition = new Vector3(-72.84f, 27.18f, 0f);
+                SavePoint.CheckpointPosition = new Vector3(-89.49f, 25.18f, 0f);
                 SavePoint.AttackApres = true;
                 SavePoint.ArcoApres = true;
             }

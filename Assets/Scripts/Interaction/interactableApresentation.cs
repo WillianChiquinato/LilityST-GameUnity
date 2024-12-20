@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class interactableApresentation : CollidableObjects
@@ -29,6 +30,7 @@ public class interactableApresentation : CollidableObjects
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
 
         ApresInput.SetActive(false);
+        
     }
 
     protected override void Update()
@@ -68,11 +70,15 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Dash")
                     {
+                        playerMoviment.playerInput.enabled = true;
+
+                        InputAction.CallbackContext fakeContext = new InputAction.CallbackContext();
+                        playerMoviment.OnDash(fakeContext);
+                        
                         goraflixMoviment.animator.SetBool("Grab", false);
                         grabPlayer.grabActived = false;
                         SavePoint.DashApres = true;
                         Time.timeScale = 1f;
-                        playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
 
                         Destroy(this.gameObject);

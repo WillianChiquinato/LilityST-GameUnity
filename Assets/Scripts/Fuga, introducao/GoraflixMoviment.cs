@@ -48,10 +48,6 @@ public class GoraflixMoviment : MonoBehaviour
         {
             return animator.GetBool(animationstrings.canMove);
         }
-        set
-        {
-
-        }
     }
 
     public bool _Target = false;
@@ -120,7 +116,8 @@ public class GoraflixMoviment : MonoBehaviour
 
             if (timingAttack < 0f && SavePoint.DashApres)
             {
-                ataqueGeneral();
+                ataqueGeneral(); 
+                grabPlayer.grabActived = false;
             }
         }
 
@@ -172,14 +169,11 @@ public class GoraflixMoviment : MonoBehaviour
         playerSeguir = true;
         paredes_pretas.SetActive(false);
         nomeBoss.SetActive(false);
-        
-        yield return new WaitForSeconds(0.4f);
-        grabPlayer.grabActived = true;
     }
 
     private void ataqueGeneral()
     {
-        grabPlayer.grabActived = false;
+        animator.SetBool("Grab", false);
         if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
         {
             speed = 6.5f;
