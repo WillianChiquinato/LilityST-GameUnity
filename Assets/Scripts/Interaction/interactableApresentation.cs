@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class interactableApresentation : CollidableObjects
 {
     public PlayerMoviment playerMoviment;
+    public GoraflixMoviment goraflixMoviment;
+    public grabPlayer grabPlayer;
     public GameObject ApresInput;
 
     public TextMeshProUGUI texto01;
@@ -23,8 +25,10 @@ public class interactableApresentation : CollidableObjects
     {
         base.Start();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        ApresInput.SetActive(false);
+        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+        grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
 
+        ApresInput.SetActive(false);
     }
 
     protected override void Update()
@@ -64,6 +68,8 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Dash")
                     {
+                        goraflixMoviment.animator.SetBool("Grab", false);
+                        grabPlayer.grabActived = false;
                         SavePoint.DashApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
@@ -84,18 +90,16 @@ public class interactableApresentation : CollidableObjects
         timerApres = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ativo = true;
-            Time.timeScale = 0f;
-            ApresInput.SetActive(true);
-            playerMoviment.playerInput.enabled = false;
-
             if (GetInput == "Jump")
             {
-                SavePoint.JumpApres = true;
+                ativo = true;
+                Time.timeScale = 0f;
+                ApresInput.SetActive(true);
+                playerMoviment.playerInput.enabled = false;
                 texto01.text = "Pressione";
                 texto02.text = "Para pular";
                 imagem.texture = referenciaImg;
@@ -103,19 +107,33 @@ public class interactableApresentation : CollidableObjects
 
             if (GetInput == "WallJump")
             {
-                SavePoint.WallApres = true;
+                ativo = true;
+                Time.timeScale = 0f;
+                ApresInput.SetActive(true);
+                playerMoviment.playerInput.enabled = false;
                 texto01.text = "Vá na parede, press W";
                 texto02.text = "Para WallJump";
                 imagem.texture = referenciaImg;
             }
 
-            if (GetInput == "Dash")
+            if (GetInput == "Dash" && goraflixMoviment.playerSeguir)
             {
-                SavePoint.WallApres = true;
-                texto01.text = "Pressione SHIFT";
-                texto02.text = "Para Dash";
-                imagem.texture = referenciaImg;
+                StartCoroutine(StartDash());
             }
         }
+    }
+
+    IEnumerator StartDash()
+    {
+        yield return new WaitForSeconds(2f);
+
+        ativo = true;
+        Time.timeScale = 0f;
+        ApresInput.SetActive(true);
+        playerMoviment.playerInput.enabled = false;
+
+        texto01.text = "Pressione SHIFT";
+        texto02.text = "Para Dash";
+        imagem.texture = referenciaImg;
     }
 }

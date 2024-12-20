@@ -15,23 +15,21 @@ public class grabPlayer : MonoBehaviour
 
     void Update()
     {
+        //
         RaycastHit2D Hitgrab = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance, playerLayerMask);
 
-        if (Hitgrab.collider != null)
+        if (Hitgrab.collider != null && grabActived)
         {
-            if(grabActived && grabandoObject == null)
-            {
-                grabandoObject = Hitgrab.collider.gameObject;
-                grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                grabandoObject.transform.position = grabPoint.position;
-                grabandoObject.transform.SetParent(transform);
-            }
-            else if(!grabActived)
-            {
-                grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                grabandoObject.transform.SetParent(null);
-                grabandoObject = null;
-            }
+            grabandoObject = Hitgrab.collider.gameObject;
+            grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            grabandoObject.transform.position = grabPoint.position;
+            grabandoObject.transform.SetParent(transform);
+        }
+        else if (grabandoObject != null && grabActived == false)
+        {
+            grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            grabandoObject.transform.SetParent(null);
+            grabandoObject = null;
         }
 
         Debug.DrawRay(rayPoint.position, transform.right * rayDistance, Color.green);

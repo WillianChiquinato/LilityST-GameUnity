@@ -7,6 +7,7 @@ public class GoraflixMoviment : MonoBehaviour
 {
     TouchingDistance touching;
     public PlayerMoviment playerMoviment;
+    public grabPlayer grabPlayer;
     public Transform playerTransform;
     private float speed = 6.5f;
     public Animator animator;
@@ -33,6 +34,7 @@ public class GoraflixMoviment : MonoBehaviour
     public CinemachineFramingTransposer transposer;
     public DetectionZone attackZona;
     public Vector3 originalPosition;
+    public bool ataqueGenerals = false;
 
 
     public bool playerSeguir = false;
@@ -45,6 +47,10 @@ public class GoraflixMoviment : MonoBehaviour
         get
         {
             return animator.GetBool(animationstrings.canMove);
+        }
+        set
+        {
+
         }
     }
 
@@ -76,6 +82,7 @@ public class GoraflixMoviment : MonoBehaviour
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -111,7 +118,7 @@ public class GoraflixMoviment : MonoBehaviour
             playerMoviment.canMove = false;
             StartCoroutine(TransicaoCamera(secondTarget));
 
-            if (timingAttack < 0f)
+            if (timingAttack < 0f && SavePoint.DashApres)
             {
                 ataqueGeneral();
             }
@@ -150,8 +157,6 @@ public class GoraflixMoviment : MonoBehaviour
 
     IEnumerator TransicaoCamera(Transform target)
     {
-        cinemachineVirtualCamera.Follow = target;
-
         while (Vector3.Distance(cinemachineVirtualCamera.Follow.position, target.position) > 0.1f)
         {
             transposer.m_XDamping = 2;
@@ -160,13 +165,21 @@ public class GoraflixMoviment : MonoBehaviour
             cinemachineVirtualCamera.Follow = target;
             yield return null;
         }
+
+        yield return new WaitForSeconds(3f);
+
+        animator.SetBool("Grab", true);
+        playerSeguir = true;
+        paredes_pretas.SetActive(false);
+        nomeBoss.SetActive(false);
+        
+        yield return new WaitForSeconds(0.4f);
+        grabPlayer.grabActived = true;
     }
 
     private void ataqueGeneral()
     {
-        playerSeguir = true;
-        paredes_pretas.SetActive(false);
-        nomeBoss.SetActive(false);
+        grabPlayer.grabActived = false;
         if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
         {
             speed = 6.5f;
@@ -174,7 +187,6 @@ public class GoraflixMoviment : MonoBehaviour
             transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
             animator.SetBool(animationstrings.SeguirPlayer, true);
             animator.SetBool(animationstrings.Teleporte, false);
-
         }
         else
         {
@@ -187,6 +199,7 @@ public class GoraflixMoviment : MonoBehaviour
                 transform.position = Vector2.MoveTowards(rb.position, targetPosition, 10 * Time.deltaTime);
             }
         }
+
 
         StartCoroutine(TransicaoCamera(firstTarget));
         playerMoviment.canMove = true;
