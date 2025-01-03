@@ -9,10 +9,10 @@ public class SavePoint : MonoBehaviour
     public static bool CheckpointAnim2 = false;
 
     //Parte da introdução
-    public static bool JumpApres = false;
-    public static bool AttackApres = false;
-    public static bool WallApres = false;
-    public static bool DashApres = false;
+    public static bool JumpApres = true;
+    public static bool AttackApres = true;
+    public static bool WallApres = true;
+    public static bool DashApres = true;
     public static bool ArcoApres = true;
 
     //Menu / Reset Checkpoint
