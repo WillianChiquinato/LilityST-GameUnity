@@ -28,7 +28,10 @@ public class Dialogo_Trigger : MonoBehaviour
 {
     public Dialogos dialogos;
     public PlayerMoviment playerMoviment;
+    public Input_Conversa input_Conversa;
     public Animator animator;
+
+    public GameObject dialogosAnim;
 
     private void Start()
     {
@@ -43,10 +46,30 @@ public class Dialogo_Trigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && playerMoviment.entrar == true)
+        if (collision.CompareTag("Player"))
         {
-            TriggerDialogo();
-            animator.SetBool(animationstrings.InicioDialogo, true);   
+            dialogosAnim.SetActive(true);
+            if (playerMoviment.entrar)
+            {
+                TriggerDialogo();
+                animator.SetBool(animationstrings.InicioDialogo, true);
+            }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            StartCoroutine(AnimacaoSair());
+        }
+    }
+
+    IEnumerator AnimacaoSair()
+    {
+        input_Conversa.animator.SetBool("Dialogos", true);
+        yield return new WaitForSeconds(0.6f);
+
+        dialogosAnim.SetActive(false);
     }
 }

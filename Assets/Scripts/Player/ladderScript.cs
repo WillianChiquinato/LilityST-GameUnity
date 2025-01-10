@@ -31,7 +31,7 @@ public class ladderScript : MonoBehaviour
 
         if (playerMoviment == null)
         {
-            if (isLadder && Mathf.Abs(vertical) > 0f && !playerBebe_Moviment.IsMoving)
+            if (isLadder && Mathf.Abs(vertical) > 0f)
             {
                 isClimbing = true;
                 playerBebe_Moviment.animacao.SetBool("IsClimbing", true);
@@ -39,7 +39,7 @@ public class ladderScript : MonoBehaviour
         }
         else if (playerBebe_Moviment == null)
         {
-            if (isLadder && Mathf.Abs(vertical) > 0f && !playerMoviment.IsMoving)
+            if (isLadder && Mathf.Abs(vertical) > 0f)
             {
                 isClimbing = true;
                 playerMoviment.animacao.SetBool("IsClimbing", true);

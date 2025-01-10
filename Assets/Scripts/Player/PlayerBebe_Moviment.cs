@@ -155,7 +155,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        if (IsAlive && touching.IsGrouded && canMove)
+        if (IsAlive && canMove)
         {
             IsMoving = moveInput != Vector2.zero;
 

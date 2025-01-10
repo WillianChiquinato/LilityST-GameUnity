@@ -29,12 +29,13 @@ public class GoraflixMoviment : MonoBehaviour
     [Header("Targets")]
     public GameObject paredes_pretas;
     public GameObject nomeBoss;
+    public GameObject apresentacaoObjs;
     public Transform firstTarget;
     public Transform secondTarget;
     public CinemachineFramingTransposer transposer;
     public DetectionZone attackZona;
     public Vector3 originalPosition;
-    public bool ataqueGenerals = false;
+    public bool grab = true;
 
 
     public bool playerSeguir = false;
@@ -108,36 +109,41 @@ public class GoraflixMoviment : MonoBehaviour
 
         if (atacar)
         {
-            timingAttack -= Time.deltaTime;
-            paredes_pretas.SetActive(true);
-            nomeBoss.SetActive(true);
-            playerMoviment.canMove = false;
-            StartCoroutine(TransicaoCamera(secondTarget));
-
-            if (timingAttack < 0f && SavePoint.DashApres)
+            if (SavePoint.DashApres)
             {
-                ataqueGeneral(); 
-                grabPlayer.grabActived = false;
-            }
-        }
-
-        if (speed == 0f)
-        {
-            if (playerSeguir && !playerMoviment.IsMoving)
-            {
-                timerTP -= Time.deltaTime;
-                if (timerTP < 0.6f && distanceToPlayerPlayerY > 5f)
+                CutPlay();
+                if (timingAttack < 0f)
                 {
-                    animator.SetBool(animationstrings.Teleporte, true);
-                    if (timerTP < 0f)
+                    ataqueGeneral();
+                }
+            }
+
+            if (speed == 0f)
+            {
+                if (playerSeguir && !playerMoviment.IsMoving)
+                {
+                    timerTP -= Time.deltaTime;
+                    if (timerTP < 0.6f && distanceToPlayerPlayerY > 5f)
                     {
-                        StartCoroutine(TpOnPlayer());
-                        timerTP = 2f;
+                        animator.SetBool(animationstrings.Teleporte, true);
+                        if (timerTP < 0f)
+                        {
+                            StartCoroutine(TpOnPlayer());
+                            timerTP = 2f;
+                        }
                     }
                 }
-
             }
         }
+    }
+
+    public void CutPlay()
+    {
+        StartCoroutine(TransicaoCamera(secondTarget));
+
+        paredes_pretas.SetActive(true);
+        nomeBoss.SetActive(true);
+        playerMoviment.canMove = false;
     }
 
     IEnumerator TpOnPlayer()
@@ -152,7 +158,7 @@ public class GoraflixMoviment : MonoBehaviour
         transform.position = originalPosition;
     }
 
-    IEnumerator TransicaoCamera(Transform target)
+    public IEnumerator TransicaoCamera(Transform target)
     {
         while (Vector3.Distance(cinemachineVirtualCamera.Follow.position, target.position) > 0.1f)
         {
@@ -169,28 +175,35 @@ public class GoraflixMoviment : MonoBehaviour
         playerSeguir = true;
         paredes_pretas.SetActive(false);
         nomeBoss.SetActive(false);
+        timingAttack -= Time.deltaTime;
     }
 
     private void ataqueGeneral()
     {
+        Destroy(apresentacaoObjs);
+        grab = false;
+        grabPlayer.grabActived = false;
         animator.SetBool("Grab", false);
-        if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
+        if (!grab)
         {
-            speed = 6.5f;
-            Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
-            transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
-            animator.SetBool(animationstrings.SeguirPlayer, true);
-            animator.SetBool(animationstrings.Teleporte, false);
-        }
-        else
-        {
-            speed = 0f;
-            animator.SetBool(animationstrings.SeguirPlayer, false);
-
-            if (ataqueState)
+            if (distanceToPlayer > stopDistance && !touching.IsOnWall && !SpeedDelayed)
             {
+                speed = 6.5f;
                 Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
-                transform.position = Vector2.MoveTowards(rb.position, targetPosition, 10 * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
+                animator.SetBool(animationstrings.SeguirPlayer, true);
+                animator.SetBool(animationstrings.Teleporte, false);
+            }
+            else
+            {
+                speed = 0f;
+                animator.SetBool(animationstrings.SeguirPlayer, false);
+
+                if (ataqueState)
+                {
+                    Vector2 targetPosition = new Vector2(playerTransform.position.x, rb.position.y);
+                    transform.position = Vector2.MoveTowards(rb.position, targetPosition, 10 * Time.deltaTime);
+                }
             }
         }
 
