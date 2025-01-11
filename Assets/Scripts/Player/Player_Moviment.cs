@@ -91,7 +91,7 @@ public class PlayerMoviment : MonoBehaviour
     public bool isDashing;
     public float dashSpeed;
     public float dashDuration;
-    private float stateTimerDash;
+    public float stateTimerDash;
     public float timerDash;
     public float dashCooldown;
 
@@ -100,14 +100,6 @@ public class PlayerMoviment : MonoBehaviour
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] public camerafollowObject camerafollowObject;
-
-    [Header("Esquiva")]
-    public bool EsquivaPress = false;
-    public bool EsquivaPressSolution;
-    public float EsquivaSpeed;
-    public float EsquivaDuration;
-    public float stateTimerEsquiva;
-    public float timerEsquiva;
 
 
     public int AtaqueCounterAtual
@@ -254,7 +246,6 @@ public class PlayerMoviment : MonoBehaviour
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
         stateTimerDash = dashDuration;
-        stateTimerEsquiva = EsquivaDuration;
 
         //saber qual cena o jogador esta.
         currentScene = SceneManager.GetActiveScene().name;
@@ -283,7 +274,6 @@ public class PlayerMoviment : MonoBehaviour
 
         //Dash cooldown
         timerDash -= Time.deltaTime;
-        timerEsquiva -= Time.deltaTime;
         //Tempo do dash
         if (isDashing && !touching.IsOnWall)
         {
@@ -294,24 +284,6 @@ public class PlayerMoviment : MonoBehaviour
                 isDashing = false;
                 stateTimerDash = dashDuration;
                 rb.gravityScale = 4.5f;
-            }
-        }
-        else
-        {
-            animacao.SetBool(animationstrings.isDashing, false);
-            isDashing = false;
-            stateTimerDash = dashDuration;
-            rb.gravityScale = 4.5f;
-        }
-
-        if (EsquivaPressSolution)
-        {
-            stateTimerEsquiva -= Time.deltaTime;
-            if (stateTimerEsquiva < 0f)
-            {
-                animacao.SetBool(animationstrings.isDashing, false);
-                EsquivaPressSolution = false;
-                stateTimerEsquiva = EsquivaDuration;
             }
         }
 
@@ -400,7 +372,7 @@ public class PlayerMoviment : MonoBehaviour
                 }
             }
 
-            if (!isWallJumping && !isDashing && !EsquivaPressSolution)
+            if (!isWallJumping && !isDashing)
             {
                 rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
             }

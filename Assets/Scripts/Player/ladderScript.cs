@@ -56,7 +56,7 @@ public class ladderScript : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 4f;
+            // rb.gravityScale = 4f;
         }
     }
 
@@ -90,7 +90,7 @@ public class ladderScript : MonoBehaviour
             else if (playerBebe_Moviment == null)
             {
                 playerMoviment.touching.groundDistancia = 0.36f;
-                playerMoviment.animacao.SetBool("IsClimbing", true);
+                playerMoviment.animacao.SetBool("IsClimbing", false);
             }
         }
     }
