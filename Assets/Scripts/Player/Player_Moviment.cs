@@ -94,6 +94,7 @@ public class PlayerMoviment : MonoBehaviour
     public float stateTimerDash;
     public float timerDash;
     public float dashCooldown;
+    public ladderScript LadderScript;
 
 
 
@@ -242,6 +243,7 @@ public class PlayerMoviment : MonoBehaviour
         healthBar = GameObject.FindFirstObjectByType<HealthBar>();
         potion_Script = GameObject.FindFirstObjectByType<potion_script>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
+        LadderScript = GameObject.FindFirstObjectByType<ladderScript>();
 
         transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
@@ -252,7 +254,7 @@ public class PlayerMoviment : MonoBehaviour
         SavePoint.nomeCenaMenu = currentScene;
         Debug.Log("Nome da cena atual: " + currentScene);
 
-        
+
     }
 
     private void Update()
@@ -275,7 +277,7 @@ public class PlayerMoviment : MonoBehaviour
         //Dash cooldown
         timerDash -= Time.deltaTime;
         //Tempo do dash
-        if (isDashing && !touching.IsOnWall)
+        if (isDashing)
         {
             stateTimerDash -= Time.deltaTime;
             if (stateTimerDash < 0f)
@@ -284,6 +286,10 @@ public class PlayerMoviment : MonoBehaviour
                 isDashing = false;
                 stateTimerDash = dashDuration;
                 rb.gravityScale = 4.5f;
+            }
+            else if (touching.IsOnWall)
+            {
+                stateTimerDash = 0f;
             }
         }
 
@@ -294,6 +300,7 @@ public class PlayerMoviment : MonoBehaviour
         }
 
         canJump = (touching.IsOnWall && wallSlide) ? true : false;
+
         WallSlide();
 
         currentZRotation = bow.transform.eulerAngles.z;
@@ -448,7 +455,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SavePoint.DashApres)
         {
-            if (context.started && timerDash < 0f)
+            if (context.started && timerDash < 0f && !LadderScript.isLadder)
             {
                 isDashing = true;
                 animacao.SetBool(animationstrings.isDashing, true);

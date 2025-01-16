@@ -49,6 +49,8 @@ public class ladderScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerMoviment != null && playerMoviment.isDashing) return;
+
         if (isClimbing)
         {
             rb.gravityScale = 0f;
@@ -56,7 +58,7 @@ public class ladderScript : MonoBehaviour
         }
         else
         {
-            // rb.gravityScale = 4f;
+            rb.gravityScale = 4.5f;
         }
     }
 
