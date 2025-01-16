@@ -61,7 +61,7 @@ public class Dialogo_Trigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(AnimacaoSair());
+            collision.GetComponent<PlayerMoviment>().StartCoroutine(AnimacaoSair());
         }
     }
 
