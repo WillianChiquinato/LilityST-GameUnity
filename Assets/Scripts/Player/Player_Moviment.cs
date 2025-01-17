@@ -455,7 +455,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SavePoint.DashApres)
         {
-            if (context.started && timerDash < 0f && !LadderScript.isLadder)
+            if (context.started && timerDash < 0f)
             {
                 isDashing = true;
                 animacao.SetBool(animationstrings.isDashing, true);
