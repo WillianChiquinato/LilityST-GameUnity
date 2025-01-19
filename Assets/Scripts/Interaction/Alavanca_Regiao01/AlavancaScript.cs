@@ -2,19 +2,23 @@ using UnityEngine;
 
 public class AlavancaScript : MonoBehaviour
 {
-    public PlayerMoviment playerMoviment;
-    public Animator animator;
-    public Tile_AlavancaScript[] tile_AlavancaScript;
+    [Header("Timers e Variaveis")]
     public bool TilesBool = false;
     public float timerDuration;
     public float timerTiles = 0f;
+    public Vector3 offset;
+
+    [Header("References")]
+    public PlayerMoviment playerMoviment;
+    public BoxCollider2D boxCollider;
+    public Animator animator;
+    public Tile_AlavancaScript[] tile_AlavancaScript;
 
     void Start()
     {
-        tile_AlavancaScript = FindObjectsByType<Tile_AlavancaScript>(FindObjectsSortMode.None);
-
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -59,6 +63,7 @@ public class AlavancaScript : MonoBehaviour
         }
 
         animator.SetBool("Ativado", false);
+        this.boxCollider.enabled = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -67,6 +72,9 @@ public class AlavancaScript : MonoBehaviour
         {
             animator.SetBool("Ativado", true);
             TilesBool = true;
+            playerMoviment.animacao.SetBool("InputAlavanca", true);
+            this.boxCollider.enabled = false;
+            this.playerMoviment.transform.position = transform.position + offset;
         }
     }
 }

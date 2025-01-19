@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 5150228129046689077}
   - component: {fileID: 8028374232826561430}
   - component: {fileID: 6993018629814190210}
+  - component: {fileID: 2785946920860732403}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Player
@@ -268,20 +269,16 @@ MonoBehaviour:
   WallstateTimer: 0.2
   canJump: 0
   isWallJumping: 0
-  wallJumpTimer: 0.15
+  wallJumpTimer: 0.1
   isDashing: 0
   dashSpeed: 20
   dashDuration: 0.3
+  stateTimerDash: 0
   timerDash: 0
   dashCooldown: 1
+  LadderScript: {fileID: 0}
   _cameraFollow: {fileID: 0}
   camerafollowObject: {fileID: 0}
-  EsquivaPress: 0
-  EsquivaPressSolution: 0
-  EsquivaSpeed: 15
-  EsquivaDuration: 0.3
-  stateTimerEsquiva: 0
-  timerEsquiva: 2
   _IsMoving: 0
   _IsAcordada: 0
   _IsRight: 1
@@ -657,7 +654,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 2049
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -737,6 +734,23 @@ MonoBehaviour:
   possibleDrop: []
   dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
   chanceToropItens: 70
+--- !u!114 &2785946920860732403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793249064160061137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb49ecec0800a774eb5d99926f187cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLadder: 0
+  isClimbing: 0
+  rb: {fileID: 0}
+  playerMoviment: {fileID: 3583350418226193328}
+  playerBebe_Moviment: {fileID: 0}
 --- !u!1 &2877492617240880508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8844949802469335203}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TransformRecuo
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -1792,7 +1806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9076710696975144262}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: OneWay
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}

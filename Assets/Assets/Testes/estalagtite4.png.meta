@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 22fec31e89c627548a41be009aa6ab79
+guid: dd8f40035c7980c49bf98ccef9e593d9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8128864547420043125
-    second: Alavanca_ativacao_placeholder6_0
+      213: -6193406565244616354
+    second: estalagtite4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Alavanca_ativacao_placeholder6_0
+      name: estalagtite4_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 0
-        width: 45
-        height: 28
+        x: 0
+        y: 2
+        width: 33
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 577fc30cc378fc070800000000000000
-      internalID: 8128864547420043125
+      spriteID: e51c5010b899c0aa0800000000000000
+      internalID: -6193406565244616354
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Alavanca_ativacao_placeholder6_0: 8128864547420043125
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
