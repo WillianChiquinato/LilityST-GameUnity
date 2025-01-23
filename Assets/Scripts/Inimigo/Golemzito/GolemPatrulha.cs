@@ -27,8 +27,8 @@ public class GolemPatrulha_Moviment : MonoBehaviour
     public int blinkCount = 1;
 
     //Efeito da piscada
-    public Material newMaterial;  // O novo material que você quer usar temporariamente
-    private Material originalMaterial;  // Para armazenar o material original
+    public Material newMaterial;
+    private Material originalMaterial;
     private SpriteRenderer spriteRenderer;
 
 
