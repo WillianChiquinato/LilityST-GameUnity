@@ -7,13 +7,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
 {
-    public static PlayerMoviment Instance { get; private set; }
     public string currentScene;
 
 
     [Header("Instances")]
     public float currentZRotation;
-    public bool isFollowing = true;
     public float maxSpeed = 7f;
     public float speed = 2f;
     public float acelerationSpeed;
@@ -28,9 +26,6 @@ public class PlayerMoviment : MonoBehaviour
     public float ResetTimer;
     public float ResetTimerLimite;
     private int ataqueCounterAtual;
-
-    [Header("CursorMouse")]
-    public bool isCursorVisible = false;
 
     //Healing
     [Header("Healing")]
@@ -76,7 +71,6 @@ public class PlayerMoviment : MonoBehaviour
     public float targetTimeScale = 0.3f;
     public float duration = 1f;
     public float elapsedTime = 0f;
-    public float tempoCooldown;
 
 
     [Header("Wall Slide / Wall Jump")]
@@ -253,8 +247,6 @@ public class PlayerMoviment : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         SavePoint.nomeCenaMenu = currentScene;
         Debug.Log("Nome da cena atual: " + currentScene);
-
-
     }
 
     private void Update()

@@ -30,7 +30,6 @@ public class interactableApresentation : CollidableObjects
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
 
         ApresInput.SetActive(false);
-
     }
 
     protected override void Update()
@@ -44,39 +43,39 @@ public class interactableApresentation : CollidableObjects
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    if (GetInput == "Jump")
+                    if (GetInput == "Jump" && !SavePoint.JumpApres)
                     {
                         SavePoint.JumpApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
-
-                        Destroy(this.gameObject);
+                        
                         ativo = false;
+                        Destroy(gameObject);
                     }
 
-                    if (GetInput == "WallJump")
+                    if (GetInput == "WallJump" && !SavePoint.WallApres)
                     {
                         SavePoint.WallApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
 
-                        Destroy(this.gameObject);
                         ativo = false;
+                        Destroy(this.gameObject);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    if (GetInput == "Dash")
+                    if (GetInput == "Dash" && !SavePoint.DashApres)
                     {
                         SavePoint.DashApres = true;
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
                         goraflixMoviment.grab = false;
 
-                        Destroy(this.gameObject);
                         ativo = false;
+                        Destroy(this.gameObject);
                     }
                 }
             }
@@ -94,7 +93,7 @@ public class interactableApresentation : CollidableObjects
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (GetInput == "Jump")
+            if (GetInput == "Jump" && !SavePoint.JumpApres)
             {
                 ativo = true;
                 Time.timeScale = 0f;
@@ -105,7 +104,7 @@ public class interactableApresentation : CollidableObjects
                 imagem.texture = referenciaImg;
             }
 
-            if (GetInput == "WallJump")
+            if (GetInput == "WallJump" && !SavePoint.WallApres)
             {
                 ativo = true;
                 Time.timeScale = 0f;
@@ -116,7 +115,7 @@ public class interactableApresentation : CollidableObjects
                 imagem.texture = referenciaImg;
             }
 
-            if (GetInput == "Dash" && goraflixMoviment.playerSeguir)
+            if (GetInput == "Dash" && goraflixMoviment.playerSeguir && !SavePoint.DashApres)
             {
                 StartCoroutine(StartDash());
             }

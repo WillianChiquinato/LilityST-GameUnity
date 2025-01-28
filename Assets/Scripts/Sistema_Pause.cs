@@ -27,7 +27,6 @@ public class Sistema_Pause : MonoBehaviour
 
     [Header("Savepoint")]
     //Savepoint
-    public bool IrRestart = false;
     public string CurrentSceneName { get; private set; }
 
     void Start()
@@ -52,6 +51,13 @@ public class Sistema_Pause : MonoBehaviour
 
         CutSceneDroggo = GameObject.FindWithTag("CutScene");
         CutSceneDroggo.SetActive(false);
+
+        //Cenas modificação de spawn
+        if (SavePoint.nomeCenaMenu == "Altior-Fuga" && !SavePoint.CheckpointAnim)
+        {
+            SavePoint.CheckpointPosition = new Vector2(-54.4f, 16.7f);
+            playerMoviment.transform.position = SavePoint.CheckpointPosition;
+        }
     }
 
     void Update()

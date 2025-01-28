@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class SavePoint : MonoBehaviour
@@ -17,4 +18,19 @@ public class SavePoint : MonoBehaviour
 
     //Menu / Reset Checkpoint
     public static string nomeCenaMenu = "Altior-Quarto";
+
+    //Animação fuga
+    public static CinemachineVirtualCamera CinemaVirtual;
+
+    void Update()
+    {
+        if (CinemaVirtual == null)
+        {
+            CinemaVirtual = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        }
+        else
+        {
+            Debug.Log("Cena bebe");
+        }
+    }
 }

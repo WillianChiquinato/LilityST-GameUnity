@@ -34,7 +34,7 @@ public class Sistema_Cenas : MonoBehaviour
                 SavePoint.AttackApres = true;
                 SavePoint.ArcoApres = true;
             }
-            if (sceneName == "NPCs")
+            else if (sceneName == "NPCs")
             {
                 SavePoint.CheckpointPosition = new Vector3(-72.84f, 45.35f, 0f);
             }

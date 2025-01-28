@@ -127,18 +127,16 @@ public class Dialogos_Manager2 : MonoBehaviour
 
     public void EndDialogo()
     {
-        SavePoint.CheckpointPosition = new Vector2(-89.49f, 31.84f);
-
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
         StartCoroutine(DelayTransition());
-        // dialogo_Trigger.animator.SetBool(animationstrings.InicioDialogo, false);
     }
 
     IEnumerator DelayTransition()
     {
         playerBebe.animacao.SetBool(animationstrings.canMove, false);
+
         yield return new WaitForSeconds(1);
 
         transicao.Transicao(sceneName);
