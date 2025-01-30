@@ -22,15 +22,16 @@ public class SavePoint : MonoBehaviour
     //Animação fuga
     public static CinemachineVirtualCamera CinemaVirtual;
 
-    void Update()
-    {
-        if (CinemaVirtual == null)
-        {
-            CinemaVirtual = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
-        }
-        else
-        {
-            Debug.Log("Cena bebe");
-        }
-    }
+    //Resolver
+    // void Update()
+    // {
+    //     if (CinemaVirtual == null)
+    //     {
+    //         CinemaVirtual = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Cena bebe");
+    //     }
+    // }
 }

@@ -378,11 +378,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZona: {fileID: 8241061438158253828}
   player: {fileID: 0}
-  speed: 4.5
-  jumpForce: 12
-  shouldJump: 0
-  Isgrounded: 0
   groundCheck:
     serializedVersion: 2
     m_Bits: 64
+  direcao: -1
+  distancePlayer: 0
+  speed: 4.7
+  jumpForce: 12
+  shouldJump: 0
+  Isgrounded: 0
+  acceleration: 0.8
   _Target: 0
