@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2245366741531248201}
   - component: {fileID: 4213363591311923657}
   - component: {fileID: 4602707155330089086}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8445594008211714650}
   - component: {fileID: 4557793505937849936}
   - component: {fileID: 8241061438158253828}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DetectAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 4939600362580012511}
   - component: {fileID: 1015751370392506130}
   - component: {fileID: 9156327006664606414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SoldadoGeneral
   m_TagString: Inimigos
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 21
+  m_SortingOrder: 19
   m_Sprite: {fileID: 21300000, guid: 64e32b652e7ba554ab84f6256c5666ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -316,7 +316,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 394e9683a82916044a0646eca5197a6f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -361,8 +361,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.036014557, y: -0.75237083}
-  m_Size: {x: 0.81394196, y: 2.462738}
+  m_Offset: {x: -0.036014557, y: -0.89425087}
+  m_Size: {x: 0.81394196, y: 2.178978}
   m_Direction: 0
 --- !u!114 &9156327006664606414
 MonoBehaviour:
@@ -383,11 +383,11 @@ MonoBehaviour:
     m_Bits: 64
   direcao: -1
   distancePlayer: 0
-  speed: 5
+  speed: 5.2
   jumpForce: 12
   shouldJump: 0
   Isgrounded: 0
-  minSpeed: 5
+  minSpeed: 5.2
   maxSpeed: 7.5
   acceleration: 0.8
   _Target: 0

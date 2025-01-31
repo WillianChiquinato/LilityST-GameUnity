@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class vidroScript : MonoBehaviour
 {
+    //Vai sumir logo logo, apenas o general.
     public GameObject prefabEnemy;
+    public GameObject prefabGeneral;
     public GameObject spawnSoldado;
+    public GameObject spawnGeneral;
+
     public Animator animator;
     public Transform player;
     private SpriteRenderer spriteRenderer;
+    public BoxCollider2D boxCollider2D;
+    public static bool boxCollider2DActive = false;
 
 
     void Awake()
@@ -14,6 +20,13 @@ public class vidroScript : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+
+        if (boxCollider2DActive)
+        {
+            boxCollider2D.enabled = false;
+        }
+
     }
 
     void Update()
@@ -43,6 +56,9 @@ public class vidroScript : MonoBehaviour
             Debug.Log("Inimigo SPAWN");
             animator.SetBool("Vidro", true);
             Instantiate(prefabEnemy, spawnSoldado.transform.position, Quaternion.identity);
+            Instantiate(prefabGeneral, spawnGeneral.transform.position, Quaternion.identity);
+            boxCollider2DActive = true;
+            boxCollider2D.enabled = false;
         }
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class EnemyPathing : MonoBehaviour
 {
@@ -64,11 +65,15 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
         distancePlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
+        float velocityY = rb.linearVelocity.y;
+
+        animator.SetFloat(animationstrings.yVelocity, velocityY);
 
         if (canMove)
         {
             // Verifica se está no chão
             Isgrounded = Physics2D.Raycast(transform.position, Vector2.down, 2.1f, groundCheck);
+            animator.SetBool("Jumping", shouldJump);
 
             if (Isgrounded)
             {
@@ -78,18 +83,23 @@ public class EnemyPathing : MonoBehaviour
                 rb.linearVelocity = new Vector2(direcao * speed, rb.linearVelocity.y);
 
                 // Verificações para pathing inteligente
-                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.6f), Vector2.right * direcao, 2f, groundCheck);
+                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.8f), Vector2.right * direcao, 2f, groundCheck);
                 RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down, 2f, groundCheck);
-                RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, -0.2f, 0), Vector2.right * direcao, 2f, groundCheck);
+                RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, -0.3f, 0), Vector2.right * direcao, 2f, groundCheck);
 
                 //Logica para o pulo, se estiver em baixo do inimigo, nao se aplica o pulo.
                 if (player.transform.position.y < transform.position.y - 2f)
                 {
                     shouldJump = false;
+                    Debug.Log("Player abaixo do inimigo");
                 }
                 else
                 {
                     if (!gapAhead.collider && !groundFront.collider)
+                    {
+                        shouldJump = true;
+                    }
+                    else if (!groundFront.collider && platformAbove.collider)
                     {
                         shouldJump = true;
                     }
@@ -129,6 +139,10 @@ public class EnemyPathing : MonoBehaviour
             }
 
         }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
     }
 
     void FixedUpdate()
@@ -160,13 +174,13 @@ public class EnemyPathing : MonoBehaviour
 
         //Detect Player.
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position + new Vector3(0, -0.2f, 0), new Vector2(direcao, 0) * 2f);
+        Gizmos.DrawRay(transform.position + new Vector3(0, -0.3f, 0), new Vector2(direcao, 0) * 2f);
 
         if (Isgrounded)
         {
             //Plataformas e colisao a frente.
             Gizmos.color = Color.red;
-            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, -0.6f), new Vector2(direcao, 0) * 2f);
+            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, -0.8f), new Vector2(direcao, 0) * 2f);
 
             //Lacuna do ground.
             Gizmos.color = Color.blue;
