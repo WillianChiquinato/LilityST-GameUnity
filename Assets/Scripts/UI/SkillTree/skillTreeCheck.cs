@@ -32,7 +32,8 @@ public class skillTreeCheck : MonoBehaviour
             imageSelect.sprite = ConvertTextureToSprite(skillTreeUI[selectedIndex].imagemRef);
             textoSelect.text = skillTreeUI[selectedIndex].textoRef;
             botaoSelect.onClick.RemoveAllListeners();
-            botaoSelect.onClick.AddListener(skillTreeUI[selectedIndex].UnlockSkillSlot);
+            botaoSelect.onClick.AddListener(() => skillTreeUI[selectedIndex].UnlockSkillSlot());
+            Debug.Log("CU");
         }
     }
 

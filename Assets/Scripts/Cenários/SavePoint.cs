@@ -20,18 +20,18 @@ public class SavePoint : MonoBehaviour
     public static string nomeCenaMenu = "Altior-Quarto";
 
     //Animação fuga
-    public static CinemachineVirtualCamera CinemaVirtual;
+    public static CinemachineVirtualCamera CinemaVirtual { get; private set; }
 
     //Resolver
-    // void Update()
-    // {
-    //     if (CinemaVirtual == null)
-    //     {
-    //         CinemaVirtual = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Cena bebe");
-    //     }
-    // }
+    public void Awake()
+    {
+        if (CinemaVirtual == null)
+        {
+            CinemaVirtual = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        }
+        else
+        {
+            Debug.Log("Cena bebe");
+        }
+    }
 }

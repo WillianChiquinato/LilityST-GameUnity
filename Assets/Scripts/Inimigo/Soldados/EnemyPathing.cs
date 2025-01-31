@@ -17,8 +17,8 @@ public class EnemyPathing : MonoBehaviour
     public float jumpForce;
     public bool shouldJump;
     public bool Isgrounded;
-    private float minSpeed = 4.7f;
-    private float maxSpeed = 8f;
+    public float minSpeed;
+    public float maxSpeed;
     public float acceleration = 0.8f;
 
 
@@ -68,7 +68,7 @@ public class EnemyPathing : MonoBehaviour
         if (canMove)
         {
             // Verifica se está no chão
-            Isgrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundCheck);
+            Isgrounded = Physics2D.Raycast(transform.position, Vector2.down, 2.1f, groundCheck);
 
             if (Isgrounded)
             {
@@ -78,9 +78,9 @@ public class EnemyPathing : MonoBehaviour
                 rb.linearVelocity = new Vector2(direcao * speed, rb.linearVelocity.y);
 
                 // Verificações para pathing inteligente
-                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.6f), Vector2.right * direcao, 2f, groundCheck);
-                RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, 0, 0), Vector2.down, 2f, groundCheck);
-                RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, 0.8f, 0), Vector2.right * direcao, 2f, groundCheck);
+                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.6f), Vector2.right * direcao, 2f, groundCheck);
+                RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down, 2f, groundCheck);
+                RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, -0.2f, 0), Vector2.right * direcao, 2f, groundCheck);
 
                 //Logica para o pulo, se estiver em baixo do inimigo, nao se aplica o pulo.
                 if (player.transform.position.y < transform.position.y - 2f)
@@ -98,6 +98,29 @@ public class EnemyPathing : MonoBehaviour
                         shouldJump = true;
                     }
                 }
+
+                //Distancia e direção do player.
+                if (distancePlayer < 4.2f)
+                {
+                    direcao = Mathf.Sign(player.position.x - transform.position.x);
+                    FlipDirecao();
+                    Target = attackZona.detectColliders.Count > 0;
+
+
+                    if (attackCooldown > 0)
+                    {
+                        attackCooldown -= Time.deltaTime;
+                    }
+
+                    if (!shouldJump)
+                    {
+                        speed = Mathf.MoveTowards(speed, maxSpeed, acceleration * Time.deltaTime);
+                    }
+                    else
+                    {
+                        speed = minSpeed;
+                    }
+                }
             }
             else
             {
@@ -105,23 +128,6 @@ public class EnemyPathing : MonoBehaviour
                 animator.SetBool("IsGround", false);
             }
 
-            if (distancePlayer < 3.5f)
-            {
-                direcao = Mathf.Sign(player.position.x - transform.position.x);
-                FlipDirecao();
-                Target = attackZona.detectColliders.Count > 0;
-
-                speed = Mathf.MoveTowards(speed, maxSpeed, acceleration * Time.deltaTime);
-
-                if (attackCooldown > 0)
-                {
-                    attackCooldown -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                speed = minSpeed;
-            }
         }
     }
 
@@ -147,24 +153,24 @@ public class EnemyPathing : MonoBehaviour
 
         //IsGround.
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, Vector2.down * 1.1f);
+        Gizmos.DrawRay(transform.position, Vector2.down * 2.1f);
 
         //Direção do movimento.
         float direcao = Mathf.Sign(player.position.x - transform.position.x);
 
         //Detect Player.
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, Vector2.up * 4f);
+        Gizmos.DrawRay(transform.position + new Vector3(0, -0.2f, 0), new Vector2(direcao, 0) * 2f);
 
         if (Isgrounded)
         {
             //Plataformas e colisao a frente.
             Gizmos.color = Color.red;
-            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, 0.6f), new Vector2(direcao, 0) * 2f);
+            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, -0.6f), new Vector2(direcao, 0) * 2f);
 
             //Lacuna do ground.
             Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position + new Vector3(direcao * 0.7f, 0, 0), Vector2.down * 2f);
+            Gizmos.DrawRay(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down * 2f);
         }
     }
 

@@ -135,6 +135,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         camerafollowObject = _cameraFollow.GetComponent<cameraFollowBaby>();
 
         StartCoroutine(StartMachine());
+        cinemachineVirtualCamera.m_Lens.OrthographicSize = 4f;
     }
 
     private void Update()

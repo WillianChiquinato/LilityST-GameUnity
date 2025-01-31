@@ -14,9 +14,8 @@ public class SkillTreeUI : MonoBehaviour
 
     [SerializeField] private SkillTreeUI[] shouldBeUnlocked;
     [SerializeField] private SkillTreeUI[] shouldBeLocked;
-
     [SerializeField] private SkillTreeUI[] habilidadeAlternativa;
-
+    
     [SerializeField] private Image skillImage;
 
     [Header("ItensTransicoes")]

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 1
-  knockback: {x: 2, y: 2}
+  knockback: {x: 7, y: 2}
 --- !u!61 &4602707155330089086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.8326435, y: -0.44661903}
+  m_Offset: {x: 1.3397112, y: -0.9715824}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -91,7 +91,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9914589, y: 1.298954}
+  m_Size: {x: 2.0055943, y: 0.5592308}
   m_EdgeRadius: 0
 --- !u!1 &4341315035493261196
 GameObject:
@@ -160,7 +160,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.94, y: -0.17}
+  m_Offset: {x: 0.95187855, y: -0.64514554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -170,7 +170,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.38, y: 1.7}
+  m_Size: {x: 1.4037571, y: 2.6502912}
   m_EdgeRadius: 0
 --- !u!114 &8241061438158253828
 MonoBehaviour:
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 9156327006664606414}
   m_Layer: 0
   m_Name: SoldadoGeneral
-  m_TagString: Untagged
+  m_TagString: Inimigos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -37.35, y: 26.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8445594008211714650}
@@ -266,8 +266,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 409548726, guid: f5aef6cb2b0519343b66f47ba7094612, type: 3}
+  m_SortingOrder: 21
+  m_Sprite: {fileID: 21300000, guid: 64e32b652e7ba554ab84f6256c5666ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -361,8 +361,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.036014557, y: -0.25346756}
-  m_Size: {x: 0.81394196, y: 1.4649315}
+  m_Offset: {x: -0.036014557, y: -0.75237083}
+  m_Size: {x: 0.81394196, y: 2.462738}
   m_Direction: 0
 --- !u!114 &9156327006664606414
 MonoBehaviour:
@@ -383,9 +383,11 @@ MonoBehaviour:
     m_Bits: 64
   direcao: -1
   distancePlayer: 0
-  speed: 4.7
+  speed: 5
   jumpForce: 12
   shouldJump: 0
   Isgrounded: 0
+  minSpeed: 5
+  maxSpeed: 7.5
   acceleration: 0.8
   _Target: 0

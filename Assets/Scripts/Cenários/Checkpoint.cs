@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
     {
         savePoint = GameObject.FindAnyObjectByType<SavePoint>();
         playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
-        SavePoint.CinemaVirtual = GameObject.FindGameObjectWithTag("EditorOnly").GetComponent<CinemachineVirtualCamera>();
+        // SavePoint.CinemaVirtual = GameObject.FindGameObjectWithTag("EditorOnly").GetComponent<CinemachineVirtualCamera>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

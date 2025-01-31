@@ -23,6 +23,7 @@ public class Hidden_Area : MonoBehaviour
 
     void Awake()
     {
+        virtualCamera.m_Lens.OrthographicSize = 6f;
         cameras = FindFirstObjectByType<Camera>();
 
         if (isObjectDestroyed)
@@ -58,10 +59,7 @@ public class Hidden_Area : MonoBehaviour
     {
         float timeElapsed = 0f;
 
-        // Garantir que a câmera esteja em modo ortográfico
         cameras.orthographic = true;
-
-        // Obter o componente de lente da Cinemachine
         var lens = virtualCamera.m_Lens;
 
         // Definir o valor inicial do OrthographicSize
@@ -71,18 +69,13 @@ public class Hidden_Area : MonoBehaviour
         // Interpolação suave do OrthographicSize durante o tempo
         while (timeElapsed < duration)
         {
-            // Interpolando entre o tamanho inicial e final
             lens.OrthographicSize = Mathf.Lerp(startSize, endSize, timeElapsed / duration);
-
-            // Atualizar o componente de lente da câmera
             virtualCamera.m_Lens = lens;
 
-            // Aumentar o tempo decorrido
             timeElapsed += Time.deltaTime;
-            yield return null;  // Esperar o próximo frame
+            yield return null;
         }
 
-        // Garantir que o OrthographicSize final seja exatamente o alvo
         lens.OrthographicSize = endSize;
         virtualCamera.m_Lens = lens;
     }
