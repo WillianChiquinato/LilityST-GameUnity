@@ -21,7 +21,6 @@ public class Soldados_Ativador : MonoBehaviour
     public Transform targetObject;
     public Vector3 localPosition;
 
-    //
     void Start()
     {
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
