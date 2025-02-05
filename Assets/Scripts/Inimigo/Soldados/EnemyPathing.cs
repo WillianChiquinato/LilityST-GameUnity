@@ -91,7 +91,6 @@ public class EnemyPathing : MonoBehaviour
                 if (player.transform.position.y < transform.position.y - 2f)
                 {
                     shouldJump = false;
-                    Debug.Log("Player abaixo do inimigo");
                 }
                 else
                 {

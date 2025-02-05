@@ -2,23 +2,18 @@ using UnityEngine;
 
 public class vidroScript : MonoBehaviour
 {
-    //Vai sumir logo logo, apenas o general.
-    public GameObject prefabEnemy;
-    public GameObject prefabGeneral;
-    public GameObject spawnSoldado;
-    public GameObject spawnGeneral;
-
     public Animator animator;
-    public Transform player;
+    public Transform Objeto;
     private SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider2D;
+    public bool GeneralActived = false;
     public static bool boxCollider2DActive = false;
 
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
+        Objeto = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
 
@@ -33,10 +28,10 @@ public class vidroScript : MonoBehaviour
     {
         int order = 1;
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        GameObject Objeto = GameObject.FindFirstObjectByType<GameObject>();
+        if (Objeto != null)
         {
-            if (player.transform.position.x < transform.position.x)
+            if (Objeto.transform.position.x < transform.position.x)
             {
                 order = Mathf.Max(order, 20);
             }
@@ -51,14 +46,15 @@ public class vidroScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D colisor)
     {
-        if (colisor.gameObject.CompareTag("Player"))
+        if (GeneralActived)
         {
-            Debug.Log("Inimigo SPAWN");
-            animator.SetBool("Vidro", true);
-            Instantiate(prefabEnemy, spawnSoldado.transform.position, Quaternion.identity);
-            Instantiate(prefabGeneral, spawnGeneral.transform.position, Quaternion.identity);
-            boxCollider2DActive = true;
-            boxCollider2D.enabled = false;
+            if (colisor.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Inimigo SPAWN");
+                animator.SetBool("Vidro", true);
+                boxCollider2DActive = true;
+                boxCollider2D.enabled = false;
+            }
         }
     }
 

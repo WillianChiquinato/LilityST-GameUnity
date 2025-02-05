@@ -115,7 +115,7 @@ public class interactableApresentation : CollidableObjects
                 imagem.texture = referenciaImg;
             }
 
-            if (GetInput == "Dash" && goraflixMoviment.playerSeguir && !SavePoint.DashApres)
+            if (GetInput == "Dash" && !SavePoint.DashApres)
             {
                 StartCoroutine(StartDash());
             }

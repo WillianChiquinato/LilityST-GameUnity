@@ -32,11 +32,22 @@ public class Dialogo_Trigger : MonoBehaviour
     public Animator animator;
 
     public GameObject dialogosAnim;
+    public float TimerTargetDialogo;
+    public float TimerDialogo;
+    public bool targetBool = false;
 
     private void Start()
     {
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (TimerDialogo >= 1f && targetBool)
+        {
+            TimerDialogo += Time.deltaTime;
+        }
     }
 
     public void TriggerDialogo()
@@ -48,12 +59,35 @@ public class Dialogo_Trigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            dialogosAnim.SetActive(true);
-            if (playerMoviment.entrar)
+            if (dialogosAnim != null)
+            {
+                dialogosAnim.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Sem indicador");
+            }
+
+            if (this.gameObject.CompareTag("Inimigos"))
+            {
+                targetBool = true;
+                if (TimerDialogo >= TimerTargetDialogo)
+                {
+                    TriggerDialogo();
+                    TimerDialogo = 0f;
+                    return;
+                }
+            }
+            else if (playerMoviment.entrar)
             {
                 TriggerDialogo();
                 animator.SetBool(animationstrings.InicioDialogo, true);
             }
+        }
+
+        if (!Dialogos_Manager.dialogos_Manager.isDialogoAtivo && !this.gameObject.CompareTag("Inimigos"))
+        {
+            animator.SetBool(animationstrings.InicioDialogo, false);
         }
     }
 
@@ -67,9 +101,19 @@ public class Dialogo_Trigger : MonoBehaviour
 
     IEnumerator AnimacaoSair()
     {
-        input_Conversa.animator.SetBool("Dialogos", true);
+        if (input_Conversa != null)
+        {
+            input_Conversa.animator.SetBool("Dialogos", true);
+        }
         yield return new WaitForSeconds(0.6f);
 
-        dialogosAnim.SetActive(false);
+        if (dialogosAnim != null)
+        {
+            dialogosAnim.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Sem indicador");
+        }
     }
 }

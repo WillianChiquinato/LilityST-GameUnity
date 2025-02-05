@@ -9,7 +9,6 @@ public class Dialogos_Manager : MonoBehaviour
     public static Dialogos_Manager dialogos_Manager;
 
     public DialogoTexto linhaAtual;
-    public Dialogo_Trigger dialogo_Trigger;
 
     public bool isUpDialog;
 
@@ -40,7 +39,6 @@ public class Dialogos_Manager : MonoBehaviour
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTexto>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        dialogo_Trigger = GameObject.FindFirstObjectByType<Dialogo_Trigger>();
 
         if (dialogos_Manager == null)
         {
@@ -127,7 +125,6 @@ public class Dialogos_Manager : MonoBehaviour
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
-        dialogo_Trigger.animator.SetBool(animationstrings.InicioDialogo, false);
         playerMoviment.animacao.SetBool(animationstrings.canMove, true);
     }
 
