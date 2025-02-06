@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Soldados_Ativador : MonoBehaviour
 {
+    [Header("Ativacao Soldados")]
     public bool isAtivado = false;
     public float timerAtivado = 0f;
     public float timerTargtAtivado;
+    public float timerAtivadoSoldados = 0f;
+    public float timerTargetAtivadoSoldados;
+
+    public float CameraTransitionValue;
+
+    [Header("Instances")]
     public Collider2D colisor;
     public PlayerMoviment playerMoviment;
+    public GoraflixMoviment goraflixMoviment;
     public Animator animator;
 
     [Header("Soldados")]
@@ -18,6 +26,7 @@ public class Soldados_Ativador : MonoBehaviour
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public CinemachineFramingTransposer framingPosition;
     public Transform targetObject;
     public Vector3 localPosition;
 
@@ -26,6 +35,8 @@ public class Soldados_Ativador : MonoBehaviour
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         colisor = GetComponent<Collider2D>();
         localPosition = targetObject.localPosition;
+
+        framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     void Update()
@@ -35,10 +46,14 @@ public class Soldados_Ativador : MonoBehaviour
             timerAtivado += Time.deltaTime;
             if (timerAtivado >= timerTargtAtivado)
             {
-                Instantiate(prefabGeneralMelee, spawnSoldados.transform.position, Quaternion.identity);
-                Instantiate(prefabGeneralLanceiro, spawnSoldados.transform.position, Quaternion.identity);
+                timerAtivadoSoldados += Time.deltaTime;
+                if (timerAtivadoSoldados >= timerTargetAtivadoSoldados)
+                {
+                    Instantiate(prefabGeneralMelee, spawnSoldados.transform.position, Quaternion.identity);
+                    Instantiate(prefabGeneralLanceiro, spawnSoldados.transform.position, Quaternion.identity);
+                    isAtivado = false;
+                }
 
-                isAtivado = false;
                 StartCoroutine(AtivarSoldados());
             }
         }
@@ -55,16 +70,26 @@ public class Soldados_Ativador : MonoBehaviour
     IEnumerator AtivarSoldados()
     {
         playerMoviment.canMove = false;
-        cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(localPosition.x * 2.2f, 1, cinemachineVirtualCamera.transform.position.z);
+        Vector3 diferrenca = targetObject.position - playerMoviment.transform.position;
+
+        framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
+        
         colisor.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
-        animator = GameObject.FindFirstObjectByType<GoraflixMoviment>().GetComponent<Animator>();
+        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+        animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(1f);
+        if (goraflixMoviment.Target)
+        {
+            animator.SetBool("Lanca", true);
+        }
 
-        cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(0, 0, 0);
+        yield return new WaitForSeconds(CameraTransitionValue);
+
+        framingPosition.m_TrackedObjectOffset = new Vector3(0, 0, 0);
         playerMoviment.canMove = true;
         Destroy(this.gameObject);
     }

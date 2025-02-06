@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &775977141581258634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4553136207281343309}
+  m_Layer: 8
+  m_Name: ProjetilLanca
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4553136207281343309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775977141581258634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.74, y: 0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6523580117358528926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942770226250625502
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +171,7 @@ Transform:
   m_Children:
   - {fileID: 7211629179013429535}
   - {fileID: 6804520861694310883}
+  - {fileID: 4553136207281343309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5740215760803393217
@@ -301,8 +333,13 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   attackZona: {fileID: 7578808064237995989}
+  projetilLanca: {fileID: 8304956482604548665, guid: d1c6956aace7fde48b5f8e377ceb62db, type: 3}
+  projetilInstance: {fileID: 4553136207281343309}
   SpawnCheck: 0
   distanceToPlayer: 0
+  LancaTrigger: 0
+  shootTempo: 0
+  shootTimerTarget: 5
   grab: 1
   _Target: 0
 --- !u!114 &4045977632491931796
@@ -445,7 +482,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -154.48428, y: 0.55976677}
+  m_Offset: {x: -198.59918, y: 0.55976677}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -455,5 +492,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 320.6725, y: 31.112793}
+  m_Size: {x: 232.44267, y: 31.112793}
   m_EdgeRadius: 0

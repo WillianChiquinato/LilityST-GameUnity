@@ -20,6 +20,7 @@ public class General_Spawn : MonoBehaviour
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public CinemachineFramingTransposer framingPosition;
     public Transform targetObject;
     public Vector3 localPosition;
 
@@ -34,10 +35,9 @@ public class General_Spawn : MonoBehaviour
         vidroScript = GameObject.FindFirstObjectByType<vidroScript>();
         colisor = GetComponent<Collider2D>();
         targetObject = transform.GetChild(0);
-        localPosition = targetObject.localPosition;
         colisor.enabled = true;
 
-        Debug.Log(localPosition);
+        framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     void Update()
@@ -48,9 +48,12 @@ public class General_Spawn : MonoBehaviour
             if (TimerSpawnGeneral >= 3f && targetObject != null)
             {
                 playerMoviment.canMove = false;
-                playerMoviment.transform.localScale = new Vector3(1, 1, 1);
+                playerMoviment.IsRight = true;
                 playerMoviment.transform.position = new Vector3(playerTESTE.transform.position.x, playerMoviment.transform.position.y, playerMoviment.transform.position.z);
-                cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(localPosition.x, 1, cinemachineVirtualCamera.transform.position.z);
+                
+                Vector3 diferrenca = targetObject.position - playerMoviment.transform.position;
+                framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
+                
                 colisor.enabled = false;
                 if (TimerSpawnGeneral >= 5.5f)
                 {

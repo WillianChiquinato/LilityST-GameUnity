@@ -14,11 +14,17 @@ public class GoraflixMoviment : MonoBehaviour
     public Rigidbody2D rb;
     public DetectionZone attackZona;
 
+    public GameObject projetilLanca;
+    public Transform projetilInstance;
+
 
 
     [Header("Variaveis")]
     public bool SpawnCheck = false;
     public float distanceToPlayer;
+    public bool LancaTrigger = false;
+    public float shootTempo;
+    public float shootTimerTarget;
 
     [Header("Grab Player")]
     public bool grab = true;
@@ -67,7 +73,22 @@ public class GoraflixMoviment : MonoBehaviour
 
     void Update()
     {
+        shootTempo += Time.deltaTime;
         Target = attackZona.detectColliders.Count > 0;
+
+        if (Target)
+        {
+            if (attackCooldown <= 0)
+            {
+                if (LancaTrigger && shootTempo >= shootTimerTarget)
+                {
+                    Instantiate(projetilLanca, projetilInstance.position, Quaternion.identity);
+                    shootTempo = 0f;
+                    LancaTrigger = false;
+                    animator.SetBool("Lanca", false);
+                }
+            }
+        }
 
         if (attackCooldown > 0)
         {

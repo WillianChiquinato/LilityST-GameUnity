@@ -189,7 +189,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             return _IsRight;
         }
-        private set
+        set
         {
             if (_IsRight != value)
             {
