@@ -50,8 +50,11 @@ public class Soldados_Ativador : MonoBehaviour
                 timerAtivadoSoldados += Time.deltaTime;
                 if (timerAtivadoSoldados >= timerTargetAtivadoSoldados)
                 {
-                    Instantiate(prefabGeneralMelee, spawnSoldados.transform.position, Quaternion.identity);
-                    Instantiate(prefabGeneralLanceiro, spawnSoldados.transform.position, Quaternion.identity);
+                    if (prefabGeneralLanceiro != null && prefabGeneralMelee != null)
+                    {
+                        Instantiate(prefabGeneralMelee, spawnSoldados.transform.position, Quaternion.identity);
+                        Instantiate(prefabGeneralLanceiro, spawnSoldados.transform.position, Quaternion.identity);
+                    }
                     isAtivado = false;
                 }
 
@@ -82,12 +85,13 @@ public class Soldados_Ativador : MonoBehaviour
         animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         if (goraflixMoviment.Target)
         {
             animator.SetBool("Lanca", true);
             if (passagemOpen != null)
             {
+                yield return new WaitForSeconds(0.7f);
                 Destroy(passagemOpen);
             }
             else

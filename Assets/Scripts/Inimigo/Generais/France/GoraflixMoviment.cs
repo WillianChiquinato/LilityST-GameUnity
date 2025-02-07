@@ -86,7 +86,7 @@ public class GoraflixMoviment : MonoBehaviour
                 animator.SetBool("Lanca", true);
                 if (LancaTrigger && shootTempo >= shootTimerTarget)
                 {
-                    Instantiate(projetilLanca, projetilInstance.localPosition, Quaternion.identity);
+                    Instantiate(projetilLanca, projetilInstance.position, Quaternion.identity);
                     shootTempo = 0f;
                     LancaTrigger = false;
                     animator.SetBool("Lanca", false);

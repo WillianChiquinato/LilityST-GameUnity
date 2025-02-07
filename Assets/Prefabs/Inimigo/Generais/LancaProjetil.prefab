@@ -185,8 +185,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 0}
-  objetoSaidaProjetil: {fileID: 3792366820303539963, guid: 4762c3181b3139641b72e97860751beb, type: 3}
-  pontoInicial: {x: -175.9, y: 0, z: 0}
+  objetoSaidaProjetil: {fileID: 0}
+  pontoInicial: {x: 0, y: 0, z: 0}
   duracaoTrajetoria: 5
   tempo: 0
 --- !u!95 &8240152802139486809

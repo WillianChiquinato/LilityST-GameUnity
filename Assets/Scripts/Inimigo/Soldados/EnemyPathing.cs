@@ -86,6 +86,7 @@ public class EnemyPathing : MonoBehaviour
                 groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.8f), Vector2.right * direcao, 2f, groundCheck);
                 RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down, 2f, groundCheck);
                 RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, -0.3f, 0), Vector2.right * direcao, 2f, groundCheck);
+                RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + new Vector3(0, 1f, 0), Vector2.right * direcao, 2f, groundCheck);
 
                 //Logica para o pulo, se estiver em baixo do inimigo, nao se aplica o pulo.
                 if (player.transform.position.y < transform.position.y - 2f)
@@ -97,18 +98,20 @@ public class EnemyPathing : MonoBehaviour
                     if (!gapAhead.collider && !groundFront.collider)
                     {
                         shouldJump = true;
+                        Debug.Log("furo no chao");
                     }
-                    else if (!groundFront.collider && platformAbove.collider)
+                    else if (groundFront.collider || platformAbove.collider && !wallCheck.collider)
                     {
-                        shouldJump = true;
-                    }
-                    else if (groundFront.collider || platformAbove.collider)
-                    {
-                        shouldJump = true;
-                        if (distancePlayer > 4.2f)
+                        if (wallCheck.collider)
                         {
-                            direcao = Mathf.Sign(player.position.x - transform.position.x);
+                            Debug.Log("parede detectada");
+                            direcao *= -1;
                             FlipDirecao();
+                        }
+                        else
+                        {
+                            shouldJump = true;
+                            Debug.Log("Apenas plaatforma");
                         }
                     }
                 }
@@ -141,6 +144,11 @@ public class EnemyPathing : MonoBehaviour
                 animator.SetBool("IsGround", false);
             }
 
+            if (rb.linearVelocity.x <= 0)
+            {
+                rb.linearVelocity = new Vector2(transform.localScale.x * speed, rb.linearVelocity.y);
+            }
+
         }
         else
         {
@@ -156,8 +164,7 @@ public class EnemyPathing : MonoBehaviour
 
             if (Mathf.Abs(rb.linearVelocity.y) < 0.1f)
             {
-                Vector2 direcaoAtePlayer = (player.transform.position - transform.position).normalized;
-                Vector2 jumpVector = new Vector2(direcaoAtePlayer.x * minSpeed, jumpForce);
+                Vector2 jumpVector = new Vector2(transform.localScale.x * minSpeed, jumpForce);
 
                 rb.linearVelocity = jumpVector;
             }
@@ -178,6 +185,9 @@ public class EnemyPathing : MonoBehaviour
         //Detect Player.
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(transform.position + new Vector3(0, -0.3f, 0), new Vector2(direcao, 0) * 2f);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1f, 0), new Vector2(direcao, 0) * 2f);
 
         if (Isgrounded)
         {

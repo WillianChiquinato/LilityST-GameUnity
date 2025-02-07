@@ -32,7 +32,7 @@ public class lanca_General : MonoBehaviour
         if (objetoSaidaProjetil == null)
         {
             objetoSaidaProjetil = GameObject.FindFirstObjectByType<GoraflixMoviment>();
-            pontoInicial = objetoSaidaProjetil.transform.localPosition;
+            pontoInicial = objetoSaidaProjetil.transform.position;
         }
         if (player == null)
         {
