@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 775977141581258634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 0.06, z: 0}
+  m_LocalPosition: {x: 1.07, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -333,13 +333,14 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   attackZona: {fileID: 7578808064237995989}
-  projetilLanca: {fileID: 8304956482604548665, guid: d1c6956aace7fde48b5f8e377ceb62db, type: 3}
+  projetilLanca: {fileID: 4618734590020294472, guid: d1c6956aace7fde48b5f8e377ceb62db, type: 3}
   projetilInstance: {fileID: 4553136207281343309}
   SpawnCheck: 0
   distanceToPlayer: 0
   LancaTrigger: 0
   shootTempo: 0
-  shootTimerTarget: 5
+  shootTimerTarget: 6
+  attackLanca: 0
   grab: 1
   _Target: 0
 --- !u!114 &4045977632491931796
@@ -429,7 +430,7 @@ Transform:
   m_GameObject: {fileID: 7602450116137871312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 1.6, z: 0}
+  m_LocalPosition: {x: -9.6, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

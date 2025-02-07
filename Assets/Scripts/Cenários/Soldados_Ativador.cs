@@ -23,6 +23,7 @@ public class Soldados_Ativador : MonoBehaviour
     public GameObject prefabGeneralMelee;
     public GameObject prefabGeneralLanceiro;
     public GameObject spawnSoldados;
+    public GameObject passagemOpen;
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -73,7 +74,7 @@ public class Soldados_Ativador : MonoBehaviour
         Vector3 diferrenca = targetObject.position - playerMoviment.transform.position;
 
         framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
-        
+
         colisor.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
@@ -81,10 +82,18 @@ public class Soldados_Ativador : MonoBehaviour
         animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         if (goraflixMoviment.Target)
         {
             animator.SetBool("Lanca", true);
+            if (passagemOpen != null)
+            {
+                Destroy(passagemOpen);
+            }
+            else
+            {
+                Debug.Log("Passagem Ainda nao ativa");
+            }
         }
 
         yield return new WaitForSeconds(CameraTransitionValue);

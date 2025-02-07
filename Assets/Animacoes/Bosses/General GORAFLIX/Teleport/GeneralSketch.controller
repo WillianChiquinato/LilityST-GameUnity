@@ -253,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatName: attackCooldown
   updateOnStateEnter: 0
-  updateOnStateExit: 0
+  updateOnStateExit: 1
   updateStateMachineEnter: 0
   updateStateMachineExit: 0
   valueOnEnter: 0

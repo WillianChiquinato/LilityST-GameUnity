@@ -56,7 +56,6 @@ public class InteractableObjectMesa_Robert : CollidableObjects
             playerBebe_Moviment.playerInput.enabled = false;
             playerBebe_Moviment.camerafollowObject.transposer.m_TrackedObjectOffset = new Vector3(0, 1f, 0);
             item_robert.SetActive(true);
-            // SavePoint.CheckpointPosition = new Vector2(-89.49f, 31.84f);
 
             Debug.Log("Interagindo com " + name);
         }

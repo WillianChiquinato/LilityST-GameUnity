@@ -55,7 +55,7 @@ public class Sistema_Pause : MonoBehaviour
         //Cenas modificação de spawn
         if (SavePoint.nomeCenaMenu == "Altior-Fuga" && !SavePoint.CheckpointAnim)
         {
-            SavePoint.CheckpointPosition = new Vector2(-54.4f, 16.7f);
+            SavePoint.CheckpointPosition = new Vector2(-186.3f, 22.4f);
             playerMoviment.transform.position = SavePoint.CheckpointPosition;
         }
     }

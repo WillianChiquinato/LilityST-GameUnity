@@ -21,7 +21,7 @@ public class Attack_Projetil : MonoBehaviour, Defender
         player = GameObject.FindAnyObjectByType<PlayerMoviment>();
         droggoScript = GameObject.FindAnyObjectByType<DroggoScript>();
 
-        Destroy(this.gameObject, 3.0f);
+        // Destroy(this.gameObject, 3.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D Collision)

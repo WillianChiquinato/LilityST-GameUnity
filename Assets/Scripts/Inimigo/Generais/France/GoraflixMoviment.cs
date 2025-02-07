@@ -25,6 +25,7 @@ public class GoraflixMoviment : MonoBehaviour
     public bool LancaTrigger = false;
     public float shootTempo;
     public float shootTimerTarget;
+    public bool attackLanca = false;
 
     [Header("Grab Player")]
     public bool grab = true;
@@ -54,7 +55,7 @@ public class GoraflixMoviment : MonoBehaviour
         {
             return animator.GetFloat(animationstrings.attackCooldown);
         }
-        private set
+        set
         {
             animator.SetFloat(animationstrings.attackCooldown, Mathf.Max(value, 0));
         }
@@ -68,6 +69,8 @@ public class GoraflixMoviment : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+
+        attackCooldown = 1f;
         playerTransform = playerMoviment.transform;
     }
 
@@ -76,13 +79,14 @@ public class GoraflixMoviment : MonoBehaviour
         shootTempo += Time.deltaTime;
         Target = attackZona.detectColliders.Count > 0;
 
-        if (Target)
+        if (Target && attackLanca)
         {
             if (attackCooldown <= 0)
             {
+                animator.SetBool("Lanca", true);
                 if (LancaTrigger && shootTempo >= shootTimerTarget)
                 {
-                    Instantiate(projetilLanca, projetilInstance.position, Quaternion.identity);
+                    Instantiate(projetilLanca, projetilInstance.localPosition, Quaternion.identity);
                     shootTempo = 0f;
                     LancaTrigger = false;
                     animator.SetBool("Lanca", false);

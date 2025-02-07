@@ -102,9 +102,14 @@ public class EnemyPathing : MonoBehaviour
                     {
                         shouldJump = true;
                     }
-                    else if (groundFront.collider && platformAbove.collider)
+                    else if (groundFront.collider || platformAbove.collider)
                     {
                         shouldJump = true;
+                        if (distancePlayer > 4.2f)
+                        {
+                            direcao = Mathf.Sign(player.position.x - transform.position.x);
+                            FlipDirecao();
+                        }
                     }
                 }
 
@@ -114,7 +119,6 @@ public class EnemyPathing : MonoBehaviour
                     direcao = Mathf.Sign(player.position.x - transform.position.x);
                     FlipDirecao();
                     Target = attackZona.detectColliders.Count > 0;
-
 
                     if (attackCooldown > 0)
                     {
