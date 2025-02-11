@@ -26,10 +26,7 @@ public class GoraflixMoviment : MonoBehaviour
     public float shootTempo;
     public float shootTimerTarget;
     public bool attackLanca = false;
-
-    [Header("Grab Player")]
-    public bool grab = true;
-
+    public bool grabActived = false;
 
     public bool canMove
     {

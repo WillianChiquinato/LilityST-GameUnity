@@ -40,13 +40,16 @@ public class PlayerMoviment : MonoBehaviour
 
     //Variaveis
     [Header("Variaveis")]
+    public Damage DamageScript;
+    public TouchingDistance touching;
+    public bool entrar;
+    public bool grabAtivo = false;
+    public bool grabAnim = false;
+
     [HideInInspector]
     public Animator animacao;
     [HideInInspector]
     public Rigidbody2D rb;
-    public Damage DamageScript;
-    public TouchingDistance touching;
-    public bool entrar;
 
     //Jump
     [Header("Jump")]

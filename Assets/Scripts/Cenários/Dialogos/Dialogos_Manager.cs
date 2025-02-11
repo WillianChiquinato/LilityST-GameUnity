@@ -48,6 +48,7 @@ public class Dialogos_Manager : MonoBehaviour
 
     public void StartDialogos(Dialogos dialogos)
     {
+        playerMoviment.grabAtivo = false;
         isDialogoAtivo = true;
 
         animator.SetBool(animationstrings.isDialog, true);
@@ -126,6 +127,7 @@ public class Dialogos_Manager : MonoBehaviour
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
         playerMoviment.animacao.SetBool(animationstrings.canMove, true);
+        playerMoviment.grabAtivo = true;
     }
 
     public void buttonDialog()

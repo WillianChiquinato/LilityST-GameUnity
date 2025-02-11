@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class camerafollowObject : MonoBehaviour
 {
-
     [Header("Field of View")]
     [SerializeField] private Transform _playerTransform;
 
@@ -21,10 +18,12 @@ public class camerafollowObject : MonoBehaviour
     public CinemachineFramingTransposer transposer;
     public Vector3 newOffset;
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return null; // Espera um frame para garantir que todos os objetos estejam carregados.
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         _playerTransform = playerMoviment.GetComponentInChildren<Transform>();
+
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
@@ -34,7 +33,14 @@ public class camerafollowObject : MonoBehaviour
 
     void Update()
     {
-        transform.position = _playerTransform.position;
+        if (_playerTransform != null)
+        {
+            transform.position = _playerTransform.position;
+        }
+        else
+        {
+            Debug.LogWarning("_playerTransform ainda não foi atribuído!");
+        }
     }
 
     public void chamarTurn()

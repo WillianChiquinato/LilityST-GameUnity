@@ -7,22 +7,20 @@ public class General_Spawn : MonoBehaviour
     [Header("Instancias")]
     public GameObject spawnGeneral;
     public GameObject prefabGeneral;
+    public GameObject prefabGeneralInstance = null;
+    public grabPlayer grabPlayer;
+    public GameObject grabPlayerPosition;
     public Collider2D colisor;
     public PlayerMoviment playerMoviment;
+    public GoraflixMoviment goraflixMoviment;
     public vidroScript vidroScript;
     public Collider2D LiberarSalao;
-
-
-
-    public GameObject playerTESTE;
-
 
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public CinemachineFramingTransposer framingPosition;
     public Transform targetObject;
-    public Vector3 localPosition;
 
 
     [Header("Timers")]
@@ -49,20 +47,55 @@ public class General_Spawn : MonoBehaviour
             {
                 playerMoviment.canMove = false;
                 playerMoviment.IsRight = true;
-                playerMoviment.transform.position = new Vector3(playerTESTE.transform.position.x, playerMoviment.transform.position.y, playerMoviment.transform.position.z);
-                
+
                 Vector3 diferrenca = targetObject.position - playerMoviment.transform.position;
                 framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
-                
+
+
                 colisor.enabled = false;
                 if (TimerSpawnGeneral >= 5.5f)
                 {
-                    Instantiate(prefabGeneral, spawnGeneral.transform.position, Quaternion.identity);
-                    SpawnGeneral = false;
-                    LiberarSalao.enabled = false;
-                    vidroScript.GeneralActived = true;
+                    if (prefabGeneralInstance == null)
+                    {
+                        prefabGeneralInstance = Instantiate(prefabGeneral, spawnGeneral.transform.position, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Debug.Log("General já instanciado");
+                    }
+
+                    goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+                    grabPlayer = goraflixMoviment.GetComponent<grabPlayer>();
+
+                    if (TimerSpawnGeneral >= 10f)
+                    {
+                        goraflixMoviment.animator.SetBool("Grab", true);
+
+                        if (goraflixMoviment.grabActived)
+                        {
+                            playerMoviment.transform.position = grabPlayerPosition.transform.position;
+                            playerMoviment.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                            framingPosition.m_TrackedObjectOffset = new Vector3(3, 0, 0);
+
+                            //Libera o vidro para usar o IsDashing.
+                            LiberarSalao.enabled = false;
+                            vidroScript.GeneralActived = true;
+
+                            if (playerMoviment.grabAtivo)
+                            {
+                                playerMoviment.animacao.SetBool("Grab", true);
+                                playerMoviment.grabAnim = true;
+                                if (playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).IsName("GrabPlayer") && playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                                {
+                                    playerMoviment.animacao.SetBool("Grab", false);
+                                    SpawnGeneral = false;
+                                }
+                            }
+                        }
+                    }
                 }
             }
+
         }
         else
         {

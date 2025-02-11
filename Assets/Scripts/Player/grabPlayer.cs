@@ -3,35 +3,36 @@ using UnityEngine;
 
 public class grabPlayer : MonoBehaviour
 {
+    [Header("Grab Instances")]
     [SerializeField] private Transform grabPoint;
+    public PlayerMoviment grabandoObject;
 
-    [SerializeField] private Transform rayPoint;
-    [SerializeField] private float rayDistance;
 
-    public GameObject grabandoObject;
-    [SerializeField] private LayerMask playerLayerMask;
-
+    [Header("Grab Settings")]
     public bool grabActived = false;
+    public bool continuosGrab = false;
+
+    private void Start()
+    {
+        grabandoObject = GameObject.FindFirstObjectByType<PlayerMoviment>();
+    }
 
     void Update()
     {
-        RaycastHit2D Hitgrab = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance, playerLayerMask);
-
-        if (grabandoObject == null && Hitgrab.collider != null && grabActived)
+        if (grabActived)
         {
-            grabandoObject = Hitgrab.collider.gameObject;
-            grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            grabandoObject.transform.position = grabPoint.position;
-            grabandoObject.transform.SetParent(transform);
+            if (continuosGrab)
+            {
+                grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                grabandoObject.transform.SetParent(transform);
+                grabandoObject.transform.position = grabPoint.position;
+            }
+            else
+            {
+                grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                grabandoObject.transform.SetParent(null);
+                grabandoObject = null;
+            }
         }
-        else if (grabandoObject != null && grabActived == false)
-        {
-            Debug.Log("Testando o cuzinho");
-            grabandoObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            grabandoObject.transform.SetParent(null);
-            grabandoObject = null;
-        }
-
-        Debug.DrawRay(rayPoint.position, transform.right * rayDistance, Color.green);
     }
 }

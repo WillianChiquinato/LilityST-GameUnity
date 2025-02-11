@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,18 +42,18 @@ public class interactableApresentation : CollidableObjects
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    if (GetInput == "Jump" && !SavePoint.JumpApres)
+                    if (GetInput == "Jump")
                     {
                         SavePoint.JumpApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
-                        
+
                         ativo = false;
                         Destroy(gameObject);
                     }
 
-                    if (GetInput == "WallJump" && !SavePoint.WallApres)
+                    if (GetInput == "WallJump")
                     {
                         SavePoint.WallApres = true;
                         Time.timeScale = 1f;
@@ -67,14 +66,25 @@ public class interactableApresentation : CollidableObjects
                 }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    if (GetInput == "Dash" && !SavePoint.DashApres)
+                    if (GetInput == "Dash")
                     {
                         SavePoint.DashApres = true;
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
-                        goraflixMoviment.grab = false;
 
                         ativo = false;
+                        playerMoviment.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        playerMoviment.canMove = true;
+
+                        playerMoviment.isDashing = true;
+                        playerMoviment.animacao.SetBool(animationstrings.isDashing, true);
+                        playerMoviment.timerDash = playerMoviment.dashCooldown;
+                        playerMoviment.DamageScript.isInvicible = true;
+
+                        playerMoviment.IsRight = false;
+                        playerMoviment.rb.linearVelocity = new Vector2(playerMoviment.dashSpeed * -1, 0);
+                        playerMoviment.rb.gravityScale = 0f;
+
                         Destroy(this.gameObject);
                     }
                 }
@@ -115,7 +125,7 @@ public class interactableApresentation : CollidableObjects
                 imagem.texture = referenciaImg;
             }
 
-            if (GetInput == "Dash" && !SavePoint.DashApres)
+            if (GetInput == "Dash" && playerMoviment.grabAnim)
             {
                 StartCoroutine(StartDash());
             }
@@ -124,7 +134,7 @@ public class interactableApresentation : CollidableObjects
 
     IEnumerator StartDash()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
 
         ativo = true;
         Time.timeScale = 0f;
