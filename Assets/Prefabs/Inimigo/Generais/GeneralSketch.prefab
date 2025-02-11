@@ -341,7 +341,7 @@ MonoBehaviour:
   shootTempo: 0
   shootTimerTarget: 6
   attackLanca: 0
-  grab: 1
+  grabActived: 0
   _Target: 0
 --- !u!114 &4045977632491931796
 MonoBehaviour:
