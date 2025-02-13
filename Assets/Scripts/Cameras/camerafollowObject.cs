@@ -7,9 +7,11 @@ public class camerafollowObject : MonoBehaviour
     [Header("Field of View")]
     [SerializeField] private Transform _playerTransform;
     private bool isInitialized = false;
+    public bool shouldFlip = true;
 
     [Header("Flip Rotation")]
     [SerializeField] private float _flipRotationTime = 0.5f;
+    [SerializeField] private CameraControllerTrigger[] cameraControllerTrigger;
 
     private Coroutine _turnCoroutine;
     private PlayerMoviment playerMoviment;
@@ -22,6 +24,8 @@ public class camerafollowObject : MonoBehaviour
     public void Awake()
     {
         StartCoroutine(ItilializedCamera());
+
+        cameraControllerTrigger = Object.FindObjectsByType<CameraControllerTrigger>(FindObjectsSortMode.None);
     }
 
     IEnumerator ItilializedCamera()
@@ -46,7 +50,7 @@ public class camerafollowObject : MonoBehaviour
         {
             return;
         }
-        
+
         if (_playerTransform != null)
         {
             transform.position = _playerTransform.position;
@@ -55,34 +59,52 @@ public class camerafollowObject : MonoBehaviour
         {
             Debug.LogWarning("_playerTransform ainda não foi atribuído!");
         }
+
+        for (int i = 0; i < cameraControllerTrigger.Length; i++)
+        {
+            if (cameraControllerTrigger[i].PlayerDetect)
+            {
+                shouldFlip = false;
+            }
+            else
+            {
+                shouldFlip = true;
+            }
+        }
     }
 
     public void chamarTurn()
     {
-        _turnCoroutine = StartCoroutine(flipXlerp());
+        if (shouldFlip)
+        {
+            _turnCoroutine = StartCoroutine(flipXlerp());
+        }
     }
 
     public IEnumerator flipXlerp()
     {
-        float startScaleX = transform.localScale.x;
-        float endRotationAmount = DeterminarEndScaleX();
-        float xScale = startScaleX;
-
-        float startOffset = transposer.m_TrackedObjectOffset.x;
-        float endOffset = DeterminarEndOffset().x;
-
-        float elapsedTime = 0f;
-        while (elapsedTime < _flipRotationTime)
+        if (shouldFlip)
         {
-            elapsedTime += Time.deltaTime;
-            xScale = Mathf.Lerp(startScaleX, endRotationAmount, elapsedTime / _flipRotationTime);
+            float startScaleX = transform.localScale.x;
+            float endRotationAmount = DeterminarEndScaleX();
+            float xScale = startScaleX;
 
-            transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
+            float startOffset = transposer.m_TrackedObjectOffset.x;
+            float endOffset = DeterminarEndOffset().x;
 
-            float currentOffsetX = Mathf.Lerp(startOffset, endOffset, elapsedTime / _flipRotationTime);
-            transposer.m_TrackedObjectOffset = new Vector3(currentOffsetX, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
+            float elapsedTime = 0f;
+            while (elapsedTime < _flipRotationTime)
+            {
+                elapsedTime += Time.deltaTime;
+                xScale = Mathf.Lerp(startScaleX, endRotationAmount, elapsedTime / _flipRotationTime);
 
-            yield return null;
+                transform.localScale = new Vector3(xScale, transform.localScale.y, transform.localScale.z);
+
+                float currentOffsetX = Mathf.Lerp(startOffset, endOffset, elapsedTime / _flipRotationTime);
+                transposer.m_TrackedObjectOffset = new Vector3(currentOffsetX, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
+
+                yield return null;
+            }
         }
     }
 

@@ -58,6 +58,11 @@ public class Sistema_Pause : MonoBehaviour
             SavePoint.CheckpointPosition = new Vector2(-53.93f, 16.6f);
             playerMoviment.transform.position = SavePoint.CheckpointPosition;
         }
+        if (SavePoint.nomeCenaMenu == "MontanhaIntro" || !SavePoint.CheckpointAnim)
+        {
+            SavePoint.CheckpointPosition = new Vector2(-23.5f, 2.7f);
+            playerMoviment.transform.position = SavePoint.CheckpointPosition;
+        }
     }
 
     void Update()

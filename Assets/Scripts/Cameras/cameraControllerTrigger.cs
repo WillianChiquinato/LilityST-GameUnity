@@ -7,18 +7,21 @@ using UnityEditor;
 public class CameraControllerTrigger : MonoBehaviour
 {
     public CustomInspectorObje customInspectorObje;
+    public bool PlayerDetect;
 
     private Collider2D _coll;
 
     void Start()
     {
         _coll = GetComponent<Collider2D>();
+        PlayerDetect = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            PlayerDetect = true;
             if (customInspectorObje.panCameraContact)
             {
                 //Executa o efeito da camera
@@ -31,6 +34,7 @@ public class CameraControllerTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            PlayerDetect = false;
             if (customInspectorObje.panCameraContact)
             {
                 //Executa o efeito da camera

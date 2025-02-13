@@ -279,7 +279,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 0}
+  shouldFlip: 0
   _flipRotationTime: 0.3
+  cameraControllerTrigger: []
   cinemachineVirtualCamera: {fileID: 0}
   transposer: {fileID: 0}
   newOffset: {x: 0.6, y: 0, z: 0}
