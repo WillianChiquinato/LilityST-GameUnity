@@ -162,7 +162,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             return _IsMoving;
         }
-        private set
+        set
         {
             _IsMoving = value;
             animacao.SetBool(animationstrings.IsMoving, value);
