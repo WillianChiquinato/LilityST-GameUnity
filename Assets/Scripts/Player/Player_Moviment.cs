@@ -35,7 +35,6 @@ public class PlayerMoviment : MonoBehaviour
 
     [HideInInspector]
     public Acorda_Boss acorda_Boss;
-    public SavePoint savePoint;
     public HealthBar healthBar;
 
     //Variaveis
@@ -242,13 +241,11 @@ public class PlayerMoviment : MonoBehaviour
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
         LadderScript = GameObject.FindFirstObjectByType<ladderScript>();
 
-        transform.position = SavePoint.CheckpointPosition;
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
         stateTimerDash = dashDuration;
 
         //saber qual cena o jogador esta.
         currentScene = SceneManager.GetActiveScene().name;
-        SavePoint.nomeCenaMenu = currentScene;
         Debug.Log("Nome da cena atual: " + currentScene);
     }
 
@@ -257,16 +254,6 @@ public class PlayerMoviment : MonoBehaviour
         if (!canMove)
         {
             playerInput.enabled = false;
-        }
-
-        if (Input.anyKeyDown)
-        {
-            animacao.SetBool(animationstrings.IsAcordada, true);
-        }
-        else if (SavePoint.CheckpointAnim == true && SavePoint.CheckpointAnim2 == true)
-        {
-            animacao.SetBool(animationstrings.IsAcordada, true);
-            animacao.SetBool("Checkpoint", true);
         }
 
         //Dash cooldown
@@ -394,7 +381,6 @@ public class PlayerMoviment : MonoBehaviour
                 jumpBufferContador -= Time.deltaTime;
                 if (jumpBufferContador <= 0f)
                 {
-                    //teste
                     jumpBufferFinal = false;
                 }
                 if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
@@ -448,7 +434,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (SavePoint.DashApres)
+        if (SaveData.Instance.DashUnlocked)
         {
             if (context.started && timerDash < 0f)
             {
@@ -466,7 +452,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && IsJumping && SavePoint.JumpApres)
+        if (context.started && IsJumping && SaveData.Instance.JumpUnlocked)
         {
             if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
@@ -540,11 +526,10 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (SavePoint.AttackApres)
+        if (SaveData.Instance.attackUnlocked)
         {
             if (context.started && touching.IsGrouded)
             {
-                Debug.Log(SavePoint.AttackApres);
                 Atacar = true;
                 Reset = true;
                 animacao.SetTrigger(animationstrings.attack);
@@ -563,7 +548,7 @@ public class PlayerMoviment : MonoBehaviour
     public void OnPowers(InputAction.CallbackContext context)
     {
         //Add Savepoint.PowerUpApress
-        if (context.started && SavePoint.ArcoApres)
+        if (context.started && SaveData.Instance.powerUps.Contains(PowerUps.Arco))
         {
             if (touching.IsGrouded && bow.NewArrow == null)
             {

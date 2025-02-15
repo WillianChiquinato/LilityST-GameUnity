@@ -10,7 +10,6 @@ public class Sistema_Pause : MonoBehaviour
     private Damage playerDamage;
 
     public BossFight bossFight;
-    public SavePoint savePoint;
     public PlayerMoviment playerMoviment;
     public FadeStartGame fadeStartGame;
     public GameObject pauseMenu;
@@ -51,18 +50,6 @@ public class Sistema_Pause : MonoBehaviour
 
         CutSceneDroggo = GameObject.FindWithTag("CutScene");
         CutSceneDroggo.SetActive(false);
-
-        //Cenas modificação de spawn
-        if (SavePoint.nomeCenaMenu == "Altior-Fuga" && !SavePoint.CheckpointAnim)
-        {
-            SavePoint.CheckpointPosition = new Vector2(-54.41f, 16.6f);
-            playerMoviment.transform.position = SavePoint.CheckpointPosition;
-        }
-        if (SavePoint.nomeCenaMenu == "MontanhaIntro" && !SavePoint.CheckpointAnim)
-        {
-            SavePoint.CheckpointPosition = new Vector2(-23.5f, 2.7f);
-            playerMoviment.transform.position = SavePoint.CheckpointPosition;
-        }
     }
 
     void Update()
@@ -112,7 +99,6 @@ public class Sistema_Pause : MonoBehaviour
         //Teste
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
-        Debug.Log("Cena: " + SavePoint.nomeCenaMenu);
         IrMenu = true;
     }
 

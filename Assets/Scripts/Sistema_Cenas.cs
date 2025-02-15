@@ -26,23 +26,6 @@ public class Sistema_Cenas : MonoBehaviour
         {
             transicao.Transicao(sceneName);
             Debug.Log("Esta na cena " + sceneName);
-
-            //Arrumar depois, nao esta manutenivel (Colocar alguma logica para cada saida)
-            if (sceneName == "Introducao")
-            {
-                SavePoint.CheckpointPosition = new Vector3(-89.49f, 25.18f, 0f);
-                SavePoint.AttackApres = true;
-                SavePoint.ArcoApres = true;
-            }
-            else if (sceneName == "NPCs")
-            {
-                SavePoint.CheckpointPosition = new Vector3(-72.84f, 45.35f, 0f);
-            }
-            //Teste krleo
-            else if (sceneName == "Green_phase")
-            {
-                SavePoint.CheckpointPosition = new Vector3(-67.50f, 28.74f, 0f);
-            }
         }
     }
 }

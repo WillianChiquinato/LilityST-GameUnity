@@ -131,7 +131,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         ladderScript = GetComponent<ladderScript>();
 
-        transform.position = SavePoint.CheckpointPosition;
+        transform.position = new Vector2(-97.18f, 24.04f);
         camerafollowObject = _cameraFollow.GetComponent<cameraFollowBaby>();
 
         StartCoroutine(StartMachine());

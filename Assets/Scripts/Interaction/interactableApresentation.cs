@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class interactableApresentation : CollidableObjects
 {
+    public SaveData saveData;
+
     public PlayerMoviment playerMoviment;
     public GoraflixMoviment goraflixMoviment;
     public grabPlayer grabPlayer;
@@ -29,6 +31,7 @@ public class interactableApresentation : CollidableObjects
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
 
         ApresInput.SetActive(false);
+        saveData = SaveData.Instance;
     }
 
     protected override void Update()
@@ -44,7 +47,6 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Jump")
                     {
-                        SavePoint.JumpApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
@@ -55,7 +57,6 @@ public class interactableApresentation : CollidableObjects
 
                     if (GetInput == "WallJump")
                     {
-                        SavePoint.WallApres = true;
                         Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
                         ApresInput.SetActive(false);
@@ -68,7 +69,6 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Dash")
                     {
-                        SavePoint.DashApres = true;
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
 
@@ -103,8 +103,13 @@ public class interactableApresentation : CollidableObjects
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (GetInput == "Jump" && !SavePoint.JumpApres)
+            if (GetInput == "Jump" && !saveData.JumpUnlocked)
             {
+                SaveData.Instance.JumpUnlocked = true;
+
+                // Atualiza a referência local
+                saveData.JumpUnlocked = true;
+
                 ativo = true;
                 Time.timeScale = 0f;
                 ApresInput.SetActive(true);
@@ -112,10 +117,18 @@ public class interactableApresentation : CollidableObjects
                 texto01.text = "Pressione";
                 texto02.text = "Para pular";
                 imagem.texture = referenciaImg;
+
+                // Debug para verificar se a variável foi realmente alterada
+                Debug.Log("Jump desbloqueado? " + SaveData.Instance.JumpUnlocked);
             }
 
-            if (GetInput == "WallJump" && !SavePoint.WallApres)
+            if (GetInput == "WallJump" && !saveData.WalljumpUnlocked)
             {
+                SaveData.Instance.WalljumpUnlocked = true;
+
+                // Atualiza a referência local
+                saveData.WalljumpUnlocked = true;
+
                 ativo = true;
                 Time.timeScale = 0f;
                 ApresInput.SetActive(true);
@@ -127,6 +140,10 @@ public class interactableApresentation : CollidableObjects
 
             if (GetInput == "Dash" && playerMoviment.grabAnim)
             {
+                SaveData.Instance.DashUnlocked = true;
+
+                // Atualiza a referência local
+                saveData.DashUnlocked = true;
                 StartCoroutine(StartDash());
             }
         }
