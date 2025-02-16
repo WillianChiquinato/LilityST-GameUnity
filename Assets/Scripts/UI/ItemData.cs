@@ -5,7 +5,8 @@ using UnityEngine;
 public enum itensType
 {
     Documentos,
-    Materiais
+    Materiais,
+    Coletaveis
 }
 
 [CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Item")]

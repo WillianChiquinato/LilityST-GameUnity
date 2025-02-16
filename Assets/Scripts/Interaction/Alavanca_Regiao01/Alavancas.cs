@@ -13,6 +13,7 @@ public class Alavancas : MonoBehaviour
     public BoxCollider2D boxCollider;
     public Animator animator;
     public Tile_AlavancaScript[] tile_AlavancaScript;
+    public GameObject objetoSumir;
 
     void Start()
     {
@@ -27,16 +28,26 @@ public class Alavancas : MonoBehaviour
         {
             timerTiles -= Time.deltaTime;
 
-            foreach (var objeto in tile_AlavancaScript)
+            if (tile_AlavancaScript.Length == 0)
             {
-                if (objeto.playerEncosto)
+                if (objetoSumir != null)
                 {
-                    objeto.StartCoroutine(objeto.TileTimer());
+                    objetoSumir.SetActive(false);
                 }
-                else
+            }
+            else
+            {
+                foreach (var objeto in tile_AlavancaScript)
                 {
-                    objeto.animator.SetBool("Ativado", true);
-                    objeto.boxCollider2D.enabled = true;
+                    if (objeto.playerEncosto)
+                    {
+                        objeto.StartCoroutine(objeto.TileTimer());
+                    }
+                    else
+                    {
+                        objeto.animator.SetBool("Ativado", true);
+                        objeto.boxCollider2D.enabled = true;
+                    }
                 }
             }
 

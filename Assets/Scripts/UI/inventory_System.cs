@@ -14,14 +14,21 @@ public class inventory_System : MonoBehaviour
     public List<Inventory_item> docs;
     public Dictionary<ItemData, Inventory_item> docsDicionary;
 
+    public List<Inventory_item> coletaveis;
+    public Dictionary<ItemData, Inventory_item> collectDicionary;
+
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform documentosSlotParent;
+    
+    [SerializeField] private Transform coletaveisSlotParent;
 
 
     [SerializeField] private Item_SlotUI[] inventoryItemSlot;
     [SerializeField] private Item_SlotUI[] documentosItemSlot;
+    [SerializeField] private Item_SlotUI[] coletaveisItemSlot;
+
 
 
     void Awake()
@@ -44,8 +51,12 @@ public class inventory_System : MonoBehaviour
         docs = new List<Inventory_item>();
         docsDicionary = new Dictionary<ItemData, Inventory_item>();
 
+        coletaveis = new List<Inventory_item>();
+        collectDicionary = new Dictionary<ItemData, Inventory_item>();
+
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<Item_SlotUI>();
         documentosItemSlot = documentosSlotParent.GetComponentsInChildren<Item_SlotUI>();
+        coletaveisItemSlot = coletaveisSlotParent.GetComponentsInChildren<Item_SlotUI>();
 
         for (int i = 0; i < startEquipament.Count; i++)
         {
@@ -63,6 +74,10 @@ public class inventory_System : MonoBehaviour
         {
             documentosItemSlot[i].CleanUpSlot();
         }
+        for (int i = 0; i < coletaveisItemSlot.Length; i++)
+        {
+            coletaveisItemSlot[i].CleanUpSlot();
+        }
 
 
 
@@ -75,6 +90,10 @@ public class inventory_System : MonoBehaviour
         {
             documentosItemSlot[i].UpdateInventory(docs[i]);
         }
+        for (int i = 0; i < coletaveis.Count; i++)
+        {
+            coletaveisItemSlot[i].UpdateInventory(coletaveis[i]);
+        }
     }
 
     public void AddItem(ItemData _item)
@@ -86,6 +105,10 @@ public class inventory_System : MonoBehaviour
         else if (_item.itensType == itensType.Materiais)
         {
             AddToInventory(_item);
+        }
+        else if (_item.itensType == itensType.Coletaveis)
+        {
+            AddToCollect(_item);
         }
 
         UpdateInventory();
@@ -119,6 +142,20 @@ public class inventory_System : MonoBehaviour
         }
     }
 
+    public void AddToCollect(ItemData _item)
+    {
+        if (collectDicionary.TryGetValue(_item, out Inventory_item value))
+        {
+            value.AddStack();
+        }
+        else
+        {
+            Inventory_item newItem = new Inventory_item(_item);
+            coletaveis.Add(newItem);
+            collectDicionary.Add(_item, newItem);
+        }
+    }
+
     public void RemoveItem(ItemData _item)
     {
         if (inventoryDicionary.TryGetValue(_item, out Inventory_item value))
@@ -144,6 +181,19 @@ public class inventory_System : MonoBehaviour
             else
             {
                 docsValue.RemoveStack();
+            }
+        }
+
+        if (collectDicionary.TryGetValue(_item, out Inventory_item collectvalue))
+        {
+            if (collectvalue.stackSize <= 1)
+            {
+                inventory.Remove(collectvalue);
+                inventoryDicionary.Remove(_item);
+            }
+            else
+            {
+                collectvalue.RemoveStack();
             }
         }
 

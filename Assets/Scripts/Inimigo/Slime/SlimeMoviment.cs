@@ -5,45 +5,29 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class SlimeMoviment : MonoBehaviour
 {
+    [Header("Instancias")]
     TouchingDistance touching;
     private Item_drop dropInimigo;
-
     Rigidbody2D rb;
     Animator animator;
     Damage DamageScript;
     public DetectionZoneSlime attackZona;
-    private Vector2 vectorDirecao = Vector2.right;
+    public PlayerMoviment playerMoviment;
+    public GameObject targetLilityObject;
+    public BoxCollider2D boxCollider;
 
+
+    [Header("Variaveis")]
+    public bool targetLility;
     public float speed = 4f;
-    public float ContagemJump = 0.2f;
-    public bool IsJumping;
-    public enum WalkAbleDirecao { Right, Left }
+    public float direcao;
+    public float direcaoTarget;
 
-    private WalkAbleDirecao _WalkDirecao;
+    public float ItemTimerScale;
+    public float ItemTimerTarget;
 
-    public WalkAbleDirecao WalkDirecao
-    {
-        get { return _WalkDirecao; }
-        set
-        {
-            if (_WalkDirecao != value)
-            {
-                // Definir o Flip
-                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
-
-                if (value == WalkAbleDirecao.Right)
-                {
-                    vectorDirecao = Vector2.right;
-                }
-                else if (value == WalkAbleDirecao.Left)
-                {
-                    vectorDirecao = Vector2.left;
-                }
-            }
-
-            _WalkDirecao = value;
-        }
-    }
+    public int attackDamage = 0;
+    public Vector2 knockbackAttack = Vector2.zero;
 
 
     public bool _Target = false;
@@ -70,6 +54,7 @@ public class SlimeMoviment : MonoBehaviour
 
     private void Awake()
     {
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
@@ -84,46 +69,53 @@ public class SlimeMoviment : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (touching.IsOnWall)
-        {
-            FlipDirecao();
-        }
+        direcao = Mathf.Sign(transform.localScale.x);
 
-        if (!DamageScript.VelocityLock)
+        if (targetLilityObject == null)
         {
-            if (canMove && !touching.IsGrouded)
+            ItemTimerScale = 0f;
+            targetLility = false;
+        }
+        else
+        {
+            direcaoTarget = Mathf.Sign(targetLilityObject.transform.position.x - transform.position.x);
+            float distanceToItem = Mathf.Abs(targetLilityObject.transform.position.x - transform.position.x);
+
+            if (targetLility)
             {
-                ContagemJump -= Time.deltaTime;
-                if (ContagemJump > 0)
-                {
-                    rb.linearVelocity = new Vector2(speed * vectorDirecao.x, 2);
-                }
-                else
-                {
-                    IsJumping = false;
-                }
+                rb.linearVelocity = new Vector2(direcaoTarget * speed, rb.linearVelocity.y);
+            }
+
+            if (distanceToItem <= 0.6f)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+
+            if (direcaoTarget == -1)
+            {
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
             else
             {
-                ContagemJump = 0.2f;
-                rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, 0), rb.linearVelocity.y);
+                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
         }
+
+        // FlipDirecao();
     }
 
     private void FlipDirecao()
     {
-        if (WalkDirecao == WalkAbleDirecao.Right)
+        if (touching.IsGrouded)
         {
-            WalkDirecao = WalkAbleDirecao.Left;
-        }
-        else if (WalkDirecao == WalkAbleDirecao.Left)
-        {
-            WalkDirecao = WalkAbleDirecao.Right;
-        }
-        else
-        {
-            Debug.LogError("A direcao atual vc vai se fuder");
+            if (transform.position.x > playerMoviment.transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
     }
 
@@ -135,7 +127,24 @@ public class SlimeMoviment : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+            float scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
+            
+            float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
+            rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);
+
+            Damage DamageScript = playerMoviment.GetComponent<Damage>();
+
+            if (DamageScript != null)
+            {
+                Vector2 flipknockback = new Vector2(direction * knockbackAttack.x * scaleFactor, knockbackAttack.y);
+
+                // ataque ao alvo
+                bool goHit = DamageScript.hit(attackDamage, flipknockback);
+                if (goHit)
+                {
+                    Debug.Log("AtaqueInimigo");
+                }
+            }   
         }
     }
 }

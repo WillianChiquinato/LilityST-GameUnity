@@ -1730,7 +1730,6 @@ MonoBehaviour:
       icone: {fileID: 0}
       isUpDialog: 0
     linhaTexto: 
-  dialogo_Trigger: {fileID: 0}
   isUpDialog: 0
   initialName1: Galthera
   iconeCaracter: {fileID: 3699793834251542754}
@@ -10725,12 +10724,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
   - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
   - {fileID: 11400000, guid: d5b5c33630e714e448ae402a6ed78fc6, type: 2}
+  - {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
   inventory: []
   docs: []
+  coletaveis: []
   inventorySlotParent: {fileID: 1817314714615921247}
   documentosSlotParent: {fileID: 3149003101408346434}
+  coletaveisSlotParent: {fileID: 2711953222594348413}
   inventoryItemSlot: []
   documentosItemSlot: []
+  coletaveisItemSlot: []
 --- !u!1 &5979335749512420886
 GameObject:
   m_ObjectHideFlags: 0

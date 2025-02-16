@@ -9,7 +9,7 @@ public class itemObject : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private TextMeshPro texto;
 
-    [SerializeField] private ItemData itemData;
+    [SerializeField] public ItemData itemData;
     public PlayerMoviment playerMoviment;
 
 

@@ -9,6 +9,8 @@ public class Tile_AlavancaScript : MonoBehaviour
     public BoxCollider2D boxCollider2D;
     public GameObject oneWayStart;
 
+    public float timerDurationTile;
+
     void Start()
     {
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
@@ -20,7 +22,10 @@ public class Tile_AlavancaScript : MonoBehaviour
 
     void Update()
     {
-
+        if (playerEncosto)
+        {
+            timerDurationTile -= Time.deltaTime;
+        }
     }
 
     //Caso troque de ideia, excluir linhas abaixo.
@@ -35,12 +40,15 @@ public class Tile_AlavancaScript : MonoBehaviour
 
     public IEnumerator TileTimer()
     {
-        yield return new WaitForSeconds(0.5f);
+        if (timerDurationTile <= 0f)
+        {
+            yield return new WaitForSeconds(0.5f);
 
-        animator.SetBool("Ativado", false);
+            animator.SetBool("Ativado", false);
 
-        yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.1f);
 
-        boxCollider2D.enabled = false;
+            boxCollider2D.enabled = false;   
+        }
     }
 }

@@ -28,7 +28,8 @@ public class Checkpoints : MonoBehaviour
                     SaveData.Instance.DashUnlocked,
                     SaveData.Instance.WalljumpUnlocked,
                     SaveData.Instance.JumpUnlocked,
-                    SaveData.Instance.attackUnlocked
+                    SaveData.Instance.attackUnlocked,
+                    SaveData.Instance.powerUps
                 );
                 Debug.Log("Checkpoint salvo na posição: " + transform.position);
             }

@@ -38,7 +38,7 @@ public class Savepoint : MonoBehaviour
             }
             if (playerMoviment.currentScene == "MontanhaIntro")
             {
-                instance.defaultPosition = new Vector2(-23.5f, 2.7f);
+                instance.defaultPosition = new Vector2(-23.5f, -1f);
                 playerMoviment.transform.position = defaultPosition;
             }
         }
@@ -68,7 +68,7 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    public void SaveCheckpoint(Vector2 checkpoint, int health, bool CameraCorrected, bool DashUnlocked, bool WalljumpUnlocked, bool JumpUnlocked, bool attackUnlocked)
+    public void SaveCheckpoint(Vector2 checkpoint, int health, bool CameraCorrected, bool DashUnlocked, bool WalljumpUnlocked, bool JumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps)
     {
         SaveData data = new SaveData
         {
@@ -79,7 +79,9 @@ public class Savepoint : MonoBehaviour
             DashUnlocked = DashUnlocked,
             WalljumpUnlocked = WalljumpUnlocked,
             JumpUnlocked = JumpUnlocked,
-            attackUnlocked = attackUnlocked
+            attackUnlocked = attackUnlocked,
+
+            powerUps = new List<PowerUps>(powerUps)
         };
 
         SaveManager.Save(data);
