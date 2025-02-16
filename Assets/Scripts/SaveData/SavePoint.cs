@@ -33,7 +33,12 @@ public class Savepoint : MonoBehaviour
         {
             if (playerMoviment.currentScene == "Altior-Fuga")
             {
-                instance.defaultPosition = new Vector2(-54.41f, 16.6f);
+                instance.defaultPosition = new Vector2(-470f, 16.6f);
+                playerMoviment.transform.position = defaultPosition;
+            }
+            if (playerMoviment.currentScene == "DimensaoTempo")
+            {
+                instance.defaultPosition = new Vector2(-81.6f, 26f);
                 playerMoviment.transform.position = defaultPosition;
             }
             if (playerMoviment.currentScene == "MontanhaIntro")

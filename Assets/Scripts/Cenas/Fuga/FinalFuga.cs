@@ -4,7 +4,12 @@ using UnityEngine;
 public class FinalFuga : MonoBehaviour
 {
     [Header("Player & Instances")]
+    public LevelTransicao levelTransicao;
     public PlayerMoviment playerMoviment;
+    public Transform positionGeneral;
+    public GameObject generalPrefab;
+    public GameObject GeneralInstance;
+
     public GameObject LançaGeneralPrefab;
     public GameObject LançaGeneral = null;
     public Transform PosicaoLançaGeneral;
@@ -55,5 +60,15 @@ public class FinalFuga : MonoBehaviour
         playerMoviment.IsRight = true;
 
         LançaTrigger = false;
+        if (GeneralInstance == null)
+        {
+            GeneralInstance = Instantiate(generalPrefab, positionGeneral.position, generalPrefab.transform.rotation);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        //Trocar posteriormente para a cena final
+        levelTransicao.gameObject.SetActive(true);
+        levelTransicao.Transicao("DimensaoTempo");
     }
 }
