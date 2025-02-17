@@ -35,6 +35,7 @@ public class Throw_Item : MonoBehaviour
                 for (int i = 0; i < itensColetaveis.Count; i++)
                 {
                     itemData = itensColetaveis[i].itemData;
+                    prefabItem.GetComponent<itemObject>().itemData = itemData;
                     // Certifica-se de que cada posição do array é inicializada
                     itemArremessar[i] = prefabItem;
                     stackObjetos = itensColetaveis[0].stackSize;
@@ -60,7 +61,7 @@ public class Throw_Item : MonoBehaviour
                 if (newDrop == null)
                 {
                     newDrop = Instantiate(itemArremessar[0], transform.position, Quaternion.identity);
-                    stackObjetos = itensColetaveis[0].stackSize--;
+                    inventory_System.instance.RemoveItem(itensColetaveis[0].itemData);
 
                     Rigidbody2D rb = newDrop.GetComponent<Rigidbody2D>();
                     float direction = transform.localScale.x > 0 ? 1 : -1;

@@ -11,7 +11,6 @@ public class Sistema_Pause : MonoBehaviour
 
     public BossFight bossFight;
     public PlayerMoviment playerMoviment;
-    public FadeStartGame fadeStartGame;
     public GameObject pauseMenu;
     public GameObject MainCamera;
     public GameObject CutSceneDroggo;

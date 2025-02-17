@@ -78,5 +78,6 @@ public class Hidden_Area : MonoBehaviour
 
         lens.OrthographicSize = endSize;
         virtualCamera.m_Lens = lens;
+        SaveData.Instance.CameraCorrected = true;
     }
 }
