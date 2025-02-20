@@ -42,6 +42,11 @@ public class camerafollowObject : MonoBehaviour
         transposer.m_TrackedObjectOffset = newOffset;
 
         isInitialized = true;
+
+        if (SaveData.Instance.CameraCorrected)
+        {
+            cinemachineVirtualCamera.m_Lens.OrthographicSize = 7f;
+        }
     }
 
     void Update()

@@ -52,6 +52,7 @@ public class PlayerMoviment : MonoBehaviour
 
     //Jump
     [Header("Jump")]
+    public bool jumpInput = false;
     public bool IsJumping;
     public float jumpImpulso = 20f;
     public float ContagemJump = 0.05f;
@@ -368,7 +369,7 @@ public class PlayerMoviment : MonoBehaviour
 
             if (touching.IsGrouded && rb.linearVelocity.y <= 0f)
             {
-                IsJumping = true;
+                IsJumping = false;
                 coyoteTimeContador = CoyoteTime;
             }
             else
@@ -383,16 +384,13 @@ public class PlayerMoviment : MonoBehaviour
                 {
                     jumpBufferFinal = false;
                 }
-                if (jumpBufferFinal && touching.IsGrouded && !wallSlide)
-                {
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
-                    jumpBufferFinal = false;
-                }
             }
-            else
-            {
-                jumpBufferContador = jumpBufferTimer;
-            }
+        }
+
+        if (jumpBufferFinal && touching.IsGrouded && !wallSlide && jumpInput)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
+            jumpBufferFinal = false;
         }
 
         animacao.SetFloat(animationstrings.yVelocity, rb.linearVelocity.y);
@@ -452,12 +450,15 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && IsJumping && SaveData.Instance.JumpUnlocked)
+        if (context.started && SaveData.Instance.JumpUnlocked)
         {
+            jumpInput = true;
+
             if (coyoteTimeContador > 0f || jumpBufferFinal)
             {
                 Jump();
             }
+
             if (isDashing)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.7f);
@@ -467,15 +468,17 @@ public class PlayerMoviment : MonoBehaviour
         if (!touching.IsGrouded)
         {
             jumpBufferFinal = true;
-        }
-        else
-        {
-            jumpBufferFinal = false;
+            jumpBufferContador = jumpBufferTimer;
         }
 
-        if (context.canceled && rb.linearVelocity.y > 0f)
+        if (context.canceled)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Lerp(rb.linearVelocity.y, 0f, 0.5f));
+            jumpInput = false;
+
+            if (rb.linearVelocity.y > 0f)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Lerp(rb.linearVelocity.y, 0f, 0.5f));
+            }
         }
     }
 
@@ -484,7 +487,7 @@ public class PlayerMoviment : MonoBehaviour
         animacao.SetTrigger(animationstrings.jump);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
-        IsJumping = false;
+        IsJumping = true;
     }
 
     private void WallSlide()

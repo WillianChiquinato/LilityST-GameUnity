@@ -21,7 +21,7 @@ public class inventory_System : MonoBehaviour
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform documentosSlotParent;
-    
+
     [SerializeField] private Transform coletaveisSlotParent;
 
 
@@ -186,14 +186,11 @@ public class inventory_System : MonoBehaviour
 
         if (collectDicionary.TryGetValue(_item, out Inventory_item collectvalue))
         {
-            if (collectvalue.stackSize <= 1)
+            collectvalue.RemoveStack();
+
+            if (collectvalue.stackSize <= 0)
             {
-                inventory.Remove(collectvalue);
-                inventoryDicionary.Remove(_item);
-            }
-            else
-            {
-                collectvalue.RemoveStack();
+                collectvalue.ResetStack();
             }
         }
 

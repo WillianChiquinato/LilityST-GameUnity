@@ -14,4 +14,5 @@ public class Inventory_item
 
     public void AddStack() => stackSize++;
     public void RemoveStack() => stackSize--;
+    public void ResetStack() => stackSize = 0;
 }

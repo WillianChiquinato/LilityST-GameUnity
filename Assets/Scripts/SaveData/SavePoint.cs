@@ -13,8 +13,11 @@ public class Savepoint : MonoBehaviour
 
     private void Awake()
     {
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        }
 
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         if (instance == null)
         {
             instance = this;
@@ -24,16 +27,13 @@ public class Savepoint : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
         //Cenas modificação de spawn
         if (IsJsonFileEmpty("Assets/Scripts/SaveData/savepoint.json"))
         {
             if (playerMoviment.currentScene == "Altior-Fuga")
             {
-                instance.defaultPosition = new Vector2(-470f, 16.6f);
+                instance.defaultPosition = new Vector2(-53f, 16.6f);
                 playerMoviment.transform.position = defaultPosition;
             }
             if (playerMoviment.currentScene == "DimensaoTempo")
@@ -55,6 +55,14 @@ public class Savepoint : MonoBehaviour
             {
                 playerMoviment.transform.position = saveData.playerCheckpoint;
             }
+        }
+    }
+
+    void Update()
+    {
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         }
     }
 
