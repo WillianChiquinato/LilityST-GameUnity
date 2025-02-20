@@ -38,6 +38,7 @@ public class Throw_Item : MonoBehaviour
                     // Certifica-se de que cada posição do array é inicializada
                     itemArremessar[i] = prefabItem;
                     stackObjetos = itensColetaveis[0].stackSize;
+                    itemArremessar[i].GetComponent<itemObject>().itemData = itemData;
                 }
             }
             else
