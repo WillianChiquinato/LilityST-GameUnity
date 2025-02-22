@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class Cervinho_moviment : MonoBehaviour
 {
-    public TextMeshPro textoEnter;
     public GameObject animatorInteracao;
     public Animator animator;
-
-
-    void Start()
-    {
-        animatorInteracao.SetActive(false);
-        textoEnter.text = "";
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -21,7 +13,6 @@ public class Cervinho_moviment : MonoBehaviour
         {
             Debug.Log("Player entrou");
             animatorInteracao.SetActive(true);
-            textoEnter.text = "Pressione E para interagir";
             animatorInteracao.GetComponent<Animator>().SetBool("isInteracting", false);
         }
     }
@@ -36,10 +27,9 @@ public class Cervinho_moviment : MonoBehaviour
 
     IEnumerator TimerExit()
     {
-        textoEnter.text = "";
         animatorInteracao.GetComponent<Animator>().SetBool("isInteracting", true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         animatorInteracao.SetActive(false);
     }
 }

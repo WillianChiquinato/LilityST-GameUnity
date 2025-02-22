@@ -249,6 +249,7 @@ MonoBehaviour:
   grabAnim: 0
   animacao: {fileID: 0}
   rb: {fileID: 0}
+  jumpInput: 0
   IsJumping: 0
   jumpImpulso: 20
   ContagemJump: 0.05

@@ -7,22 +7,24 @@ public class FadeStartGame : MonoBehaviour
 {
     public bool permissao = false;
     private fadeUI fadeUI;
-    private SaveData saveData;
 
     [SerializeField]
     private float fadeTime;
     public string nomeCena;
+    public SaveData saveData;
 
     void Awake()
     {
-        saveData = new SaveData();
+        saveData = SaveData.Instance;
     }
+
     void Start()
     {
         fadeUI = GetComponent<fadeUI>();
         fadeUI.FadeUIOut(fadeTime);
 
         nomeCena = saveData.currentScene;
+        Debug.Log("Nome da cena: " + nomeCena);
     }
 
     public void ChamarStartGame()

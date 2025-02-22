@@ -24,10 +24,10 @@ public class Dialogos_Manager : MonoBehaviour
     public TextMeshProUGUI nomeCaracter2;
     public TextMeshProUGUI dialogoArea2;
 
-    public bool isTextComplete = false;
 
     [Header("Situacoes Gerais")]
-    [SerializeField] public Queue<DialogoTexto> linhas;
+    public bool isTextComplete = false;
+    public Queue<DialogoTexto> linhas;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Sistema_Pause : MonoBehaviour
 {
-    public GameObject[] objs;
+    [Header("Pause Instances")]
     private Damage playerDamage;
 
     public BossFight bossFight;
@@ -15,17 +16,38 @@ public class Sistema_Pause : MonoBehaviour
     public GameObject MainCamera;
     public GameObject CutSceneDroggo;
     public Damage playerHealth;
-    public bool IsPaused;
     private LevelTransicao transicao;
+
+    public Dialogo_TriggerCervo dialogoCervo;
+
+    [Header("Variaveis")]
+    public bool IsPaused;
     public string sceneName;
     public bool IrMenu = false;
 
+    [Header("Apresentacao")]
     public GameObject[] apresentaocao;
     public GameObject SistemaUI;
+    public GameObject CutSumir;
+
+    [Header("Cinemachine")]
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public CinemachineFramingTransposer framingPosition;
 
     [Header("Savepoint")]
     //Savepoint
     public string CurrentSceneName { get; private set; }
+    public GameObject UISavePoint;
+
+
+    void Awake()
+    {
+        CutSumir = GameObject.FindGameObjectWithTag("Sumir");
+        dialogoCervo = GameObject.FindFirstObjectByType<Dialogo_TriggerCervo>();
+
+        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+    }
 
     void Start()
     {
@@ -36,9 +58,6 @@ public class Sistema_Pause : MonoBehaviour
             obj.SetActive(false);
         }
         pauseMenu.SetActive(false);
-
-        // Verifica se já existe uma instância desse objeto na cena
-        objs = GameObject.FindGameObjectsWithTag("DontDestroy");
 
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
@@ -93,6 +112,11 @@ public class Sistema_Pause : MonoBehaviour
         SistemaUI.SetActive(true);
     }
 
+    public void AbrirHUDInventário()
+    {
+        Debug.Log("Abrir inventário");
+    }
+
     public void ParaOMenu()
     {
         //Teste
@@ -104,6 +128,34 @@ public class Sistema_Pause : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void ExitCheckpoint()
+    {
+        Debug.Log("Saindo do checkpoint");
+
+        CutSumir.SetActive(true);
+        framingPosition.m_TrackedObjectOffset = new Vector3(0, 0, 0);
+
+        UISavePoint.SetActive(false);
+        playerMoviment.animacao.SetBool("Checkpoint", false);
+        playerMoviment.canMove = true;
+    }
+
+    public void CervoDialog()
+    {
+        UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
+        UISavePoint.SetActive(false);
+        if (dialogoCervo != null)
+        {
+            dialogoCervo.TriggerDialogo();
+            dialogoCervo.animator.SetBool(animationstrings.InicioDialogo, true);
+        }
+    }
+
+    public void Dimensoes()
+    {
+        Debug.Log("Dimensoes");
     }
 
     private void OnEnable()

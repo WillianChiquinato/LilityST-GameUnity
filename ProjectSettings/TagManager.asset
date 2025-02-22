@@ -21,6 +21,9 @@ TagManager:
   - Apresentacao
   - Ladder
   - ItemArremessar
+  - CheckpointUI
+  - Cervo
+  - SavePointUI
   layers:
   - Default
   - TransparentFX
