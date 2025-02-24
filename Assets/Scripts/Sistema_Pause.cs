@@ -38,10 +38,16 @@ public class Sistema_Pause : MonoBehaviour
     //Savepoint
     public string CurrentSceneName { get; private set; }
     public GameObject UISavePoint;
+    public GameObject objectoSaveUI;
+    
 
 
     void Awake()
     {
+        UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
+        objectoSaveUI = GameObject.FindGameObjectWithTag("CheckpointUI");
+        UISavePoint.SetActive(false);
+        objectoSaveUI.SetActive(false);
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
         dialogoCervo = GameObject.FindFirstObjectByType<Dialogo_TriggerCervo>();
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Checkpoints : MonoBehaviour
 {
+    public Sistema_Pause gameManager;
+
     [Header("Checkpoints")]
     public List<Collider2D> collidersNoTrigger = new List<Collider2D>();
     public bool playerNoTrigger = false;
@@ -22,21 +24,15 @@ public class Checkpoints : MonoBehaviour
     public bool triggerCheckpoint;
     public GameObject CutSumir;
 
-
-    [Header("UI")]
-    public GameObject objectoSaveUI;
-    public GameObject UISavePoint;
-
     void Awake()
     {
+        gameManager = GameObject.FindFirstObjectByType<Sistema_Pause>();
         paiCheckpoint = transform.parent != null ? transform.parent.gameObject : gameObject;
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
-        UISavePoint.SetActive(false);
-        objectoSaveUI.SetActive(false);
         player = GameObject.FindFirstObjectByType<PlayerMoviment>();
 
         if (player == null)
@@ -49,7 +45,7 @@ public class Checkpoints : MonoBehaviour
     {
         direcao = (player.transform.position.x - transform.position.x) > 0 ? 1f : -1f;
 
-        if (UISavePoint.activeSelf == true)
+        if (gameManager.UISavePoint.activeSelf == true)
         {
             triggerCheckpoint = true;
         }
@@ -87,7 +83,7 @@ public class Checkpoints : MonoBehaviour
                 {
                     Debug.LogError("Savepoint.instance ou player está null. O checkpoint não foi salvo.");
                 }
-                objectoSaveUI.SetActive(true);
+                gameManager.objectoSaveUI.SetActive(true);
 
                 StartCoroutine(AutoMoveSave());
             }
@@ -132,12 +128,12 @@ public class Checkpoints : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         CutSumir.SetActive(false);
         framingPosition.m_TrackedObjectOffset = new Vector3(-5, 0, 0);
-        objectoSaveUI.SetActive(false);
+        gameManager.objectoSaveUI.SetActive(false);
 
         if (!cervoNoTrigger)
         {
             yield return new WaitForSeconds(1f);
-            UISavePoint.SetActive(true);
+            gameManager.UISavePoint.SetActive(true);
         }
     }
 }

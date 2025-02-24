@@ -50,7 +50,7 @@ public class Throw_Item : MonoBehaviour
 
         arremessar = Input.GetKeyDown(KeyCode.Space);
 
-        if (itemArremessar != null && stackObjetos > 0)
+        if (itemArremessar != null && stackObjetos >= 0)
         {
             if (arremessar && newDrop == null)
             {
@@ -71,7 +71,6 @@ public class Throw_Item : MonoBehaviour
                     Vector2 force = new Vector2(ForceArremesso * direction, ForceArremesso * 1f);
                     rb.AddForce(force, ForceMode2D.Impulse);
                     animator.SetBool("Arremessar", false);
-                    Destroy(newDrop, 7f);
                 }
             }
 

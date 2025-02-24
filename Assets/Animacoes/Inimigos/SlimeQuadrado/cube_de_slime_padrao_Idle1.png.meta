@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8f840f36f49432c49882a062fb2bee4e
+guid: 5231c1e62bca5fb47aea046c0955f4d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 103202023749902115
-    second: cenario_blocado_dt_0
+      213: -7360487550061800386
+    second: cube_de_slime_padrao_Idle1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cenario_blocado_dt_0
+      name: cube_de_slime_padrao_Idle1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 730
-        height: 279
+        x: 64
+        y: 29
+        width: 52
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32fd6bd91b5ae6100800000000000000
-      internalID: 103202023749902115
+      spriteID: e3491ec129b4ad990800000000000000
+      internalID: -7360487550061800386
       vertices: []
       indices: 
       edges: []

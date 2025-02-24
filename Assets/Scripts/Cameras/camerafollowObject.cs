@@ -65,6 +65,11 @@ public class camerafollowObject : MonoBehaviour
             Debug.LogWarning("_playerTransform ainda não foi atribuído!");
         }
 
+        if (cameraControllerTrigger.Length == 0)
+        {
+            shouldFlip = true;
+        }
+        
         for (int i = 0; i < cameraControllerTrigger.Length; i++)
         {
             if (cameraControllerTrigger[i].PlayerDetect)

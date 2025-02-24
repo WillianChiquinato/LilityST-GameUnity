@@ -14,11 +14,17 @@ public class DetectionZoneSlime : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        detectColliders.Add(collision);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            detectColliders.Add(collision);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
     {
-        detectColliders.Remove(collision);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            detectColliders.Remove(collision);
+        }
     }
 }

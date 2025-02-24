@@ -22,6 +22,7 @@ public class SlimeMoviment : MonoBehaviour
     public float speed = 4f;
     public float direcao;
     public float direcaoTarget;
+    public float direcaoPlayer;
 
     public float ItemTimerScale;
     public float ItemTimerTarget;
@@ -29,6 +30,8 @@ public class SlimeMoviment : MonoBehaviour
     public int attackDamage = 0;
     public Vector2 knockbackAttack = Vector2.zero;
 
+    [Header("Attack")]
+    public bool attackActived = false;
 
     public bool _Target = false;
     public bool Target
@@ -64,7 +67,18 @@ public class SlimeMoviment : MonoBehaviour
 
     void Update()
     {
-        Target = attackZona.detectColliders.Count > 0;
+
+        if (touching.IsGrouded)
+        {
+            if (rb.linearVelocity.x != 0)
+            {
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -86,7 +100,7 @@ public class SlimeMoviment : MonoBehaviour
                 rb.linearVelocity = new Vector2(direcaoTarget * speed, rb.linearVelocity.y);
             }
 
-            if (distanceToItem <= 0.6f)
+            if (distanceToItem <= 0.1f)
             {
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             }
@@ -101,7 +115,16 @@ public class SlimeMoviment : MonoBehaviour
             }
         }
 
-        // FlipDirecao();
+        if (attackActived && Vector2.Distance(transform.position, playerMoviment.transform.position) > 0.5f)
+        {
+            if (playerMoviment.touching.IsGrouded)
+            {
+                direcaoPlayer = Mathf.Sign(playerMoviment.transform.position.x - transform.position.x);
+                FlipDirecao();
+            }
+            Target = attackZona.detectColliders.Count > 0;
+            rb.linearVelocity = new Vector2(direcaoPlayer * speed, rb.linearVelocity.y);
+        }
     }
 
     private void FlipDirecao()
@@ -127,8 +150,13 @@ public class SlimeMoviment : MonoBehaviour
         }
         else
         {
+            if (!attackActived)
+            {
+                attackActived = true;
+            }
+
             float scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
-            
+
             float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
             rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);
 
@@ -144,7 +172,7 @@ public class SlimeMoviment : MonoBehaviour
                 {
                     Debug.Log("AtaqueInimigo");
                 }
-            }   
+            }
         }
     }
 }
