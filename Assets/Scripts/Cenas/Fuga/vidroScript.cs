@@ -9,7 +9,6 @@ public class vidroScript : MonoBehaviour
     public SpriteRenderer[] cornerSpriteRenderer;
     public BoxCollider2D boxCollider2D;
     public bool GeneralActived = false;
-    public static bool boxCollider2DActive = false;
 
 
     void Awake()
@@ -18,11 +17,6 @@ public class vidroScript : MonoBehaviour
         player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-
-        if (boxCollider2DActive)
-        {
-            boxCollider2D.enabled = false;
-        }
 
         foreach (var vidro in cornerSpriteRenderer)
         {
@@ -63,7 +57,6 @@ public class vidroScript : MonoBehaviour
     {
         Debug.Log("Inimigo SPAWN");
         animator.SetBool("Vidro", true);
-        boxCollider2DActive = true;
 
         yield return new WaitForSeconds(1.3f);
 
