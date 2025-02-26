@@ -24,6 +24,7 @@ public class Throw_Item : MonoBehaviour
 
     void Update()
     {
+        //
         if (inventory_System.instance != null)
         {
             itensColetaveis = inventory_System.instance.coletaveis;

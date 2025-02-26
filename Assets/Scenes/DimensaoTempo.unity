@@ -2432,7 +2432,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 120
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -2485,7 +2485,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5382,11 +5382,11 @@ ParticleSystem:
     collidesWith:
       serializedVersion: 2
       m_Bits: 141376
-    maxCollisionShapes: 300
+    maxCollisionShapes: 500
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
-    collidesWithDynamic: 1
+    collidesWithDynamic: 0
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
@@ -6521,7 +6521,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -7342,7 +7342,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10292,11 +10292,11 @@ ParticleSystem:
     collidesWith:
       serializedVersion: 2
       m_Bits: 141376
-    maxCollisionShapes: 300
+    maxCollisionShapes: 500
     quality: 0
     voxelSize: 0.5
     collisionMessages: 0
-    collidesWithDynamic: 1
+    collidesWithDynamic: 0
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
@@ -16447,6 +16447,7 @@ GameObject:
   - component: {fileID: 432421153}
   - component: {fileID: 432421152}
   - component: {fileID: 432421154}
+  - component: {fileID: 432421155}
   m_Layer: 0
   m_Name: D_tempo_pedras_3
   m_TagString: Untagged
@@ -16538,6 +16539,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   PersoSeguir: {fileID: 0}
+--- !u!114 &432421155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432421151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.7
+  m_LightVolumeIntensity: 0.34
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: e9e0d945e7a3e12600000000abe506b395c84d77
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.0677501, y: 0.023699999, z: 0}
+    m_Extent: {x: 2.5945501, y: 1.9085, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -1.1626587, y: -0.38389206, z: 0}
+  - {x: 1.0268784, y: -0.37685204, z: 0}
+  - {x: 0.66776276, y: 0.39696884, z: 0}
+  - {x: -0.51657104, y: 0.43255997, z: 0}
 --- !u!1 &457389323
 GameObject:
   m_ObjectHideFlags: 0
@@ -16865,6 +16918,7 @@ GameObject:
   - component: {fileID: 692590959}
   - component: {fileID: 692590958}
   - component: {fileID: 692590960}
+  - component: {fileID: 692590961}
   m_Layer: 0
   m_Name: D_tempo_pedras_2
   m_TagString: Untagged
@@ -16956,6 +17010,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   PersoSeguir: {fileID: 0}
+--- !u!114 &692590961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692590957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.7
+  m_LightVolumeIntensity: 0.34
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: e9e0d945e7a3e12600000000abe506b395c84d77
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.11594999, y: -0.014450014, z: 0}
+    m_Extent: {x: 3.6865501, y: 1.8313501, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -2.30336, y: -0.34487534, z: 0}
+  - {x: 1.9772797, y: -0.33380508, z: 0}
+  - {x: 2.0727158, y: 0.16165543, z: 0}
+  - {x: 1.4839859, y: 0.31729698, z: 0}
+  - {x: 0.9764633, y: 0.012781143, z: 0}
+  - {x: 0.70282745, y: 0.14313316, z: 0}
+  - {x: -0.12819672, y: 0.15116501, z: 0}
+  - {x: -0.46694946, y: -0.17824173, z: 0}
+  - {x: -0.81614685, y: 0.18259048, z: 0}
+  - {x: -1.2080994, y: 0.14914703, z: 0}
+  - {x: -2.1075668, y: 0.088243484, z: 0}
 --- !u!1 &698422308
 GameObject:
   m_ObjectHideFlags: 0
@@ -17860,6 +17973,7 @@ GameObject:
   - component: {fileID: 891725221}
   - component: {fileID: 891725220}
   - component: {fileID: 891725222}
+  - component: {fileID: 891725223}
   m_Layer: 0
   m_Name: D_tempo_pedras_1
   m_TagString: Untagged
@@ -17931,7 +18045,7 @@ Transform:
   m_GameObject: {fileID: 891725219}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.760002, y: -5.129999, z: -0.5}
+  m_LocalPosition: {x: -12.841, y: -5.129999, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17951,6 +18065,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   PersoSeguir: {fileID: 0}
+--- !u!114 &891725223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891725219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.7
+  m_LightVolumeIntensity: 0.34
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: e9e0d945e7a3e12600000000abe506b395c84d77
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.02700007, y: -0.007999957, z: 0}
+    m_Extent: {x: 3.5043, y: 1.825, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -2.0326767, y: -0.32457352, z: 0}
+  - {x: 1.9772797, y: -0.33380508, z: 0}
+  - {x: 1.7584839, y: 0.17020226, z: 0}
+  - {x: 0.8259506, y: 0.2256012, z: 0}
+  - {x: 0.11501312, y: -0.27297974, z: 0}
+  - {x: -0.5589981, y: 0.31793022, z: 0}
+  - {x: -1.2080994, y: 0.14914703, z: 0}
+  - {x: -1.7556839, y: 0.14914703, z: 0}
 --- !u!1001 &1073406799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18111,7 +18281,7 @@ Canvas:
   m_GameObject: {fileID: 1106310481}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -18123,7 +18293,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 46218139
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_TargetDisplay: 0
 --- !u!224 &1106310486
 RectTransform:
@@ -42726,7 +42896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2665886601416573747, guid: 1a63eed1caff2fb43bc37c964eb4eb01, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.200003
+      value: -9.4
       objectReference: {fileID: 0}
     - target: {fileID: 2665886601416573747, guid: 1a63eed1caff2fb43bc37c964eb4eb01, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42758,7 +42928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4820579893237030508, guid: 1a63eed1caff2fb43bc37c964eb4eb01, type: 3}
       propertyPath: m_TrackedObjectOffset.x
-      value: 0.6
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8146556615295930313, guid: 1a63eed1caff2fb43bc37c964eb4eb01, type: 3}
       propertyPath: m_Name
