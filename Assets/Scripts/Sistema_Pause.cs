@@ -126,7 +126,6 @@ public class Sistema_Pause : MonoBehaviour
 
     public void ParaOMenu()
     {
-        //Teste
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
         IrMenu = true;

@@ -50,7 +50,7 @@ public class Savepoint : MonoBehaviour
                 }
                 if (playerMoviment.currentScene == "MontanhaIntro")
                 {
-                    instance.defaultPosition = new Vector2(-23.5f, -1f);
+                    instance.defaultPosition = new Vector2(-23.0f, -1f);
                     playerMoviment.transform.position = defaultPosition;
                 }
             }

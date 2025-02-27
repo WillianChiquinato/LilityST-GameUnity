@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lagartin_Moviment : MonoBehaviour
+public class Lagartin_Moviment : PlayerPoco
 {
     [Header("Instancias")]
     private Item_drop dropInimigo;
