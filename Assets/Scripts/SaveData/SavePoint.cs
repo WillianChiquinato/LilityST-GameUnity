@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Cinemachine;
 
 public class Savepoint : MonoBehaviour
 {
@@ -31,20 +32,27 @@ public class Savepoint : MonoBehaviour
         //Cenas modificação de spawn
         if (IsJsonFileEmpty("Assets/Scripts/SaveData/savepoint.json"))
         {
-            if (playerMoviment.currentScene == "Altior-Fuga")
+            if (SaveData.Instance.currentScene == "Altior-Quarto")
             {
-                instance.defaultPosition = new Vector2(-53f, 16.6f);
-                playerMoviment.transform.position = defaultPosition;
+                Debug.Log("Sem checkpoint, nao salvar nessa cena");
             }
-            if (playerMoviment.currentScene == "DimensaoTempo")
+            if (playerMoviment != null)
             {
-                instance.defaultPosition = new Vector2(-81.6f, 26f);
-                playerMoviment.transform.position = defaultPosition;
-            }
-            if (playerMoviment.currentScene == "MontanhaIntro")
-            {
-                instance.defaultPosition = new Vector2(-23.5f, -1f);
-                playerMoviment.transform.position = defaultPosition;
+                if (playerMoviment.currentScene == "Altior-Fuga")
+                {
+                    instance.defaultPosition = new Vector2(-53f, 16.6f);
+                    playerMoviment.transform.position = defaultPosition;
+                }
+                if (playerMoviment.currentScene == "DimensaoTempo")
+                {
+                    instance.defaultPosition = new Vector2(-81.6f, 26f);
+                    playerMoviment.transform.position = defaultPosition;
+                }
+                if (playerMoviment.currentScene == "MontanhaIntro")
+                {
+                    instance.defaultPosition = new Vector2(-23.5f, -1f);
+                    playerMoviment.transform.position = defaultPosition;
+                }
             }
         }
         else
@@ -63,6 +71,17 @@ public class Savepoint : MonoBehaviour
         if (playerMoviment == null)
         {
             playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        }
+
+        if (saveData.CameraCorrected)
+        {
+            CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+            cinemachineVirtualCamera.m_Lens.OrthographicSize = 7f;
+        }
+        else
+        {
+            CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+            cinemachineVirtualCamera.m_Lens.OrthographicSize = 6f;
         }
     }
 

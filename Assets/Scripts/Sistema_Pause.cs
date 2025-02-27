@@ -57,6 +57,7 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
+        
         SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
         foreach (var obj in apresentaocao)

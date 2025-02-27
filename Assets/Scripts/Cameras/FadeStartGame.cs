@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,21 +10,55 @@ public class FadeStartGame : MonoBehaviour
 
     [SerializeField]
     private float fadeTime;
-    public string nomeCena;
-    public SaveData saveData;
+    public string jsonFilePath = "Assets/Scripts/SaveData/savepoint.json";
+    private string OriginalScene = "Altior-Quarto";
 
     void Awake()
     {
-        saveData = SaveData.Instance;
+        LoadJson();
     }
 
     void Start()
     {
         fadeUI = GetComponent<fadeUI>();
         fadeUI.FadeUIOut(fadeTime);
+    }
 
-        nomeCena = saveData.currentScene;
-        Debug.Log("Nome da cena: " + nomeCena);
+    void LoadJson()
+    {
+        if (File.Exists(jsonFilePath))
+        {
+            string json = File.ReadAllText(jsonFilePath);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+
+            if (IsJsonFileEmpty(jsonFilePath))
+            {
+                Debug.Log("Cena padrao: " + OriginalScene);
+            }
+            else
+            {
+                Debug.Log("Cena Atual: " + saveData.currentScene);
+            }
+        }
+        else
+        {
+            Debug.LogError("Arquivo JSON não encontrado em: " + jsonFilePath);
+        }
+    }
+
+    bool IsJsonFileEmpty(string path)
+    {
+        if (File.Exists(path))
+        {
+            string fileContent = File.ReadAllText(path);
+
+            return string.IsNullOrWhiteSpace(fileContent);
+        }
+        else
+        {
+            Debug.LogError("O arquivo JSON não foi encontrado.");
+            return true;
+        }
     }
 
     public void ChamarStartGame()
@@ -37,6 +71,17 @@ public class FadeStartGame : MonoBehaviour
         permissao = true;
         fadeUI.FadeUIIn(fadeTime);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene(nomeCena);
+
+        string json = File.ReadAllText(jsonFilePath);
+        SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+
+        if (IsJsonFileEmpty(jsonFilePath))
+        {
+            SceneManager.LoadScene(OriginalScene);
+        }
+        else
+        {
+            SceneManager.LoadScene(saveData.currentScene);
+        }
     }
 }

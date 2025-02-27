@@ -19,7 +19,7 @@ public class plataform_intro : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, checkdistance, layerMaskPlat);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, checkdistance, layerMaskPlat);
         if (hit.collider != null)
         {
             platformEffector2D.useOneWay = false;
