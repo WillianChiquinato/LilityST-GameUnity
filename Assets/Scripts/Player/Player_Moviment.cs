@@ -17,7 +17,7 @@ public class PlayerMoviment : MonoBehaviour
     public float acelerationSpeed;
     public float airSpeed = 7f;
     public Vector2 moveInput;
-    [HideInInspector]
+
     public bool Atacar;
     public bool RecuarAtirar;
     [SerializeField]
@@ -544,7 +544,17 @@ public class PlayerMoviment : MonoBehaviour
             {
                 Atacar = true;
                 animacao.SetTrigger(animationstrings.attack);
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    animacao.SetTrigger("UpwardTrigger");
+                }
+                if (Input.GetKey(KeyCode.W) && !touching.IsGrouded)
+                {
+                    animacao.SetTrigger("DownwardTrigger");
+                }
             }
+
         }
     }
 

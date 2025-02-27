@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
-public class GolemPatrulha_Moviment : MonoBehaviour
+public class GolemPatrulha_Moviment : PlayerPoco
 {
     private Item_drop dropInimigo;
     [SerializeField]
