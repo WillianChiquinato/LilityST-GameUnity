@@ -119,6 +119,18 @@ public class PlayerMoviment : MonoBehaviour
         }
     }
 
+    public float attackCooldown
+    {
+        get
+        {
+            return animacao.GetFloat(animationstrings.attackCooldown);
+        }
+        private set
+        {
+            animacao.SetFloat(animationstrings.attackCooldown, Mathf.Max(value, 0));
+        }
+    }
+
     public float CurrentMoveSpeed
     {
         get
@@ -255,6 +267,11 @@ public class PlayerMoviment : MonoBehaviour
         if (!canMove)
         {
             playerInput.enabled = false;
+        }
+
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
         }
 
         //Dash cooldown

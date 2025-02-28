@@ -1,7 +1,28 @@
 fileFormatVersion: 2
-guid: dab4b4e0c36851942a6d544cd6c9a41d
+guid: 3f62b553de659e040ab700bf52c5a94d
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 683737166470107569
+    second: Lilith_weapons5_0
+  - first:
+      213: 1061293243774542850
+    second: Lilith_weapons5_1
+  - first:
+      213: 641479232973516586
+    second: Lilith_weapons5_2
+  - first:
+      213: 7810011567663242421
+    second: Lilith_weapons5_3
+  - first:
+      213: -6370861485908800130
+    second: Lilith_weapons5_4
+  - first:
+      213: -3978452956184366020
+    second: Lilith_weapons5_5
+  - first:
+      213: -6345923278788728373
+    second: Lilith_weapons5_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +64,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -107,7 +128,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -120,7 +141,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -152,20 +173,20 @@ TextureImporter:
       name: Lilith_weapons5_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 85
-        width: 13
-        height: 15
+        x: 35
+        y: 84
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ee40555425e9e6f4fab89a2f505f6de1
-      internalID: 886845338
+      spriteID: 1b1de2f845f1d7900800000000000000
+      internalID: 683737166470107569
       vertices: []
       indices: 
       edges: []
@@ -174,20 +195,20 @@ TextureImporter:
       name: Lilith_weapons5_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 73
-        width: 36
-        height: 27
+        x: 69
+        y: 72
+        width: 38
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 857c0266c69ef834189987f209cf7ce9
-      internalID: 2111806161
+      spriteID: 20424bd05987abe00800000000000000
+      internalID: 1061293243774542850
       vertices: []
       indices: 
       edges: []
@@ -196,20 +217,20 @@ TextureImporter:
       name: Lilith_weapons5_2
       rect:
         serializedVersion: 2
-        x: 20
-        y: 67
-        width: 12
-        height: 11
+        x: 19
+        y: 66
+        width: 14
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c2e85ed1a226615428811a1e733dd6b0
-      internalID: -369780517
+      spriteID: a2f2d24b6fdf6e800800000000000000
+      internalID: 641479232973516586
       vertices: []
       indices: 
       edges: []
@@ -218,20 +239,20 @@ TextureImporter:
       name: Lilith_weapons5_3
       rect:
         serializedVersion: 2
-        x: 43
-        y: 40
-        width: 21
-        height: 25
+        x: 42
+        y: 39
+        width: 23
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2c55b04c472d74f4080350857708f81c
-      internalID: 85837097
+      spriteID: 5bc524e342cb26c60800000000000000
+      internalID: 7810011567663242421
       vertices: []
       indices: 
       edges: []
@@ -240,20 +261,20 @@ TextureImporter:
       name: Lilith_weapons5_4
       rect:
         serializedVersion: 2
-        x: 79
-        y: 46
-        width: 20
-        height: 8
+        x: 78
+        y: 45
+        width: 22
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 580d024d8d6458340b40c87c9c8f4a27
-      internalID: 1166561336
+      spriteID: e7d403b9b372697a0800000000000000
+      internalID: -6370861485908800130
       vertices: []
       indices: 
       edges: []
@@ -262,20 +283,20 @@ TextureImporter:
       name: Lilith_weapons5_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 7
-        width: 10
-        height: 20
+        x: 15
+        y: 6
+        width: 12
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0e05605148756f447b1365a310e198f8
-      internalID: -1884095418
+      spriteID: c3437077d12b9c8c0800000000000000
+      internalID: -3978452956184366020
       vertices: []
       indices: 
       edges: []
@@ -284,20 +305,20 @@ TextureImporter:
       name: Lilith_weapons5_6
       rect:
         serializedVersion: 2
-        x: 44
-        y: 7
-        width: 8
-        height: 21
+        x: 43
+        y: 6
+        width: 10
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ea315f2e304cbe74d932dcc3bff80c94
-      internalID: -2064064857
+      spriteID: bc96aeb6660cee7a0800000000000000
+      internalID: -6345923278788728373
       vertices: []
       indices: 
       edges: []
@@ -315,14 +336,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Lilith_weapons5_0: 886845338
-      Lilith_weapons5_1: 2111806161
-      Lilith_weapons5_2: -369780517
-      Lilith_weapons5_3: 85837097
-      Lilith_weapons5_4: 1166561336
-      Lilith_weapons5_5: -1884095418
-      Lilith_weapons5_6: -2064064857
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
