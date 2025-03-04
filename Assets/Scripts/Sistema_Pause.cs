@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -7,9 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class Sistema_Pause : MonoBehaviour
 {
-    [Header("Pause Instances")]
-    private Damage playerDamage;
+    public static Sistema_Pause instance { get; private set; }
 
+    [Header("Quests")]
+    public QuestEvents questEvents;
+
+    [Header("Pause Instances")]
     public BossFight bossFight;
     public PlayerMoviment playerMoviment;
     public GameObject pauseMenu;
@@ -39,11 +43,19 @@ public class Sistema_Pause : MonoBehaviour
     public string CurrentSceneName { get; private set; }
     public GameObject UISavePoint;
     public GameObject objectoSaveUI;
-    
-
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            questEvents = new QuestEvents();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
         objectoSaveUI = GameObject.FindGameObjectWithTag("CheckpointUI");
         UISavePoint.SetActive(false);
@@ -57,7 +69,7 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
-        
+
         SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
         foreach (var obj in apresentaocao)
@@ -69,7 +81,6 @@ public class Sistema_Pause : MonoBehaviour
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        playerDamage = playerMoviment.GetComponent<Damage>();
         playerHealth = playerMoviment.GetComponent<Damage>();
         bossFight = FindAnyObjectByType<BossFight>();
 
@@ -188,5 +199,16 @@ public class Sistema_Pause : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene(CurrentSceneName);
+    }
+
+    //Apagar dps
+    public event Action<int> onPlayerLevelChange;
+    public void PlayerLevelChange(int level)
+    {
+        level = 0;
+        if (onPlayerLevelChange != null)
+        {
+            onPlayerLevelChange(level);
+        }
     }
 }
