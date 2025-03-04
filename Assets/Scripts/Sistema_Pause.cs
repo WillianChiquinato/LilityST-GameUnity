@@ -14,6 +14,7 @@ public class Sistema_Pause : MonoBehaviour
     public QuestEvents questEvents;
 
     [Header("Pause Instances")]
+    public UI pauseUI;
     public BossFight bossFight;
     public PlayerMoviment playerMoviment;
     public GameObject pauseMenu;
@@ -56,6 +57,7 @@ public class Sistema_Pause : MonoBehaviour
             Destroy(gameObject);
         }
 
+        pauseUI = GameObject.FindFirstObjectByType<UI>();
         UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
         objectoSaveUI = GameObject.FindGameObjectWithTag("CheckpointUI");
         UISavePoint.SetActive(false);
@@ -121,6 +123,7 @@ public class Sistema_Pause : MonoBehaviour
     {
         playerMoviment.playerInput.enabled = true;
         pauseMenu.SetActive(false);
+        pauseUI.transform.GetChild(1).gameObject.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
     }

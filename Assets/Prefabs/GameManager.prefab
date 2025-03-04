@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62516d563c1fd6c49ade8df82d3c9c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUI: {fileID: 0}
   bossFight: {fileID: 0}
   playerMoviment: {fileID: 0}
   pauseMenu: {fileID: 0}
@@ -100,8 +101,7 @@ MonoBehaviour:
   IsPaused: 0
   sceneName: Menu
   IrMenu: 0
-  apresentaocao:
-  - {fileID: 0}
+  apresentaocao: []
   SistemaUI: {fileID: 0}
   CutSumir: {fileID: 0}
   cinemachineVirtualCamera: {fileID: 0}
