@@ -18,6 +18,7 @@ public class SlimeMoviment : MonoBehaviour
 
 
     [Header("Variaveis")]
+    float scaleFactor;
     public bool targetLility;
     public float speed = 4f;
     public float direcao;
@@ -122,7 +123,10 @@ public class SlimeMoviment : MonoBehaviour
                 direcaoPlayer = Mathf.Sign(playerMoviment.transform.position.x - transform.position.x);
                 FlipDirecao();
             }
-            Target = attackZona.detectColliders.Count > 0;
+            if (attackZona != null)
+            {
+                Target = attackZona.detectColliders.Count > 0;
+            }
             rb.linearVelocity = new Vector2(direcaoPlayer * speed, rb.linearVelocity.y);
         }
     }
@@ -150,12 +154,15 @@ public class SlimeMoviment : MonoBehaviour
         }
         else
         {
-            if (!attackActived)
+            if (!attackActived && attackZona != null)
             {
                 attackActived = true;
             }
 
-            float scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
+            if (boxCollider != null)
+            {
+                scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;    
+            }
 
             float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
             rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);

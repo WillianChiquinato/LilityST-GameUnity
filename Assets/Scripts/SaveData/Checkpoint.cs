@@ -122,6 +122,7 @@ public class Checkpoints : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
         player.animacao.SetBool("Checkpoint", true);
+        player.IsRight = false;
 
         isMovingAutomatically = true;
 
