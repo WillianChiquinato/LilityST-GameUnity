@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LagartoPatrulha : MonoBehaviour
+public class LagartoPatrulha : PlayerPoco
 {
     [Header("Instacias")]
     public Rigidbody2D rb;

@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 5756673905079531348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 0, z: 0}
+  m_LocalPosition: {x: 0.65, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,17 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e87038adff5a941b05ec438cf18f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   collidersNoTrigger: []
   playerNoTrigger: 0
   cervoNoTrigger: 0
+  paiCheckpoint: {fileID: 0}
   cinemachineVirtualCamera: {fileID: 0}
   framingPosition: {fileID: 0}
   player: {fileID: 0}
   isMovingAutomatically: 0
-  paiCheckpoint: {fileID: 0}
   direcao: 0
-  objectoSaveUI: {fileID: 0}
-  UISavePoint: {fileID: 0}
+  triggerCheckpoint: 0
+  CutSumir: {fileID: 0}
 --- !u!1 &9038913364375212065
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 9038913364375212065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.829, z: 0}
+  m_LocalPosition: {x: -0.07, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: 1171906793
   m_SortingLayer: -3
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 196fcef2f9c43df459ba31c69aa20e19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38e8a4e488642df40a0ee0136460183e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

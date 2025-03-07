@@ -94,8 +94,6 @@ public class PlayerMoviment : MonoBehaviour
     public float dashCooldown;
     public ladderScript LadderScript;
 
-
-
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] public camerafollowObject camerafollowObject;

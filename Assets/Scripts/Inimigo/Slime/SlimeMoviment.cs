@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
-public class SlimeMoviment : MonoBehaviour
+public class SlimeMoviment : PlayerPoco
 {
     [Header("Instancias")]
     TouchingDistance touching;
@@ -64,11 +64,14 @@ public class SlimeMoviment : MonoBehaviour
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+        newMaterial = Resources.Load<Material>("Material/Hit");
     }
 
     void Update()
     {
-
         if (touching.IsGrouded)
         {
             if (rb.linearVelocity.x != 0)
@@ -158,26 +161,29 @@ public class SlimeMoviment : MonoBehaviour
             {
                 attackActived = true;
             }
-
-            if (boxCollider != null)
+            if (!Input.GetKey(KeyCode.S))
             {
-                scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;    
-            }
 
-            float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
-            rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);
-
-            Damage DamageScript = playerMoviment.GetComponent<Damage>();
-
-            if (DamageScript != null)
-            {
-                Vector2 flipknockback = new Vector2(direction * knockbackAttack.x * scaleFactor, knockbackAttack.y);
-
-                // ataque ao alvo
-                bool goHit = DamageScript.hit(attackDamage, flipknockback);
-                if (goHit)
+                if (boxCollider != null)
                 {
-                    Debug.Log("AtaqueInimigo");
+                    scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
+                }
+
+                float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
+                rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);
+
+                Damage DamageScript = playerMoviment.GetComponent<Damage>();
+
+                if (DamageScript != null)
+                {
+                    Vector2 flipknockback = new Vector2(direction * knockbackAttack.x * scaleFactor, knockbackAttack.y);
+
+                    // ataque ao alvo
+                    bool goHit = DamageScript.hit(attackDamage, flipknockback);
+                    if (goHit)
+                    {
+                        Debug.Log("AtaqueInimigo");
+                    }
                 }
             }
         }

@@ -26,11 +26,6 @@ public class GolemPatrulha_Moviment : PlayerPoco
     public float blinkDuration = 0.1f;
     public int blinkCount = 1;
 
-    //Efeito da piscada
-    public Material newMaterial;
-    private Material originalMaterial;
-    private SpriteRenderer spriteRenderer;
-
 
     public float speed = 4f;
     public float StopRate = 0.2f;
@@ -109,6 +104,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
+        newMaterial = Resources.Load<Material>("Material/Hit");
     }
 
     void Update()

@@ -25,6 +25,7 @@ public class Lagartin_Moviment : PlayerPoco
 
 
     public bool _Target = false;
+
     public bool Target
     {
         get
@@ -54,8 +55,11 @@ public class Lagartin_Moviment : PlayerPoco
         DamageScript = GetComponent<Damage>();
         touching = GetComponent<TouchingDistance>();
         dropInimigo = GetComponent<Item_drop>();
-    }
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+        newMaterial = Resources.Load<Material>("Material/Hit");
+    }
 
     void Update()
     {
@@ -70,7 +74,10 @@ public class Lagartin_Moviment : PlayerPoco
             {
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 animator.SetBool(animationstrings.Comeco, true);
-                if (touching.IsGrouded && canMove)
+            }
+            if (touching.IsGrouded && canMove)
+            {
+                if (!DamageScript.VelocityLock)
                 {
                     attackDetector.SetActive(false);
                     if (distanciaAttack < 20)
@@ -115,5 +122,15 @@ public class Lagartin_Moviment : PlayerPoco
         {
             rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
         }
+        StartCoroutine(OnHitEnemy());
+    }
+
+    IEnumerator OnHitEnemy()
+    {
+        spriteRenderer.material = newMaterial;
+
+        yield return new WaitForSeconds(0.2f);
+
+        spriteRenderer.material = originalMaterial;
     }
 }

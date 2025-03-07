@@ -1,10 +1,14 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack references")]
     private PlayerMoviment PlayerCaracter;
     private Rigidbody2D rb;
+    public GameObject hitEffectPrefab;
+    public GameObject hitEffectPosition;
+    public GameObject hitEffect;
 
 
     [Header("Attack Variables")]
@@ -31,17 +35,19 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damage damage = collision.GetComponent<Damage>();
-        PlayerPoco attack = collision.GetComponent<PlayerPoco>();
-
-        if (damage != null)
+        if (collision.gameObject.CompareTag("Inimigos"))
         {
+            Damage damage = collision.gameObject.GetComponent<Damage>();
+            Debug.Log("Pegou " + damage);
+
+            PlayerPoco attack = collision.GetComponent<PlayerPoco>();
+
             ApplyDamage(damage);
-        }
 
-        if (attack != null)
-        {
-            HandleCollision(attack);
+            if (attack != null)
+            {
+                HandleCollision(attack);
+            }
         }
     }
 
@@ -58,20 +64,6 @@ public class PlayerAttack : MonoBehaviour
             direction = Vector2.up;
             collided = true;
         }
-
-        // //Checks to see if the melee attack is a standard melee attack
-        // if (PlayerCaracter.touching.IsGrouded && Mathf.Abs(Input.GetAxis("Vertical")) < 0.1f)
-        // {
-        //     if (PlayerCaracter.IsRight)
-        //     {
-        //         direction = Vector2.left;
-        //     }
-        //     else
-        //     {
-        //         direction = Vector2.right;
-        //     }
-        //     collided = true;
-        // }
 
         StartCoroutine(NoLongerColliding());
     }
@@ -105,6 +97,12 @@ public class PlayerAttack : MonoBehaviour
         if (goHit)
         {
             Debug.Log("AtaqueInimigo");
+        }
+
+        if (hitEffect == null)
+        {
+            hitEffect = Instantiate(hitEffectPrefab, hitEffectPosition.transform.position, Quaternion.identity);
+            Destroy(hitEffect, 0.3f);
         }
     }
 }
