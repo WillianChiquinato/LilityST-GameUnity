@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 38e8a4e488642df40a0ee0136460183e
+guid: 12befc282e6e5574c8574dfd853ba600
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4740975876227712852
-    second: banco_save_point_mont_entrelacada_0
+      213: -5040579108647600012
+    second: save_caderno_icone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: banco_save_point_mont_entrelacada_0
+      name: save_caderno_icone_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 2
-        width: 94
-        height: 45
+        x: 40
+        y: 29
+        width: 846
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 457cf3fc0745bc140800000000000000
-      internalID: 4740975876227712852
+      spriteID: 4700eceb1044c0ab0800000000000000
+      internalID: -5040579108647600012
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      banco_save_point_mont_entrelacada_0: 4740975876227712852
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

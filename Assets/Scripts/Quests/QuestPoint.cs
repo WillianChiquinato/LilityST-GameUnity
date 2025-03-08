@@ -4,7 +4,7 @@ using UnityEngine;
 public class QuestPoint : MonoBehaviour
 {
     [Header("Quest")]
-    [SerializeField] private QuestsInfoSO questInfopoint;
+    [SerializeField] public QuestsInfoSO questInfopoint;
 
     [Header("Configurações")]
     [SerializeField] private bool Startpoint = true;
@@ -12,7 +12,7 @@ public class QuestPoint : MonoBehaviour
 
     public bool PlayerAtivo = false;
     private bool PlayerEstaPerto = false;
-    private string QuestId;
+    public string QuestId;
     private QuestsState CurrentQuestState;
 
     private QuestIcon questIcon;

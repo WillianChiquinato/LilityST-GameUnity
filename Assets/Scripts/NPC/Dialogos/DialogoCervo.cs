@@ -30,6 +30,7 @@ public class DialogoCervo : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.SetActive(false);
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTextoCervo>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
@@ -42,6 +43,7 @@ public class DialogoCervo : MonoBehaviour
 
     public void StartDialogos(DialogosCervo dialogos)
     {
+        this.gameObject.SetActive(true);
         isDialogoAtivo = true;
 
         animator.SetBool(animationstrings.IsDialogFinish, false);

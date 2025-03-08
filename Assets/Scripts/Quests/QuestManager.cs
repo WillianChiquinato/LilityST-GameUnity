@@ -1,18 +1,87 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
     [Header("Configs Load")]
     [SerializeField] private bool loadQuests = false;
-
-    private Dictionary<string, Quests> questsDictionary;
-
     private int currentPlayerLevel;
+
+    [Header("Quests instances")]
+    private Dictionary<string, Quests> questsDictionary;
+    public QuestPoint[] questPoints;
+    public ScriptableObject[] QuestsInstancias;
+    public List<GameObject> questGrupos;
+
+    public GameObject instanciaQuestPrefab;
+    private GameObject instanciaQuest;
+
+    public GameObject GrupoQuest;
+
+    [Header("UI ContainerDescrição")]
+    public GameObject QuestContainer;
+    public TextMeshProUGUI titleText;
+    public Image IlustracaoImage;
+    public TextMeshProUGUI descriptionText;
+
 
     void Awake()
     {
         questsDictionary = CreateQuestMap();
+        questPoints = FindObjectsByType<QuestPoint>(FindObjectsSortMode.None);
+        questGrupos = GameObject.FindGameObjectsWithTag("QuestContainer").OrderBy(quest => ExtractNumberFromName(quest.name)).ToList();
+
+
+        // Conta quantas quests são iniciais
+        int count = 0;
+        foreach (Quests quest in questsDictionary.Values)
+        {
+            if (quest.info.StartQuest)
+                count++;
+        }
+
+        // Agora cria o array com o tamanho correto
+        QuestsInstancias = new ScriptableObject[count];
+
+        int index = 0;
+        foreach (Quests quest in questsDictionary.Values)
+        {
+            if (quest.info.StartQuest)
+            {
+                // Armazena a quest no array de quests iniciais
+                QuestsInstancias[index] = quest.info;
+                Sistema_Pause.instance.questEvents.StartQuest(quest.info.id);
+                Debug.Log($"Quest {quest.info.NomeQuest} foi iniciada!");
+
+                if (index < questGrupos.Count)
+                {
+                    GameObject questGrupo = questGrupos[index];
+
+                    TextMeshProUGUI titleQuest = questGrupo.GetComponentInChildren<TextMeshProUGUI>();
+                    Image imageQuest = questGrupo.GetComponentsInChildren<Image>().FirstOrDefault(img => img.gameObject != questGrupo);
+
+                    if (titleQuest != null && imageQuest != null)
+                    {
+                        titleQuest.text = quest.info.NomeQuest;
+                        imageQuest.sprite = quest.info.Icon;
+                    }
+                }
+
+                index++;
+            }
+        }
+    }
+
+    // Extraindo apenas numeros do arrayNames
+    int ExtractNumberFromName(string questName)
+    {
+        // Aqui extraímos o número da string, assumindo que o nome segue o padrão "questXX"
+        string numberPart = new string(questName.Where(char.IsDigit).ToArray());
+        return int.Parse(numberPart);
     }
 
     void OnEnable()
@@ -91,6 +160,33 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
+        for (int i = 0; i < questGrupos.Count; i++)
+        {
+            GameObject obj = questGrupos[i];
+            Button botao = obj.GetComponent<Button>();
+
+            if (botao != null && i < QuestsInstancias.Length)
+            {
+                int index = i;
+                QuestsInfoSO questsInfoSO = (QuestsInfoSO)QuestsInstancias[index];
+
+                botao.onClick.RemoveAllListeners();
+                botao.onClick.AddListener(() => BotaoQuestDescricoes(questsInfoSO, index));
+            }
+            else
+            {
+                Debug.LogWarning("O GameObject " + obj.name + " não tem um componente Button ou índice inválido.");
+            }
+        }
+
+        for (int i = 0; i < questPoints.Length; i++)
+        {
+            if (Sistema_Pause.instance.playerMoviment.entrar && !questPoints[i].PlayerAtivo)
+            {
+                StartCoroutine(AtualizarUIQuest(questPoints[i]));
+            }
+        }
+
         foreach (Quests quest in questsDictionary.Values)
         {
             if (quest.state == QuestsState.REQUISITOS && CheckRequirementsMet(quest))
@@ -99,6 +195,53 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+
+    IEnumerator AtualizarUIQuest(QuestPoint questPoint)
+    {
+        if (instanciaQuest == null)
+        {
+            instanciaQuest = Instantiate(instanciaQuestPrefab, GrupoQuest.transform);
+            questGrupos.Add(instanciaQuest);
+
+            // Adiciona o novo ScriptableObject ao array de QuestsInstancias
+            List<ScriptableObject> tempList = QuestsInstancias.ToList();
+            tempList.Add(questPoint.questInfopoint);
+            QuestsInstancias = tempList.ToArray();
+
+            TextMeshProUGUI titleQuest = instanciaQuest.GetComponentInChildren<TextMeshProUGUI>();
+            Image imageQuest = instanciaQuest.GetComponentsInChildren<Image>().FirstOrDefault(img => img.gameObject != instanciaQuest);
+
+            if (titleQuest != null && imageQuest != null)
+            {
+                titleQuest.text = questPoint.questInfopoint.NomeQuest;
+                imageQuest.sprite = questPoint.questInfopoint.Icon;
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        instanciaQuest = null;
+    }
+
+    public void BotaoQuestDescricoes(QuestsInfoSO questsInfoSO, int index)
+    {
+        if (questsInfoSO != null)
+        {
+            Sprite questIlustracao = questsInfoSO.IlustraçãoQuest;
+            string questDescription = questsInfoSO.DescricaoQuest;
+
+            if (titleText != null && IlustracaoImage != null)
+            {
+                titleText.text = questsInfoSO.NomeQuest;
+                IlustracaoImage.sprite = questIlustracao;
+            }
+            if (descriptionText != null)
+            {
+                descriptionText.text = questDescription;
+            }
+        }
+    }
+
 
     private void StartQuests(string id)
     {

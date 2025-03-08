@@ -580,7 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37ca8479f30ce442b3700ea7919fe72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questInfopoint: {fileID: 11400000, guid: 1a1376dae2f671041baf6d7f8945051c, type: 2}
+  questInfopoint: {fileID: 11400000, guid: 2a1a7ef3ade2d7447a2dd913f59aa66b, type: 2}
   Startpoint: 1
   Endpoint: 1
   PlayerAtivo: 0
+  QuestId: 

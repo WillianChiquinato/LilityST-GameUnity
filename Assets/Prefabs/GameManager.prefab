@@ -45,6 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadQuests: 1
+  questPoints: []
+  QuestsIniciais: []
+  questGrupos: []
+  instanciaQuestPrefab: {fileID: 4913395770374501609, guid: fd857d8ff61207f46bb7c8f72876391a, type: 3}
+  GrupoQuest: {fileID: 0}
+  QuestContainer: {fileID: 0}
+  titleText: {fileID: 0}
+  IlustracaoImage: {fileID: 0}
+  descriptionText: {fileID: 0}
 --- !u!1 &5798855544687393476
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62516d563c1fd6c49ade8df82d3c9c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFlashPrefab: {fileID: 8372353690292132855, guid: 54c62853ffbd00540ae26a89e1fad6f4, type: 3}
   pauseUI: {fileID: 0}
   bossFight: {fileID: 0}
   playerMoviment: {fileID: 0}

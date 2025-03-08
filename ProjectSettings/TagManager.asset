@@ -24,6 +24,7 @@ TagManager:
   - CheckpointUI
   - Cervo
   - SavePointUI
+  - QuestContainer
   layers:
   - Default
   - TransparentFX

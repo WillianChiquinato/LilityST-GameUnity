@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
-    public ParticleSystem dust;
 
 
     [Header("Instances")]
@@ -241,7 +240,6 @@ public class PlayerMoviment : MonoBehaviour
     // Chamado antes do start, isso
     private void Awake()
     {
-        dust = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         animacao = GetComponent<Animator>();
         touching = GetComponent<TouchingDistance>();
@@ -439,19 +437,11 @@ public class PlayerMoviment : MonoBehaviour
         {
             IsRight = true;
             camerafollowObject.chamarTurn();
-            if (touching.IsGrouded)
-            {
-                dust.Play();
-            }
         }
         else if (moveInput.x < 0 && IsRight)
         {
             IsRight = false;
             camerafollowObject.chamarTurn();
-            if (touching.IsGrouded)
-            {
-                dust.Play();
-            }
         }
     }
 
@@ -514,7 +504,6 @@ public class PlayerMoviment : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
         IsJumping = true;
-        dust.Play();
     }
 
     private void WallSlide()

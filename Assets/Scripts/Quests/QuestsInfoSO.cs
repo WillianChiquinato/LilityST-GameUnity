@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "QuestsInfo", menuName = "Quests/QuestsScript", order = 1)]
 public class QuestsInfoSO : ScriptableObject
@@ -7,10 +8,14 @@ public class QuestsInfoSO : ScriptableObject
 
     [Header("Geral")]
     public string NomeQuest;
+    public bool StartQuest = false;
+    public Sprite Icon;
+    public Sprite IlustraçãoQuest;
 
     [Header("Requisitos")]
     public int levelRequisitos;
     public QuestsInfoSO[] questsPreRequisitos;
+    public string DescricaoQuest;
 
     [Header("Etapas")]
     public GameObject[] questsEtapasPrefabs;
