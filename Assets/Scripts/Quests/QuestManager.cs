@@ -27,6 +27,7 @@ public class QuestManager : MonoBehaviour
     public TextMeshProUGUI titleText;
     public Image IlustracaoImage;
     public TextMeshProUGUI descriptionText;
+    public Button botao;
 
 
     void Awake()
@@ -163,7 +164,7 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < questGrupos.Count; i++)
         {
             GameObject obj = questGrupos[i];
-            Button botao = obj.GetComponent<Button>();
+            botao = obj.GetComponent<Button>();
 
             if (botao != null && i < QuestsInstancias.Length)
             {

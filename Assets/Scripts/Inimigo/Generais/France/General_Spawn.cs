@@ -73,6 +73,8 @@ public class General_Spawn : MonoBehaviour
 
                         if (goraflixMoviment.grabActived)
                         {
+                            goraflixMoviment.Anelgrab.transform.position = playerMoviment.transform.position + new Vector3(0.5f, -1, 0);
+                            goraflixMoviment.Anelgrab.SetActive(true);
                             playerMoviment.transform.position = grabPlayerPosition.transform.position;
                             playerMoviment.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                             framingPosition.m_TrackedObjectOffset = new Vector3(3, 0, 0);

@@ -6,6 +6,8 @@ using UnityEngine;
 public class GoraflixMoviment : MonoBehaviour
 {
     [Header("Instancias")]
+    public GameObject Anelgrab;
+
     TouchingDistance touching;
     public PlayerMoviment playerMoviment;
     public grabPlayer grabPlayer;
@@ -61,6 +63,7 @@ public class GoraflixMoviment : MonoBehaviour
 
     void Start()
     {
+        Anelgrab.SetActive(false);
         touching = GetComponent<TouchingDistance>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
