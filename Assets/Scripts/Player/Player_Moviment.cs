@@ -409,6 +409,12 @@ public class PlayerMoviment : MonoBehaviour
         }
 
         animacao.SetFloat(animationstrings.yVelocity, rb.linearVelocity.y);
+
+        var currentStateInfo = animacao.GetCurrentAnimatorStateInfo(0);
+        if (currentStateInfo.IsName("FilhotePegar") && currentStateInfo.normalizedTime >= 0.9f)
+        {
+            animacao.SetBool("IsFilhote", false);
+        }
     }
 
 
