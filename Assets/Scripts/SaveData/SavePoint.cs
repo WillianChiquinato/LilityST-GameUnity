@@ -69,13 +69,9 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    void Update()
+    void Start()
     {
-        if (playerMoviment == null)
-        {
-            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        }
-
+        //
         if (saveData.CameraCorrected)
         {
             CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
@@ -85,6 +81,14 @@ public class Savepoint : MonoBehaviour
         {
             CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
             cinemachineVirtualCamera.m_Lens.OrthographicSize = 6f;
+        }
+    }
+
+    void Update()
+    {
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         }
     }
 
