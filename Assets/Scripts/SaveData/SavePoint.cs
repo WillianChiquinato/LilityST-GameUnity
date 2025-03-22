@@ -11,12 +11,14 @@ public class Savepoint : MonoBehaviour
 
     public Vector2 defaultPosition = Vector2.zero;
     public PlayerMoviment playerMoviment;
+    private Transform playerParent;
 
     private void Awake()
     {
         if (playerMoviment == null)
         {
             playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+            playerParent = playerMoviment.transform.parent;
         }
 
         if (instance == null)
@@ -29,35 +31,36 @@ public class Savepoint : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Cenas modificação de spawn
+        // Cenas modificação de spawn
         if (IsJsonFileEmpty("Assets/Scripts/SaveData/savepoint.json"))
         {
             if (SaveData.Instance.currentScene == "Altior-Quarto")
             {
                 Debug.Log("Sem checkpoint, nao salvar nessa cena");
             }
+
             if (playerMoviment != null)
             {
                 if (playerMoviment.currentScene == "Altior-Fuga")
                 {
                     instance.defaultPosition = new Vector2(-53f, 16.6f);
-                    playerMoviment.transform.position = defaultPosition;
+                    playerParent.transform.position = defaultPosition;
                 }
                 if (playerMoviment.currentScene == "DimensaoTempo")
                 {
                     instance.defaultPosition = new Vector2(-81.6f, 26f);
-                    playerMoviment.transform.position = defaultPosition;
+                    playerParent.transform.position = defaultPosition;
                 }
                 if (playerMoviment.currentScene == "MontanhaIntro")
                 {
                     instance.defaultPosition = new Vector2(-85.7f, -25.5f);
-                    playerMoviment.transform.position = defaultPosition;
+                    playerParent.transform.position = defaultPosition;
                 }
             }
         }
         else
         {
-            // Se o arquivo JSON não estiver vazio, você pode carregar os dados salvos
+            // Se o arquivo JSON não estiver vazio, carregar os dados salvos
             saveData = SaveManager.Load();
             if (saveData != null)
             {

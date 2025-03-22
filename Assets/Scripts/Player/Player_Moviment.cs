@@ -284,6 +284,7 @@ public class PlayerMoviment : MonoBehaviour
                 isDashing = false;
                 stateTimerDash = dashDuration;
                 rb.gravityScale = 4.5f;
+                playerInput.enabled = true;
             }
             else if (touching.IsOnWall)
             {
@@ -459,6 +460,7 @@ public class PlayerMoviment : MonoBehaviour
             if (context.started && timerDash < 0f)
             {
                 isDashing = true;
+                playerInput.enabled = false;
                 animacao.SetBool(animationstrings.isDashing, true);
                 timerDash = dashCooldown;
                 DamageScript.isInvicible = true;
@@ -576,7 +578,6 @@ public class PlayerMoviment : MonoBehaviour
                     animacao.SetTrigger("DownwardTrigger");
                 }
             }
-
         }
     }
 
