@@ -9,8 +9,9 @@ Shader "Unlit/DamageFlash"
     SubShader
     {
         Tags { "Queue"="Overlay" "RenderType"="Transparent" }
-        Blend SrcAlpha OneMinusSrcAlpha
-
+        Blend SrcAlpha OneMinusSrcAlpha    
+        Cull Off
+        
         Pass
         {
             CGPROGRAM
@@ -44,14 +45,11 @@ Shader "Unlit/DamageFlash"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                if (i.vertex.x < 1.0)
-                {
-                    i.uv.x = 1.0 - i.uv.x;
-                }
-
+                // Obtém a cor do sprite original
                 fixed4 texColor = tex2D(_MainTex, i.uv);
                 fixed4 finalColor = lerp(texColor, _HitColor, _HitIntensity);
                 finalColor.a = texColor.a;
+
                 return finalColor;
             }
             ENDCG

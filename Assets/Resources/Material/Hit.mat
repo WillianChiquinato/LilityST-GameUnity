@@ -29,6 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FacingDirection: -1
     - _GlowIntensity: 0.377
     - _HitAlpha: 0.481
     - _HitIntensity: 0.513
