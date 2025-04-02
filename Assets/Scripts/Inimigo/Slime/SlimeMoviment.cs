@@ -18,7 +18,7 @@ public class SlimeMoviment : PlayerPoco
 
 
     [Header("Variaveis")]
-    float scaleFactor;
+    [HideInInspector] public float scaleFactor;
     public bool targetLility;
     public float speed = 4f;
     public float direcao;
@@ -58,6 +58,8 @@ public class SlimeMoviment : PlayerPoco
 
     private void Awake()
     {
+        scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
+
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
         touching = GetComponent<TouchingDistance>();
@@ -163,12 +165,6 @@ public class SlimeMoviment : PlayerPoco
             }
             if (!Input.GetKey(KeyCode.S))
             {
-
-                if (boxCollider != null)
-                {
-                    scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
-                }
-
                 float direction = (playerMoviment.transform.position.x > transform.position.x) ? 1 : -1;
                 rb.linearVelocity = new Vector2(knockback.x / 6, rb.linearVelocity.y + knockback.y);
 

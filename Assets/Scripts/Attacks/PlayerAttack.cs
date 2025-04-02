@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
 
 
     [Header("Attack Variables")]
-    public float defaultForce = 300;
+    public float defaultForce = 15;
     public float upwardsForce;
 
     public float movementTime = .2f;
@@ -48,21 +48,31 @@ public class PlayerAttack : MonoBehaviour
             {
                 HandleCollision(attack);
             }
+
+            // Verifica se o inimigo é um slime
+            SlimeMoviment slime = collision.gameObject.GetComponent<SlimeMoviment>();
+            if (slime != null)
+            {
+                defaultForce += slime.scaleFactor;
+            }
         }
     }
 
     private void HandleCollision(PlayerPoco AttackPoco)
     {
-        if (AttackPoco.giveUpwardForce && Input.GetKey(KeyCode.W) && !PlayerCaracter.touching.IsGrouded)
+        if (AttackPoco.giveUpwardForce)
         {
-            direction = Vector2.down;
-            downwardStrike = true;
-            collided = true;
-        }
-        if (Input.GetKey(KeyCode.S) && !PlayerCaracter.touching.IsGrouded)
-        {
-            direction = Vector2.up;
-            collided = true;
+            if (Input.GetKey(KeyCode.W) && !PlayerCaracter.touching.IsGrouded)
+            {
+                direction = Vector2.down;
+                downwardStrike = true;
+                collided = true;
+            }
+            if (Input.GetKey(KeyCode.S) && !PlayerCaracter.touching.IsGrouded)
+            {
+                direction = Vector2.up;
+                collided = true;
+            }
         }
 
         StartCoroutine(NoLongerColliding());
@@ -86,6 +96,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator NoLongerColliding()
     {
         yield return new WaitForSeconds(movementTime);
+        defaultForce = 15;
         collided = false;
         downwardStrike = false;
     }
