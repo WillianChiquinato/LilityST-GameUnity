@@ -18,7 +18,11 @@ public class Savepoint : MonoBehaviour
         if (playerMoviment == null)
         {
             playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-            playerParent = playerMoviment.transform.parent;
+            if (playerMoviment != null)
+            {
+                playerParent = playerMoviment.transform.parent;
+            }
+                
         }
 
         if (instance == null)
@@ -56,6 +60,11 @@ public class Savepoint : MonoBehaviour
                     instance.defaultPosition = new Vector2(-85.7f, -25.5f);
                     playerParent.transform.position = defaultPosition;
                 }
+                if (playerMoviment.currentScene == "Boss&NPC")
+                {
+                    instance.defaultPosition = new Vector2(2.4f, -39.1f);
+                    playerParent.transform.position = defaultPosition;
+                }
             }
         }
         else
@@ -64,7 +73,19 @@ public class Savepoint : MonoBehaviour
             saveData = SaveManager.Load();
             if (saveData != null)
             {
-                playerMoviment.transform.position = saveData.playerCheckpoint;
+                if (playerMoviment != null)
+                {
+                    // Se o jogador estiver na mesma cena, carregar os dados salvos
+                    if (saveData.currentScene == SceneManager.GetActiveScene().name)
+                    {
+                        playerMoviment.transform.position = saveData.playerCheckpoint;
+                    }
+                    else
+                    {
+                        // Se o jogador estiver em uma cena diferente, usar a posição padrão
+                        playerMoviment.transform.position = defaultPosition;
+                    }
+                }
             }
         }
     }

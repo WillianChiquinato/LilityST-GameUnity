@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1299433959428867074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6716659036914824162}
+  - component: {fileID: 1352608020540546522}
+  - component: {fileID: 7430421706011943054}
+  m_Layer: 10
+  m_Name: Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6716659036914824162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299433959428867074}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 191853620237064873}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1352608020540546522
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299433959428867074}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.3600467, y: -0.6853201}
+  m_Radius: 0.41907
+--- !u!114 &7430421706011943054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299433959428867074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc34282400d3cf54cad863e9f6957f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  knockback: {x: -9, y: 6}
 --- !u!1 &1316080239631074579
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +175,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lagartoPatrulha: {fileID: 0}
+--- !u!1 &6279085856672357218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568464158387171969}
+  - component: {fileID: 3280120355615220556}
+  - component: {fileID: 3726979380238757491}
+  m_Layer: 10
+  m_Name: RangeZona
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &568464158387171969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279085856672357218}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 191853620237064873}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3280120355615220556
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279085856672357218}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.74316895, y: -0.28122738}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.7555802, y: 0.9834866}
+  m_EdgeRadius: 0
+--- !u!114 &3726979380238757491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279085856672357218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2081b35ca1f3a4d82ea8a6bf04030d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectColliders: []
 --- !u!1 &6335393374704124179
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,9 +281,11 @@ GameObject:
   - component: {fileID: 9015448372128858886}
   - component: {fileID: 8792153470032682937}
   - component: {fileID: 2304173163423655106}
+  - component: {fileID: 3070313512418487273}
+  - component: {fileID: 2693791839648431994}
   m_Layer: 8
   m_Name: Lagarto Montanha
-  m_TagString: Patrulha
+  m_TagString: Inimigos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +305,8 @@ Transform:
   m_Children:
   - {fileID: 571133495699315240}
   - {fileID: 2597025134626574186}
+  - {fileID: 6716659036914824162}
+  - {fileID: 568464158387171969}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7695919494936797330
@@ -267,11 +446,13 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   rb: {fileID: 0}
   animator: {fileID: 0}
+  DamageScript: {fileID: 0}
   groundCheck:
     serializedVersion: 2
     m_Bits: 64
   groundCheckObject: {fileID: 6918382930629896944}
   targetLilityObject: {fileID: 0}
+  attackZona1: {fileID: 3726979380238757491}
   targetLility: 0
   speed: 3
   direcao: 0
@@ -281,6 +462,7 @@ MonoBehaviour:
   wallTimerTarget: 1.5
   ItemTimerScale: 0
   ItemTimerTarget: 0.5
+  _Target: 0
 --- !u!95 &2304173163423655106
 Animator:
   serializedVersion: 7
@@ -303,6 +485,59 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3070313512418487273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335393374704124179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad06fe2afbe98504a92af888784589f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8792153470032682937}
+        m_TargetAssemblyTypeName: LagartoPatrulha, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  healthChange:
+    m_PersistentCalls:
+      m_Calls: []
+  _maxHealth: 4
+  _health: 4
+  isInvicible: 0
+  invicibilityTimer: 0.25
+  _IsAlive: 1
+--- !u!114 &2693791839648431994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335393374704124179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfItens: 3
+  possibleDrop:
+  - {fileID: 11400000, guid: 154486c47e47d544590996a51ac1e18e, type: 2}
+  - {fileID: 11400000, guid: 154486c47e47d544590996a51ac1e18e, type: 2}
+  - {fileID: 11400000, guid: 154486c47e47d544590996a51ac1e18e, type: 2}
+  dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
 --- !u!1 &6918382930629896944
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +549,7 @@ GameObject:
   - component: {fileID: 571133495699315240}
   m_Layer: 8
   m_Name: GroundGO
-  m_TagString: Patrulha
+  m_TagString: Inimigos
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

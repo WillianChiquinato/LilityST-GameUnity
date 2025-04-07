@@ -22,6 +22,7 @@ public class Sistema_Cenas : MonoBehaviour
         if (collisaoEnter.CompareTag("Player"))
         {
             transicao.Transicao(sceneName);
+            player.playerInput.enabled = false;
             Debug.Log("Esta na cena " + sceneName);
         }
     }

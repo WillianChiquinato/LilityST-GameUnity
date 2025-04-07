@@ -8,9 +8,7 @@ public class AlavancaScript : Alavancas
         {
             animator.SetBool("Ativado", true);
             TilesBool = true;
-            playerMoviment.animacao.SetBool("InputAlavanca", true);
             this.boxCollider.enabled = false;
-            this.playerMoviment.transform.position = transform.position + offset;
         }
     }
 }

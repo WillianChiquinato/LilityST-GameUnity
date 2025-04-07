@@ -435,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 2793249064160061137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -85.55, y: 25.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -993,6 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb49ecec0800a774eb5d99926f187cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 8
   isLadder: 0
   isClimbing: 0
   rb: {fileID: 0}

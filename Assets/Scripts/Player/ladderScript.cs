@@ -3,7 +3,7 @@ using UnityEngine;
 public class ladderScript : MonoBehaviour
 {
     private float vertical;
-    private float speed = 10f;
+    public float speed = 8f;
     public bool isLadder;
     public bool isClimbing = false;
 
@@ -31,18 +31,22 @@ public class ladderScript : MonoBehaviour
 
         if (playerMoviment == null)
         {
-            if (isLadder && Mathf.Abs(vertical) > 0f)
+            if (isLadder)
             {
-                isClimbing = true;
-                playerBebe_Moviment.animacao.SetBool("IsClimbing", true);
+                if (Mathf.Abs(vertical) > 0f)
+                {
+                    isClimbing = true;
+                }
             }
         }
         else if (playerBebe_Moviment == null)
         {
-            if (isLadder && Mathf.Abs(vertical) > 0f)
+            if (isLadder)
             {
-                isClimbing = true;
-                playerMoviment.animacao.SetBool("IsClimbing", true);
+                if (Mathf.Abs(vertical) > 0f)
+                {
+                    isClimbing = true;
+                }
             }
         }
     }
@@ -51,14 +55,59 @@ public class ladderScript : MonoBehaviour
     {
         if (playerMoviment != null && playerMoviment.isDashing) return;
 
-        if (isClimbing)
+        if (playerMoviment == null)
         {
-            rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * speed);
+            if (isClimbing)
+            {
+                playerBebe_Moviment.animacao.SetBool("IsClimbing", true);
+                rb.gravityScale = 0f;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * speed);
+                if (Mathf.Abs(vertical) > 0f)
+                {
+                    playerBebe_Moviment.animacao.speed = 1f;
+                }
+                else if (!playerBebe_Moviment.touching.IsGrouded)
+                {
+                    playerBebe_Moviment.animacao.speed = 0f;
+                }
+                else
+                {
+                    playerBebe_Moviment.animacao.speed = 1f;
+                }
+            }
+            else
+            {
+                playerBebe_Moviment.animacao.SetBool("IsClimbing", false);
+                playerBebe_Moviment.animacao.speed = 1f;
+                rb.gravityScale = 4.5f;
+            }
         }
-        else
+        else if (playerBebe_Moviment == null)
         {
-            rb.gravityScale = 4.5f;
+            if (isClimbing)
+            {
+                playerMoviment.animacao.SetBool("IsClimbing", true);
+                rb.gravityScale = 0f;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * speed);
+                if (Mathf.Abs(vertical) > 0f)
+                {
+                    playerMoviment.animacao.speed = 1f;
+                }
+                else if (!playerMoviment.touching.IsGrouded)
+                {
+                    playerMoviment.animacao.speed = 0f;
+                }
+                else
+                {
+                    playerMoviment.animacao.speed = 1f;
+                }
+            }
+            else
+            {
+                playerMoviment.animacao.SetBool("IsClimbing", false);
+                playerMoviment.animacao.speed = 1f;
+                rb.gravityScale = 4.5f;
+            }
         }
     }
 
