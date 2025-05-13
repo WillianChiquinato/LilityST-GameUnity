@@ -7,7 +7,6 @@ public class DialogoTriggerCaracter
 {
     public string nome;
     public Sprite icone;
-    public bool isUpDialog;
 }
 
 [System.Serializable]
@@ -16,6 +15,7 @@ public class DialogoTexto
     public DialogoTriggerCaracter caracter;
     [TextArea(3, 10)]
     public string linhaTexto;
+    public bool isLility = false;
 }
 
 [System.Serializable]
@@ -35,6 +35,12 @@ public class Dialogo_Trigger : MonoBehaviour
     public float TimerTargetDialogo;
     public float TimerDialogo;
     public bool targetBool = false;
+
+    public float tempoDeEspera;
+    public bool targetEndDialogo = false;
+
+    public delegate void DialogoFinalizado();
+    public event DialogoFinalizado OnDialogoFinalizado;
 
     private void Start()
     {
@@ -78,10 +84,13 @@ public class Dialogo_Trigger : MonoBehaviour
                     return;
                 }
             }
+            else if (playerMoviment.entrar && this.gameObject.CompareTag("Cervo"))
+            {
+                StartCoroutine(EsperaLility());
+            }
             else if (playerMoviment.entrar)
             {
                 TriggerDialogo();
-                animator.SetBool(animationstrings.InicioDialogo, true);
             }
         }
 
@@ -115,5 +124,29 @@ public class Dialogo_Trigger : MonoBehaviour
         {
             Debug.Log("Sem indicador");
         }
+    }
+
+    IEnumerator EsperaLility()
+    {
+        yield return new WaitForSeconds(4f);
+
+        TriggerDialogo();
+        animator.SetBool(animationstrings.InicioDialogo, true);
+    }
+
+    public void NotificarDialogoFinalizado()
+    {
+        OnDialogoFinalizado?.Invoke();
+        Debug.Log("Dialogo finalizado!");
+        if (this.gameObject.CompareTag("Cervo"))
+        {
+            StartCoroutine(AbrirUIComDelay());
+        }
+    }
+
+    private IEnumerator AbrirUIComDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        Dialogos_Manager.dialogos_Manager.UISavePoint.SetActive(true);
     }
 }

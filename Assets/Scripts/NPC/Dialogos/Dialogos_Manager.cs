@@ -7,27 +7,25 @@ using UnityEngine.UI;
 public class Dialogos_Manager : MonoBehaviour
 {
     public static Dialogos_Manager dialogos_Manager;
-
     public DialogoTexto linhaAtual;
+    private bool personagemAnteriorIsLility = false;
 
-    public bool isUpDialog;
-
-    [Header("Dialogo1")]
-    public string initialName1;
-    public Image iconeCaracter;
-    public TextMeshProUGUI nomeCaracter;
+    [Header("Dialogos")]
+    public string initialNameLeft = "Lility";
+    public string initialNameRight;
+    public Image iconeCaracterLeft;
+    public Image iconeCaracterRight;
+    public TextMeshProUGUI TitleLeft;
+    public TextMeshProUGUI TitleRight;
     public TextMeshProUGUI dialogoArea;
-
-    [Header("Dialogo2")]
-    public string initialName2;
-    public Image iconeCaracter2;
-    public TextMeshProUGUI nomeCaracter2;
-    public TextMeshProUGUI dialogoArea2;
+    public GameObject UISavePoint;
+    public bool setCheckpointUI = false;
 
 
     [Header("Situacoes Gerais")]
     public bool isTextComplete = false;
     public Queue<DialogoTexto> linhas;
+    public float tempoDeTransicao = 0.4f;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;
@@ -62,6 +60,11 @@ public class Dialogos_Manager : MonoBehaviour
         }
 
         DisplayNextLinha();
+        iconeCaracterLeft.transform.localScale = linhaAtual.isLility ? new Vector3(1f, 1f, 1f) : new Vector3(0.65f, 0.65f, 0.65f);
+        iconeCaracterRight.transform.localScale = linhaAtual.isLility ? new Vector3(0.65f, 0.65f, 0.65f) : new Vector3(1f, 1f, 1f);
+
+        iconeCaracterLeft.color = linhaAtual.isLility ? new Color32(0xFF, 0xFF, 0xFF, 0xFF) : new Color32(63, 63, 63, 255);
+        iconeCaracterRight.color = linhaAtual.isLility ? new Color32(63, 63, 63, 255) : new Color32(0xFF, 0xFF, 0xFF, 0xFF);
     }
 
     public void DisplayNextLinha()
@@ -74,28 +77,20 @@ public class Dialogos_Manager : MonoBehaviour
         }
 
         linhaAtual = linhas.Dequeue();
-        isUpDialog = linhaAtual.caracter.isUpDialog;
 
-        nomeCaracter.text = initialName1;
-        nomeCaracter2.text = initialName2;
+        initialNameRight = linhaAtual.caracter.nome;
+        iconeCaracterRight.sprite = linhaAtual.caracter.icone;
+        TitleLeft.text = initialNameLeft;
+        TitleRight.text = initialNameRight;
+        StopAllCoroutines();
+        StartCoroutine(Sequencial(linhaAtual));
 
-        if (isUpDialog)
+        bool isPersonagemMudou = (linhaAtual.isLility != personagemAnteriorIsLility);
+        personagemAnteriorIsLility = linhaAtual.isLility;
+
+        if (isPersonagemMudou)
         {
-            iconeCaracter.sprite = linhaAtual.caracter.icone;
-            nomeCaracter.text = linhaAtual.caracter.nome;
-            StopAllCoroutines();
-            StartCoroutine(Sequencial(linhaAtual));
-
-            dialogoArea2.text = "...";
-        }
-        else
-        {
-            iconeCaracter2.sprite = linhaAtual.caracter.icone;
-            nomeCaracter2.text = linhaAtual.caracter.nome;
-            StopAllCoroutines();
-            StartCoroutine(Sequencial2(linhaAtual));
-
-            dialogoArea.text = "...";
+            StartCoroutine(ImagemTransform());
         }
     }
 
@@ -110,15 +105,47 @@ public class Dialogos_Manager : MonoBehaviour
         isTextComplete = true;
     }
 
-    IEnumerator Sequencial2(DialogoTexto dialogoTexto)
+    IEnumerator ImagemTransform()
     {
-        dialogoArea2.text = "";
-        foreach (char letter in dialogoTexto.linhaTexto.ToCharArray())
+        float t = 0f;
+        Color corAlvoLeft, corAlvoRight;
+        Vector3 escalaAlvoLeft, escalaAlvoRight;
+
+        // Define os alvos conforme quem está falando
+        if (linhaAtual.isLility)
         {
-            dialogoArea2.text += letter;
-            yield return new WaitForSeconds(speedTexto);
+            corAlvoRight = new Color32(63, 63, 63, 255);
+            escalaAlvoRight = new Vector3(0.70f, 0.70f, 0.70f);
+
+            corAlvoLeft = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+            escalaAlvoLeft = new Vector3(1f, 1f, 1f);
         }
-        isTextComplete = true;
+        else
+        {
+            corAlvoLeft = new Color32(63, 63, 63, 255);
+            escalaAlvoLeft = new Vector3(0.70f, 0.70f, 0.70f);
+
+            corAlvoRight = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+            escalaAlvoRight = new Vector3(1f, 1f, 1f);
+        }
+
+        Color corInicialLeft = iconeCaracterLeft.color;
+        Color corInicialRight = iconeCaracterRight.color;
+        Vector3 escalaInicialLeft = iconeCaracterLeft.transform.localScale;
+        Vector3 escalaInicialRight = iconeCaracterRight.transform.localScale;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / tempoDeTransicao;
+
+            iconeCaracterLeft.color = Color.Lerp(corInicialLeft, corAlvoLeft, t);
+            iconeCaracterLeft.transform.localScale = Vector3.Lerp(escalaInicialLeft, escalaAlvoLeft, t);
+
+            iconeCaracterRight.color = Color.Lerp(corInicialRight, corAlvoRight, t);
+            iconeCaracterRight.transform.localScale = Vector3.Lerp(escalaInicialRight, escalaAlvoRight, t);
+
+            yield return null;
+        }
     }
 
     public void EndDialogo()
@@ -128,6 +155,16 @@ public class Dialogos_Manager : MonoBehaviour
         animator.SetBool(animationstrings.IsDialogFinish, true);
         playerMoviment.animacao.SetBool(animationstrings.canMove, true);
         playerMoviment.grabAtivo = true;
+
+        GameObject npc = GameObject.FindGameObjectWithTag("Cervo");
+        if (npc != null)
+        {
+            Dialogo_Trigger dialogoTrigger = npc.GetComponent<Dialogo_Trigger>();
+            if (dialogoTrigger != null)
+            {
+                dialogoTrigger.NotificarDialogoFinalizado();
+            }
+        }
     }
 
     public void buttonDialog()
@@ -138,18 +175,9 @@ public class Dialogos_Manager : MonoBehaviour
         }
         else
         {
-            if (isUpDialog)
-            {
-                StopAllCoroutines();
-                dialogoArea.text = linhaAtual.linhaTexto;
-                isTextComplete = true;
-            }
-            else
-            {
-                StopAllCoroutines();
-                dialogoArea2.text = linhaAtual.linhaTexto;
-                isTextComplete = true;
-            }
+            StopAllCoroutines();
+            dialogoArea.text = linhaAtual.linhaTexto;
+            isTextComplete = true;
         }
     }
 }

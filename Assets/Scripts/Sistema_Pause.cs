@@ -23,7 +23,7 @@ public class Sistema_Pause : MonoBehaviour
     public Damage playerHealth;
     private LevelTransicao transicao;
 
-    public Dialogo_TriggerCervo dialogoCervo;
+    public Dialogo_Trigger dialogoCervo;
 
     [Header("Variaveis")]
     public bool IsPaused;
@@ -63,7 +63,6 @@ public class Sistema_Pause : MonoBehaviour
         UISavePoint.SetActive(false);
         objectoSaveUI.SetActive(false);
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
-        dialogoCervo = GameObject.FindFirstObjectByType<Dialogo_TriggerCervo>();
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();

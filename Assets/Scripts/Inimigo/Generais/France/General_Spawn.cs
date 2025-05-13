@@ -51,7 +51,6 @@ public class General_Spawn : MonoBehaviour
                 Vector3 diferrenca = targetObject.position - playerMoviment.transform.position;
                 framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
 
-
                 colisor.enabled = false;
                 if (TimerSpawnGeneral >= 5.5f)
                 {

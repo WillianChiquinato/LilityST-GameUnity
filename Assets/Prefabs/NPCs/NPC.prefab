@@ -262,36 +262,40 @@ MonoBehaviour:
   dialogos:
     dialogoTextos:
     - caracter:
-        nome: Lility
-        icone: {fileID: 21300000, guid: 64e963eb23a4a56478cc859e6f42b026, type: 3}
-        isUpDialog: 0
+        nome: Galthera
+        icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
       linhaTexto: "Oi.. \xE9\xE9 tudo bem?"
+      isLility: 0
     - caracter:
         nome: Galthera
         icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
-        isUpDialog: 1
-      linhaTexto: "Ol\xE1, uma boa tarde, me chamo galthera, nesse mundo vazio e
-        doloroso..."
+      linhaTexto: "Ol\xE1, uma boa tarde, me chamo lility, estou procurando ajuda"
+      isLility: 1
     - caracter:
-        nome: Gathera
+        nome: Galthera
         icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
-        isUpDialog: 1
       linhaTexto: "O que voc\xEA faz por aqui menina? voc\xEA esta bem vestida, nao
         parece ser daqui de baixo."
+      isLility: 0
     - caracter:
-        nome: Gathera
+        nome: Galthera
         icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
-        isUpDialog: 1
       linhaTexto: Faz tanto tempo que nao vejo ninguem.
+      isLility: 0
     - caracter:
-        nome: Lility
-        icone: {fileID: 21300000, guid: 64e963eb23a4a56478cc859e6f42b026, type: 3}
-        isUpDialog: 0
+        nome: Galthera
+        icone: {fileID: 21300000, guid: 3506567245daca04bb1196ec4af224bb, type: 3}
       linhaTexto: Faz tanto tempo que nao vejo ninguem.
+      isLility: 0
   playerMoviment: {fileID: 0}
   input_Conversa: {fileID: 1969618387561562024}
   animator: {fileID: 0}
   dialogosAnim: {fileID: 3752816714197506435}
+  TimerTargetDialogo: 0
+  TimerDialogo: 0
+  targetBool: 0
+  tempoDeEspera: 0
+  targetEndDialogo: 0
 --- !u!61 &8251178630008749723
 BoxCollider2D:
   m_ObjectHideFlags: 0

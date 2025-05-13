@@ -7,43 +7,36 @@ using UnityEngine.UI;
 public class Dialogos_Manager2 : MonoBehaviour
 {
     public static Dialogos_Manager2 dialogos_Manager;
-
     public DialogoTextoRobert linhaAtual;
-    public Dialogo_LilityPqna dialogo_Trigger;
+    private bool personagemAnteriorIsLility = false;
 
-    public bool isUpDialog;
-
-    [Header("Dialogo1")]
-    public string initialName1;
-    public Image iconeCaracter;
-    public TextMeshProUGUI nomeCaracter;
+    [Header("Dialogos")]
+    public string initialNameLeft = "Bebe Lility";
+    public string initialNameRight;
+    public Image iconeCaracterLeft;
+    public Image iconeCaracterRight;
+    public TextMeshProUGUI TitleLeft;
+    public TextMeshProUGUI TitleRight;
     public TextMeshProUGUI dialogoArea;
+    public GameObject UISavePoint;
+    public bool setCheckpointUI = false;
 
-    [Header("Dialogo2")]
-    public string initialName2;
-    public Image iconeCaracter2;
-    public TextMeshProUGUI nomeCaracter2;
-    public TextMeshProUGUI dialogoArea2;
-
-    public bool isTextComplete = false;
 
     [Header("Situacoes Gerais")]
-    [SerializeField] public Queue<DialogoTextoRobert> linhas;
-    public string sceneName;
-    private LevelTransicao transicao;
+    public bool isTextComplete = false;
+    public Queue<DialogoTextoRobert> linhas;
+    public float tempoDeTransicao = 0.4f;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;
     public Animator animator;
-    public PlayerBebe_Moviment playerBebe;
+    public PlayerBebe_Moviment playerMoviment;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTextoRobert>();
-        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
-        playerBebe = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
-        dialogo_Trigger = GameObject.FindFirstObjectByType<Dialogo_LilityPqna>();
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
 
         if (dialogos_Manager == null)
         {
@@ -56,7 +49,7 @@ public class Dialogos_Manager2 : MonoBehaviour
         isDialogoAtivo = true;
 
         animator.SetBool(animationstrings.isDialog, true);
-        playerBebe.animacao.SetBool(animationstrings.canMove, false);
+        playerMoviment.animacao.SetBool(animationstrings.canMove, false);
 
         linhas.Clear();
 
@@ -66,6 +59,11 @@ public class Dialogos_Manager2 : MonoBehaviour
         }
 
         DisplayNextLinha();
+        iconeCaracterLeft.transform.localScale = linhaAtual.isLility ? new Vector3(1f, 1f, 1f) : new Vector3(0.65f, 0.65f, 0.65f);
+        iconeCaracterRight.transform.localScale = linhaAtual.isLility ? new Vector3(0.65f, 0.65f, 0.65f) : new Vector3(1f, 1f, 1f);
+
+        iconeCaracterLeft.color = linhaAtual.isLility ? new Color32(0xFF, 0xFF, 0xFF, 0xFF) : new Color32(63, 63, 63, 255);
+        iconeCaracterRight.color = linhaAtual.isLility ? new Color32(63, 63, 63, 255) : new Color32(0xFF, 0xFF, 0xFF, 0xFF);
     }
 
     public void DisplayNextLinha()
@@ -78,28 +76,20 @@ public class Dialogos_Manager2 : MonoBehaviour
         }
 
         linhaAtual = linhas.Dequeue();
-        isUpDialog = linhaAtual.caracter.isUpDialog;
 
-        nomeCaracter.text = initialName1;
-        nomeCaracter2.text = initialName2;
+        initialNameRight = linhaAtual.caracter.nome;
+        iconeCaracterRight.sprite = linhaAtual.caracter.icone;
+        TitleLeft.text = initialNameLeft;
+        TitleRight.text = initialNameRight;
+        StopAllCoroutines();
+        StartCoroutine(Sequencial(linhaAtual));
 
-        if (isUpDialog)
+        bool isPersonagemMudou = (linhaAtual.isLility != personagemAnteriorIsLility);
+        personagemAnteriorIsLility = linhaAtual.isLility;
+
+        if (isPersonagemMudou)
         {
-            iconeCaracter.sprite = linhaAtual.caracter.icone;
-            nomeCaracter.text = linhaAtual.caracter.nome;
-            StopAllCoroutines();
-            StartCoroutine(Sequencial(linhaAtual));
-
-            dialogoArea2.text = "...";
-        }
-        else
-        {
-            iconeCaracter2.sprite = linhaAtual.caracter.icone;
-            nomeCaracter2.text = linhaAtual.caracter.nome;
-            StopAllCoroutines();
-            StartCoroutine(Sequencial2(linhaAtual));
-
-            dialogoArea.text = "...";
+            StartCoroutine(ImagemTransform());
         }
     }
 
@@ -114,15 +104,47 @@ public class Dialogos_Manager2 : MonoBehaviour
         isTextComplete = true;
     }
 
-    IEnumerator Sequencial2(DialogoTextoRobert dialogoTexto)
+    IEnumerator ImagemTransform()
     {
-        dialogoArea2.text = "";
-        foreach (char letter in dialogoTexto.linhaTexto.ToCharArray())
+        float t = 0f;
+        Color corAlvoLeft, corAlvoRight;
+        Vector3 escalaAlvoLeft, escalaAlvoRight;
+
+        // Define os alvos conforme quem está falando
+        if (linhaAtual.isLility)
         {
-            dialogoArea2.text += letter;
-            yield return new WaitForSeconds(speedTexto);
+            corAlvoRight = new Color32(63, 63, 63, 255);
+            escalaAlvoRight = new Vector3(0.70f, 0.70f, 0.70f);
+
+            corAlvoLeft = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+            escalaAlvoLeft = new Vector3(1f, 1f, 1f);
         }
-        isTextComplete = true;
+        else
+        {
+            corAlvoLeft = new Color32(63, 63, 63, 255);
+            escalaAlvoLeft = new Vector3(0.70f, 0.70f, 0.70f);
+
+            corAlvoRight = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+            escalaAlvoRight = new Vector3(1f, 1f, 1f);
+        }
+
+        Color corInicialLeft = iconeCaracterLeft.color;
+        Color corInicialRight = iconeCaracterRight.color;
+        Vector3 escalaInicialLeft = iconeCaracterLeft.transform.localScale;
+        Vector3 escalaInicialRight = iconeCaracterRight.transform.localScale;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / tempoDeTransicao;
+
+            iconeCaracterLeft.color = Color.Lerp(corInicialLeft, corAlvoLeft, t);
+            iconeCaracterLeft.transform.localScale = Vector3.Lerp(escalaInicialLeft, escalaAlvoLeft, t);
+
+            iconeCaracterRight.color = Color.Lerp(corInicialRight, corAlvoRight, t);
+            iconeCaracterRight.transform.localScale = Vector3.Lerp(escalaInicialRight, escalaAlvoRight, t);
+
+            yield return null;
+        }
     }
 
     public void EndDialogo()
@@ -130,16 +152,17 @@ public class Dialogos_Manager2 : MonoBehaviour
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
-        StartCoroutine(DelayTransition());
-    }
+        playerMoviment.animacao.SetBool(animationstrings.canMove, true);
 
-    IEnumerator DelayTransition()
-    {
-        playerBebe.animacao.SetBool(animationstrings.canMove, false);
-
-        yield return new WaitForSeconds(1);
-
-        transicao.Transicao(sceneName);
+        GameObject npc = GameObject.FindGameObjectWithTag("Cervo");
+        if (npc != null)
+        {
+            Dialogo_Trigger dialogoTrigger = npc.GetComponent<Dialogo_Trigger>();
+            if (dialogoTrigger != null)
+            {
+                dialogoTrigger.NotificarDialogoFinalizado();
+            }
+        }
     }
 
     public void buttonDialog()
@@ -150,18 +173,9 @@ public class Dialogos_Manager2 : MonoBehaviour
         }
         else
         {
-            if (isUpDialog)
-            {
-                StopAllCoroutines();
-                dialogoArea.text = linhaAtual.linhaTexto;
-                isTextComplete = true;
-            }
-            else
-            {
-                StopAllCoroutines();
-                dialogoArea2.text = linhaAtual.linhaTexto;
-                isTextComplete = true;
-            }
+            StopAllCoroutines();
+            dialogoArea.text = linhaAtual.linhaTexto;
+            isTextComplete = true;
         }
     }
 }

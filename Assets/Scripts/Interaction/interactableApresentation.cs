@@ -71,6 +71,7 @@ public class interactableApresentation : CollidableObjects
                     {
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
+                        goraflixMoviment.Anelgrab.SetActive(false);
 
                         ativo = false;
                         playerMoviment.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
