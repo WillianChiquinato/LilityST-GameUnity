@@ -27,7 +27,6 @@ public class interactableApresentation : CollidableObjects
     {
         base.Start();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
 
         ApresInput.SetActive(false);
@@ -69,6 +68,7 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Dash")
                     {
+                        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
                         goraflixMoviment.Anelgrab.SetActive(false);
