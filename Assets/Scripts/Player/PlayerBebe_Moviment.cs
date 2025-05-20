@@ -26,6 +26,9 @@ public class PlayerBebe_Moviment : MonoBehaviour
     public Rigidbody2D rb;
     public TouchingDistance touching;
     public bool entrar;
+    public float jumpImpulso;
+    public bool IsJumping;
+
 
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
@@ -149,6 +152,11 @@ public class PlayerBebe_Moviment : MonoBehaviour
             playerInput.enabled = true;
         }
 
+        if (touching.IsGrouded && rb.linearVelocity.y <= 0f)
+        {
+            IsJumping = false;
+        }
+
         rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
     }
 
@@ -182,6 +190,21 @@ public class PlayerBebe_Moviment : MonoBehaviour
             IsRight = false;
             camerafollowObject.chamarTurn();
         }
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started && touching.IsGrouded && canMove)
+        {
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        animacao.SetTrigger(animationstrings.jump);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
+        IsJumping = true;
     }
 
     public void OnLook(InputAction.CallbackContext context)

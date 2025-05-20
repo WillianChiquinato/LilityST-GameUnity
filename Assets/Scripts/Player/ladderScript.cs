@@ -79,7 +79,7 @@ public class ladderScript : MonoBehaviour
             {
                 playerBebe_Moviment.animacao.SetBool("IsClimbing", false);
                 playerBebe_Moviment.animacao.speed = 1f;
-                rb.gravityScale = 4.5f;
+                rb.gravityScale = 2f;
             }
         }
         else if (playerBebe_Moviment == null)
