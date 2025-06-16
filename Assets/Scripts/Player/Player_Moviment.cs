@@ -50,6 +50,10 @@ public class PlayerMoviment : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
 
+    public float RunTiming;
+    public float idleTimingRun;
+    public float accelerationTimer;
+
     //Jump
     [Header("Jump")]
     public bool jumpInput = false;
@@ -138,7 +142,7 @@ public class PlayerMoviment : MonoBehaviour
                 playerInput.enabled = true;
                 if (IsMoving && !touching.IsOnWall)
                 {
-                    if (touching.IsGrouded && speed < maxSpeed)
+                    if (touching.IsGrouded && speed <= maxSpeed)
                     {
                         speed += Time.deltaTime * acelerationSpeed;
                         return speed;
@@ -176,6 +180,22 @@ public class PlayerMoviment : MonoBehaviour
         {
             _IsMoving = value;
             animacao.SetBool(animationstrings.IsMoving, value);
+        }
+    }
+
+    [SerializeField]
+    private bool _IsRunning = false;
+
+    public bool IsRunning
+    {
+        get
+        {
+            return _IsRunning;
+        }
+        set
+        {
+            _IsRunning = value;
+            animacao.SetBool("IsRunning", value);
         }
     }
 
@@ -359,6 +379,38 @@ public class PlayerMoviment : MonoBehaviour
             {
                 healing = false;
                 healingTimer = 2;
+            }
+        }
+
+        if (IsMoving)
+        {
+            idleTimingRun = 0f;
+            RunTiming += Time.deltaTime;
+            if (RunTiming >= 2.0f)
+            {
+                maxSpeed = 10f;
+                accelerationTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(accelerationTimer / 1f);
+                airSpeed = Mathf.Lerp(airSpeed, 10f, t * t);
+
+                speed = Mathf.Lerp(speed, 10f, t * t);
+                IsRunning = true;
+            }
+            else
+            {
+                Debug.Log("Está em movimento");
+            }
+        }
+        else
+        {
+            idleTimingRun += Time.deltaTime;
+            if (idleTimingRun > 0.15f)
+            {
+                RunTiming = 0f;
+                accelerationTimer = 0f;
+                airSpeed = 7f;
+                maxSpeed = 7f;
+                IsRunning = false;
             }
         }
     }
