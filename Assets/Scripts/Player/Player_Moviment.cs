@@ -101,26 +101,6 @@ public class PlayerMoviment : MonoBehaviour
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] public camerafollowObject camerafollowObject;
 
-
-    public int AtaqueCounterAtual
-    {
-        get
-        {
-            return ataqueCounterAtual;
-        }
-        private set
-        {
-            if (value >= numeroDeAttcks)
-            {
-                ataqueCounterAtual = 0;
-            }
-            else
-            {
-                ataqueCounterAtual = value;
-            }
-        }
-    }
-
     public float attackCooldown
     {
         get
@@ -282,6 +262,7 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Update()
     {
+        animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
         if (!canMove)
         {
             playerInput.enabled = false;
@@ -326,27 +307,31 @@ public class PlayerMoviment : MonoBehaviour
 
         if (tempo)
         {
-            // Atualiza o tempo decorrido
-            elapsedTime += Time.unscaledDeltaTime; // Usar Time.unscaledDeltaTime para garantir que a interpolação não seja afetada por timeScale
-
-            // Calcula a fração do tempo decorrido em relação à duração total
+            elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / duration;
-
-            // Interpola suavemente o Time.timeScale do valor inicial para o targetTimeScale
             Time.timeScale = Mathf.Lerp(1f, targetTimeScale, t);
-
-            // Opcional: Debug para verificar o valor atual do Time.timeScale
             Debug.Log("Current TimeScale: " + Time.timeScale);
         }
 
-        if (Reset == true)
+        if (Reset)
         {
-            ResetTimer += Time.deltaTime;
-            if (ResetTimer >= ResetTimerLimite)
+            if (Input.GetMouseButtonDown(0))
             {
-                Reset = false;
-                ResetTimer = 0;
-                ataqueCounterAtual = 0;
+                ataqueCounterAtual++;
+                ResetTimer = 0f;
+            }
+
+            if (ataqueCounterAtual > 0)
+            {
+                ResetTimer += Time.deltaTime;
+
+                if (ResetTimer >= ResetTimerLimite)
+                {
+                    Reset = false;
+                    ResetTimer = 0;
+                    ataqueCounterAtual = 0;
+                    Debug.Log("Combo Resetado por tempo");
+                }
             }
         }
 
@@ -607,28 +592,25 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SaveData.Instance.attackUnlocked)
         {
-            if (context.started && touching.IsGrouded)
+            if (context.performed)
             {
                 Atacar = true;
-                Reset = true;
-                animacao.SetTrigger(animationstrings.attack);
-                animacao.SetInteger(animationstrings.counterAtt, AtaqueCounterAtual);
-
-                AtaqueCounterAtual++;
-            }
-            else if (context.started)
-            {
-                Atacar = true;
-                animacao.SetTrigger(animationstrings.attack);
-
-                if (Input.GetKey(KeyCode.S))
+                if (touching.IsGrouded)
                 {
-                    animacao.SetTrigger("UpwardTrigger");
+                    Reset = true;
                 }
-                if (Input.GetKey(KeyCode.W) && !touching.IsGrouded)
+                else
                 {
-                    animacao.SetTrigger("DownwardTrigger");
+                    if (Input.GetKey(KeyCode.S))
+                    {
+                        animacao.SetTrigger("UpwardTrigger");
+                    }
+                    if (Input.GetKey(KeyCode.W) && !touching.IsGrouded)
+                    {
+                        animacao.SetTrigger("DownwardTrigger");
+                    }
                 }
+                animacao.SetTrigger(animationstrings.attack);
             }
         }
     }

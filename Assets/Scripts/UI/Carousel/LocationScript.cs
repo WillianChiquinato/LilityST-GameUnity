@@ -1,6 +1,7 @@
 using UnityEngine;
 using HasanSadikin.Carousel;
 
+[DefaultExecutionOrder(100)]
 [System.Serializable]
 public class LocationData
 {
@@ -8,6 +9,7 @@ public class LocationData
     public int itemIndex;
 }
 
+[DefaultExecutionOrder(100)]
 public class LocationScript : CarouselController<LocationData>
 {
     public UI uI;

@@ -4,6 +4,7 @@ using DG.Tweening;
 
 namespace HasanSadikin.Carousel
 {
+    [DefaultExecutionOrder(100)]
     public class HorizontalCarouselItemPositioner : MonoBehaviour, ICarouselItemPositioner
     {
         [SerializeField] private bool _isStatic = false;

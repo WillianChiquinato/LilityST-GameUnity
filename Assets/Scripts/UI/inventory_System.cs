@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class inventory_System : MonoBehaviour
@@ -58,10 +59,51 @@ public class inventory_System : MonoBehaviour
         documentosItemSlot = documentosSlotParent.GetComponentsInChildren<Item_SlotUI>();
         coletaveisItemSlot = coletaveisSlotParent.GetComponentsInChildren<Item_SlotUI>();
 
-        for (int i = 0; i < startEquipament.Count; i++)
+
+        if (IsInventoryJSONFileEmpty("Assets/Scripts/SaveData/Inventario/inventario.json"))
         {
-            AddItem(startEquipament[i]);
+            foreach (var item in startEquipament)
+            {
+                AddItem(item);
+            }
+
+            SaveInventory();
+            Debug.Log("Inventário inicializado com os itens de startEquipament.");
         }
+        else
+        {
+            LoadInventory();
+        }
+    }
+
+    public bool IsInventoryJSONFileEmpty(string path)
+    {
+        if (File.Exists(path))
+        {
+            string fileContent = File.ReadAllText(path);
+            return string.IsNullOrWhiteSpace(fileContent);
+        }
+        else
+        {
+            Debug.LogError("O arquivo JSON não foi encontrado.");
+            return true;
+        }
+    }
+
+    [System.Serializable]
+    public class InventoryItemSaveData
+    {
+        public string itemName;
+        public itensType itemType;
+        public int stackSize;
+    }
+
+    [System.Serializable]
+    public class InventorySaveData
+    {
+        public List<InventoryItemSaveData> MaterialsItens = new List<InventoryItemSaveData>();
+        public List<InventoryItemSaveData> DocumentsItens = new List<InventoryItemSaveData>();
+        public List<InventoryItemSaveData> ColectItens = new List<InventoryItemSaveData>();
     }
 
     public void UpdateInventory()
@@ -206,6 +248,121 @@ public class inventory_System : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void SaveInventory()
+    {
+        InventorySaveData saveData = new InventorySaveData();
+
+        foreach (var item in inventory)
+        {
+            saveData.MaterialsItens.Add(new InventoryItemSaveData
+            {
+                itemName = item.itemData.ItemName,
+                itemType = item.itemData.itensType,
+                stackSize = item.stackSize
+            });
+        }
+
+        foreach (var item in docs)
+        {
+            saveData.DocumentsItens.Add(new InventoryItemSaveData
+            {
+                itemName = item.itemData.ItemName,
+                itemType = item.itemData.itensType,
+                stackSize = item.stackSize
+            });
+        }
+
+        foreach (var item in coletaveis)
+        {
+            saveData.ColectItens.Add(new InventoryItemSaveData
+            {
+                itemName = item.itemData.ItemName,
+                itemType = item.itemData.itensType,
+                stackSize = item.stackSize
+            });
+        }
+
+        string json = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(Application.dataPath + "/Scripts/SaveData/Inventario/inventario.json", json);
+
+        Debug.Log("Inventário salvo em: " + Application.dataPath + "/Scripts/SaveData/Inventario/inventario.json");
+    }
+
+    public void LoadInventory()
+    {
+        string path = Application.dataPath + "/Scripts/SaveData/Inventario/inventario.json";
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            Debug.Log("Arquivo JSON carregado: " + json);
+            InventorySaveData inventoryData = JsonUtility.FromJson<InventorySaveData>(json);
+
+            // Limpar inventário antes de carregar
+            inventory.Clear();
+            docs.Clear();
+            coletaveis.Clear();
+            Debug.Log("CLEAR INVENTORY");
+
+            // Carregar os itens de cada tipo
+            foreach (var itemData in inventoryData.MaterialsItens)
+            {
+                ItemData item = GetItemData(itemData.itemName, itemData.itemType);
+                if (item != null)
+                {
+                    for (int i = 0; i < itemData.stackSize; i++)
+                    {
+                        AddItem(item);
+                        Debug.Log("Adicionando item: " + itemData.itemName + " com quantidade: " + itemData.stackSize);
+                    }
+                }
+            }
+
+            foreach (var itemData in inventoryData.DocumentsItens)
+            {
+                ItemData item = GetItemData(itemData.itemName, itemData.itemType);
+                if (item != null)
+                {
+                    for (int i = 0; i < itemData.stackSize; i++)
+                    {
+                        AddItem(item);
+                        Debug.Log("Adicionando item: " + itemData.itemName + " com quantidade: " + itemData.stackSize);
+                    }
+                }
+            }
+
+            foreach (var itemData in inventoryData.ColectItens)
+            {
+                ItemData item = GetItemData(itemData.itemName, itemData.itemType);
+                if (item != null)
+                {
+                    for (int i = 0; i < itemData.stackSize; i++)
+                    {
+                        AddItem(item);
+                        Debug.Log("Adicionando item: " + itemData.itemName + " com quantidade: " + itemData.stackSize);
+                    }
+                }
+            }
+
+            UpdateInventory();
+        }
+        else
+        {
+            Debug.LogWarning("Arquivo de inventário não encontrado em: " + path);
+        }
+    }
+
+    public ItemData GetItemData(string itemName, itensType type)
+    {
+        Debug.Log("Tentando carregar: Itens/" + itemName);
+        ItemData item = Resources.Load<ItemData>("Itens/" + itemName);
+        if (item == null)
+        {
+            Debug.LogError("Item não encontrado: " + itemName);
+        }
+        return item;
     }
 
     public List<Inventory_item> GetInventoryList() => inventory;

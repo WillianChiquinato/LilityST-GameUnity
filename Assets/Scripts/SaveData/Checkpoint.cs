@@ -77,20 +77,20 @@ public class Checkpoints : MonoBehaviour
                         SaveData.Instance.attackUnlocked,
                         SaveData.Instance.powerUps
                     );
+                    inventory_System.instance.SaveInventory();
                     Debug.Log("Checkpoint salvo na posição: " + transform.position);
                 }
                 else
                 {
                     Debug.LogError("Savepoint.instance ou player está null. O checkpoint não foi salvo.");
                 }
-                gameManager.objectoSaveUI.SetActive(true);
 
                 StartCoroutine(AutoMoveSave());
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) 
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collidersNoTrigger.Contains(collision))
         {
@@ -129,7 +129,6 @@ public class Checkpoints : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         CutSumir.SetActive(false);
         framingPosition.m_TrackedObjectOffset = new Vector3(-5, 0, 0);
-        gameManager.objectoSaveUI.SetActive(false);
 
         if (!cervoNoTrigger)
         {

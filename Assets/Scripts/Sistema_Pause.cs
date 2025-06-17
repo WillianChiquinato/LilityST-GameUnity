@@ -43,7 +43,6 @@ public class Sistema_Pause : MonoBehaviour
     //Savepoint
     public string CurrentSceneName { get; private set; }
     public GameObject UISavePoint;
-    public GameObject objectoSaveUI;
 
     void Awake()
     {
@@ -59,9 +58,7 @@ public class Sistema_Pause : MonoBehaviour
 
         pauseUI = GameObject.FindFirstObjectByType<UI>();
         UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
-        objectoSaveUI = GameObject.FindGameObjectWithTag("CheckpointUI");
         UISavePoint.SetActive(false);
-        objectoSaveUI.SetActive(false);
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
@@ -70,14 +67,7 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
-
-        SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
-        foreach (var obj in apresentaocao)
-        {
-            obj.SetActive(false);
-        }
-        pauseMenu.SetActive(false);
 
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
@@ -87,7 +77,21 @@ public class Sistema_Pause : MonoBehaviour
 
         CutSceneDroggo = GameObject.FindWithTag("CutScene");
         CutSceneDroggo.SetActive(false);
+        StartCoroutine(DelayStart());
     }
+
+    IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        SistemaUI.SetActive(false);
+        foreach (var obj in apresentaocao)
+        {
+            obj.SetActive(false);
+        }
+        pauseMenu.SetActive(false);
+    }
+
 
     void Update()
     {
@@ -161,22 +165,6 @@ public class Sistema_Pause : MonoBehaviour
         playerMoviment.canMove = true;
     }
 
-    public void CervoDialog()
-    {
-        UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
-        UISavePoint.SetActive(false);
-        if (dialogoCervo != null)
-        {
-            dialogoCervo.TriggerDialogo();
-            dialogoCervo.animator.SetBool(animationstrings.InicioDialogo, true);
-        }
-    }
-
-    public void Dimensoes()
-    {
-        Debug.Log("Dimensoes");
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -192,8 +180,6 @@ public class Sistema_Pause : MonoBehaviour
         //Atualiza o nome da cena atual quando uma nova cena é carregada
         CurrentSceneName = scene.name;
     }
-
-
 
     //Parte de reiniciar
     public IEnumerator TempoMorte()

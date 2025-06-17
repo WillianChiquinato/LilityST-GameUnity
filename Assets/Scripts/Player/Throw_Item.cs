@@ -24,7 +24,6 @@ public class Throw_Item : MonoBehaviour
 
     void Update()
     {
-        //
         if (inventory_System.instance != null)
         {
             itensColetaveis = inventory_System.instance.coletaveis;
@@ -51,7 +50,7 @@ public class Throw_Item : MonoBehaviour
 
         arremessar = Input.GetKeyDown(KeyCode.Space);
 
-        if (itemArremessar != null && stackObjetos >= 0)
+        if (itemArremessar != null && stackObjetos > 0)
         {
             if (arremessar && newDrop == null)
             {
