@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 6993018629814190210}
   - component: {fileID: 2785946920860732403}
   - component: {fileID: 878990692150599985}
-  - component: {fileID: 4179122582926954952}
+  - component: {fileID: 8014262254239817579}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Player
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   arremessar: 0
   TimerArremessar: 0
   ForceArremesso: 10
---- !u!114 &4179122582926954952
+--- !u!114 &8014262254239817579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1040,60 +1040,38 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_AlphaCutoff: 0.01
+  m_AlphaCutoff: 0.1
   m_ApplyToSortingLayers: 5dbc4d72d1aec894e7a3e126e9e0d945abe506b395c84d77000000006b84754dc9a8806f3916f48e9b3bc102
   m_ShapePath:
-  - {x: -0.11105347, y: -1.6130028, z: 0}
-  - {x: -0.13909912, y: -1.3010483, z: 0}
-  - {x: -0.102752686, y: -1.2213211, z: 0}
-  - {x: -0.32154846, y: -1.1972389, z: 0}
-  - {x: -0.36383057, y: -1.0619125, z: 0}
-  - {x: -0.33000183, y: -0.86315155, z: 0}
-  - {x: -0.27360535, y: -0.72667694, z: 0}
-  - {x: -0.2546234, y: -0.604496, z: 0}
-  - {x: -0.2167511, y: -0.4861107, z: 0}
-  - {x: -0.13822937, y: -0.3340683, z: 0}
-  - {x: -0.13009644, y: 0.08086777, z: 0}
-  - {x: -0.020248413, y: 0.20697403, z: 0}
-  - {x: 0.30519104, y: 0.19477081, z: 0}
-  - {x: 0.40281677, y: 0.11747742, z: 0}
-  - {x: 0.41908264, y: -0.13066864, z: 0}
-  - {x: 0.36213684, y: -0.18762207, z: 0}
-  - {x: 0.37556458, y: -0.35152817, z: 0}
-  - {x: 0.4697113, y: -0.5084419, z: 0}
-  - {x: 0.48854065, y: -0.599453, z: 0}
-  - {x: 0.46029663, y: -0.6935997, z: 0}
-  - {x: 0.44947815, y: -0.7901497, z: 0}
-  - {x: 0.52737427, y: -0.9199753, z: 0}
-  - {x: 0.5187073, y: -1.0800972, z: 0}
-  - {x: 0.46029663, y: -1.0976982, z: 0}
-  - {x: 0.46029663, y: -1.2544975, z: 0}
-  - {x: 0.4310913, y: -1.6306534, z: 0}
-  m_ShapePathHash: 1423273005
+  - {x: -2.199997, y: -2, z: 0}
+  - {x: -2.199997, y: 2, z: 0}
+  - {x: 2.199997, y: 2, z: 0}
+  - {x: 2.199997, y: -2, z: 0}
+  m_ShapePathHash: 0
   m_InstanceId: 0
   m_ShadowShape2DComponent: {fileID: 6746592206924115849}
   m_ShadowShape2DProvider:
-    rid: 2024483881117024397
+    rid: 2024483881117024413
   m_ShadowCastingSource: 2
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
       m_Center: {x: 0.08000183, y: -0.76000214, z: 0}
-      m_Extent: {x: 0.27999878, y: 0.7999954, z: 0}
+      m_Extent: {x: 0.2599945, y: 0.77999115, z: 0}
     m_EdgeProcessing: 1
-    m_TrimEdge: 0.18
+    m_TrimEdge: 0.2
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.2
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.18
+    m_InitialTrim: 0
+  m_CastingOption: 2
+  m_PreviousTrimEdge: 0.2
   m_PreviousEdgeProcessing: 1
   m_PreviousShadowCastingSource: 2
   m_PreviousShadowShape2DSource: {fileID: 6746592206924115849}
   references:
     version: 2
     RefIds:
-    - rid: 2024483881117024397
+    - rid: 2024483881117024413
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
 --- !u!1 &2877492617240880508

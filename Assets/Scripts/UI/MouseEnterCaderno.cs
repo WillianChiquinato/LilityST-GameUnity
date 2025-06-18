@@ -28,7 +28,6 @@ public class MouseEnterCaderno : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;

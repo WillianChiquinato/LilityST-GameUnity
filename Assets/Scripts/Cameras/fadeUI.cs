@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class fadeUI : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class fadeUI : MonoBehaviour
             canvasGroup.alpha += Time.unscaledDeltaTime / segundos;
             yield return null;
         }
-        
+
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
         yield return null;
