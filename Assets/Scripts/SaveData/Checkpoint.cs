@@ -75,9 +75,11 @@ public class Checkpoints : MonoBehaviour
                         SaveData.Instance.WalljumpUnlocked,
                         SaveData.Instance.JumpUnlocked,
                         SaveData.Instance.attackUnlocked,
-                        SaveData.Instance.powerUps
+                        SaveData.Instance.powerUps,
+                        SaveData.Instance.XPlayer
                     );
                     inventory_System.instance.SaveInventory();
+                    QuestManager.instance.SaveAllQuests();
                     Debug.Log("Checkpoint salvo na posição: " + transform.position);
                 }
                 else

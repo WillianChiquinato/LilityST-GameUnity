@@ -9,16 +9,19 @@ public class QuestPoint : MonoBehaviour
     [Header("Configurações")]
     [SerializeField] private bool Startpoint = true;
     [SerializeField] private bool Endpoint = true;
+    public bool pointStarted = false;
 
     public bool PlayerAtivo = false;
     private bool PlayerEstaPerto = false;
     public string QuestId;
-    private QuestsState CurrentQuestState;
-
-    private QuestIcon questIcon;
+    public QuestsState CurrentQuestState;
+    public QuestIcon questIcon;
 
     void Awake()
     {
+        PlayerAtivo = false;
+        PlayerEstaPerto = false;
+
         QuestId = questInfopoint.id;
         questIcon = GetComponentInChildren<QuestIcon>();
     }
@@ -33,20 +36,29 @@ public class QuestPoint : MonoBehaviour
 
     private void SubmitPressed()
     {
+        Debug.Log("SubmitPressed chamado!");
         if (!PlayerEstaPerto)
         {
             return;
         }
+        PlayerAtivo = true;
 
-        if(CurrentQuestState == QuestsState.PODE_INICIAR && Startpoint)
+        if (!pointStarted)
         {
-            Sistema_Pause.instance.questEvents.StartQuest(QuestId);
-        }
-        else if (CurrentQuestState == QuestsState.PODE_FINALIZAR && Endpoint)
-        {
-            Sistema_Pause.instance.questEvents.FinishedQuest(QuestId);
+            var state = CurrentQuestState;
+
+            if (state == QuestsState.PODE_INICIAR && Startpoint)
+            {
+                Sistema_Pause.instance.questEvents.StartQuest(QuestId);
+            }
+            else if (state == QuestsState.PODE_FINALIZAR && Endpoint)
+            {
+                Sistema_Pause.instance.questEvents.FinishedQuest(QuestId);
+            }
         }
 
+        pointStarted = true;
+        QuestManager.instance.SaveAllQuests();
         Debug.Log($"QuestPoint {QuestId} foi ativado!");
     }
 
@@ -69,7 +81,7 @@ public class QuestPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             PlayerEstaPerto = true;
         }
@@ -77,11 +89,11 @@ public class QuestPoint : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (Sistema_Pause.instance.playerMoviment.entrar && !PlayerAtivo)
+            if (Sistema_Pause.instance.player.entrar && !pointStarted)
             {
-                PlayerAtivo = true;
+                Debug.Log("SubmitPressed adicionado!");
                 SubmitPressed();
             }
         }
@@ -89,10 +101,13 @@ public class QuestPoint : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerEstaPerto = false;
-            PlayerAtivo = false;
+            if (!pointStarted)
+            {
+                PlayerEstaPerto = false;
+                PlayerAtivo = false;    
+            }
         }
     }
 }

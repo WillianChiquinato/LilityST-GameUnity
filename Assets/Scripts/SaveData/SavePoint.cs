@@ -137,7 +137,7 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    public void SaveCheckpoint(Vector2 checkpoint, int health, bool CameraCorrected, bool DashUnlocked, bool WalljumpUnlocked, bool JumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps)
+    public void SaveCheckpoint(Vector2 checkpoint, int health, bool CameraCorrected, bool DashUnlocked, bool WalljumpUnlocked, bool JumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
     {
         SaveData data = new SaveData
         {
@@ -149,6 +149,7 @@ public class Savepoint : MonoBehaviour
             WalljumpUnlocked = WalljumpUnlocked,
             JumpUnlocked = JumpUnlocked,
             attackUnlocked = attackUnlocked,
+            XPlayer = XPlayer,
 
             powerUps = new List<PowerUps>(powerUps)
         };

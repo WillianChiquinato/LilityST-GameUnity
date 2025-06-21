@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +10,11 @@ public class Sistema_Pause : MonoBehaviour
 
     [Header("Quests")]
     public QuestEvents questEvents;
+
+    [Header("Player")]
+    public PlayerMoviment player;
+    public int XpPlayer = 0;
+
 
     [Header("Pause Instances")]
     public UI pauseUI;
@@ -24,11 +27,6 @@ public class Sistema_Pause : MonoBehaviour
     private LevelTransicao transicao;
 
     public Dialogo_Trigger dialogoCervo;
-
-    [Header("Player")]
-    public PlayerMoviment player;
-    public int XpPlayer = 0;
-    // public GameObject[] checkpoints;
 
     [Header("Variaveis")]
     public bool IsPaused;

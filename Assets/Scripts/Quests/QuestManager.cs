@@ -4,11 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager instance;
+
     [Header("Configs Load")]
     [SerializeField] private bool loadQuests = false;
     private int currentPlayerQuest;
@@ -23,7 +26,6 @@ public class QuestManager : MonoBehaviour
 
     public GameObject instanciaQuestPrefab;
     private GameObject instanciaQuest;
-
     public GameObject GrupoQuest;
 
 
@@ -37,6 +39,16 @@ public class QuestManager : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         questsDictionary = CreateQuestMap();
         questPoints = FindObjectsByType<QuestPoint>(FindObjectsSortMode.None);
         questGrupos = GameObject.FindGameObjectsWithTag("QuestContainer").OrderBy(quest => ExtractNumberFromName(quest.name)).ToList();
@@ -243,6 +255,12 @@ public class QuestManager : MonoBehaviour
 
     IEnumerator AtualizarUIQuest(QuestPoint questPoint)
     {
+        var quest = GetQuestById(questPoint.questInfopoint.id);
+        if (quest == null || quest.state == QuestsState.PODE_FINALIZAR || quest.state == QuestsState.FINALIZADO)
+        {
+            yield break;
+        }
+
         if (instanciaQuest == null)
         {
             instanciaQuest = Instantiate(instanciaQuestPrefab, GrupoQuest.transform);
@@ -256,10 +274,9 @@ public class QuestManager : MonoBehaviour
             TextMeshProUGUI titleQuest = instanciaQuest.GetComponentInChildren<TextMeshProUGUI>();
             Image imageQuest = instanciaQuest.GetComponentsInChildren<Image>().FirstOrDefault(img => img.gameObject != instanciaQuest);
 
-            if (titleQuest != null && imageQuest != null)
+            if (titleQuest != null)
             {
                 titleQuest.text = questPoint.questInfopoint.NomeQuest;
-                imageQuest.sprite = questPoint.questInfopoint.Icon;
             }
         }
 
@@ -291,6 +308,7 @@ public class QuestManager : MonoBehaviour
     private void StartQuests(string id)
     {
         Quests quests = GetQuestById(id);
+
         quests.InstantiateCurrentStep(this.transform);
         ChangeQuestState(quests.info.id, QuestsState.EM_ANDAMENTO);
     }
@@ -337,6 +355,7 @@ public class QuestManager : MonoBehaviour
 
         Debug.Log($"Quest {quests.info.NomeQuest} finalizada com sucesso!");
     }
+
 
     private void ClaimRewards(Quests quest)
     {
