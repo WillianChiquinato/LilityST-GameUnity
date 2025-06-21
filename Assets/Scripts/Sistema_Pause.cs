@@ -73,7 +73,6 @@ public class Sistema_Pause : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<PlayerMoviment>();
-        SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
 
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
