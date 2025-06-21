@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
+    public Sistema_Pause gameManager;
 
 
     [Header("Instances")]
@@ -256,6 +257,11 @@ public class PlayerMoviment : MonoBehaviour
         //saber qual cena o jogador esta.
         currentScene = SceneManager.GetActiveScene().name;
         Debug.Log("Nome da cena atual: " + currentScene);
+    }
+
+    void Start()
+    {
+        gameManager = FindFirstObjectByType<Sistema_Pause>();
     }
 
     private void Update()
@@ -690,6 +696,19 @@ public class PlayerMoviment : MonoBehaviour
                 animacao.SetBool(animationstrings.IsHealing, true);
                 DamageScript.Health++;
             }
+        }
+    }
+
+    public void PlayerXPRewards(int xp)
+    {
+        if (gameManager != null)
+        {
+            gameManager.AddXP(xp);
+            Debug.Log("XP Adicionado!");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager não encontrado!");
         }
     }
 }

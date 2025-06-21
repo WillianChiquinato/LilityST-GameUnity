@@ -17,6 +17,7 @@ public class SaveData
         }
     }
 
+    public int XPlayer = 0;
     public Vector2 playerCheckpoint;
     public int playerHealth;
     public string currentScene;

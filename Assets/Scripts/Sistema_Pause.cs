@@ -25,6 +25,11 @@ public class Sistema_Pause : MonoBehaviour
 
     public Dialogo_Trigger dialogoCervo;
 
+    [Header("Player")]
+    public PlayerMoviment player;
+    public int XpPlayer = 0;
+    // public GameObject[] checkpoints;
+
     [Header("Variaveis")]
     public bool IsPaused;
     public string sceneName;
@@ -67,6 +72,8 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
+        player = FindFirstObjectByType<PlayerMoviment>();
+        SistemaUI.SetActive(false);
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
 
         transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
@@ -189,14 +196,20 @@ public class Sistema_Pause : MonoBehaviour
         SceneManager.LoadScene(CurrentSceneName);
     }
 
-    //Apagar dps
-    public event Action<int> onPlayerLevelChange;
-    public void PlayerLevelChange(int level)
+    public event Action<int> onPlayerChange;
+    public void PlayerChange(int level)
     {
         level = 0;
-        if (onPlayerLevelChange != null)
-        {
-            onPlayerLevelChange(level);
-        }
+        QuestPoint questAtual = FindFirstObjectByType<QuestPoint>();
+        // if (onPlayerChange != null && questAtual.questInfopoint.tipoMissao.Equals("CriaturaFolclorica"))
+        // {
+        //     onPlayerChange(level);
+        // }
+    }
+
+    public void AddXP(int xp)
+    {
+        XpPlayer += xp;
+        SaveData.Instance.XPlayer += xp;
     }
 }

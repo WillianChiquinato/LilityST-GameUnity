@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +11,9 @@ public class QuestManager : MonoBehaviour
 {
     [Header("Configs Load")]
     [SerializeField] private bool loadQuests = false;
-    private int currentPlayerLevel;
+    private int currentPlayerQuest;
+    private string questSavePath => Path.Combine(Application.dataPath, "Scripts", "SaveData");
+
 
     [Header("Quests instances")]
     private Dictionary<string, Quests> questsDictionary;
@@ -21,6 +25,7 @@ public class QuestManager : MonoBehaviour
     private GameObject instanciaQuest;
 
     public GameObject GrupoQuest;
+
 
     [Header("UI ContainerDescrição")]
     public GameObject QuestContainer;
@@ -42,7 +47,9 @@ public class QuestManager : MonoBehaviour
         foreach (Quests quest in questsDictionary.Values)
         {
             if (quest.info.StartQuest)
+            {
                 count++;
+            }
         }
 
         // Agora cria o array com o tamanho correto
@@ -80,9 +87,16 @@ public class QuestManager : MonoBehaviour
     // Extraindo apenas numeros do arrayNames
     int ExtractNumberFromName(string questName)
     {
-        // Aqui extraímos o número da string, assumindo que o nome segue o padrão "questXX"
-        string numberPart = new string(questName.Where(char.IsDigit).ToArray());
-        return int.Parse(numberPart);
+        // Usa Regex para encontrar o primeiro número na string.
+        // Usado apenas para instanciar o QuestContainer.
+        Match match = Regex.Match(questName, @"\d+");
+
+        if (match.Success && int.TryParse(match.Value, out int number))
+        {
+            return number;
+        }
+
+        return 0;
     }
 
     void OnEnable()
@@ -99,7 +113,7 @@ public class QuestManager : MonoBehaviour
 
         Sistema_Pause.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
 
-        Sistema_Pause.instance.onPlayerLevelChange += PlayerLevelChange;
+        Sistema_Pause.instance.onPlayerChange += PlayerLevelChange;
     }
 
     void OnDisable()
@@ -110,7 +124,7 @@ public class QuestManager : MonoBehaviour
 
         Sistema_Pause.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
 
-        Sistema_Pause.instance.onPlayerLevelChange += PlayerLevelChange;
+        Sistema_Pause.instance.onPlayerChange += PlayerLevelChange;
     }
 
     void Start()
@@ -123,6 +137,36 @@ public class QuestManager : MonoBehaviour
             }
             Sistema_Pause.instance.questEvents.QuestStateChange(quest);
         }
+
+        foreach (Quests quest in questsDictionary.Values)
+        {
+            if (quest.state == QuestsState.EM_ANDAMENTO)
+            {
+                // Verifica se a quest já está na UI (evita duplicar caso esteja)
+                bool jaExisteNaUI = questGrupos.Any(g => g.GetComponentInChildren<TextMeshProUGUI>()?.text == quest.info.NomeQuest);
+
+                //Refatorar isso
+                if (!jaExisteNaUI)
+                {
+                    GameObject novaUI = Instantiate(instanciaQuestPrefab, GrupoQuest.transform);
+                    questGrupos.Add(novaUI);
+
+                    List<ScriptableObject> tempList = QuestsInstancias.ToList();
+                    if (!tempList.Contains(quest.info))
+                    {
+                        tempList.Add(quest.info);
+                        QuestsInstancias = tempList.ToArray();
+                    }
+
+                    TextMeshProUGUI titleQuest = novaUI.GetComponentInChildren<TextMeshProUGUI>();
+                    if (titleQuest != null)
+                    {
+                        titleQuest.text = quest.info.NomeQuest;
+                    }
+                }
+
+            }
+        }
     }
 
     private void ChangeQuestState(string id, QuestsState newState)
@@ -134,7 +178,7 @@ public class QuestManager : MonoBehaviour
 
     private void PlayerLevelChange(int level)
     {
-        currentPlayerLevel = level;
+        currentPlayerQuest = level;
     }
 
     private bool CheckRequirementsMet(Quests quest)
@@ -142,7 +186,7 @@ public class QuestManager : MonoBehaviour
         bool meetsRequirements = true;
 
         // check player level requirements
-        if (currentPlayerLevel < quest.info.levelRequisitos)
+        if (currentPlayerQuest < quest.info.levelRequisitos)
         {
             meetsRequirements = false;
         }
@@ -270,14 +314,58 @@ public class QuestManager : MonoBehaviour
     private void FinishedQuests(string id)
     {
         Quests quests = GetQuestById(id);
+
+        Debug.Log($"Finalizando quest: {id} - {quests.info.NomeQuest}");
+
+        GameObject grupoParaRemover = questGrupos
+            .FirstOrDefault(g => g.GetComponentInChildren<TextMeshProUGUI>()?.text.Trim() == quests.info.NomeQuest.Trim());
+
+        if (grupoParaRemover == null)
+        {
+            Debug.LogWarning($"Nenhum grupo de UI encontrado para a quest {quests.info.NomeQuest}");
+        }
+        else
+        {
+            questGrupos.Remove(grupoParaRemover);
+            Destroy(grupoParaRemover);
+        }
+
+        QuestsInstancias = QuestsInstancias.Where(q => q != quests.info).ToArray();
+
         ClaimRewards(quests);
         ChangeQuestState(quests.info.id, QuestsState.FINALIZADO);
+
+        Debug.Log($"Quest {quests.info.NomeQuest} finalizada com sucesso!");
     }
 
     private void ClaimRewards(Quests quest)
     {
-        Debug.Log("Parabens, voce ganhou uma dedada no cuzinho!!");
+        Rewards recompensa = quest.info.recompensas;
+
+        // XP
+        if (recompensa.TipoRecompensa.HasFlag(Rewards.RewardType.XP))
+        {
+            if (recompensa.xpPlayer > 0)
+            {
+                Sistema_Pause.instance.player.PlayerXPRewards(recompensa.xpPlayer);
+                Debug.Log($"Ganhou {recompensa.xpPlayer} XP!");
+            }
+        }
+
+        //Itens
+        if (recompensa.TipoRecompensa.HasFlag(Rewards.RewardType.Item))
+        {
+            if (recompensa.itensData != null)
+            {
+                foreach (var item in recompensa.itensData)
+                {
+                    inventory_System.instance.AddItem(item);
+                    Debug.Log($"Ganhou carta: {item.name}");
+                }
+            }
+        }
     }
+
 
     private void QuestStepStateChange(string id, int stepIndex, QuestsStepState questStepState)
     {
@@ -316,7 +404,7 @@ public class QuestManager : MonoBehaviour
         return quests;
     }
 
-    private void OnApplicationQuit()
+    public void SaveAllQuests()
     {
         foreach (Quests quest in questsDictionary.Values)
         {
@@ -324,42 +412,51 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void SaveQuestData(Quests quests)
+    private void SaveQuestData(Quests quest)
     {
         try
         {
-            QuestData questData = quests.GetQuestData();
-            string serializedData = JsonUtility.ToJson(questData);
-            PlayerPrefs.SetString(quests.info.id, serializedData);
-            Debug.Log("Salvando dados da quest: " + serializedData);
+            // Cria pasta, se não existir
+            if (!Directory.Exists(questSavePath))
+                Directory.CreateDirectory(questSavePath);
+
+            QuestData questData = quest.GetQuestData();
+            string serializedData = JsonUtility.ToJson(questData, true);
+
+            string filePath = Path.Combine(questSavePath, quest.info.id + ".json");
+            File.WriteAllText(filePath, serializedData);
+
+            Debug.Log("Salvando dados da quest em: " + filePath);
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Erro ao salvar dados da quest " + e.Message);
+            Debug.LogError("Erro ao salvar dados da quest: " + e.Message);
         }
     }
 
     private Quests LoadQuest(QuestsInfoSO questsInfoSO)
     {
-        Quests quests = null;
+        Quests quest = null;
+        string filePath = Path.Combine(questSavePath, questsInfoSO.id + ".json");
+
         try
         {
-            if (PlayerPrefs.HasKey(questsInfoSO.id) && loadQuests)
+            if (File.Exists(filePath) && loadQuests)
             {
-                string serializedData = PlayerPrefs.GetString(questsInfoSO.id);
-                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
-                quests = new Quests(questsInfoSO, questData.state, questData.questStepIndex, questData.questStepStates);
+                string json = File.ReadAllText(filePath);
+                QuestData questData = JsonUtility.FromJson<QuestData>(json);
+                quest = new Quests(questsInfoSO, questData.state, questData.questStepIndex, questData.questStepStates);
             }
             else
             {
-                quests = new Quests(questsInfoSO);
+                quest = new Quests(questsInfoSO);
             }
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Erro ao carregar dados da quest " + e.Message);
-            return null;
+            Debug.LogError("Erro ao carregar a quest: " + e.Message);
         }
-        return quests;
+
+        return quest;
     }
 }

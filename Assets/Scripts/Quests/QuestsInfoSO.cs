@@ -21,7 +21,7 @@ public class QuestsInfoSO : ScriptableObject
     public GameObject[] questsEtapasPrefabs;
 
     [Header("Recompensas")]
-    public int xpRecompensa;
+    public Rewards recompensas;
 
     private void OnValidate()
     {
