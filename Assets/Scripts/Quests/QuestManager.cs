@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
     [Header("Configs Load")]
     [SerializeField] private bool loadQuests = false;
     private int currentPlayerQuest;
-    private string questSavePath => Path.Combine(Application.dataPath, "Scripts", "SaveData");
+    private string questSavePath => Path.Combine(Application.dataPath, "Scripts", "SaveData", "Quests");
 
 
     [Header("Quests instances")]

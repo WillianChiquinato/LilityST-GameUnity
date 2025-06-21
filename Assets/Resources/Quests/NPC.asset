@@ -22,7 +22,7 @@ MonoBehaviour:
   DescricaoQuest: "Encontro drag\xE3o da montanha em sua caverna"
   questsEtapasPrefabs:
   - {fileID: 0}
-  Recompensa:
+  recompensas:
     TipoRecompensa: 0
     xpPlayer: 0
     itensData: []

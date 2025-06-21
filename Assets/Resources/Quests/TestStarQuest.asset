@@ -22,7 +22,7 @@ MonoBehaviour:
   DescricaoQuest: fbklkjnkjbdnkjnkjvndkfjvnkdkkmvdvmkvv
   questsEtapasPrefabs:
   - {fileID: 0}
-  Recompensa:
+  recompensas:
     TipoRecompensa: 0
     xpPlayer: 0
     itensData: []
