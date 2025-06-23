@@ -26,17 +26,23 @@ public class Dialogos_Manager2 : MonoBehaviour
     public bool isTextComplete = false;
     public Queue<DialogoTextoRobert> linhas;
     public float tempoDeTransicao = 0.4f;
+    public LevelTransicao levelTransicao;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;
     public Animator animator;
     public PlayerBebe_Moviment playerMoviment;
+    public GameObject Robert;
+    public Transform alvoFinaly;
+    public GameObject cadeiraLayer;
 
     void Start()
     {
+        Robert = GameObject.Find("Robert");
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTextoRobert>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+        levelTransicao = GameObject.FindFirstObjectByType<LevelTransicao>();
 
         if (dialogos_Manager == null)
         {
@@ -149,6 +155,8 @@ public class Dialogos_Manager2 : MonoBehaviour
 
     public void EndDialogo()
     {
+        Robert.GetComponent<Animator>().SetBool("isTalking", true);
+        Robert.GetComponent<Animator>().SetBool("Abraco", true);
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
@@ -163,6 +171,68 @@ public class Dialogos_Manager2 : MonoBehaviour
                 dialogoTrigger.NotificarDialogoFinalizado();
             }
         }
+
+        StartCoroutine(lilityFinaly(alvoFinaly));
+    }
+
+    IEnumerator lilityFinaly(Transform alvo)
+    {
+        float pontoInicialX = playerMoviment.transform.position.x;
+        float destinoX = alvo.position.x;
+        float distanciaTotal = Mathf.Abs(destinoX - pontoInicialX);
+        bool jaPulou = false;
+
+        playerMoviment.canMove = false;
+        playerMoviment.IsRight = true;
+
+        yield return new WaitForSeconds(0.7f);
+
+        Robert.GetComponent<Animator>().SetBool("isTalking", true);
+
+        yield return new WaitForSeconds(0.3f);
+        Robert.GetComponent<Animator>().SetBool("Abraco", true);
+        yield return new WaitForSeconds(0.08f);
+        cadeiraLayer.GetComponent<SpriteRenderer>().sortingOrder = 7;
+
+        yield return new WaitForSeconds(1.7f);
+
+        float distanciaMinima = 0.1f;
+        float velocidade = playerMoviment.speed;
+
+        while (Mathf.Abs(playerMoviment.transform.position.x - destinoX) > distanciaMinima)
+        {
+            float distanciaRestante = Mathf.Abs(playerMoviment.transform.position.x - destinoX);
+            float percorrido = 1f - (distanciaRestante / distanciaTotal);
+
+            // Pula quando estiver a 40% do caminho
+            if (percorrido >= 0.53f && !jaPulou)
+            {
+                jaPulou = true;
+                playerMoviment.animacao.SetTrigger(animationstrings.jump);
+                playerMoviment.Jump();
+            }
+
+            // Movimentação horizontal com física, sem mexer no Y
+            float direcaoX = Mathf.Sign(destinoX - playerMoviment.transform.position.x);
+            playerMoviment.rb.linearVelocity = new Vector2(
+                direcaoX * velocidade,
+                playerMoviment.rb.linearVelocity.y
+            );
+
+            playerMoviment.IsMoving = true;
+
+            yield return null;
+        }
+
+        // Parar movimento horizontal ao chegar
+        playerMoviment.rb.linearVelocity = new Vector2(0f, playerMoviment.rb.linearVelocity.y);
+        playerMoviment.IsMoving = false;
+
+        Destroy(playerMoviment.gameObject);
+        Debug.Log("Finalizando dialogo");
+
+        yield return new WaitForSeconds(1.5f);
+        levelTransicao.Transicao("Altior-Fuga");
     }
 
     public void buttonDialog()

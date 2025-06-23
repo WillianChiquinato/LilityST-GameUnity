@@ -9,7 +9,6 @@ public class PlayerBebe_Moviment : MonoBehaviour
 {
     public static PlayerBebe_Moviment Instance { get; private set; }
 
-
     [Header("Instances")]
     public PlayerInput playerInput;
     public float speed;
@@ -17,7 +16,6 @@ public class PlayerBebe_Moviment : MonoBehaviour
     public Vector2 moveInput;
     public int facingDirecao = 1;
     public ladderScript ladderScript;
-
 
     [Header("Variaveis")]
     [HideInInspector]
@@ -57,7 +55,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         {
             return _IsMoving;
         }
-        private set
+        set
         {
             _IsMoving = value;
             animacao.SetBool(animationstrings.IsMoving, value);
@@ -101,7 +99,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         {
             return _IsRight;
         }
-        private set
+        set
         {
             if (_IsRight != value)
             {
@@ -200,7 +198,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         animacao.SetTrigger(animationstrings.jump);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
