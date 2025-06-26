@@ -131,6 +131,7 @@ public class Sistema_Pause : MonoBehaviour
         playerMoviment.playerInput.enabled = true;
         pauseMenu.SetActive(false);
         pauseUI.transform.GetChild(1).gameObject.SetActive(false);
+        pauseMenu.transform.GetChild(0).gameObject.SetActive(true);
         Time.timeScale = 1f;
         IsPaused = false;
     }
@@ -138,6 +139,7 @@ public class Sistema_Pause : MonoBehaviour
     public void AbrirHUD()
     {
         SistemaUI.SetActive(true);
+        pauseMenu.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void AbrirHUDInventário()

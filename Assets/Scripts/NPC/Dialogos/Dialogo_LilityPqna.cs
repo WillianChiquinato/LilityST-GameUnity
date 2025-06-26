@@ -33,10 +33,9 @@ public class Dialogo_LilityPqna : MonoBehaviour
     public Animator animator;
     public bool AjusteAnimation = false;
 
-    public TextMeshPro textoPress;
-
     [Header("Alvo Dialog")]
     public Transform alvoDialog;
+    public Vector3 offset;
 
     private void Start()
     {
@@ -104,18 +103,27 @@ public class Dialogo_LilityPqna : MonoBehaviour
         Dialogos_Manager2.dialogos_Manager.StartDialogos(dialogos);
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = transform.position + offset;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        textoPress.text = "Press [E]";
+        GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", true);
         if (collision.CompareTag("Player") && playerBebe.entrar == true)
         {
             playerBebe.camerafollowObject.transposer.m_TrackedObjectOffset = new Vector3(1.4f, 0.6f, 0);
+            GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = Vector3.zero;
             AjusteAnimation = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        textoPress.text = "";
+        GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
     }
 }

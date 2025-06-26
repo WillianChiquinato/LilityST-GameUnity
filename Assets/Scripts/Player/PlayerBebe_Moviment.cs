@@ -33,6 +33,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     public cameraFollowBaby camerafollowObject;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public GameObject cadeira;
+    public GameObject roupaCadeira;
 
     public bool canMove
     {
@@ -222,6 +223,11 @@ public class PlayerBebe_Moviment : MonoBehaviour
         yield return new WaitForSeconds(7.5f);
 
         cadeira.SetActive(false);
+        roupaCadeira.SetActive(false);
         cinemachineVirtualCamera.GetComponent<Animator>().SetBool("CameraStart", true);
+
+        yield return new WaitForSeconds(1.5f);
+        cinemachineVirtualCamera.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+        Debug.Log($"Camera Invalidate Cache called {cinemachineVirtualCamera.GetComponent<CinemachineConfiner2D>()}");
     }
 }
