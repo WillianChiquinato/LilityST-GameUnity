@@ -11,7 +11,7 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image FragmentoImagem;
     [SerializeField] private Sprite originalSprite;
     [SerializeField] private TextMeshProUGUI FragmentoTexto;
-    private float animDuration = 0.5f;
+    private float animDuration = 0.4f;
 
     [SerializeField] private Transform canvasFragmentoFrente;
     private Transform originalParent;
@@ -91,33 +91,54 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
             Debug.Log("Item ou itemData é null!");
         }
     }
+
     private void MoveFragmentoToDeckBuilder(Transform destino, Action onMoveComplete)
     {
         originalParent = transform.parent;
         originalSiblingIndex = transform.GetSiblingIndex();
 
-        // Cria um placeholder para manter o espaço no layout
         placeholderSlot = new GameObject("Placeholder");
-        RectTransform rect = placeholderSlot.AddComponent<RectTransform>();
-        rect.sizeDelta = ((RectTransform)transform).sizeDelta;
+        RectTransform placeholderRect = placeholderSlot.AddComponent<RectTransform>();
+        RectTransform thisRect = GetComponent<RectTransform>();
+        RectTransform destinoRect = destino as RectTransform;
+
+        placeholderRect.sizeDelta = thisRect.sizeDelta;
         placeholderSlot.transform.SetParent(originalParent);
         placeholderSlot.transform.SetSiblingIndex(originalSiblingIndex);
 
-        canvasFragmentoFrente.SetAsLastSibling();
-        transform.SetParent(canvasFragmentoFrente, true);
+        HorizontalLayoutGroup horizontalLayout = originalParent.GetComponent<HorizontalLayoutGroup>();
+        if (horizontalLayout != null) horizontalLayout.enabled = false;
 
-        Debug.Log($"Iniciando animação de {transform.position} para {destino.position}");
-        transform.DOMove(destino.position, animDuration)
-            .OnKill(() =>
+        Vector2 telaOrigem = RectTransformUtility.WorldToScreenPoint(null, thisRect.position);
+        Vector2 telaDestino = RectTransformUtility.WorldToScreenPoint(null, destinoRect.position);
+
+        transform.SetParent(canvasFragmentoFrente, false);
+
+        Vector2 origemLocal, destinoLocal;
+        RectTransform canvasRect = canvasFragmentoFrente as RectTransform;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, telaOrigem, null, out origemLocal);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, telaDestino, null, out destinoLocal);
+
+        // 🔸 AQUI: define os offsets de partida e chegada
+        Vector2 offsetOrigem = new Vector2(50f, -50f);
+        Vector2 offsetDestino = new Vector2(50f, 0f);
+
+        thisRect.anchoredPosition = origemLocal + offsetOrigem;
+
+        thisRect.DOAnchorPos(destinoLocal + offsetDestino, animDuration)
+            .SetEase(Ease.InOutQuad)
+            .SetUpdate(true)
+            .OnComplete(() =>
             {
-                transform.SetParent(originalParent, true);
+                transform.SetParent(originalParent, false);
                 transform.SetSiblingIndex(originalSiblingIndex);
-                transform.localPosition = Vector3.zero;
+                thisRect.anchoredPosition = Vector2.zero;
+
+                if (horizontalLayout != null) horizontalLayout.enabled = true;
 
                 Destroy(placeholderSlot);
-
                 onMoveComplete?.Invoke();
-                Debug.Log("Animação concluída e carta movida para o DeckBuilder.");
             });
     }
 

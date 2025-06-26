@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,6 +71,8 @@ public class Sistema_Pause : MonoBehaviour
 
     void Start()
     {
+        DOTween.Init();
+
         player = FindFirstObjectByType<PlayerMoviment>();
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
 
