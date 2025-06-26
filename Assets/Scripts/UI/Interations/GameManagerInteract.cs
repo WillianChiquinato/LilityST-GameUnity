@@ -21,7 +21,11 @@ public class GameManagerInteract : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+        if (Sistema_Pause.instance == null)
+        {
+            player = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+        }
+
         interactIcon = transform.GetChild(0).gameObject;
     }
 }

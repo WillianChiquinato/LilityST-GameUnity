@@ -80,6 +80,7 @@ public class Checkpoints : MonoBehaviour
                     );
                     inventory_System.instance.SaveInventory();
                     QuestManager.instance.SaveAllQuests();
+                    FragmentoSystem.instance.SaveFragment();
                     Debug.Log("Checkpoint salvo na posição: " + transform.position);
                 }
                 else
