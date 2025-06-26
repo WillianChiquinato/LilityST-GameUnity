@@ -13,8 +13,6 @@ public class FotoMae : MonoBehaviour
     {
         FotoAnim = FotoContainer.transform.GetChild(0).GetComponent<Animator>();
         BtnFotoAnim = FotoContainer.transform.GetChild(1).GetComponent<Animator>();
-
-        BtnFoto = BtnFotoAnim.GetComponent<Button>();
     }
 
     void Start()

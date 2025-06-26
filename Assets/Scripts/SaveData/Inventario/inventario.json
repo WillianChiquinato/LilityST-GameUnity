@@ -1,0 +1,28 @@
+{
+    "MaterialsItens": [
+        {
+            "itemName": "Goraflix",
+            "itemType": 1,
+            "stackSize": 1
+        },
+        {
+            "itemName": "DocumentoItem",
+            "itemType": 1,
+            "stackSize": 1
+        }
+    ],
+    "DocumentsItens": [
+        {
+            "itemName": "RobertFile",
+            "itemType": 0,
+            "stackSize": 1
+        }
+    ],
+    "ColectItens": [
+        {
+            "itemName": "Pedrinha",
+            "itemType": 2,
+            "stackSize": 1
+        }
+    ]
+}

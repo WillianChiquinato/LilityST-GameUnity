@@ -220,7 +220,10 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
     IEnumerator StartMachine()
     {
-        yield return new WaitForSeconds(7.5f);
+        yield return new WaitForSeconds(0.2f);
+        cinemachineVirtualCamera.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+
+        yield return new WaitForSeconds(7.3f);
 
         cadeira.SetActive(false);
         roupaCadeira.SetActive(false);

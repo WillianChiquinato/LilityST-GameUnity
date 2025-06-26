@@ -117,7 +117,8 @@ public class Dialogo_LilityPqna : MonoBehaviour
         if (collision.CompareTag("Player") && playerBebe.entrar == true)
         {
             playerBebe.camerafollowObject.transposer.m_TrackedObjectOffset = new Vector3(1.4f, 0.6f, 0);
-            GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = Vector3.zero;
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+            this.GetComponent<BoxCollider2D>().enabled = false;
             AjusteAnimation = true;
         }
     }

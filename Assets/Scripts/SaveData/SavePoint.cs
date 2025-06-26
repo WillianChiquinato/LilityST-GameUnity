@@ -45,6 +45,9 @@ public class Savepoint : MonoBehaviour
 
             if (playerMoviment != null)
             {
+                Transform playerChild = playerMoviment.transform; // Obtém o filho do playerParent
+                playerChild.localPosition = Vector3.zero;
+
                 if (playerMoviment.currentScene == "Altior-Fuga")
                 {
                     instance.defaultPosition = new Vector2(-53f, 16.6f);
@@ -87,10 +90,9 @@ public class Savepoint : MonoBehaviour
                         // Se o jogador estiver em uma cena diferente, usar a posição padrão
                         if (playerParent != null)
                         {
-                            Transform playerChild = playerMoviment.transform; // Obtém o filho do playerParent
-                            playerChild.localPosition = Vector3.zero; // Ajusta a posição local do filho para (0,0,0)
+                            Transform playerChild = playerMoviment.transform;
+                            playerChild.localPosition = Vector3.zero;
 
-                            // Move o playerParent para a posição atual (onde o player está)
                             playerParent.position = playerMoviment.transform.position;
                         }
                     }
