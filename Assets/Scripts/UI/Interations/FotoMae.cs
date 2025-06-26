@@ -11,8 +11,11 @@ public class FotoMae : MonoBehaviour
 
     void Awake()
     {
-        FotoAnim = FotoContainer.transform.GetChild(0).GetComponent<Animator>();
-        BtnFotoAnim = FotoContainer.transform.GetChild(1).GetComponent<Animator>();
+        FotoAnim = FotoContainer.transform.GetChild(1).GetComponent<Animator>();
+        BtnFotoAnim = FotoContainer.transform.GetChild(0).GetComponent<Animator>();
+
+        Debug.Log(FotoAnim != null ? "FotoAnim OK" : "FotoAnim NULL");
+        Debug.Log(BtnFotoAnim != null ? "BtnFotoAnim OK" : "BtnFotoAnim NULL");
     }
 
     void Start()
@@ -27,9 +30,11 @@ public class FotoMae : MonoBehaviour
 
     public void FecharFoto()
     {
+        Debug.Log("FecharFoto called");
+        FotoContainer.SetActive(true);
         FotoAnim.SetTrigger("FecharFoto");
         BtnFotoAnim.SetTrigger("BtnFecharFoto");
-        Invoke("DesativarFoto", 0.8f);
+        Invoke(nameof(DesativarFoto), 0.8f);
     }
 
     private void DesativarFoto()
