@@ -51,6 +51,10 @@ public class EnemyPathing : MonoBehaviour
         {
             return animator.GetBool(animationstrings.canMove);
         }
+        set
+        {
+            animator.SetBool(animationstrings.canMove, value);
+        }
     }
 
 
@@ -71,7 +75,7 @@ public class EnemyPathing : MonoBehaviour
         if (canMove)
         {
             // Verifica se está no chão
-            Isgrounded = Physics2D.Raycast(transform.position, Vector2.down, 2.1f, groundCheck);
+            Isgrounded = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f, 0f), Vector2.down, 2.1f, groundCheck);
             animator.SetBool("Jumping", shouldJump);
 
             if (Isgrounded)
@@ -82,8 +86,8 @@ public class EnemyPathing : MonoBehaviour
                 rb.linearVelocity = new Vector2(direcao * speed, rb.linearVelocity.y);
 
                 // Verificações para pathing inteligente
-                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.8f), Vector2.right * direcao, 2f, groundCheck);
-                RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down, 2f, groundCheck);
+                groundFront = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -0.3f), Vector2.right * direcao, 2f, groundCheck);
+                RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(direcao * 0.7f, -0.5f, 0), Vector2.down, 2f, groundCheck);
                 RaycastHit2D platformAbove = Physics2D.Raycast(transform.position + new Vector3(0, -0.3f, 0), Vector2.right * direcao, 2f, groundCheck);
                 RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + new Vector3(0, 1f, 0), Vector2.right * direcao, 2f, groundCheck);
 
@@ -116,7 +120,7 @@ public class EnemyPathing : MonoBehaviour
                 }
 
                 //Distancia e direção do player.
-                if (distancePlayer < 4.2f)
+                if (distancePlayer < 2f)
                 {
                     direcao = Mathf.Sign(player.position.x - transform.position.x);
                     FlipDirecao();
@@ -161,8 +165,10 @@ public class EnemyPathing : MonoBehaviour
         {
             shouldJump = false;
 
-            if (Mathf.Abs(rb.linearVelocity.y) < 0.1f)
+            if (Mathf.Abs(rb.linearVelocity.y) < 0.05f)
             {
+                //Desacelera e pula.
+                speed = minSpeed;
                 Vector2 jumpVector = new Vector2(transform.localScale.x * minSpeed, jumpForce);
 
                 rb.linearVelocity = jumpVector;
@@ -176,7 +182,7 @@ public class EnemyPathing : MonoBehaviour
 
         //IsGround.
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, Vector2.down * 2.1f);
+        Gizmos.DrawRay(transform.position + new Vector3(0.5f, 0f, 0f), Vector2.down * 2.1f);
 
         //Direção do movimento.
         float direcao = Mathf.Sign(player.position.x - transform.position.x);
@@ -192,11 +198,11 @@ public class EnemyPathing : MonoBehaviour
         {
             //Plataformas e colisao a frente.
             Gizmos.color = Color.red;
-            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, -0.8f), new Vector2(direcao, 0) * 2f);
+            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0, -0.5f), new Vector2(direcao, 0) * 2f);
 
             //Lacuna do ground.
             Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position + new Vector3(direcao * 0.7f, -0.8f, 0), Vector2.down * 2f);
+            Gizmos.DrawRay(transform.position + new Vector3(direcao * 0.7f, -0.3f, 0), Vector2.down * 2f);
         }
     }
 

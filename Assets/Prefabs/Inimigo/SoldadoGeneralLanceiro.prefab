@@ -383,11 +383,11 @@ MonoBehaviour:
     m_Bits: 64
   direcao: -1
   distancePlayer: 0
-  speed: 4.5
-  jumpForce: 12
+  speed: 6
+  jumpForce: 11
   shouldJump: 0
   Isgrounded: 0
-  minSpeed: 4.5
-  maxSpeed: 7
+  minSpeed: 6
+  maxSpeed: 9
   acceleration: 0.6
   _Target: 0

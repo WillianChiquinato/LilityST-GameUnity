@@ -5,6 +5,7 @@ using UnityEngine;
 public class Soldados_Ativador : MonoBehaviour
 {
     [Header("Ativacao Soldados")]
+    public RemovendoTile removendoTile;
     public bool isAtivado = false;
     public float timerAtivado = 0f;
     public float timerTargtAtivado;
@@ -20,10 +21,10 @@ public class Soldados_Ativador : MonoBehaviour
     public Animator animator;
 
     [Header("Soldados")]
+    public StopSoldier stopSoldiers;
     public GameObject prefabGeneralMelee;
     public GameObject prefabGeneralLanceiro;
     public GameObject spawnSoldados;
-    public GameObject passagemOpen;
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -36,6 +37,8 @@ public class Soldados_Ativador : MonoBehaviour
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         colisor = GetComponent<Collider2D>();
         localPosition = targetObject.localPosition;
+        removendoTile = GameObject.FindFirstObjectByType<RemovendoTile>();
+        stopSoldiers = FindFirstObjectByType<StopSoldier>();
 
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
@@ -89,14 +92,26 @@ public class Soldados_Ativador : MonoBehaviour
         if (goraflixMoviment.Target)
         {
             animator.SetBool("Lanca", true);
-            if (passagemOpen != null)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("attackLança"))
             {
-                yield return new WaitForSeconds(0.7f);
-                Destroy(passagemOpen);
-            }
-            else
-            {
-                Debug.Log("Passagem Ainda nao ativa");
+                if (removendoTile != null)
+                {
+                    removendoTile.RemoverArea();
+                }
+                else
+                {
+                    Debug.LogWarning("RemovendoTile não encontrado!");
+                }
+
+                foreach (EnemyPathing enemy in stopSoldiers.enemyPathing)
+                {
+                    if (enemy != null)
+                    {
+                        enemy.canMove = true;
+                        enemy.speed = enemy.minSpeed;
+                        Debug.Log("Soldados Ativados: " + enemy.name);
+                    }
+                }
             }
         }
 

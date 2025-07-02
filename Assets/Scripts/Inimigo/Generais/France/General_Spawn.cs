@@ -43,7 +43,7 @@ public class General_Spawn : MonoBehaviour
         if (SpawnGeneral)
         {
             TimerSpawnGeneral += Time.deltaTime;
-            if (TimerSpawnGeneral >= 3f && targetObject != null)
+            if (TimerSpawnGeneral >= 2f && targetObject != null)
             {
                 playerMoviment.canMove = false;
                 playerMoviment.IsRight = true;
@@ -52,7 +52,7 @@ public class General_Spawn : MonoBehaviour
                 framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x, diferrenca.y, 0);
 
                 colisor.enabled = false;
-                if (TimerSpawnGeneral >= 5.5f)
+                if (TimerSpawnGeneral >= 4.5f)
                 {
                     if (prefabGeneralInstance == null)
                     {
@@ -66,13 +66,13 @@ public class General_Spawn : MonoBehaviour
                     goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
                     grabPlayer = goraflixMoviment.GetComponent<grabPlayer>();
 
-                    if (TimerSpawnGeneral >= 10f)
+                    if (TimerSpawnGeneral >= 8f)
                     {
                         goraflixMoviment.animator.SetBool("Grab", true);
 
                         if (goraflixMoviment.grabActived)
                         {
-                            goraflixMoviment.Anelgrab.transform.position = playerMoviment.transform.position + new Vector3(0.5f, -1, 0);
+                            goraflixMoviment.Anelgrab.transform.position = playerMoviment.transform.position + new Vector3(0.5f, -0.7f, 0);
                             goraflixMoviment.Anelgrab.SetActive(true);
                             playerMoviment.animacao.SetBool("Grab", true);
                             playerMoviment.transform.position = grabPlayerPosition.transform.position;

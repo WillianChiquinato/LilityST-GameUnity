@@ -14,7 +14,6 @@ public class Candelabro : MonoBehaviour
     public float fallDelayTime;
     public bool isFalling = false;
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

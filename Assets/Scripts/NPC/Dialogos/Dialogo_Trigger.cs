@@ -59,6 +59,7 @@ public class Dialogo_Trigger : MonoBehaviour
     public void TriggerDialogo()
     {
         Dialogos_Manager.dialogos_Manager.StartDialogos(dialogos);
+        Debug.Log("Dialogo iniciado!");
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -74,11 +75,12 @@ public class Dialogo_Trigger : MonoBehaviour
                 Debug.Log("Sem indicador");
             }
 
-            if (this.gameObject.CompareTag("Inimigos"))
+            if (gameObject.CompareTag("Inimigos"))
             {
                 targetBool = true;
                 if (TimerDialogo >= TimerTargetDialogo)
                 {
+                    Debug.Log("Dialogo com inimigo iniciado!");
                     TriggerDialogo();
                     TimerDialogo = 0f;
                     return;
@@ -128,7 +130,7 @@ public class Dialogo_Trigger : MonoBehaviour
 
     IEnumerator EsperaLility()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
         TriggerDialogo();
         animator.SetBool(animationstrings.InicioDialogo, true);
