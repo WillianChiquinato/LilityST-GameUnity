@@ -15,12 +15,6 @@ public class Bow : MonoBehaviour
     public Transform ShotPoint;
     public Rigidbody2D NewArrow;
 
-    [Header("Animators")]
-    public Animator animatorBD;
-    public Animator animatorBE;
-    public Animator animatorARCO;
-
-
     //Caminho da Flecha
     public GameObject point;
     public GameObject posicaoGO;
@@ -114,9 +108,6 @@ public class Bow : MonoBehaviour
             bodyCamera = false;
             transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             playerMoviment.animacao.SetBool(animationstrings.Powers, false);
-            animatorBD.SetBool(animationstrings.PowersBraco, false);
-            animatorBE.SetBool(animationstrings.PowersBraco, false);
-            animatorARCO.SetBool(animationstrings.PowersBraco, false);
             Time.timeScale = 1f;
             playerMoviment.tempo = false;
             playerMoviment.elapsedTime = 0f;

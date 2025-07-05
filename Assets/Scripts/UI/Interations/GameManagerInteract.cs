@@ -21,7 +21,7 @@ public class GameManagerInteract : MonoBehaviour
 
     void Start()
     {
-        if (Sistema_Pause.instance == null)
+        if (GameManager.instance == null)
         {
             player = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
         }

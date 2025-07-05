@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class DroggoScript : MonoBehaviour
 {
     public Animator animator;
-    Sistema_Pause sistema_Pause;
+    GameManager sistema_Pause;
     public Transform player;
     public Rigidbody2D rb;
     public CapsuleCollider2D droggoHits;
@@ -32,7 +32,7 @@ public class DroggoScript : MonoBehaviour
     private float shootTimerDroggo = 2f;
     public float shootTempo;
     public bool shootTimer;
-    
+
 
     //Para o Dash
     public bool CanDash = true;
@@ -91,7 +91,7 @@ public class DroggoScript : MonoBehaviour
 
     private void Awake()
     {
-        sistema_Pause = GameObject.FindAnyObjectByType<Sistema_Pause>();
+        sistema_Pause = GameObject.FindAnyObjectByType<GameManager>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         droggoHits = GetComponent<CapsuleCollider2D>();
@@ -110,9 +110,9 @@ public class DroggoScript : MonoBehaviour
     {
         shootTempo += Time.deltaTime;
 
-        if(damage.IsAlive == false) 
+        if (damage.IsAlive == false)
         {
-            StartCoroutine(FimGame()); 
+            StartCoroutine(FimGame());
         }
 
         if (attackCooldown > 0)
@@ -244,6 +244,6 @@ public class DroggoScript : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("Menu");
-        sistema_Pause.IrMenu = true;  
+        sistema_Pause.IrMenu = true;
     }
 }

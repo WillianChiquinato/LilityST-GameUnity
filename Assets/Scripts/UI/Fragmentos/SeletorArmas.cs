@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SeletorArmas : MonoBehaviour
 {
+    public static SeletorArmas instance;
+
     [Header("Buttons")]
     [SerializeField] public Button previousButton;
     [SerializeField] public Button nextButton;
@@ -12,9 +14,18 @@ public class SeletorArmas : MonoBehaviour
     [Header("Conteudo UI")]
     public Image conteudoUI;
 
+    readonly string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Mascara", "Sino" };
+
     void Awake()
     {
-        SelectArma(0);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
@@ -41,10 +52,16 @@ public class SeletorArmas : MonoBehaviour
 
     public void SelectArma(int index)
     {
+        if (index < 0 || index >= nomesDasArmas.Length)
+            return;
+
         previousButton.interactable = (index != 0);
-        nextButton.interactable = (index != 4);
+        nextButton.interactable = (index != nomesDasArmas.Length - 1);
 
         currentIndex = index;
+
+        string armaAtual = nomesDasArmas[currentIndex];
+        FragmentoSystem.instance.UpdateDeckUI(armaAtual);
     }
 
     public void NextArma()

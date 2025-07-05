@@ -74,7 +74,7 @@ public class QuestManager : MonoBehaviour
             {
                 // Armazena a quest no array de quests iniciais
                 QuestsInstancias[index] = quest.info;
-                Sistema_Pause.instance.questEvents.StartQuest(quest.info.id);
+                GameManager.instance.questEvents.StartQuest(quest.info.id);
                 Debug.Log($"Quest {quest.info.NomeQuest} foi iniciada!");
 
                 if (index < questGrupos.Count)
@@ -113,30 +113,30 @@ public class QuestManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (Sistema_Pause.instance == null)
+        if (GameManager.instance == null)
         {
             Debug.LogError("Sistema_Pause não foi inicializado! Aguarde.");
             return;
         }
 
-        Sistema_Pause.instance.questEvents.OnStartQuest += StartQuests;
-        Sistema_Pause.instance.questEvents.OnAdvancedQuest += AdvancedQuests;
-        Sistema_Pause.instance.questEvents.OnFinishedQuest += FinishedQuests;
+        GameManager.instance.questEvents.OnStartQuest += StartQuests;
+        GameManager.instance.questEvents.OnAdvancedQuest += AdvancedQuests;
+        GameManager.instance.questEvents.OnFinishedQuest += FinishedQuests;
 
-        Sistema_Pause.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
+        GameManager.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
 
-        Sistema_Pause.instance.onPlayerChange += PlayerLevelChange;
+        GameManager.instance.onPlayerChange += PlayerLevelChange;
     }
 
     void OnDisable()
     {
-        Sistema_Pause.instance.questEvents.OnStartQuest -= StartQuests;
-        Sistema_Pause.instance.questEvents.OnAdvancedQuest -= AdvancedQuests;
-        Sistema_Pause.instance.questEvents.OnFinishedQuest -= FinishedQuests;
+        GameManager.instance.questEvents.OnStartQuest -= StartQuests;
+        GameManager.instance.questEvents.OnAdvancedQuest -= AdvancedQuests;
+        GameManager.instance.questEvents.OnFinishedQuest -= FinishedQuests;
 
-        Sistema_Pause.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
+        GameManager.instance.questEvents.OnQuestStepStateChanged += QuestStepStateChange;
 
-        Sistema_Pause.instance.onPlayerChange += PlayerLevelChange;
+        GameManager.instance.onPlayerChange += PlayerLevelChange;
     }
 
     void Start()
@@ -147,7 +147,7 @@ public class QuestManager : MonoBehaviour
             {
                 quest.InstantiateCurrentStep(this.transform);
             }
-            Sistema_Pause.instance.questEvents.QuestStateChange(quest);
+            GameManager.instance.questEvents.QuestStateChange(quest);
         }
 
         foreach (Quests quest in questsDictionary.Values)
@@ -185,7 +185,7 @@ public class QuestManager : MonoBehaviour
     {
         Quests quests = GetQuestById(id);
         quests.state = newState;
-        Sistema_Pause.instance.questEvents.QuestStateChange(quests);
+        GameManager.instance.questEvents.QuestStateChange(quests);
     }
 
     private void PlayerLevelChange(int level)
@@ -238,7 +238,7 @@ public class QuestManager : MonoBehaviour
 
         for (int i = 0; i < questPoints.Length; i++)
         {
-            if (Sistema_Pause.instance.playerMoviment.entrar && !questPoints[i].PlayerAtivo)
+            if (GameManager.instance.playerMoviment.entrar && !questPoints[i].PlayerAtivo)
             {
                 StartCoroutine(AtualizarUIQuest(questPoints[i]));
             }
@@ -366,7 +366,7 @@ public class QuestManager : MonoBehaviour
         {
             if (recompensa.xpPlayer > 0)
             {
-                Sistema_Pause.instance.player.PlayerXPRewards(recompensa.xpPlayer);
+                GameManager.instance.player.PlayerXPRewards(recompensa.xpPlayer);
                 Debug.Log($"Ganhou {recompensa.xpPlayer} XP!");
             }
         }

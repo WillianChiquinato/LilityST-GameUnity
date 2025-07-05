@@ -7,22 +7,13 @@ public class HealthBar : MonoBehaviour
 {
     //Referencia do damage
     Damage playerDamage;
-    public PlayerMoviment player;
+    PlayerMoviment player;
     public Slider slider;
-
-    void Awake()
-    {
-        player = GameObject.FindFirstObjectByType<PlayerMoviment>();
-
-        if (player == null)
-        {
-            Debug.Log("Nao achei o player");
-        }
-        playerDamage = player.GetComponent<Damage>();
-    }
 
     void Start()
     {
+        player = FindFirstObjectByType<PlayerMoviment>();
+        playerDamage = player.GetComponent<Damage>();
         slider.value = CalcularPorcentagem(playerDamage.Health, playerDamage.maxHealth);
     }
 

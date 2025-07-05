@@ -1,16 +1,10 @@
 {
-    "ChaveTempo": [
-        {
-            "fragmentoNome": "ChaveTempo2",
-            "fragmentoType": 0,
-            "stackSize": 1
-        }
-    ],
+    "ChaveTempo": [],
     "ChaveMovimento": [
         {
             "fragmentoNome": "ChaveMovimento",
             "fragmentoType": 1,
-            "stackSize": 2
+            "stackSize": 3
         }
     ],
     "ChaveVida": [],
@@ -26,5 +20,81 @@
             "stackSize": 1
         }
     ],
-    "ChaveOrdem": []
+    "ChaveOrdem": [],
+    "DecksPorArma": [
+        {
+            "armaNome": "Bastão",
+            "fragmentos": [
+                {
+                    "fragmentoNome": "ChaveMovimento",
+                    "fragmentoType": 1,
+                    "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos",
+                    "fragmentoType": 3,
+                    "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos2",
+                    "fragmentoType": 3,
+                    "stackSize": 1
+                }
+            ]
+        },
+        {
+            "armaNome": "Arco",
+            "fragmentos": [
+                {
+                    "fragmentoNome": "ChaveMovimento",
+                    "fragmentoType": 1,
+                    "stackSize": 1
+                }
+            ]
+        },
+        {
+            "armaNome": "Marreta",
+            "fragmentos": [
+                {
+                    "fragmentoNome": "ChaveMovimento",
+                    "fragmentoType": 1,
+                    "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos",
+                    "fragmentoType": 3,
+                    "stackSize": 1
+                }
+            ]
+        },
+        {
+            "armaNome": "Luva",
+            "fragmentos": []
+        },
+        {
+            "armaNome": "Mascara",
+            "fragmentos": []
+        },
+        {
+            "armaNome": "Sino",
+            "fragmentos": [
+                {
+                    "fragmentoNome": "ChaveMovimento",
+                    "fragmentoType": 1,
+                    "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos",
+                    "fragmentoType": 3,
+                    "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos2",
+                    "fragmentoType": 3,
+                    "stackSize": 1
+                }
+            ]
+        }
+    ],
+    "armaSelecionada": "Bastão"
 }

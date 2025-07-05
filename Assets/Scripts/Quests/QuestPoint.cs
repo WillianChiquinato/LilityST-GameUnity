@@ -28,9 +28,9 @@ public class QuestPoint : MonoBehaviour
 
     void OnEnable()
     {
-        if (Sistema_Pause.instance != null)
+        if (GameManager.instance != null)
         {
-            Sistema_Pause.instance.questEvents.OnQuestStateChanged += QuestStateChanged;
+            GameManager.instance.questEvents.OnQuestStateChanged += QuestStateChanged;
         }
     }
 
@@ -49,11 +49,11 @@ public class QuestPoint : MonoBehaviour
 
             if (state == QuestsState.PODE_INICIAR && Startpoint)
             {
-                Sistema_Pause.instance.questEvents.StartQuest(QuestId);
+                GameManager.instance.questEvents.StartQuest(QuestId);
             }
             else if (state == QuestsState.PODE_FINALIZAR && Endpoint)
             {
-                Sistema_Pause.instance.questEvents.FinishedQuest(QuestId);
+                GameManager.instance.questEvents.FinishedQuest(QuestId);
             }
         }
 
@@ -64,9 +64,9 @@ public class QuestPoint : MonoBehaviour
 
     void OnDisable()
     {
-        if (Sistema_Pause.instance != null)
+        if (GameManager.instance != null)
         {
-            Sistema_Pause.instance.questEvents.OnQuestStateChanged -= QuestStateChanged;
+            GameManager.instance.questEvents.OnQuestStateChanged -= QuestStateChanged;
         }
     }
 
@@ -91,7 +91,7 @@ public class QuestPoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Sistema_Pause.instance.player.entrar && !pointStarted)
+            if (GameManager.instance.player.entrar && !pointStarted)
             {
                 Debug.Log("SubmitPressed adicionado!");
                 SubmitPressed();
@@ -106,7 +106,7 @@ public class QuestPoint : MonoBehaviour
             if (!pointStarted)
             {
                 PlayerEstaPerto = false;
-                PlayerAtivo = false;    
+                PlayerAtivo = false;
             }
         }
     }

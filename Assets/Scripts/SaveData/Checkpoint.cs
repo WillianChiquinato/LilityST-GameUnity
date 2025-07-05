@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Checkpoints : MonoBehaviour
 {
-    public Sistema_Pause gameManager;
+    public GameManager gameManager;
 
     [Header("Checkpoints")]
     public List<Collider2D> collidersNoTrigger = new List<Collider2D>();
@@ -18,7 +18,6 @@ public class Checkpoints : MonoBehaviour
     public CinemachineFramingTransposer framingPosition;
 
     [Header("Player e variaveis")]
-    [SerializeField] private PlayerMoviment player;
     public bool isMovingAutomatically = false;
     public float direcao;
     public bool triggerCheckpoint;
@@ -26,16 +25,18 @@ public class Checkpoints : MonoBehaviour
 
     void Awake()
     {
-        gameManager = GameObject.FindFirstObjectByType<Sistema_Pause>();
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
         paiCheckpoint = transform.parent != null ? transform.parent.gameObject : gameObject;
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
-        player = GameObject.FindFirstObjectByType<PlayerMoviment>();
+    }
 
-        if (player == null)
+    void Start()
+    {
+        if (GameManager.instance.player == null)
         {
             Debug.LogError("PlayerMoviment não encontrado! Verifique se o Player tem esse componente.");
         }
@@ -43,7 +44,7 @@ public class Checkpoints : MonoBehaviour
 
     void Update()
     {
-        direcao = (player.transform.position.x - transform.position.x) > 0 ? 1f : -1f;
+        direcao = (GameManager.instance.player.transform.position.x - transform.position.x) > 0 ? 1f : -1f;
 
         if (gameManager.UISavePoint.activeSelf == true)
         {
@@ -63,13 +64,13 @@ public class Checkpoints : MonoBehaviour
 
         if (playerNoTrigger)
         {
-            if (player.entrar)
+            if (GameManager.instance.player.entrar)
             {
-                if (Savepoint.instance != null && player != null)
+                if (Savepoint.instance != null && GameManager.instance.player != null)
                 {
                     Savepoint.instance.SaveCheckpoint(
                         transform.position,
-                        player.GetComponent<Damage>().maxHealth,
+                        GameManager.instance.player.GetComponent<Damage>().maxHealth,
                         SaveData.Instance.CameraCorrected,
                         SaveData.Instance.DashUnlocked,
                         SaveData.Instance.WalljumpUnlocked,
@@ -104,28 +105,28 @@ public class Checkpoints : MonoBehaviour
     IEnumerator AutoMoveSave()
     {
         isMovingAutomatically = true;
-        player.canMove = false;
+        GameManager.instance.player.canMove = false;
         if (direcao == -1)
         {
-            player.IsRight = true;
+            GameManager.instance.player.IsRight = true;
         }
         else
         {
-            player.IsRight = false;
+            GameManager.instance.player.IsRight = false;
         }
 
-        while (paiCheckpoint.transform.position.x != player.transform.position.x)
+        while (paiCheckpoint.transform.position.x != GameManager.instance.player.transform.position.x)
         {
-            float step = player.speed * Time.deltaTime;
-            player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(paiCheckpoint.transform.position.x, player.transform.position.y, player.transform.position.z), step);
-            player.IsMoving = true;
+            float step = GameManager.instance.player.speed * Time.deltaTime;
+            GameManager.instance.player.transform.position = Vector3.MoveTowards(GameManager.instance.player.transform.position, new Vector3(paiCheckpoint.transform.position.x, GameManager.instance.player.transform.position.y, GameManager.instance.player.transform.position.z), step);
+            GameManager.instance.player.IsMoving = true;
             yield return null;
         }
-        player.IsMoving = false;
+        GameManager.instance.player.IsMoving = false;
 
         yield return new WaitForSeconds(0.7f);
-        player.animacao.SetBool("Checkpoint", true);
-        player.IsRight = false;
+        GameManager.instance.player.animacao.SetBool("Checkpoint", true);
+        GameManager.instance.player.IsRight = false;
 
         isMovingAutomatically = true;
 

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
-    public Sistema_Pause gameManager;
+    public GameManager gameManager;
 
 
     [Header("Instances")]
@@ -261,7 +261,7 @@ public class PlayerMoviment : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindFirstObjectByType<Sistema_Pause>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void Update()

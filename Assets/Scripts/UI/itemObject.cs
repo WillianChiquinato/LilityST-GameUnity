@@ -7,12 +7,10 @@ public class itemObject : MonoBehaviour
     [SerializeField] private TextMeshPro texto;
     [SerializeField] public ItemData itemData;
     [SerializeField] public FragmentoData fragmentoData;
-    public PlayerMoviment playerMoviment;
 
     void Awake()
     {
         texto = GetComponentInChildren<TextMeshPro>();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         SetupVisual();
     }
 

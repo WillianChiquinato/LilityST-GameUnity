@@ -2,14 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class ArmasSystem : MonoBehaviour
 {
+    [System.Serializable]
+    public class DeckPorArma
+    {
+        public string armaNome;
+        public List<FragmentoItem> fragmentos = new List<FragmentoItem>();
+    }
+
+    public List<DeckPorArma> DecksPorArma = new List<DeckPorArma>();
+
     public static ArmasSystem instance;
 
     public int maxDeckSize = 5;
     public List<FragmentoData> deck = new List<FragmentoData>();
-
-    private List<FragmentoData> tempDeckItems = new List<FragmentoData>();
 
     private void Awake()
     {
@@ -21,11 +29,6 @@ public class ArmasSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Update()
-    {
-        AtualizarDeckPlayer();
     }
 
     public bool AdicionarAoDeck(FragmentoData item)
@@ -55,64 +58,21 @@ public class ArmasSystem : MonoBehaviour
 
     public bool PodeAdicionarFragmento(FragmentoData item)
     {
-        if (deck.Contains(item))
-        {
-            Debug.Log("Essa carta já está no deck.");
-            return false;
-        }
-
         int countTempo = deck.Count(c => c.TipoFragmento == fragmentoType.Tempo);
         int countMovimento = deck.Count(c => c.TipoFragmento == fragmentoType.Movimento);
         int countVida = deck.Count(c => c.TipoFragmento == fragmentoType.Vida);
         int countCaos = deck.Count(c => c.TipoFragmento == fragmentoType.Caos);
         int countOrdem = deck.Count(c => c.TipoFragmento == fragmentoType.Ordem);
 
-        return PodeAdicionarFragmento(item, countTempo, countMovimento, countVida, countCaos, countOrdem);
-    }
-
-    public bool PodeAdicionarFragmento(FragmentoData item, int countTempo, int countMovimento, int countVida, int countCaos, int countOrdem)
-    {
-        switch (item.TipoFragmento)
+        return item.TipoFragmento switch
         {
-            case fragmentoType.Tempo:
-                if (countTempo >= 1)
-                {
-                    Debug.Log("Você só pode adicionar até 1 cartas cinzas.");
-                    return false;
-                }
-                break;
-            case fragmentoType.Movimento:
-                if (countMovimento >= 1)
-                {
-                    Debug.Log("Você só pode adicionar até 1 cartas douradas.");
-                    return false;
-                }
-                break;
-            case fragmentoType.Vida:
-                if (countVida >= 1)
-                {
-                    Debug.Log("Você só pode adicionar 1 carta espectral.");
-                    return false;
-                }
-                break;
-
-            case fragmentoType.Caos:
-                if (countCaos >= 1)
-                {
-                    Debug.Log("Você só pode adicionar 1 carta vermelha.");
-                    return false;
-                }
-                break;
-
-            case fragmentoType.Ordem:
-                if (countOrdem >= 1)
-                {
-                    Debug.Log("Você só pode adicionar 1 carta azul.");
-                    return false;
-                }
-                break;
-        }
-        return true;
+            fragmentoType.Tempo => countTempo < 6,
+            fragmentoType.Movimento => countMovimento < 6,
+            fragmentoType.Vida => countVida < 6,
+            fragmentoType.Caos => countCaos < 6,
+            fragmentoType.Ordem => countOrdem < 6,
+            _ => true
+        };
     }
 
     public void AtualizarDeckUI(FragmentoData item)
@@ -122,8 +82,18 @@ public class ArmasSystem : MonoBehaviour
         FragmentoSystem.instance.AddToDeckBuilder(item);
     }
 
-    public void AtualizarDeckPlayer()
+    public int GetPrimeiroSlotVazioOuFragmentoExistente(FragmentoData fragData)
     {
-        //Atualizar atributos das armas.
+        if (deck.Contains(fragData))
+            return -1;
+
+        for (int i = 0; i < maxDeckSize; i++)
+        {
+            if (i >= deck.Count || deck[i] == null)
+                return i;
+        }
+
+        // Deck cheio
+        return -1;
     }
 }

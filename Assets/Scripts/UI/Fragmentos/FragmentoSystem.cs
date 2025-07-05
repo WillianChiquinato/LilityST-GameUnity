@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class FragmentoSystem : MonoBehaviour
 {
+    public List<DeckPorArmaSaveData> DecksPorArma = new();
     public static FragmentoSystem instance;
 
     public List<FragmentoData> startEquipament;
@@ -59,6 +61,7 @@ public class FragmentoSystem : MonoBehaviour
 
     void Start()
     {
+        InicializarDecks();
         ChaveTempo = new List<FragmentoItem>();
         ChaveTempoDicionary = new Dictionary<FragmentoData, FragmentoItem>();
 
@@ -98,6 +101,19 @@ public class FragmentoSystem : MonoBehaviour
         else
         {
             LoadFragmento();
+            SeletorArmas.instance.SelectArma(0);
+        }
+    }
+
+    void InicializarDecks()
+    {
+        string[] armas = new[] { "Bastão", "Arco", "Marreta", "Luva", "Mascara", "Sino" };
+        foreach (var arma in armas)
+        {
+            if (!DecksPorArma.Any(d => d.armaNome == arma))
+            {
+                DecksPorArma.Add(new DeckPorArmaSaveData { armaNome = arma });
+            }
         }
     }
 
@@ -132,6 +148,9 @@ public class FragmentoSystem : MonoBehaviour
         public List<FragmentoItemSaveData> ChaveVida = new List<FragmentoItemSaveData>();
         public List<FragmentoItemSaveData> ChaveCaos = new List<FragmentoItemSaveData>();
         public List<FragmentoItemSaveData> ChaveOrdem = new List<FragmentoItemSaveData>();
+
+        public List<DeckPorArmaSaveData> DecksPorArma = new();
+        public string armaSelecionada = "Bastão";
     }
 
     public void UpdateInventory()
@@ -370,6 +389,7 @@ public class FragmentoSystem : MonoBehaviour
     {
         fragmentoSaveData saveData = new fragmentoSaveData();
 
+        // Salvar os fragmentos gerais
         foreach (var item in ChaveTempo)
         {
             saveData.ChaveTempo.Add(new FragmentoItemSaveData
@@ -420,103 +440,119 @@ public class FragmentoSystem : MonoBehaviour
             });
         }
 
+        // Salvar os decks por arma
+        foreach (var deck in DecksPorArma)
+        {
+            DeckPorArmaSaveData deckSave = new DeckPorArmaSaveData();
+            deckSave.armaNome = deck.armaNome;
+
+            foreach (var frag in deck.fragmentos)
+            {
+                if (frag == null)
+                {
+                    Debug.LogWarning($"Fragmento inválido no deck '{deck.armaNome}', ignorando.");
+                    continue;
+                }
+
+                // aqui você monta o save data a partir do FragmentoItem
+                deckSave.fragmentos.Add(new FragmentoItemSaveData
+                {
+                    fragmentoNome = frag.fragmentoNome,
+                    fragmentoType = frag.fragmentoType,
+                    stackSize = frag.stackSize
+                });
+            }
+
+            saveData.DecksPorArma.Add(deckSave);
+        }
+
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(Application.dataPath + "/Scripts/SaveData/Inventario/fragmentos.json", json);
 
-        Debug.Log("Fragmentos salvas em: " + Application.dataPath + "/Scripts/SaveData/Inventario/fragmentos.json");
+        Debug.Log("Fragmentos e decks salvos em: " + Application.dataPath + "/Scripts/SaveData/Inventario/fragmentos.json");
     }
 
     public void LoadFragmento()
     {
         string path = Application.dataPath + "/Scripts/SaveData/Inventario/fragmentos.json";
 
-        if (File.Exists(path))
+        if (!File.Exists(path))
         {
-            string json = File.ReadAllText(path);
-            Debug.Log("Arquivo JSON carregado: " + json);
-            fragmentoSaveData FragmentosInventoryData = JsonUtility.FromJson<fragmentoSaveData>(json);
-
-            // Limpar inventário antes de carregar
-            ChaveTempo.Clear();
-            ChaveMovimento.Clear();
-            ChaveVida.Clear();
-            ChaveCaos.Clear();
-            ChaveOrdem.Clear();
-            Debug.Log("CLEAR INVENTORY");
-
-            // Carregar os itens de cada tipo
-            foreach (var fragmentoData in FragmentosInventoryData.ChaveTempo)
-            {
-                FragmentoData item = GetFragmentoData(fragmentoData.fragmentoNome, fragmentoData.fragmentoType);
-                if (item != null)
-                {
-                    for (int i = 0; i < fragmentoData.stackSize; i++)
-                    {
-                        AddItem(item);
-                        Debug.Log("Adicionando item: " + fragmentoData.fragmentoNome + " com quantidade: " + fragmentoData.stackSize);
-                    }
-                }
-            }
-
-            foreach (var fragmentoData in FragmentosInventoryData.ChaveMovimento)
-            {
-                FragmentoData item = GetFragmentoData(fragmentoData.fragmentoNome, fragmentoData.fragmentoType);
-                if (item != null)
-                {
-                    for (int i = 0; i < fragmentoData.stackSize; i++)
-                    {
-                        AddItem(item);
-                        Debug.Log("Adicionando item: " + fragmentoData.fragmentoNome + " com quantidade: " + fragmentoData.stackSize);
-                    }
-                }
-            }
-
-            foreach (var fragmento in FragmentosInventoryData.ChaveVida)
-            {
-                FragmentoData item = GetFragmentoData(fragmento.fragmentoNome, fragmento.fragmentoType);
-                if (item != null)
-                {
-                    for (int i = 0; i < fragmento.stackSize; i++)
-                    {
-                        AddItem(item);
-                        Debug.Log("Adicionando item: " + fragmento.fragmentoNome + " com quantidade: " + fragmento.stackSize);
-                    }
-                }
-            }
-
-            foreach (var fragmento in FragmentosInventoryData.ChaveCaos)
-            {
-                FragmentoData item = GetFragmentoData(fragmento.fragmentoNome, fragmento.fragmentoType);
-                if (item != null)
-                {
-                    for (int i = 0; i < fragmento.stackSize; i++)
-                    {
-                        AddItem(item);
-                        Debug.Log("Adicionando item: " + fragmento.fragmentoNome + " com quantidade: " + fragmento.stackSize);
-                    }
-                }
-            }
-
-            foreach (var fragmento in FragmentosInventoryData.ChaveOrdem)
-            {
-                FragmentoData item = GetFragmentoData(fragmento.fragmentoNome, fragmento.fragmentoType);
-                if (item != null)
-                {
-                    for (int i = 0; i < fragmento.stackSize; i++)
-                    {
-                        AddItem(item);
-                        Debug.Log("Adicionando item: " + fragmento.fragmentoNome + " com quantidade: " + fragmento.stackSize);
-                    }
-                }
-            }
-
-            UpdateInventory();
+            Debug.LogWarning("Arquivo de inventário não encontrado: " + path);
+            return;
         }
-        else
+
+        string json = File.ReadAllText(path);
+        fragmentoSaveData FragmentosInventoryData = JsonUtility.FromJson<fragmentoSaveData>(json);
+
+        Debug.Log("Arquivo JSON carregado.");
+
+        // Limpar inventário antes de carregar
+        ChaveTempo.Clear();
+        ChaveMovimento.Clear();
+        ChaveVida.Clear();
+        ChaveCaos.Clear();
+        ChaveOrdem.Clear();
+        DecksPorArma.Clear();
+
+        Debug.Log("Inventário limpo.");
+
+        void AddStack(FragmentoItemSaveData data)
         {
-            Debug.LogWarning("Arquivo de inventário não encontrado em: " + path);
+            FragmentoData item = GetFragmentoData(data.fragmentoNome, data.fragmentoType);
+            if (item != null)
+            {
+                for (int i = 0; i < data.stackSize; i++)
+                {
+                    AddItem(item);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Fragmento '{data.fragmentoNome}' não encontrado.");
+            }
         }
+
+        foreach (var frag in FragmentosInventoryData.ChaveTempo) AddStack(frag);
+        foreach (var frag in FragmentosInventoryData.ChaveMovimento) AddStack(frag);
+        foreach (var frag in FragmentosInventoryData.ChaveVida) AddStack(frag);
+        foreach (var frag in FragmentosInventoryData.ChaveCaos) AddStack(frag);
+        foreach (var frag in FragmentosInventoryData.ChaveOrdem) AddStack(frag);
+
+        foreach (var deckSave in FragmentosInventoryData.DecksPorArma)
+        {
+            DeckPorArmaSaveData deckData = new DeckPorArmaSaveData
+            {
+                armaNome = deckSave.armaNome,
+                fragmentos = new List<FragmentoItemSaveData>()
+            };
+
+            foreach (var frag in deckSave.fragmentos)
+            {
+                FragmentoData fragData = GetFragmentoData(frag.fragmentoNome, frag.fragmentoType);
+                if (fragData != null)
+                {
+                    deckData.fragmentos.Add(frag);
+                }
+                else
+                {
+                    Debug.LogWarning($"Fragmento '{frag.fragmentoNome}' não encontrado para deck '{deckSave.armaNome}'");
+                }
+            }
+
+            DecksPorArma.Add(deckData);
+        }
+
+        UpdateInventory();
+        string armaSelecionada = FragmentosInventoryData.armaSelecionada;
+
+        if (string.IsNullOrEmpty(armaSelecionada))
+            armaSelecionada = "Bastão";
+
+        Debug.Log($"Carregando arma selecionada: {armaSelecionada}");
+        SelecionarArma(armaSelecionada);
     }
+
 
     private FragmentoData GetFragmentoData(string ChaveName, fragmentoType type)
     {
@@ -528,4 +564,116 @@ public class FragmentoSystem : MonoBehaviour
         }
         return fragmento;
     }
+
+    [System.Serializable]
+    public class DeckPorArmaSaveData
+    {
+        public string armaNome;
+        public List<FragmentoItemSaveData> fragmentos = new();
+    }
+
+    public void SelecionarArma(string armaNome)
+    {
+        var deck = DecksPorArma.FirstOrDefault(d => d.armaNome == armaNome);
+        if (deck == null)
+        {
+            Debug.LogWarning($"Deck para arma '{armaNome}' não encontrado.");
+            return;
+        }
+
+        DeckBuilder.Clear();
+        DeckBuilderDicionary.Clear();
+        ArmasSystem.instance.deck.Clear();
+
+        for (int i = 0; i < DeckBuilderItemSlot.Length; i++)
+        {
+            if (i < deck.fragmentos.Count)
+            {
+                var fragSave = deck.fragmentos[i];
+                FragmentoData fragData = GetFragmentoData(fragSave.fragmentoNome, fragSave.fragmentoType);
+
+                if (fragData != null)
+                {
+                    FragmentoItem fragItem = new FragmentoItem(fragData);
+                    fragItem.stackSize = fragSave.stackSize;
+
+                    // ✅ Atualiza também as listas corretas
+                    DeckBuilder.Add(fragItem);
+                    if (!DeckBuilderDicionary.ContainsKey(fragData))
+                    {
+                        DeckBuilderDicionary.Add(fragData, fragItem);
+                    }
+
+                    ArmasSystem.instance.deck.Add(fragData);
+                    DeckBuilderItemSlot[i].UpdateInventory(fragItem);
+
+                    Debug.Log($"Carregado para deck '{armaNome}': {fragSave.fragmentoNome}");
+                }
+                else
+                {
+                    DeckBuilderItemSlot[i].CleanUpSlot();
+                }
+            }
+            else
+            {
+                DeckBuilderItemSlot[i].CleanUpSlot();
+            }
+        }
+    }
+
+
+    public void UpdateDeckUI(string armaNome)
+    {
+        // Busca os dados do deck para a arma selecionada
+        var deck = DecksPorArma.FirstOrDefault(d => d.armaNome == armaNome);
+
+        if (deck == null)
+        {
+            Debug.LogWarning($"Nenhum deck encontrado para arma: {armaNome}");
+            return;
+        }
+
+        Debug.Log($"Atualizando UI para arma: {armaNome}");
+
+        // slots visuais
+        for (int i = 0; i < DeckBuilderSlotParent.childCount; i++)
+        {
+            var slotTransform = DeckBuilderSlotParent.GetChild(i);
+            var slotUI = slotTransform.GetComponent<FragmentosSlot_UI>();
+
+            if (i < deck.fragmentos.Count)
+            {
+                var fragSaveData = deck.fragmentos[i];
+                var fragData = GetFragmentoData(fragSaveData.fragmentoNome, fragSaveData.fragmentoType);
+
+                if (fragData != null)
+                {
+                    var fragmentoItem = new FragmentoItem(fragData)
+                    {
+                        stackSize = fragSaveData.stackSize
+                    };
+
+                    slotUI.UpdateInventory(fragmentoItem);
+                    Debug.Log($"Slot {i}: {fragData.NomeFragmento} x{fragSaveData.stackSize}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Fragmento não encontrado nos Resources: {fragSaveData.fragmentoNome}");
+                    slotUI.CleanUpSlot();
+                }
+            }
+            else
+            {
+                // Não há fragmento para este slot, limpa.
+                slotUI.CleanUpSlot();
+            }
+        }
+
+        Debug.Log($"Atualizando deck UI para arma: '{armaNome}'");
+        foreach (var decks in DecksPorArma)
+        {
+            Debug.Log($"Deck disponível: '{decks.armaNome}' com {decks.fragmentos.Count} fragmentos");
+        }
+    }
+
 }

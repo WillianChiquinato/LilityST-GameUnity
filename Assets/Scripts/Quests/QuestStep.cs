@@ -11,7 +11,7 @@ public abstract class QuestStep : MonoBehaviour
     {
         this.questID = questID;
         this.stepIndex = currentStepIndex;
-        if(questStepState != null && questStepState != "")
+        if (questStepState != null && questStepState != "")
         {
             StoreQuestStepState(questStepState);
         }
@@ -22,14 +22,14 @@ public abstract class QuestStep : MonoBehaviour
         if (!finalizado)
         {
             finalizado = true;
-            Sistema_Pause.instance.questEvents.AdvancedQuest(questID);
+            GameManager.instance.questEvents.AdvancedQuest(questID);
             Destroy(this.gameObject, 0.3f);
         }
     }
 
     protected void ChangeState(string newState)
     {
-        Sistema_Pause.instance.questEvents.QuestStepStateChange(questID, stepIndex, new QuestsStepState(newState));
+        GameManager.instance.questEvents.QuestStepStateChange(questID, stepIndex, new QuestsStepState(newState));
     }
 
     protected abstract void StoreQuestStepState(string state);

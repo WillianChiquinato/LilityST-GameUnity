@@ -76,8 +76,13 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
 
         if (Fragmento != null && Fragmento.FragmentoData != null)
         {
-            //Ele pega o index do slot de destino baseado na quantidade de cartas no deck.
-            int slotDestinoIndex = ArmasSystem.instance.deck.Count;
+            int slotDestinoIndex = ArmasSystem.instance.GetPrimeiroSlotVazioOuFragmentoExistente(Fragmento.FragmentoData);
+
+            if (slotDestinoIndex == -1)
+            {
+                Debug.Log("Deck cheio! Não há slot disponível para este fragmento.");
+                return;
+            }
             Transform destinoSlot = FragmentoSystem.instance.DeckBuilderSlotParent.GetChild(slotDestinoIndex).transform;
 
             // Move a carta para o DeckBuilder antes de adicionar
@@ -155,7 +160,7 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
             }
             else
             {
-                Debug.Log("Deck está cheio! Não é possível adicionar mais cartas.");
+                Debug.Log("Não é possível adicionar mais.");
             }
         }
         else

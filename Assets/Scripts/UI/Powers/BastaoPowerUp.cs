@@ -4,7 +4,6 @@ using UnityEngine;
 public class BastaoPowerUp : PowerUp
 {
     public SaveData saveData;
-    public PlayerMoviment playerMoviment;
 
     public TextMeshPro textoAcima;
     public string textoIndicator;
@@ -12,7 +11,6 @@ public class BastaoPowerUp : PowerUp
     protected override void Awake()
     {
         base.Awake();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         startPosition = transform.position;
 
         saveData = SaveData.Instance;
@@ -22,9 +20,9 @@ public class BastaoPowerUp : PowerUp
     protected override void Update()
     {
         base.Update();
-        if (playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).IsName("IsPowerUp") && playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9)
+        if (GameManager.instance.playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).IsName("IsPowerUp") && GameManager.instance.playerMoviment.animacao.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9)
         {
-            playerMoviment.animacao.SetBool("isPowerUp", false);
+            GameManager.instance.playerMoviment.animacao.SetBool("isPowerUp", false);
             Destroy(this.gameObject);
         }
     }
@@ -34,9 +32,9 @@ public class BastaoPowerUp : PowerUp
         if (collision.gameObject.CompareTag("Player"))
         {
             textoAcima.text = textoIndicator;
-            if (playerMoviment.entrar)
+            if (GameManager.instance.playerMoviment.entrar)
             {
-                playerMoviment.animacao.SetBool("isPowerUp", true);
+                GameManager.instance.playerMoviment.animacao.SetBool("isPowerUp", true);
                 if (!SaveData.Instance.powerUps.Contains(PowerUps.Bastao))
                 {
                     SaveData.Instance.powerUps.Add(PowerUps.Bastao);
