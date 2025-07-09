@@ -339,13 +339,15 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        if (elapsedTime >= 5 || Input.GetMouseButtonDown(1) && RecuarAtirar == true)
+        if (elapsedTime >= 3 || Input.GetMouseButtonDown(1) && RecuarAtirar)
         {
             //ARCO arrumar
             bow.bodyCamera = false;
 
             animacao.SetBool(animationstrings.Powers, false);
+            bow.playerArco.gameObject.SetActive(false);
             bow.gameObject.SetActive(false);
+            GetComponent<SpriteRenderer>().enabled = true;
             Time.timeScale = 1f;
             tempo = false;
             elapsedTime = 0f;
@@ -356,7 +358,7 @@ public class PlayerMoviment : MonoBehaviour
                 nuss.SetActive(false);
             }
         }
-        if (elapsedTime >= 2f)
+        if (elapsedTime >= 1.5f)
         {
             RecuarAtirar = true;
         }
@@ -626,10 +628,12 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (touching.IsGrouded && bow.NewArrow == null)
             {
+                GetComponent<SpriteRenderer>().enabled = false;
                 tempo = true;
                 bow.bodyCamera = true;
                 animacao.SetBool(animationstrings.Powers, true);
                 bow.gameObject.SetActive(true);
+                bow.playerArco.gameObject.SetActive(true);
                 bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
             }
         }

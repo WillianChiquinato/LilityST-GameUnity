@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
+    [Header("References")]
+    public PlayerArco playerArco;
     public PlayerMoviment playerMoviment;
     public Rigidbody2D Arrow;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -23,7 +25,6 @@ public class Bow : MonoBehaviour
     public float SpaceEntreEles;
     public bool Respawn;
 
-
     public Camera cameraArco;
     public Vector2 offset;
     [HideInInspector]
@@ -32,6 +33,7 @@ public class Bow : MonoBehaviour
     public Vector3 newOffset;
 
 
+    [Header("Virada da camera")]
     //Virada da camera
     public float targetOffsetX = 2f;
     public float transitionDuration = 2f;
@@ -40,9 +42,20 @@ public class Bow : MonoBehaviour
     private float transitionStartTime;
     public bool bodyCamera;
 
+    [Header("Partes do corpo para animação")]
+    public Transform tronco;
+    public Transform cabeca;
+    public Transform tanga;
+    public Transform bracoDireito;
+    public Transform bracoEsquerdo;
+    public Transform ArcoAnim;
+
     void Start()
     {
+        playerArco = GameObject.FindFirstObjectByType<PlayerArco>();
+        playerArco.gameObject.SetActive(false);
         gameObject.SetActive(false);
+
         cameraArco = FindFirstObjectByType<Camera>();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
@@ -56,7 +69,6 @@ public class Bow : MonoBehaviour
             points[i].gameObject.SetActive(false);
         }
     }
-
 
     void Update()
     {
@@ -88,26 +100,28 @@ public class Bow : MonoBehaviour
         Vector3 mousePositionArco = cameraArco.ScreenToWorldPoint(Input.mousePosition);
         Vector2 BowPosition = transform.position;
         Vector2 mousePosition = new Vector2(mousePositionArco.x + offset.x, mousePositionArco.y + offset.y);
-
         Direcao = mousePosition - BowPosition;
         transform.right = Direcao;
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (playerMoviment.Atirar == true)
+            if (playerMoviment.Atirar)
             {
-                //Projetil do voador
                 Shoot();
+                tronco.GetComponent<Animator>().SetTrigger("PowerUp");
+                cabeca.GetComponent<Animator>().SetTrigger("PowerUp");
+                tanga.GetComponent<Animator>().SetTrigger("PowerUp");
+                bracoDireito.GetComponent<Animator>().SetTrigger("PowerUp");
+                bracoEsquerdo.GetComponent<Animator>().SetTrigger("PowerUp");
+                ArcoAnim.GetComponent<Animator>().SetTrigger("PowerUp");
             }
         }
-
 
         if (NewArrow)
         {
             StartCoroutine(delayAnimation());
             bodyCamera = false;
             transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
-            playerMoviment.animacao.SetBool(animationstrings.Powers, false);
             Time.timeScale = 1f;
             playerMoviment.tempo = false;
             playerMoviment.elapsedTime = 0f;
@@ -165,6 +179,9 @@ public class Bow : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         gameObject.SetActive(false);
+        playerArco.gameObject.SetActive(false);
+        playerMoviment.GetComponent<SpriteRenderer>().enabled = true;
+        playerMoviment.animacao.SetBool(animationstrings.Powers, false);
 
         foreach (var DestruirCaminho in points)
         {
