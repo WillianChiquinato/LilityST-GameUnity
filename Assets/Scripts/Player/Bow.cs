@@ -101,7 +101,7 @@ public class Bow : MonoBehaviour
         Vector2 BowPosition = transform.position;
         Vector2 mousePosition = new Vector2(mousePositionArco.x + offset.x, mousePositionArco.y + offset.y);
         Direcao = mousePosition - BowPosition;
-        transform.right = Direcao;
+        transform.right = Direcao.normalized;
 
         if (Input.GetMouseButtonDown(0))
         {
