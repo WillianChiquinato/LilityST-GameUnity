@@ -69,6 +69,7 @@ public class PlayerMoviment : MonoBehaviour
 
     //Sobre o arco
     [Header("Bow")]
+    public bool arcoEffect = false;
     public PlayerInput playerInput;
     Bow bow;
     public bool Atirar = false;
@@ -341,6 +342,7 @@ public class PlayerMoviment : MonoBehaviour
 
         if (elapsedTime >= 3 || Input.GetMouseButtonDown(1) && RecuarAtirar)
         {
+            arcoEffect = false;
             //ARCO arrumar
             bow.bodyCamera = false;
 
@@ -502,15 +504,18 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (context.started && timerDash < 0f)
             {
-                isDashing = true;
-                playerInput.enabled = false;
-                animacao.SetBool(animationstrings.isDashing, true);
-                timerDash = dashCooldown;
-                DamageScript.isInvicible = true;
+                if (!arcoEffect)
+                {
+                    isDashing = true;
+                    playerInput.enabled = false;
+                    animacao.SetBool(animationstrings.isDashing, true);
+                    timerDash = dashCooldown;
+                    DamageScript.isInvicible = true;
 
-                rb.linearVelocity = new Vector2(dashSpeed * facingDirecao, 0);
+                    rb.linearVelocity = new Vector2(dashSpeed * facingDirecao, 0);
 
-                rb.gravityScale = 0f;
+                    rb.gravityScale = 0f;
+                }
             }
         }
     }
@@ -561,14 +566,17 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
         {
-            WallstateTimer -= Time.deltaTime;
-            wallSlide = true;
-            animacao.SetBool(animationstrings.IsWallSliding, true);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
-
-            if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
+            if (!arcoEffect)
             {
-                WallJump();
+                WallstateTimer -= Time.deltaTime;
+                wallSlide = true;
+                animacao.SetBool(animationstrings.IsWallSliding, true);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
+
+                if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
+                {
+                    WallJump();
+                }
             }
         }
         else
@@ -598,7 +606,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SaveData.Instance.attackUnlocked)
         {
-            if (context.performed)
+            if (context.performed && !arcoEffect)
             {
                 Atacar = true;
                 if (touching.IsGrouded)
@@ -628,6 +636,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (touching.IsGrouded && bow.NewArrow == null)
             {
+                arcoEffect = true;
                 GetComponent<SpriteRenderer>().enabled = false;
                 tempo = true;
                 bow.bodyCamera = true;
@@ -672,7 +681,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !arcoEffect)
         {
             entrar = true;
         }
@@ -686,19 +695,22 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (context.started && touching.IsGrouded && healingTimer >= 2)
         {
-            //Logica para slider
-            if (DamageScript.Health == DamageScript.maxHealth || potion_Script.potionInt <= 0)
+            if (!arcoEffect)
             {
-                //Logica ainda para 
-                //Ver mais tarde no projeto
-                Debug.Log("Nada curado");
-            }
-            else
-            {
-                healing = true;
-                potion_Script.HealigMetod();
-                animacao.SetBool(animationstrings.IsHealing, true);
-                DamageScript.Health++;
+                //Logica para slider
+                if (DamageScript.Health == DamageScript.maxHealth || potion_Script.potionInt <= 0)
+                {
+                    //Logica ainda para 
+                    //Ver mais tarde no projeto
+                    Debug.Log("Nada curado");
+                }
+                else
+                {
+                    healing = true;
+                    potion_Script.HealigMetod();
+                    animacao.SetBool(animationstrings.IsHealing, true);
+                    DamageScript.Health++;
+                }
             }
         }
     }
