@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(100)]
 public class SeletorArmas : MonoBehaviour
 {
     public static SeletorArmas instance;
@@ -14,7 +15,7 @@ public class SeletorArmas : MonoBehaviour
     [Header("Conteudo UI")]
     public Image conteudoUI;
 
-    readonly string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Mascara", "Sino" };
+    public string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Mascara", "Sino" };
 
     void Awake()
     {
@@ -61,7 +62,8 @@ public class SeletorArmas : MonoBehaviour
         currentIndex = index;
 
         string armaAtual = nomesDasArmas[currentIndex];
-        FragmentoSystem.instance.UpdateDeckUI(armaAtual);
+
+        ArmasSystem.instance.AtualizarDeckUI(armaAtual);
     }
 
     public void NextArma()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using TMPro;
@@ -62,13 +63,16 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
             return;
         }
 
-        if (ArmasSystem.instance.deck.Count >= ArmasSystem.instance.maxDeckSize)
+        string armaAtual = SeletorArmas.instance.nomesDasArmas[SeletorArmas.instance.currentIndex];
+        var deckAtual = ArmasSystem.instance.decksPorArmaRuntime[armaAtual];
+
+        if (deckAtual.Count >= ArmasSystem.instance.maxDeckSize)
         {
             Debug.Log("Deck está cheio! Não é possível adicionar mais cartas.");
             return;
         }
 
-        if (!ArmasSystem.instance.PodeAdicionarFragmento(Fragmento.FragmentoData))
+        if (!ArmasSystem.instance.PodeAdicionarFragmento(deckAtual, Fragmento.FragmentoData))
         {
             Debug.Log("Você atingiu o limite para esse tipo de fragmento!");
             return;
@@ -76,19 +80,20 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
 
         if (Fragmento != null && Fragmento.FragmentoData != null)
         {
-            int slotDestinoIndex = ArmasSystem.instance.GetPrimeiroSlotVazioOuFragmentoExistente(Fragmento.FragmentoData);
+            int slotDestinoIndex = ArmasSystem.instance.GetPrimeiroSlotVazioOuFragmentoExistente(deckAtual, Fragmento.FragmentoData);
 
             if (slotDestinoIndex == -1)
             {
                 Debug.Log("Deck cheio! Não há slot disponível para este fragmento.");
                 return;
             }
+
             Transform destinoSlot = FragmentoSystem.instance.DeckBuilderSlotParent.GetChild(slotDestinoIndex).transform;
 
             // Move a carta para o DeckBuilder antes de adicionar
             MoveFragmentoToDeckBuilder(destinoSlot, () =>
             {
-                AdicionarFragmentoAoDeck();
+                AdicionarFragmentoAoDeck(armaAtual);
             });
         }
         else
@@ -148,11 +153,11 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
     }
 
 
-    private void AdicionarFragmentoAoDeck()
+    private void AdicionarFragmentoAoDeck(string armaAtual)
     {
         if (Fragmento.FragmentoData.TipoFragmento == fragmentoType.Tempo || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Movimento || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Vida || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Caos || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Ordem)
         {
-            bool adicionou = ArmasSystem.instance.AdicionarAoDeck(Fragmento.FragmentoData);
+            bool adicionou = ArmasSystem.instance.AdicionarAoDeck(armaAtual, Fragmento.FragmentoData);
 
             if (adicionou)
             {
@@ -169,3 +174,4 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
         }
     }
 }
+

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &612524346119926847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2431,6 +2431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629152d0504e7414f885a787480e0590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backContentLivro: {fileID: 12272697800570960}
+  DecksPorArma: []
   startEquipament:
   - {fileID: 11400000, guid: 64316751f4b25db4db30a2846759edb0, type: 2}
   - {fileID: 11400000, guid: 941e5ec157752144ea576a183f26d94e, type: 2}
@@ -2471,6 +2473,12 @@ MonoBehaviour:
   nextButton: {fileID: 3559746219505091660}
   currentIndex: 0
   conteudoUI: {fileID: 8660966511602153886}
+  nomesDasArmas:
+  - "Bast\xE3o"
+  - Arco
+  - Marreta
+  - Mascara
+  - Sino
 --- !u!1 &1182625222942507940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,7 +2718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8d00926ec629e4281e30823ab9a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   slider: {fileID: 4699295787057609854}
 --- !u!1 &1250498474593158009
 GameObject:
@@ -14558,6 +14565,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a823c5fa100d22746a2a956681c90228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData:
+    ChaveTempo: []
+    ChaveMovimento: []
+    ChaveVida: []
+    ChaveCaos: []
+    ChaveOrdem: []
+    DecksPorArma: []
+    armaSelecionada: "Bast\xE3o"
   maxDeckSize: 5
   deck: []
 --- !u!1 &7133072271003277063

@@ -437,6 +437,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8693427636072404807}
   - component: {fileID: 5622870845906274581}
+  - component: {fileID: 4195023517029188421}
+  - component: {fileID: 343981235343712849}
   m_Layer: 0
   m_Name: Lilith_weapons-Pernas
   m_TagString: Untagged
@@ -514,6 +516,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4195023517029188421
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395906432310891783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b35805b1921177429e9d25be7c1c017, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &343981235343712849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395906432310891783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ebd23b0028ac14ab917f4e6583a865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  animTorax: {fileID: 7037904220810092492}
+  estaVirado: 0
 --- !u!1 &2436492943533295347
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,10 +798,11 @@ MonoBehaviour:
   jumpBufferFinal: 0
   arcoEffect: 0
   playerInput: {fileID: 0}
+  bow: {fileID: 0}
   Atirar: 0
   tempo: 0
   targetTimeScale: 0.3
-  duration: 1
+  duration: 2
   elapsedTime: 0
   facingDirecao: 1
   wallSlide: 0

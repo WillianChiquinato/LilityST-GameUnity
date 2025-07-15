@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FragmentoSystem : MonoBehaviour
 {
+    public GameObject backContentLivro;
     public List<DeckPorArmaSaveData> DecksPorArma = new();
     public static FragmentoSystem instance;
 
@@ -61,7 +62,8 @@ public class FragmentoSystem : MonoBehaviour
 
     void Start()
     {
-        InicializarDecks();
+        backContentLivro.SetActive(false);
+
         ChaveTempo = new List<FragmentoItem>();
         ChaveTempoDicionary = new Dictionary<FragmentoData, FragmentoItem>();
 
@@ -140,6 +142,7 @@ public class FragmentoSystem : MonoBehaviour
         public int stackSize;
     }
 
+    private fragmentoSaveData saveData;
     [System.Serializable]
     public class fragmentoSaveData
     {
@@ -441,27 +444,18 @@ public class FragmentoSystem : MonoBehaviour
         }
 
         // Salvar os decks por arma
-        foreach (var deck in DecksPorArma)
+        foreach (var kvp in ArmasSystem.instance.decksPorArmaRuntime)
         {
-            DeckPorArmaSaveData deckSave = new DeckPorArmaSaveData();
-            deckSave.armaNome = deck.armaNome;
-
-            foreach (var frag in deck.fragmentos)
+            DeckPorArmaSaveData deckSave = new DeckPorArmaSaveData
             {
-                if (frag == null)
+                armaNome = kvp.Key,
+                fragmentos = kvp.Value.Select(frag => new FragmentoItemSaveData
                 {
-                    Debug.LogWarning($"Fragmento inválido no deck '{deck.armaNome}', ignorando.");
-                    continue;
-                }
-
-                // aqui você monta o save data a partir do FragmentoItem
-                deckSave.fragmentos.Add(new FragmentoItemSaveData
-                {
-                    fragmentoNome = frag.fragmentoNome,
-                    fragmentoType = frag.fragmentoType,
-                    stackSize = frag.stackSize
-                });
-            }
+                    fragmentoNome = frag.NomeFragmento,
+                    fragmentoType = frag.TipoFragmento,
+                    stackSize = 1
+                }).ToList()
+            };
 
             saveData.DecksPorArma.Add(deckSave);
         }
@@ -495,6 +489,14 @@ public class FragmentoSystem : MonoBehaviour
         ChaveOrdem.Clear();
         DecksPorArma.Clear();
 
+        foreach (var deckSave in FragmentosInventoryData.DecksPorArma)
+        {
+            DeckPorArmaSaveData deckSaveCopy = new DeckPorArmaSaveData();
+            deckSaveCopy.armaNome = deckSave.armaNome;
+            deckSaveCopy.fragmentos = new List<FragmentoItemSaveData>(deckSave.fragmentos);
+            DecksPorArma.Add(deckSaveCopy);
+        }
+
         Debug.Log("Inventário limpo.");
 
         void AddStack(FragmentoItemSaveData data)
@@ -521,18 +523,14 @@ public class FragmentoSystem : MonoBehaviour
 
         foreach (var deckSave in FragmentosInventoryData.DecksPorArma)
         {
-            DeckPorArmaSaveData deckData = new DeckPorArmaSaveData
-            {
-                armaNome = deckSave.armaNome,
-                fragmentos = new List<FragmentoItemSaveData>()
-            };
+            List<FragmentoData> deckRuntime = new List<FragmentoData>();
 
             foreach (var frag in deckSave.fragmentos)
             {
                 FragmentoData fragData = GetFragmentoData(frag.fragmentoNome, frag.fragmentoType);
                 if (fragData != null)
                 {
-                    deckData.fragmentos.Add(frag);
+                    deckRuntime.Add(fragData);
                 }
                 else
                 {
@@ -540,7 +538,7 @@ public class FragmentoSystem : MonoBehaviour
                 }
             }
 
-            DecksPorArma.Add(deckData);
+            ArmasSystem.instance.decksPorArmaRuntime[deckSave.armaNome] = deckRuntime;
         }
 
         UpdateInventory();
@@ -551,6 +549,8 @@ public class FragmentoSystem : MonoBehaviour
 
         Debug.Log($"Carregando arma selecionada: {armaSelecionada}");
         SelecionarArma(armaSelecionada);
+        InicializarDecks();
+        saveData = JsonUtility.FromJson<fragmentoSaveData>(json);
     }
 
 
@@ -597,14 +597,13 @@ public class FragmentoSystem : MonoBehaviour
                     FragmentoItem fragItem = new FragmentoItem(fragData);
                     fragItem.stackSize = fragSave.stackSize;
 
-                    // ✅ Atualiza também as listas corretas
                     DeckBuilder.Add(fragItem);
                     if (!DeckBuilderDicionary.ContainsKey(fragData))
                     {
                         DeckBuilderDicionary.Add(fragData, fragItem);
                     }
 
-                    ArmasSystem.instance.deck.Add(fragData);
+                    ArmasSystem.instance.deck.Add(fragData); // Popula corretamente o estado interno
                     DeckBuilderItemSlot[i].UpdateInventory(fragItem);
 
                     Debug.Log($"Carregado para deck '{armaNome}': {fragSave.fragmentoNome}");
@@ -622,58 +621,67 @@ public class FragmentoSystem : MonoBehaviour
     }
 
 
-    public void UpdateDeckUI(string armaNome)
+    public void UpdateDeckUI(string armaNome, List<FragmentoData> deckAtual)
     {
-        // Busca os dados do deck para a arma selecionada
-        var deck = DecksPorArma.FirstOrDefault(d => d.armaNome == armaNome);
-
-        if (deck == null)
-        {
-            Debug.LogWarning($"Nenhum deck encontrado para arma: {armaNome}");
-            return;
-        }
-
         Debug.Log($"Atualizando UI para arma: {armaNome}");
 
-        // slots visuais
         for (int i = 0; i < DeckBuilderSlotParent.childCount; i++)
         {
             var slotTransform = DeckBuilderSlotParent.GetChild(i);
             var slotUI = slotTransform.GetComponent<FragmentosSlot_UI>();
 
-            if (i < deck.fragmentos.Count)
+            if (i < deckAtual.Count)
             {
-                var fragSaveData = deck.fragmentos[i];
-                var fragData = GetFragmentoData(fragSaveData.fragmentoNome, fragSaveData.fragmentoType);
+                var fragData = deckAtual[i];
 
                 if (fragData != null)
                 {
-                    var fragmentoItem = new FragmentoItem(fragData)
-                    {
-                        stackSize = fragSaveData.stackSize
-                    };
-
+                    var fragmentoItem = new FragmentoItem(fragData) { stackSize = 1 };
                     slotUI.UpdateInventory(fragmentoItem);
-                    Debug.Log($"Slot {i}: {fragData.NomeFragmento} x{fragSaveData.stackSize}");
+                    Debug.Log($"Slot {i}: {fragData.NomeFragmento}");
                 }
                 else
                 {
-                    Debug.LogWarning($"Fragmento não encontrado nos Resources: {fragSaveData.fragmentoNome}");
                     slotUI.CleanUpSlot();
                 }
             }
             else
             {
-                // Não há fragmento para este slot, limpa.
                 slotUI.CleanUpSlot();
             }
         }
-
-        Debug.Log($"Atualizando deck UI para arma: '{armaNome}'");
-        foreach (var decks in DecksPorArma)
-        {
-            Debug.Log($"Deck disponível: '{decks.armaNome}' com {decks.fragmentos.Count} fragmentos");
-        }
     }
 
+    public bool AdicionarFragmentoAoDeckAtual(FragmentoData fragmento)
+    {
+        string armaAtual = saveData.armaSelecionada;
+
+        DeckPorArmaSaveData deckArma = saveData.DecksPorArma
+            .FirstOrDefault(d => d.armaNome == armaAtual);
+
+        if (deckArma == null)
+        {
+            Debug.LogError($"Deck para arma '{armaAtual}' não encontrado!");
+            return false;
+        }
+
+        if (deckArma.fragmentos.Count >= ArmasSystem.instance.maxDeckSize)
+        {
+            Debug.LogWarning("Deck está cheio!");
+            return false;
+        }
+
+        var fragmentoSaveData = new FragmentoItemSaveData
+        {
+            fragmentoNome = fragmento.NomeFragmento,
+            fragmentoType = fragmento.TipoFragmento,
+            stackSize = 1
+        };
+
+        deckArma.fragmentos.Add(fragmentoSaveData);
+        ArmasSystem.instance.decksPorArmaRuntime[armaAtual].Add(fragmento);
+        ArmasSystem.instance.AtualizarDeckUI(armaAtual);
+        Debug.Log($"Fragmento '{fragmento.NomeFragmento}' adicionado ao deck de {armaAtual}.");
+        return true;
+    }
 }

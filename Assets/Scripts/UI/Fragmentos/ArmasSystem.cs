@@ -1,23 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static FragmentoSystem;
 
-[DefaultExecutionOrder(-100)]
+[DefaultExecutionOrder(-1000)]
 public class ArmasSystem : MonoBehaviour
 {
-    [System.Serializable]
-    public class DeckPorArma
-    {
-        public string armaNome;
-        public List<FragmentoItem> fragmentos = new List<FragmentoItem>();
-    }
-
-    public List<DeckPorArma> DecksPorArma = new List<DeckPorArma>();
+    public fragmentoSaveData saveData;
 
     public static ArmasSystem instance;
 
     public int maxDeckSize = 5;
     public List<FragmentoData> deck = new List<FragmentoData>();
+
+    public Dictionary<string, List<FragmentoData>> decksPorArmaRuntime = new();
 
     private void Awake()
     {
@@ -31,8 +27,10 @@ public class ArmasSystem : MonoBehaviour
         }
     }
 
-    public bool AdicionarAoDeck(FragmentoData item)
+    public bool AdicionarAoDeck(string arma, FragmentoData item)
     {
+        var deck = decksPorArmaRuntime[arma];
+
         if (deck.Contains(item))
         {
             Debug.Log("Essa carta já está no deck.");
@@ -45,55 +43,49 @@ public class ArmasSystem : MonoBehaviour
             return false;
         }
 
-        if (!PodeAdicionarFragmento(item))
+        if (!PodeAdicionarFragmento(deck, item))
         {
-            // A função interna já mostra a mensagem de erro apropriada
+            Debug.Log("Você atingiu o limite para esse tipo de fragmento.");
             return false;
         }
 
         deck.Add(item);
-        AtualizarDeckUI(item);
+        AtualizarDeckUI(arma);
         return true;
+        
+    }
+    
+
+    public bool PodeAdicionarFragmento(List<FragmentoData> deck, FragmentoData item)
+    {
+        int count = deck.Count(c => c.TipoFragmento == item.TipoFragmento);
+        return count < 6;
     }
 
-    public bool PodeAdicionarFragmento(FragmentoData item)
+    public void AtualizarDeckUI(string arma)
     {
-        int countTempo = deck.Count(c => c.TipoFragmento == fragmentoType.Tempo);
-        int countMovimento = deck.Count(c => c.TipoFragmento == fragmentoType.Movimento);
-        int countVida = deck.Count(c => c.TipoFragmento == fragmentoType.Vida);
-        int countCaos = deck.Count(c => c.TipoFragmento == fragmentoType.Caos);
-        int countOrdem = deck.Count(c => c.TipoFragmento == fragmentoType.Ordem);
+        var deck = decksPorArmaRuntime[arma];
+        FragmentoSystem.instance.UpdateDeckUI(arma, deck);
+    }
 
-        return item.TipoFragmento switch
+    public int GetPrimeiroSlotVazioOuFragmentoExistente(List<FragmentoData> deck, FragmentoData fragmento)
+    {
+        for (int i = 0; i < deck.Count; i++)
         {
-            fragmentoType.Tempo => countTempo < 6,
-            fragmentoType.Movimento => countMovimento < 6,
-            fragmentoType.Vida => countVida < 6,
-            fragmentoType.Caos => countCaos < 6,
-            fragmentoType.Ordem => countOrdem < 6,
-            _ => true
-        };
-    }
-
-    public void AtualizarDeckUI(FragmentoData item)
-    {
-        Debug.Log("Deck Atualizado: " + string.Join(", ", deck.Select(c => c.NomeFragmento)));
-
-        FragmentoSystem.instance.AddToDeckBuilder(item);
-    }
-
-    public int GetPrimeiroSlotVazioOuFragmentoExistente(FragmentoData fragData)
-    {
-        if (deck.Contains(fragData))
-            return -1;
-
-        for (int i = 0; i < maxDeckSize; i++)
-        {
-            if (i >= deck.Count || deck[i] == null)
+            if (deck[i] != null && deck[i] == fragmento)
+            {
                 return i;
+            }
         }
 
-        // Deck cheio
+        for (int i = 0; i < deck.Count; i++)
+        {
+            if (deck[i] == null)
+            {
+                return i;
+            }
+        }
+
         return -1;
     }
 }
