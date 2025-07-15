@@ -71,7 +71,7 @@ public class PlayerMoviment : MonoBehaviour
     [Header("Bow")]
     public bool arcoEffect = false;
     public PlayerInput playerInput;
-    Bow bow;
+    [HideInInspector] public Bow bow;
     public bool Atirar = false;
     [HideInInspector]
     public bool tempo;
@@ -124,7 +124,15 @@ public class PlayerMoviment : MonoBehaviour
                 {
                     if (touching.IsGrouded && speed <= maxSpeed)
                     {
-                        speed += Time.deltaTime * acelerationSpeed;
+                        if (arcoEffect)
+                        {
+                            speed = 4f;
+                            airSpeed = 4f;
+                        }
+                        else
+                        {
+                            speed += Time.deltaTime * acelerationSpeed;
+                        }
                         return speed;
                     }
                     else
@@ -315,7 +323,7 @@ public class PlayerMoviment : MonoBehaviour
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / duration;
             Time.timeScale = Mathf.Lerp(1f, targetTimeScale, t);
-            Debug.Log("Current TimeScale: " + Time.timeScale);
+            // Debug.Log("Current TimeScale: " + Time.timeScale);
         }
 
         if (Reset)
@@ -340,7 +348,7 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        if (elapsedTime >= 3 || Input.GetMouseButtonDown(1) && RecuarAtirar)
+        if (elapsedTime >= 4 || Input.GetMouseButtonDown(1) && RecuarAtirar)
         {
             arcoEffect = false;
             //ARCO arrumar
@@ -360,7 +368,7 @@ public class PlayerMoviment : MonoBehaviour
                 nuss.SetActive(false);
             }
         }
-        if (elapsedTime >= 1.5f)
+        if (elapsedTime >= 2f)
         {
             RecuarAtirar = true;
         }
@@ -375,8 +383,12 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        if (IsMoving)
+        if (IsMoving && !isDashing && !wallSlide)
         {
+            if (arcoEffect)
+            {
+                RunTiming = 0f;
+            }
             idleTimingRun = 0f;
             RunTiming += Time.deltaTime;
             if (RunTiming >= 2.0f)
@@ -384,13 +396,16 @@ public class PlayerMoviment : MonoBehaviour
                 maxSpeed = 10f;
                 accelerationTimer += Time.deltaTime;
                 float t = Mathf.Clamp01(accelerationTimer / 1f);
-                airSpeed = Mathf.Lerp(airSpeed, 10f, t * t);
+                airSpeed = Mathf.Lerp(airSpeed, maxSpeed, t * t);
 
-                speed = Mathf.Lerp(speed, 10f, t * t);
+                speed = Mathf.Lerp(speed, maxSpeed, t * t);
                 IsRunning = true;
             }
             else
             {
+                speed = 7f;
+                airSpeed = 7f;
+                maxSpeed = 7f;
                 Debug.Log("Está em movimento");
             }
         }
@@ -483,7 +498,6 @@ public class PlayerMoviment : MonoBehaviour
     private void setDirection(Vector2 moveInput)
     {
         facingDirecao = transform.localScale.x == 1 ? 1 : -1;
-
 
         if (moveInput.x > 0 && !IsRight)
         {
@@ -634,9 +648,10 @@ public class PlayerMoviment : MonoBehaviour
         //Add Savepoint.PowerUpApress
         if (context.started && SaveData.Instance.powerUps.Contains(PowerUps.Arco))
         {
-            if (touching.IsGrouded && bow.NewArrow == null)
+            if (bow.NewArrow == null)
             {
                 arcoEffect = true;
+                IsRunning = false;
                 GetComponent<SpriteRenderer>().enabled = false;
                 tempo = true;
                 bow.bodyCamera = true;

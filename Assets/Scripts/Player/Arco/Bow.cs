@@ -27,7 +27,7 @@ public class Bow : MonoBehaviour
 
     public Camera cameraArco;
     public Vector2 offset;
-    [HideInInspector]
+    // [HideInInspector]
     public Vector2 Direcao;
     public Transform FollowArco;
     public Vector3 newOffset;
@@ -178,7 +178,7 @@ public class Bow : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
 
-        gameObject.SetActive(false);
+        playerMoviment.GetComponentInChildren<PernasArcoLogic>().DisableBow();
         playerArco.gameObject.SetActive(false);
         playerMoviment.GetComponent<SpriteRenderer>().enabled = true;
         playerMoviment.animacao.SetBool(animationstrings.Powers, false);
