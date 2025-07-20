@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     //Referencia do damage
-    Damage playerDamage;
-    PlayerMoviment player;
+    public Damage playerDamage;
+    public PlayerMoviment player;
     public Slider slider;
 
     void Start()
@@ -15,10 +15,6 @@ public class HealthBar : MonoBehaviour
         player = FindFirstObjectByType<PlayerMoviment>();
         playerDamage = player.GetComponent<Damage>();
         slider.value = CalcularPorcentagem(playerDamage.Health, playerDamage.maxHealth);
-    }
-
-    public void OnEnable()
-    {
         playerDamage.healthChange.AddListener(OnPlayerChange);
     }
 

@@ -12,6 +12,7 @@ public class EnemyPathing : MonoBehaviour
 
     [Header("Variaveis")]
     public float direcao;
+    public float distanceX;
     public float distancePlayer;
     public float speed;
     public float jumpForce;
@@ -68,6 +69,7 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
         distancePlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
+        distanceX = Mathf.Abs(transform.position.x - player.position.x);
         float velocityY = rb.linearVelocity.y;
 
         animator.SetFloat(animationstrings.yVelocity, velocityY);
@@ -122,22 +124,30 @@ public class EnemyPathing : MonoBehaviour
                 //Distancia e direção do player.
                 if (distancePlayer < 2f)
                 {
-                    direcao = Mathf.Sign(player.position.x - transform.position.x);
-                    FlipDirecao();
-                    Target = attackZona.detectColliders.Count > 0;
+                    if (distanceX > 0.5f)
+                    {
+                        direcao = Mathf.Sign(player.position.x - transform.position.x);
+                        FlipDirecao();
+                        Target = attackZona.detectColliders.Count > 0;
 
-                    if (attackCooldown > 0)
-                    {
-                        attackCooldown -= Time.deltaTime;
-                    }
+                        if (Target)
+                        {
+                            speed = minSpeed;
+                        }
 
-                    if (!shouldJump)
-                    {
-                        speed = Mathf.MoveTowards(speed, maxSpeed, acceleration * Time.deltaTime);
-                    }
-                    else
-                    {
-                        speed = minSpeed;
+                        if (attackCooldown > 0)
+                        {
+                            attackCooldown -= Time.deltaTime;
+                        }
+
+                        if (!shouldJump)
+                        {
+                            speed = Mathf.MoveTowards(speed, maxSpeed, acceleration * Time.deltaTime);
+                        }
+                        else
+                        {
+                            speed = minSpeed;
+                        }
                     }
                 }
             }
@@ -157,6 +167,7 @@ public class EnemyPathing : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
+
     }
 
     void FixedUpdate()

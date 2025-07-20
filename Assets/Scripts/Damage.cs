@@ -10,7 +10,6 @@ public class Damage : MonoBehaviour
     public UnityEvent<int, int> healthChange;
     Animator animator;
 
-
     [SerializeField]
     //Teste
     private int _maxHealth = 4;

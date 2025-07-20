@@ -35,11 +35,11 @@ public class Throw_Item : MonoBehaviour
                 for (int i = 0; i < itensColetaveis.Count; i++)
                 {
                     itemData = itensColetaveis[i].itemData;
-                    prefabItem.GetComponent<itemObject>().itemData = itemData;
+                    prefabItem.GetComponent<ItemObject>().itemData = itemData;
                     // Certifica-se de que cada posição do array é inicializada
                     itemArremessar[i] = prefabItem;
                     stackObjetos = itensColetaveis[0].stackSize;
-                    itemArremessar[i].GetComponent<itemObject>().itemData = itemData;
+                    itemArremessar[i].GetComponent<ItemObject>().itemData = itemData;
                 }
             }
             else

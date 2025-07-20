@@ -391,11 +391,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500085b4345a6c8459e5304ab9c1270a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isItemPegado: 0
   rb: {fileID: 2811395407999999836}
   texto: {fileID: 0}
   itemData: {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
   fragmentoData: {fileID: 0}
-  playerMoviment: {fileID: 0}
+  itemIsGrounded: 0
 --- !u!61 &5859676740837191162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -430,7 +431,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.032958984, y: 0}
+  m_Offset: {x: -0.0010604858, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -440,7 +441,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.7138672, y: 1}
+  m_Size: {x: 1.0673828, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &2811395407999999836
 Rigidbody2D:

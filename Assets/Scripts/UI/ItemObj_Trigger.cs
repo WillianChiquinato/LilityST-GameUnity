@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ItemObj_Trigger : MonoBehaviour
 {
-    public itemObject itemObject;
+    public ItemObject itemObject;
 
     void Awake()
     {
-        itemObject = GetComponentInParent<itemObject>();
+        itemObject = GetComponentInParent<ItemObject>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -16,6 +16,7 @@ public class ItemObj_Trigger : MonoBehaviour
         if (other.GetComponent<PlayerMoviment>() != null && GameManager.instance.player.entrar)
         {
             itemObject.PickUpItem();
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         }
     }
 }

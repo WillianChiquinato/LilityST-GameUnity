@@ -1,17 +1,26 @@
 using TMPro;
 using UnityEngine;
 
-public class itemObject : MonoBehaviour
+public class ItemObject : MonoBehaviour
 {
+    public bool isItemPegado = false;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private TextMeshPro texto;
     [SerializeField] public ItemData itemData;
     [SerializeField] public FragmentoData fragmentoData;
+    public bool itemIsGrounded;
+    private LayerMask groundLayer;
 
     void Awake()
     {
         texto = GetComponentInChildren<TextMeshPro>();
+        groundLayer = LayerMask.GetMask("Ground");
         SetupVisual();
+    }
+
+    void Update()
+    {
+        itemIsGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer);
     }
 
     private void SetupVisual()
@@ -48,6 +57,7 @@ public class itemObject : MonoBehaviour
 
     public void PickUpItem()
     {
+        isItemPegado = true;
         if (itemData != null)
         {
             Debug.Log("Pegou item: " + itemData.ItemName);
@@ -64,13 +74,13 @@ public class itemObject : MonoBehaviour
             return;
         }
 
-        Destroy(this.gameObject);
         GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+        Destroy(this.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && itemIsGrounded)
         {
             GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = transform.position + new Vector3(0, 1.2f, 0);
         }
@@ -78,7 +88,7 @@ public class itemObject : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && itemIsGrounded && !isItemPegado)
         {
             GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", true);
         }
@@ -90,5 +100,12 @@ public class itemObject : MonoBehaviour
         {
             GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        //IsGround.
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, Vector2.down * 1f);
     }
 }
