@@ -104,25 +104,6 @@ public class interactableApresentation : CollidableObjects
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (GetInput == "Jump" && !saveData.JumpUnlocked)
-            {
-                SaveData.Instance.JumpUnlocked = true;
-
-                // Atualiza a referência local
-                saveData.JumpUnlocked = true;
-
-                ativo = true;
-                Time.timeScale = 0f;
-                ApresInput.SetActive(true);
-                playerMoviment.playerInput.enabled = false;
-                texto01.text = "Pressione";
-                texto02.text = "Para pular";
-                imagem.texture = referenciaImg;
-
-                // Debug para verificar se a variável foi realmente alterada
-                Debug.Log("Jump desbloqueado? " + SaveData.Instance.JumpUnlocked);
-            }
-
             if (GetInput == "WallJump" && !saveData.WalljumpUnlocked)
             {
                 SaveData.Instance.WalljumpUnlocked = true;

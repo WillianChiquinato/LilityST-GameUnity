@@ -21,10 +21,8 @@ public class SaveData
     public Vector2 playerCheckpoint;
     public int playerHealth;
     public string currentScene;
-    public bool CameraCorrected = false;
     public bool DashUnlocked = true;
     public bool WalljumpUnlocked = true;
-    public bool JumpUnlocked = true;
     public bool attackUnlocked = true;
     public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
 }

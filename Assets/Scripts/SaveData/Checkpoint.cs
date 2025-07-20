@@ -71,10 +71,8 @@ public class Checkpoints : MonoBehaviour
                     Savepoint.instance.SaveCheckpoint(
                         transform.position,
                         GameManager.instance.player.GetComponent<Damage>().maxHealth,
-                        SaveData.Instance.CameraCorrected,
                         SaveData.Instance.DashUnlocked,
                         SaveData.Instance.WalljumpUnlocked,
-                        SaveData.Instance.JumpUnlocked,
                         SaveData.Instance.attackUnlocked,
                         SaveData.Instance.powerUps,
                         SaveData.Instance.XPlayer

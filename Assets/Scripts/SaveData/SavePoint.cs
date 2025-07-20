@@ -47,6 +47,11 @@ public class Savepoint : MonoBehaviour
                 Transform playerChild = GameManager.instance.playerMoviment.transform; // Obtém o filho do playerParent
                 playerChild.localPosition = Vector3.zero;
 
+                if (GameManager.instance.playerMoviment.currentScene == "Altior-PreFuga")
+                {
+                    instance.defaultPosition = new Vector2(21.4f, 16.6f);
+                    playerParent.transform.position = defaultPosition;
+                }
                 if (GameManager.instance.playerMoviment.currentScene == "Altior-Fuga")
                 {
                     instance.defaultPosition = new Vector2(-53f, 16.6f);
@@ -100,21 +105,6 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        //
-        if (saveData.CameraCorrected)
-        {
-            CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
-            cinemachineVirtualCamera.m_Lens.OrthographicSize = 7f;
-        }
-        else
-        {
-            CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
-            cinemachineVirtualCamera.m_Lens.OrthographicSize = 6f;
-        }
-    }
-
     void Update()
     {
         if (GameManager.instance.playerMoviment == null)
@@ -138,17 +128,15 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    public void SaveCheckpoint(Vector2 checkpoint, int health, bool CameraCorrected, bool DashUnlocked, bool WalljumpUnlocked, bool JumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
+    public void SaveCheckpoint(Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
     {
         SaveData data = new SaveData
         {
             playerCheckpoint = checkpoint,
             playerHealth = health,
             currentScene = SceneManager.GetActiveScene().name,
-            CameraCorrected = CameraCorrected,
             DashUnlocked = DashUnlocked,
             WalljumpUnlocked = WalljumpUnlocked,
-            JumpUnlocked = JumpUnlocked,
             attackUnlocked = attackUnlocked,
             XPlayer = XPlayer,
 

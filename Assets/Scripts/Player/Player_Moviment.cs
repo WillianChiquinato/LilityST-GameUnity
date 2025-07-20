@@ -536,7 +536,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && SaveData.Instance.JumpUnlocked)
+        if (context.started)
         {
             jumpInput = true;
 

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public GameObject CutSumir;
 
     [Header("Cinemachine")]
+    public bool isCameraCorrected = true;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public CinemachineFramingTransposer framingPosition;
 
@@ -117,6 +118,11 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
+
+        if (isCameraCorrected)
+        {
+           cinemachineVirtualCamera.m_Lens.OrthographicSize = 7f; 
         }
     }
 
