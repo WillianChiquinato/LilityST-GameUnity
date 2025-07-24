@@ -10,35 +10,28 @@ public class Hidden_Area : MonoBehaviour
 
     private string collisionTag = "Player";
     public UnityEvent onTriggerEnter;
-    public UnityEvent onTriggerExit;
 
-    public Animator animator;
-    public PolygonCollider2D polygonCollider2D;
-    public CinemachineConfiner2D CinemachineRecalculo;
     public CinemachineVirtualCamera virtualCamera;
     public Camera cameras;
     public float duration = 1f;
 
-    private static bool isObjectDestroyed = false;
+    public int indexToOpacity = 0;
 
     void Awake()
     {
         virtualCamera.m_Lens.OrthographicSize = 6f;
         cameras = FindFirstObjectByType<Camera>();
-
-        if (isObjectDestroyed)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (indexToOpacity == 0)
         {
-            StartCoroutine(AnimateOrthographicSize(6f, 7f, duration));
-            isObjectDestroyed = true;
-            Debug.Log("Entrou");
+            if (collision.CompareTag("Player"))
+            {
+                StartCoroutine(AnimateOrthographicSize(6f, 7f, duration));
+                Debug.Log("Entrou");
+            }
         }
 
         if (alreadyEntered)
@@ -50,7 +43,9 @@ public class Hidden_Area : MonoBehaviour
         onTriggerEnter?.Invoke();
 
         if (oneShot)
+        {
             alreadyEntered = true;
+        }
 
         Destroy(this.gameObject, 2f);
     }

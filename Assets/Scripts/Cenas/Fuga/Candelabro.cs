@@ -32,7 +32,7 @@ public class Candelabro : MonoBehaviour
 
             if (fallDelay >= fallDelayTime)
             {
-                StartCoroutine(fallPlataform());
+                StartCoroutine(FallPlataform());
             }
         }
     }
@@ -43,15 +43,16 @@ public class Candelabro : MonoBehaviour
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                if (contact.normal.y < -0.5f)
-                {
-                    isFalling = true;
-                }
+                Debug.Log("Contact normal: " + contact.normal);
+                // if (contact.normal.y < -0.5f)
+                // {
+                //     isFalling = true;
+                // }
             }
         }
     }
 
-    IEnumerator fallPlataform()
+    IEnumerator FallPlataform()
     {
         yield return new WaitForSeconds(0.2f);
 

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public PlayerMoviment playerMoviment;
     public GameObject pauseMenu;
     public GameObject MainCamera;
-    public GameObject CutSceneDroggo;
     public Damage playerHealth;
     private LevelTransicao transicao;
 
@@ -82,8 +81,7 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMoviment.GetComponent<Damage>();
         bossFight = FindAnyObjectByType<BossFight>();
 
-        CutSceneDroggo = GameObject.FindWithTag("CutScene");
-        CutSceneDroggo.SetActive(false);
+
         StartCoroutine(DelayStart());
     }
 

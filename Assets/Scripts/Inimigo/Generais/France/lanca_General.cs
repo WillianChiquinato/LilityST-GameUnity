@@ -10,10 +10,16 @@ public class lanca_General : MonoBehaviour
     [Header("Instancias")]
     public Transform player;
     public GoraflixMoviment objetoSaidaProjetil;
-    public Vector3 pontoInicial;
-    Vector3 posicaoAnterior;
+    private Vector3 pontoInicial;
+    private Vector3 posicaoAnterior;
+
+    private float tempo = 0f;
+    private bool seguindoPlayer = true;
+
     public float duracaoTrajetoria;
-    public float tempo;
+    private float distanciaPararDeSeguir = 3f;
+    public Vector3 ultimaDirecaoValida;
+    public bool Colidiu = false;
 
     void Start()
     {
@@ -29,6 +35,8 @@ public class lanca_General : MonoBehaviour
 
     void Update()
     {
+        if (Colidiu) return;
+
         if (objetoSaidaProjetil == null)
         {
             objetoSaidaProjetil = GameObject.FindFirstObjectByType<GoraflixMoviment>();
@@ -39,7 +47,7 @@ public class lanca_General : MonoBehaviour
             player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
         }
 
-        if (tempo < duracaoTrajetoria)
+        if (seguindoPlayer)
         {
             tempo += Time.deltaTime;
             float t = tempo / duracaoTrajetoria;
@@ -49,14 +57,26 @@ public class lanca_General : MonoBehaviour
             posicao.y = Mathf.Lerp(pontoInicial.y, player.position.y, t) + altura;
 
             Vector3 direcao = posicao - posicaoAnterior;
-            if (direcao.magnitude > 0.01f)
+            if (direcao.magnitude > 0.1f)
             {
+                ultimaDirecaoValida = direcao.normalized;
+
                 float angle = Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }
 
             transform.position = posicao;
             posicaoAnterior = posicao;
+
+            float distancia = Vector3.Distance(transform.position, player.position);
+            if (distancia < distanciaPararDeSeguir)
+            {
+                seguindoPlayer = false;
+            }
+        }
+        else
+        {
+            transform.position += ultimaDirecaoValida * Time.deltaTime * 40f;
         }
 
         if (transform.localScale.x == -1)
@@ -69,13 +89,14 @@ public class lanca_General : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Ground"))
         {
             animator.SetTrigger(animationstrings.Impacto);
             rb.bodyType = RigidbodyType2D.Static;
             ColliderLanca.enabled = false;
+            Colidiu = true;
             Destroy(this.gameObject, 1f);
         }
     }
