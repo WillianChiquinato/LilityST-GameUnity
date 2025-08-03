@@ -12,6 +12,7 @@ public class RobertMoviment : MonoBehaviour
     public float speed = 2f;
 
     public GameObject pointToRun;
+    public bool pointToRendalla;
 
     public bool CanMove
     {
@@ -54,6 +55,7 @@ public class RobertMoviment : MonoBehaviour
         if (distanceToFinalPoint < 1f)
         {
             CanMove = false;
+            pointToRendalla = true;
         }
 
         Debug.Log(CanMove ? "Robert is moving." : "Robert is not moving.");

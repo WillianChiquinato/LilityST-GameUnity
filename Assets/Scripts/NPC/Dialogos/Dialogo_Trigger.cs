@@ -50,7 +50,7 @@ public class Dialogo_Trigger : MonoBehaviour
 
     void Update()
     {
-        if (TimerDialogo >= 1f && targetBool)
+        if (TimerTargetDialogo >= 1f && targetBool)
         {
             TimerDialogo += Time.deltaTime;
         }

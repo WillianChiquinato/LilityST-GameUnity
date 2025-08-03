@@ -8,6 +8,8 @@ public class PlayerMoviment : MonoBehaviour
     public string currentScene;
     public GameManager gameManager;
 
+    public bool AutoMoveAnimations = false;
+
 
     [Header("Instances")]
     public float currentZRotation;
@@ -117,6 +119,11 @@ public class PlayerMoviment : MonoBehaviour
     {
         get
         {
+            if (AutoMoveAnimations)
+            {
+                return maxSpeed;
+            }
+
             if (canMove)
             {
                 playerInput.enabled = true;
