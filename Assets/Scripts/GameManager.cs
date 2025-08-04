@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public CinemachineFramingTransposer framingPosition;
 
+    public ShakeCamera shakeCamera;
+
     [Header("Savepoint")]
     //Savepoint
     public string CurrentSceneName { get; private set; }
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
         player = FindFirstObjectByType<PlayerMoviment>();
     }
 

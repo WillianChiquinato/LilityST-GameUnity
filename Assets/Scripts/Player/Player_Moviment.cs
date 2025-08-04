@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
-    public GameManager gameManager;
 
     public bool AutoMoveAnimations = false;
 
@@ -273,11 +272,6 @@ public class PlayerMoviment : MonoBehaviour
         //saber qual cena o jogador esta.
         currentScene = SceneManager.GetActiveScene().name;
         Debug.Log("Nome da cena atual: " + currentScene);
-    }
-
-    void Start()
-    {
-        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void Update()
@@ -674,6 +668,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         //KNOCKBACK
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
+        GameManager.instance.shakeCamera.ShakeHitDamage();
 
         if (DamageScript.IsAlive)
         {
@@ -739,9 +734,9 @@ public class PlayerMoviment : MonoBehaviour
 
     public void PlayerXPRewards(int xp)
     {
-        if (gameManager != null)
+        if (GameManager.instance != null)
         {
-            gameManager.AddXP(xp);
+            GameManager.instance.AddXP(xp);
             Debug.Log("XP Adicionado!");
         }
         else

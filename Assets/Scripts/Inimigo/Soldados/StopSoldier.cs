@@ -9,7 +9,6 @@ public class StopSoldier : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Inimigos"))
         {
-            Debug.Log("Soldado esta seguindo Lility");
             EnemyPathing enemyComponent = collision.gameObject.GetComponent<EnemyPathing>();
             if (enemyComponent != null)
             {
@@ -20,6 +19,20 @@ public class StopSoldier : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.canMove = false;
+                }
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            foreach (EnemyPathing enemy in enemyPathing)
+            {
+                if (enemy != null)
+                {
+                    enemy.canMove = true;
                 }
             }
         }

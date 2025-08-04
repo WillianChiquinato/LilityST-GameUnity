@@ -15,6 +15,8 @@ public class CutplayRendalla : MonoBehaviour
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public CinemachineFramingTransposer framingPosition;
+    public ShakeCamera shakeCamera;
+
 
     public GameObject spawnRendallaSecurity;
     private bool IsCutplayAutomatically = false;
@@ -31,6 +33,7 @@ public class CutplayRendalla : MonoBehaviour
         Robert = FindFirstObjectByType<RobertMoviment>();
 
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -95,8 +98,10 @@ public class CutplayRendalla : MonoBehaviour
         }
         Animator animacaoRendalla = spawnRendallaSecurity.GetComponent<Animator>();
         Animator animacaoRobert = Robert.GetComponent<Animator>();
-        yield return new WaitForSeconds(0.1f);
         player.animacao.SetBool("Cutplay", true);
+        yield return new WaitForSeconds(0.1f);
+        shakeCamera.ShakeCutplayRendalla();
+        
         player.GetComponent<SpriteRenderer>().material = shaderCutplay;
         Robert.GetComponent<SpriteRenderer>().material = shaderCutplay;
         chao.GetComponent<TilemapRenderer>().material = shaderCutplay;
@@ -110,13 +115,9 @@ public class CutplayRendalla : MonoBehaviour
         animacaoRendalla.SetBool("Algemas", true);
         animacaoRobert.SetBool("Algemas", true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.9f);
         player.animacao.SetBool("SustoAlgemas", true);
 
-        //TODO: Dialogo a seguir.
-
-
-        //TODO: Transicao para cutplay
-
+        //Dialogo a seguir.
     }
 }
