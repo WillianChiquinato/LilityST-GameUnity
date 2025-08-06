@@ -7,6 +7,7 @@ public class CutplayRendalla : MonoBehaviour
 {
     [Header("Instancias")]
     public PlayerMoviment player;
+    public GameObject interfaceLilith;
     public GameObject Rendalla;
     public RobertMoviment Robert;
     public GameObject spawnRendalla;
@@ -88,6 +89,7 @@ public class CutplayRendalla : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         Debug.Log("Robert ja chegou, agr cutscene");
+        interfaceLilith.SetActive(false);
         framingPosition.m_TrackedObjectOffset = new Vector3(framingPosition.m_TrackedObjectOffset.x + 6f, framingPosition.m_TrackedObjectOffset.y + 0.4f, 0);
         yield return new WaitForSeconds(2f);
 
@@ -98,6 +100,7 @@ public class CutplayRendalla : MonoBehaviour
         }
         Animator animacaoRendalla = spawnRendallaSecurity.GetComponent<Animator>();
         Animator animacaoRobert = Robert.GetComponent<Animator>();
+        yield return new WaitForSeconds(0.14f);
         player.animacao.SetBool("Cutplay", true);
         yield return new WaitForSeconds(0.1f);
         shakeCamera.ShakeCutplayRendalla();
