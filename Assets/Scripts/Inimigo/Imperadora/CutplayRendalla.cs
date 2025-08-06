@@ -40,7 +40,7 @@ public class CutplayRendalla : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(ImperadoraSpawnCutPlay(2.2f));
+            StartCoroutine(ImperadoraSpawnCutPlay(1.8f));
         }
     }
 
@@ -88,7 +88,7 @@ public class CutplayRendalla : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         Debug.Log("Robert ja chegou, agr cutscene");
-        framingPosition.m_TrackedObjectOffset = new Vector3(framingPosition.m_TrackedObjectOffset.x + 8f, framingPosition.m_TrackedObjectOffset.y + 0.2f, 0);
+        framingPosition.m_TrackedObjectOffset = new Vector3(framingPosition.m_TrackedObjectOffset.x + 6f, framingPosition.m_TrackedObjectOffset.y + 0.4f, 0);
         yield return new WaitForSeconds(2f);
 
         //TODO: Spawn Imperadora
@@ -101,12 +101,12 @@ public class CutplayRendalla : MonoBehaviour
         player.animacao.SetBool("Cutplay", true);
         yield return new WaitForSeconds(0.1f);
         shakeCamera.ShakeCutplayRendalla();
-        
-        player.GetComponent<SpriteRenderer>().material = shaderCutplay;
+
         Robert.GetComponent<SpriteRenderer>().material = shaderCutplay;
+        player.GetComponent<SpriteRenderer>().material = shaderCutplay;
         chao.GetComponent<TilemapRenderer>().material = shaderCutplay;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         player.GetComponent<SpriteRenderer>().material = shaderNormal;
         Robert.GetComponent<SpriteRenderer>().material = shaderNormal;
         chao.GetComponent<TilemapRenderer>().material = shaderNormal;
