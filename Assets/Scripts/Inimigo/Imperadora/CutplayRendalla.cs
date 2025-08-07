@@ -109,17 +109,21 @@ public class CutplayRendalla : MonoBehaviour
         player.GetComponent<SpriteRenderer>().material = shaderCutplay;
         chao.GetComponent<TilemapRenderer>().material = shaderCutplay;
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.25f);
         player.GetComponent<SpriteRenderer>().material = shaderNormal;
         Robert.GetComponent<SpriteRenderer>().material = shaderNormal;
         chao.GetComponent<TilemapRenderer>().material = shaderNormal;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.4f);
         animacaoRendalla.SetBool("Algemas", true);
         animacaoRobert.SetBool("Algemas", true);
 
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(2f);
         player.animacao.SetBool("SustoAlgemas", true);
+        player.animacao.SetBool("Cutplay", false);
+
+        yield return new WaitForSeconds(3.4f);
+        animacaoRendalla.SetBool("Desconfiar", true);
 
         //Dialogo a seguir.
     }
