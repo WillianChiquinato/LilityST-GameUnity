@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class SeletorArmas : MonoBehaviour
     [Header("Conteudo UI")]
     public Image conteudoUI;
 
-    public string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Mascara", "Sino" };
+    public string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Luva", "Mascara", "Sino" };
 
     void Awake()
     {
@@ -63,7 +64,25 @@ public class SeletorArmas : MonoBehaviour
 
         string armaAtual = nomesDasArmas[currentIndex];
 
+        Debug.Log($"SeletorArmas.SelectArma - Selecionando arma: {armaAtual} (índice: {index})");
+
+        // Sincroniza a arma selecionada no ArmasSystem
+        ArmasSystem.instance.armaSelecionada = armaAtual;
+        
+        // Garante que o deck runtime existe
+        if (!ArmasSystem.instance.decksPorArmaRuntime.ContainsKey(armaAtual))
+        {
+            Debug.LogWarning($"Deck runtime não existe para arma '{armaAtual}', criando...");
+            ArmasSystem.instance.decksPorArmaRuntime[armaAtual] = new List<FragmentoData>();
+        }
+        
+        // Atualiza a UI do deck para a arma selecionada
         ArmasSystem.instance.AtualizarDeckUI(armaAtual);
+        
+        // Chama o método de seleção no FragmentoSystem
+        FragmentoSystem.instance.SelecionarArma(armaAtual);
+        
+        Debug.Log($"Arma '{armaAtual}' selecionada com sucesso");
     }
 
     public void NextArma()

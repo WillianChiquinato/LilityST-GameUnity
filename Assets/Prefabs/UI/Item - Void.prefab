@@ -297,11 +297,12 @@ GameObject:
   - component: {fileID: 8424930648992470901}
   - component: {fileID: 2792918364833342272}
   - component: {fileID: 2316365667892551107}
+  - component: {fileID: 3760500289597605442}
   - component: {fileID: 5859676740837191162}
   - component: {fileID: 2811395407999999836}
   m_Layer: 19
   m_Name: Item - Void
-  m_TagString: Untagged
+  m_TagString: ItemArremessar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,6 +398,18 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
   fragmentoData: {fileID: 0}
   itemIsGrounded: 0
+--- !u!114 &3760500289597605442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119994593037785999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d35e0e49ae2bc4479e1c14a37d3b087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &5859676740837191162
 BoxCollider2D:
   m_ObjectHideFlags: 0

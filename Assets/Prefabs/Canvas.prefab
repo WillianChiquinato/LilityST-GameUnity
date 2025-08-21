@@ -9321,12 +9321,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5160907604229675045}
-  - {fileID: 8304186948532937096}
-  - {fileID: 2640946955699588777}
-  - {fileID: 7778291569416982469}
-  - {fileID: 7716518035774751543}
+  m_Children: []
   m_Father: {fileID: 6539450383315741862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14076,6 +14071,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5160907604229675045}
+  - {fileID: 8304186948532937096}
+  - {fileID: 2640946955699588777}
+  - {fileID: 7778291569416982469}
+  - {fileID: 7716518035774751543}
   - {fileID: 2608081963640338398}
   m_Father: {fileID: 4290651761829197345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14096,16 +14096,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a823c5fa100d22746a2a956681c90228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData:
-    ChaveTempo: []
-    ChaveMovimento: []
-    ChaveVida: []
-    ChaveCaos: []
-    ChaveOrdem: []
-    DecksPorArma: []
-    armaSelecionada: "Bast\xE3o"
   maxDeckSize: 5
   deck: []
+  armaSelecionada: "Bast\xE3o"
 --- !u!1 &7133072271003277063
 GameObject:
   m_ObjectHideFlags: 0
@@ -24185,7 +24178,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2608081963640338398}
+    m_TransformParent: {fileID: 6539450383315741862}
     m_Modifications:
     - target: {fileID: 273519696975477992, guid: 7f15dbec54f20ad4b82591edb0565a77, type: 3}
       propertyPath: m_Pivot.x
@@ -29505,7 +29498,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2608081963640338398}
+    m_TransformParent: {fileID: 6539450383315741862}
     m_Modifications:
     - target: {fileID: 273519696975477992, guid: 7f15dbec54f20ad4b82591edb0565a77, type: 3}
       propertyPath: m_Pivot.x
@@ -34560,7 +34553,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2608081963640338398}
+    m_TransformParent: {fileID: 6539450383315741862}
     m_Modifications:
     - target: {fileID: 273519696975477992, guid: 7f15dbec54f20ad4b82591edb0565a77, type: 3}
       propertyPath: m_Pivot.x
@@ -34662,7 +34655,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2608081963640338398}
+    m_TransformParent: {fileID: 6539450383315741862}
     m_Modifications:
     - target: {fileID: 273519696975477992, guid: 7f15dbec54f20ad4b82591edb0565a77, type: 3}
       propertyPath: m_Pivot.x
@@ -36415,7 +36408,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2608081963640338398}
+    m_TransformParent: {fileID: 6539450383315741862}
     m_Modifications:
     - target: {fileID: 273519696975477992, guid: 7f15dbec54f20ad4b82591edb0565a77, type: 3}
       propertyPath: m_Pivot.x

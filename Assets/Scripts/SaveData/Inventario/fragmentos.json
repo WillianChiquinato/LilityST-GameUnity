@@ -1,19 +1,8 @@
 {
     "ChaveTempo": [],
-    "ChaveMovimento": [
-        {
-            "fragmentoNome": "ChaveMovimento",
-            "fragmentoType": 1,
-            "stackSize": 3
-        }
-    ],
+    "ChaveMovimento": [],
     "ChaveVida": [],
     "ChaveCaos": [
-        {
-            "fragmentoNome": "ChaveCaos2",
-            "fragmentoType": 3,
-            "stackSize": 1
-        },
         {
             "fragmentoNome": "ChaveCaos",
             "fragmentoType": 3,
@@ -26,18 +15,13 @@
             "armaNome": "Bastão",
             "fragmentos": [
                 {
-                    "fragmentoNome": "ChaveMovimento",
-                    "fragmentoType": 1,
-                    "stackSize": 1
-                },
-                {
                     "fragmentoNome": "ChaveCaos",
                     "fragmentoType": 3,
                     "stackSize": 1
                 },
                 {
-                    "fragmentoNome": "ChaveCaos2",
-                    "fragmentoType": 3,
+                    "fragmentoNome": "ChaveTempo2",
+                    "fragmentoType": 0,
                     "stackSize": 1
                 }
             ]
@@ -46,8 +30,8 @@
             "armaNome": "Arco",
             "fragmentos": [
                 {
-                    "fragmentoNome": "ChaveMovimento",
-                    "fragmentoType": 1,
+                    "fragmentoNome": "ChaveCaos",
+                    "fragmentoType": 3,
                     "stackSize": 1
                 }
             ]
@@ -55,11 +39,6 @@
         {
             "armaNome": "Marreta",
             "fragmentos": [
-                {
-                    "fragmentoNome": "ChaveMovimento",
-                    "fragmentoType": 1,
-                    "stackSize": 1
-                },
                 {
                     "fragmentoNome": "ChaveCaos",
                     "fragmentoType": 3,
@@ -73,28 +52,18 @@
         },
         {
             "armaNome": "Mascara",
-            "fragmentos": []
-        },
-        {
-            "armaNome": "Sino",
             "fragmentos": [
-                {
-                    "fragmentoNome": "ChaveMovimento",
-                    "fragmentoType": 1,
-                    "stackSize": 1
-                },
                 {
                     "fragmentoNome": "ChaveCaos",
                     "fragmentoType": 3,
                     "stackSize": 1
-                },
-                {
-                    "fragmentoNome": "ChaveCaos2",
-                    "fragmentoType": 3,
-                    "stackSize": 1
                 }
             ]
+        },
+        {
+            "armaNome": "Sino",
+            "fragmentos": []
         }
     ],
-    "armaSelecionada": "Bastão"
+    "armaSelecionada": "Arco"
 }
