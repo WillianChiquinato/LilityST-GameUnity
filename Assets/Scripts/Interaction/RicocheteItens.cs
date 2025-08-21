@@ -23,8 +23,8 @@ public class RicocheteItens : MonoBehaviour
         {
             Vector2 normal = collision.contacts[0].normal;
             Vector2 reflectDirection = Vector2.Reflect(lastVelocity, normal);
-            reflectDirection.y += 6f;
-            reflectDirection.x += 5f;
+            reflectDirection.y *= 1.8f;
+            reflectDirection.x += 6f;
             rb.linearVelocity = reflectDirection;
 
             Debug.Log($"Ricochete! Velocidade antiga: {lastVelocity}, nova: {rb.linearVelocity}");

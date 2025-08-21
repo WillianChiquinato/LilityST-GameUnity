@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89797da69b346cc4699e275442c061c8, type: 3}
   m_Name: ChaveTempo
   m_EditorClassIdentifier: 
-  <id>k__BackingField: ChaveTempoPt1
+  <id>k__BackingField: ChaveTempo
   NomeFragmento: ChaveTempo
+  TipoFragmento: 0
   Icon: {fileID: 21300000, guid: 84608cfbaa35d3d4991ad870b5ead436, type: 3}
   DescricaoFragmento: bla bla bla bla bla bla bla bla bla bla bla

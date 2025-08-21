@@ -55,12 +55,14 @@ public class ArmasSystem : MonoBehaviour
         if (deck.Contains(item))
         {
             Debug.Log("Essa carta já está no deck.");
+            ToastMessage.Instance.ShowToast("Fragmento já está no Deck!", ToastType.Alert);
             return false;
         }
 
         if (deck.Count >= maxDeckSize)
         {
             Debug.Log($"Deck está cheio! ({deck.Count}/{maxDeckSize})");
+            ToastMessage.Instance.ShowToast("Deck está cheio!", ToastType.Alert);
             return false;
         }
 
@@ -71,6 +73,7 @@ public class ArmasSystem : MonoBehaviour
         }
 
         Debug.Log($"Adicionando fragmento '{item.NomeFragmento}' ao deck");
+        ToastMessage.Instance.ShowToast("Fragmento Adicionado ao Deck!", ToastType.Success);
         deck.Add(item);
         armaSelecionada = arma;
 
@@ -95,10 +98,6 @@ public class ArmasSystem : MonoBehaviour
 
         Debug.Log($"Atualizando UI do deck");
         AtualizarDeckUI(arma);
-
-        // Salva automaticamente após adicionar
-        Debug.Log($"Salvando fragmentos");
-        FragmentoSystem.instance.SaveFragment();
 
         Debug.Log($"Fragmento '{item.NomeFragmento}' adicionado com sucesso ao deck da arma '{arma}'");
         return true;
@@ -187,8 +186,8 @@ public class ArmasSystem : MonoBehaviour
                 Debug.LogError($"Deck salvo não encontrado para arma '{arma}'");
             }
 
-            Debug.Log($"Atualizando UI do deck após remoção");
-            AtualizarDeckUI(arma);
+            // Sincronizar dados salvos com runtime no FragmentoSystem
+            FragmentoSystem.instance.SelecionarArma(arma);
 
             // Salva automaticamente após remover
             Debug.Log($"Salvando fragmentos após remoção");

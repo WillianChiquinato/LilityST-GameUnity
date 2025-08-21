@@ -237,6 +237,8 @@ public class FragmentoSystem : MonoBehaviour
 
     public void AddItem(FragmentoData _item)
     {
+        Debug.Log($"AddItem chamado para fragmento: {_item.NomeFragmento} do tipo {_item.TipoFragmento}");
+
         switch (_item.TipoFragmento)
         {
             case fragmentoType.Tempo:
@@ -257,76 +259,52 @@ public class FragmentoSystem : MonoBehaviour
         }
 
         UpdateInventory();
+        Debug.Log($"AddItem concluído para fragmento: {_item.NomeFragmento}");
     }
 
     public void AddToTempo(FragmentoData _item)
     {
-        if (ChaveTempoDicionary.TryGetValue(_item, out FragmentoItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            FragmentoItem newItem = new FragmentoItem(_item);
-            ChaveTempo.Add(newItem);
-            ChaveTempoDicionary.Add(_item, newItem);
-        }
+        // Cada fragmento é único - sempre criar novo item
+        FragmentoItem newItem = new FragmentoItem(_item);
+        ChaveTempo.Add(newItem);
+        Debug.Log($"Fragmento {_item.NomeFragmento} adicionado à lista ChaveTempo. Total: {ChaveTempo.Count}");
+        // Não usar dicionário para evitar sobrescrever fragmentos únicos
     }
 
     public void AddToMovimento(FragmentoData _item)
     {
-        if (ChaveMovimentoDicionary.TryGetValue(_item, out FragmentoItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            FragmentoItem newItem = new FragmentoItem(_item);
-            ChaveMovimento.Add(newItem);
-            ChaveMovimentoDicionary.Add(_item, newItem);
-        }
+        // Cada fragmento é único - sempre criar novo item
+        FragmentoItem newItem = new FragmentoItem(_item);
+        ChaveMovimento.Add(newItem);
+        Debug.Log($"Fragmento {_item.NomeFragmento} adicionado à lista ChaveMovimento. Total: {ChaveMovimento.Count}");
+        // Não usar dicionário para evitar sobrescrever fragmentos únicos
     }
 
     public void AddToVida(FragmentoData _item)
     {
-        if (ChaveVidaDicionary.TryGetValue(_item, out FragmentoItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            FragmentoItem newItem = new FragmentoItem(_item);
-            ChaveVida.Add(newItem);
-            ChaveVidaDicionary.Add(_item, newItem);
-        }
+        // Cada fragmento é único - sempre criar novo item
+        FragmentoItem newItem = new FragmentoItem(_item);
+        ChaveVida.Add(newItem);
+        Debug.Log($"Fragmento {_item.NomeFragmento} adicionado à lista ChaveVida. Total: {ChaveVida.Count}");
+        // Não usar dicionário para evitar sobrescrever fragmentos únicos
     }
 
     public void AddToCaos(FragmentoData _item)
     {
-        if (ChaveCaosDicionary.TryGetValue(_item, out FragmentoItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            FragmentoItem newItem = new FragmentoItem(_item);
-            ChaveCaos.Add(newItem);
-            ChaveCaosDicionary.Add(_item, newItem);
-        }
+        // Cada fragmento é único - sempre criar novo item
+        FragmentoItem newItem = new FragmentoItem(_item);
+        ChaveCaos.Add(newItem);
+        Debug.Log($"Fragmento {_item.NomeFragmento} adicionado à lista ChaveCaos. Total: {ChaveCaos.Count}");
+        // Não usar dicionário para evitar sobrescrever fragmentos únicos
     }
 
     public void AddToOrdem(FragmentoData _item)
     {
-        if (ChaveOrdemDicionary.TryGetValue(_item, out FragmentoItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            FragmentoItem newItem = new FragmentoItem(_item);
-            ChaveOrdem.Add(newItem);
-            ChaveOrdemDicionary.Add(_item, newItem);
-        }
+        // Cada fragmento é único - sempre criar novo item
+        FragmentoItem newItem = new FragmentoItem(_item);
+        ChaveOrdem.Add(newItem);
+        Debug.Log($"Fragmento {_item.NomeFragmento} adicionado à lista ChaveOrdem. Total: {ChaveOrdem.Count}");
+        // Não usar dicionário para evitar sobrescrever fragmentos únicos
     }
 
     public void AddToDeckBuilder(FragmentoData _item)
@@ -340,71 +318,59 @@ public class FragmentoSystem : MonoBehaviour
 
     public void RemoveItem(FragmentoData _item)
     {
-        if (ChaveTempoDicionary.TryGetValue(_item, out FragmentoItem TempoValue))
+        // Para fragmentos únicos, procurar e remover primeira ocorrência
+
+        // Procurar em Tempo
+        var tempoItem = ChaveTempo.FirstOrDefault(item => item.FragmentoData == _item);
+        if (tempoItem != null)
         {
-            if (TempoValue.stackSize <= 1)
-            {
-                ChaveTempo.Remove(TempoValue);
-                ChaveTempoDicionary.Remove(_item);
-            }
-            else
-            {
-                TempoValue.RemoveStack();
-            }
+            ChaveTempo.Remove(tempoItem);
+            Debug.Log($"Fragmento {_item.NomeFragmento} removido do inventário Tempo");
+            UpdateInventory();
+            return;
         }
 
-        if (ChaveMovimentoDicionary.TryGetValue(_item, out FragmentoItem MovimentoValue))
+        // Procurar em Movimento
+        var movimentoItem = ChaveMovimento.FirstOrDefault(item => item.FragmentoData == _item);
+        if (movimentoItem != null)
         {
-            if (MovimentoValue.stackSize <= 1)
-            {
-                ChaveMovimento.Remove(MovimentoValue);
-                ChaveMovimentoDicionary.Remove(_item);
-            }
-            else
-            {
-                MovimentoValue.RemoveStack();
-            }
+            ChaveMovimento.Remove(movimentoItem);
+            Debug.Log($"Fragmento {_item.NomeFragmento} removido do inventário Movimento");
+            UpdateInventory();
+            return;
         }
 
-        if (ChaveVidaDicionary.TryGetValue(_item, out FragmentoItem VidaValue))
+        // Procurar em Vida
+        var vidaItem = ChaveVida.FirstOrDefault(item => item.FragmentoData == _item);
+        if (vidaItem != null)
         {
-            if (VidaValue.stackSize <= 1)
-            {
-                ChaveVida.Remove(VidaValue);
-                ChaveVidaDicionary.Remove(_item);
-            }
-            else
-            {
-                VidaValue.RemoveStack();
-            }
+            ChaveVida.Remove(vidaItem);
+            Debug.Log($"Fragmento {_item.NomeFragmento} removido do inventário Vida");
+            UpdateInventory();
+            return;
         }
 
-        if (ChaveCaosDicionary.TryGetValue(_item, out FragmentoItem ChaosValue))
+        // Procurar em Caos
+        var caosItem = ChaveCaos.FirstOrDefault(item => item.FragmentoData == _item);
+        if (caosItem != null)
         {
-            if (ChaosValue.stackSize <= 1)
-            {
-                ChaveCaos.Remove(ChaosValue);
-                ChaveCaosDicionary.Remove(_item);
-            }
-            else
-            {
-                ChaosValue.RemoveStack();
-            }
+            ChaveCaos.Remove(caosItem);
+            Debug.Log($"Fragmento {_item.NomeFragmento} removido do inventário Caos");
+            UpdateInventory();
+            return;
         }
 
-        if (ChaveOrdemDicionary.TryGetValue(_item, out FragmentoItem OrderValue))
+        // Procurar em Ordem
+        var ordemItem = ChaveOrdem.FirstOrDefault(item => item.FragmentoData == _item);
+        if (ordemItem != null)
         {
-            if (OrderValue.stackSize <= 1)
-            {
-                ChaveOrdem.Remove(OrderValue);
-                ChaveOrdemDicionary.Remove(_item);
-            }
-            else
-            {
-                OrderValue.RemoveStack();
-            }
+            ChaveOrdem.Remove(ordemItem);
+            Debug.Log($"Fragmento {_item.NomeFragmento} removido do inventário Ordem");
+            UpdateInventory();
+            return;
         }
 
+        Debug.LogWarning($"Fragmento {_item.NomeFragmento} não encontrado no inventário para remoção");
         UpdateInventory();
     }
 
@@ -413,14 +379,14 @@ public class FragmentoSystem : MonoBehaviour
         Debug.Log("SaveFragment iniciado");
         fragmentoSaveData saveData = new fragmentoSaveData();
 
-        // Salvar os fragmentos gerais
+        // Salvar os fragmentos gerais - cada fragmento é único
         foreach (var item in ChaveTempo)
         {
             saveData.ChaveTempo.Add(new FragmentoItemSaveData
             {
                 fragmentoNome = item.FragmentoData.NomeFragmento,
                 fragmentoType = item.FragmentoData.TipoFragmento,
-                stackSize = item.stackSize
+                stackSize = 1 // Sempre 1 para fragmentos únicos
             });
         }
 
@@ -430,7 +396,7 @@ public class FragmentoSystem : MonoBehaviour
             {
                 fragmentoNome = item.FragmentoData.NomeFragmento,
                 fragmentoType = item.FragmentoData.TipoFragmento,
-                stackSize = item.stackSize
+                stackSize = 1 // Sempre 1 para fragmentos únicos
             });
         }
 
@@ -440,7 +406,7 @@ public class FragmentoSystem : MonoBehaviour
             {
                 fragmentoNome = item.FragmentoData.NomeFragmento,
                 fragmentoType = item.FragmentoData.TipoFragmento,
-                stackSize = item.stackSize
+                stackSize = 1 // Sempre 1 para fragmentos únicos
             });
         }
 
@@ -450,7 +416,7 @@ public class FragmentoSystem : MonoBehaviour
             {
                 fragmentoNome = item.FragmentoData.NomeFragmento,
                 fragmentoType = item.FragmentoData.TipoFragmento,
-                stackSize = item.stackSize
+                stackSize = 1 // Sempre 1 para fragmentos únicos
             });
         }
 
@@ -460,26 +426,12 @@ public class FragmentoSystem : MonoBehaviour
             {
                 fragmentoNome = item.FragmentoData.NomeFragmento,
                 fragmentoType = item.FragmentoData.TipoFragmento,
-                stackSize = item.stackSize
+                stackSize = 1 // Sempre 1 para fragmentos únicos
             });
         }
 
-        // Salvar os decks por arma
-        foreach (var kvp in ArmasSystem.instance.decksPorArmaRuntime)
-        {
-            DeckPorArmaSaveData deckSave = new DeckPorArmaSaveData
-            {
-                armaNome = kvp.Key,
-                fragmentos = kvp.Value.Select(frag => new FragmentoItemSaveData
-                {
-                    fragmentoNome = frag.NomeFragmento,
-                    fragmentoType = frag.TipoFragmento,
-                    stackSize = 1
-                }).ToList()
-            };
-
-            saveData.DecksPorArma.Add(deckSave);
-        }
+        // Salvar os decks por arma - usar apenas os dados do DecksPorArma como fonte de verdade
+        saveData.DecksPorArma.AddRange(DecksPorArma);
 
         // Salvar a arma selecionada atual
         saveData.armaSelecionada = ArmasSystem.instance.armaSelecionada;
@@ -628,45 +580,54 @@ public class FragmentoSystem : MonoBehaviour
             DecksPorArma.Add(deck);
         }
 
-        // Verificar se existe no runtime
+        // Verificar se existe no runtime e sincronizar
         if (!ArmasSystem.instance.decksPorArmaRuntime.ContainsKey(armaNome))
         {
             ArmasSystem.instance.decksPorArmaRuntime[armaNome] = new List<FragmentoData>();
         }
+
+        // Sincronizar dados salvos com runtime
+        var deckRuntime = ArmasSystem.instance.decksPorArmaRuntime[armaNome];
+        deckRuntime.Clear();
 
         // Limpar o DeckBuilder UI
         DeckBuilder.Clear();
         DeckBuilderDicionary.Clear();
         ArmasSystem.instance.deck.Clear();
 
-        // Carregar fragmentos do deck salvo para a UI
+        // Carregar fragmentos do deck salvo para o runtime e UI
+        for (int i = 0; i < deck.fragmentos.Count; i++)
+        {
+            var fragSave = deck.fragmentos[i];
+            FragmentoData fragData = GetFragmentoData(fragSave.fragmentoNome, fragSave.fragmentoType);
+
+            if (fragData != null)
+            {
+                // Adicionar ao runtime
+                deckRuntime.Add(fragData);
+
+                // Criar item para UI - cada fragmento é único
+                FragmentoItem fragItem = new FragmentoItem(fragData);
+                fragItem.stackSize = 1; // Sempre 1 para fragmentos únicos
+
+                DeckBuilder.Add(fragItem);
+                if (!DeckBuilderDicionary.ContainsKey(fragData))
+                {
+                    DeckBuilderDicionary.Add(fragData, fragItem);
+                }
+
+                ArmasSystem.instance.deck.Add(fragData);
+
+                Debug.Log($"Carregado para deck '{armaNome}': {fragSave.fragmentoNome}");
+            }
+        }
+
+        // Atualizar UI dos slots
         for (int i = 0; i < DeckBuilderItemSlot.Length; i++)
         {
-            if (i < deck.fragmentos.Count)
+            if (i < DeckBuilder.Count)
             {
-                var fragSave = deck.fragmentos[i];
-                FragmentoData fragData = GetFragmentoData(fragSave.fragmentoNome, fragSave.fragmentoType);
-
-                if (fragData != null)
-                {
-                    FragmentoItem fragItem = new FragmentoItem(fragData);
-                    fragItem.stackSize = fragSave.stackSize;
-
-                    DeckBuilder.Add(fragItem);
-                    if (!DeckBuilderDicionary.ContainsKey(fragData))
-                    {
-                        DeckBuilderDicionary.Add(fragData, fragItem);
-                    }
-
-                    ArmasSystem.instance.deck.Add(fragData);
-                    DeckBuilderItemSlot[i].UpdateInventory(fragItem);
-
-                    Debug.Log($"Carregado para deck '{armaNome}': {fragSave.fragmentoNome}");
-                }
-                else
-                {
-                    DeckBuilderItemSlot[i].CleanUpSlot();
-                }
+                DeckBuilderItemSlot[i].UpdateInventory(DeckBuilder[i]);
             }
             else
             {
@@ -677,13 +638,16 @@ public class FragmentoSystem : MonoBehaviour
         // Sincronizar com o ArmasSystem
         ArmasSystem.instance.armaSelecionada = armaNome;
 
-        Debug.Log($"Arma '{armaNome}' selecionada com {deck.fragmentos.Count} fragmentos.");
+        Debug.Log($"Arma '{armaNome}' selecionada com {deckRuntime.Count} fragmentos sincronizados.");
     }
-
 
     public void UpdateDeckUI(string armaNome, List<FragmentoData> deckAtual)
     {
         Debug.Log($"UpdateDeckUI chamado - Atualizando UI para arma: {armaNome} com {deckAtual.Count} fragmentos");
+
+        // Sincronizar DeckBuilder com o deck atual
+        DeckBuilder.Clear();
+        DeckBuilderDicionary.Clear();
 
         for (int i = 0; i < DeckBuilderSlotParent.childCount; i++)
         {
@@ -697,8 +661,16 @@ public class FragmentoSystem : MonoBehaviour
                 if (fragData != null)
                 {
                     var fragmentoItem = new FragmentoItem(fragData) { stackSize = 1 };
+
+                    // Adicionar ao DeckBuilder para manter sincronização
+                    DeckBuilder.Add(fragmentoItem);
+                    if (!DeckBuilderDicionary.ContainsKey(fragData))
+                    {
+                        DeckBuilderDicionary.Add(fragData, fragmentoItem);
+                    }
+
                     slotUI.UpdateInventory(fragmentoItem);
-                    Debug.Log($"Slot {i}: {fragData.NomeFragmento} atualizado");
+                    Debug.Log($"Slot {i}: {fragData.NomeFragmento} atualizado e sincronizado");
                 }
                 else
                 {
