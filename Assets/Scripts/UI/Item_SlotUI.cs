@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Item_SlotUI : MonoBehaviour, IPointerDownHandler
+public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image itemImagem;
     [SerializeField] private Sprite originalSprite;
@@ -42,5 +42,28 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Isso é um item");
+    }
+
+    //Passar o mouse exibe a descrição do item
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null && item.itemData != null)
+        {
+            ShowToolTip();
+        }
+        else
+        {
+            Debug.Log("Item não encontrado");
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToolTipItems.Instance.HideToolTip();
+    }
+
+    public void ShowToolTip()
+    {
+        ToolTipItems.Instance.ShowToolTip(item.itemData, item.stackSize);
     }
 }

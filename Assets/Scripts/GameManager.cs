@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         pauseUI.transform.GetChild(1).gameObject.SetActive(false);
         pauseMenu.transform.GetChild(0).gameObject.SetActive(true);
+        ToastMessage.Instance.activeToast.gameObject.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
     }

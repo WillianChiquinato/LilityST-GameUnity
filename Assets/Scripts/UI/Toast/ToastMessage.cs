@@ -4,7 +4,7 @@ public class ToastMessage : MonoBehaviour
 {
     public static ToastMessage Instance;
     public GameObject toastPrefab;
-    private Toast activeToast;
+    [HideInInspector] public Toast activeToast;
 
     void Awake()
     {

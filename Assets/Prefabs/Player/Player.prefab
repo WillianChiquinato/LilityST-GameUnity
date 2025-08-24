@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScene: 
-  gameManager: {fileID: 0}
+  AutoMoveAnimations: 0
   currentZRotation: 0
   maxSpeed: 7
   speed: 2
@@ -1315,7 +1315,7 @@ MonoBehaviour:
   newDrop: {fileID: 0}
   arremessar: 0
   TimerArremessar: 0
-  ForceArremesso: 10
+  ForceArremesso: 14
 --- !u!114 &8014262254239817579
 MonoBehaviour:
   m_ObjectHideFlags: 0

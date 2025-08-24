@@ -82,14 +82,8 @@ public class ItemObject : MonoBehaviour
     {
         if (other.CompareTag("Player") && itemIsGrounded)
         {
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(transform);
             GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = transform.position + new Vector3(0, 1.2f, 0);
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && itemIsGrounded && !isItemPegado)
-        {
             GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", true);
         }
     }
@@ -98,6 +92,7 @@ public class ItemObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
             GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         }
     }

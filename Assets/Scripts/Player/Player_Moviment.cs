@@ -358,6 +358,7 @@ public class PlayerMoviment : MonoBehaviour
             animacao.SetBool(animationstrings.Powers, false);
             bow.playerArco.gameObject.SetActive(false);
             bow.gameObject.SetActive(false);
+
             GetComponent<SpriteRenderer>().enabled = true;
             Time.timeScale = 1f;
             tempo = false;
@@ -680,6 +681,7 @@ public class PlayerMoviment : MonoBehaviour
             bow.newOffset = new Vector3(0, 0, 0);
 
             animacao.SetBool(animationstrings.Powers, false);
+            bow.playerArco.gameObject.SetActive(false);
             bow.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tempo = false;
@@ -729,6 +731,17 @@ public class PlayerMoviment : MonoBehaviour
                     DamageScript.Health++;
                 }
             }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("RicochetePlayer"))
+        {
+            float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
+
+            Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 4f);
+            rb.AddForce(force, ForceMode2D.Impulse);
         }
     }
 

@@ -26,6 +26,7 @@ TagManager:
   - SavePointUI
   - QuestContainer
   - Richochete
+  - RicochetePlayer
   layers:
   - Default
   - TransparentFX

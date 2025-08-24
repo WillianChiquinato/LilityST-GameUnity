@@ -84,6 +84,7 @@ public class Toast : MonoBehaviour
 
     private IEnumerator AnimateToast()
     {
+        this.gameObject.SetActive(true);
         Debug.Log("Toast chamado ANIMAÇÃO!");
         // reset posição e alpha
         rectTransform.anchoredPosition = startPos;
