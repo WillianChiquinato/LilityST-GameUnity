@@ -276,6 +276,7 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Update()
     {
+        SaveData.Instance.playTime += Time.deltaTime;
         animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
         if (!canMove)
         {

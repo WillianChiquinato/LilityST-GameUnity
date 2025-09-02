@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 
 public class MouseEnterCaderno : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Vector3 targetScale = new Vector3(0f, 0f, 0f);
-    public float scaleSpeed = 5f;
+    public Vector3 targetScale = new Vector3(1.2f, 1.2f, 1f);
+    public Vector3 positionOffset = Vector3.zero;
+    public float Speed = 5f;
 
     private Vector3 originalScale;
     public bool isHovered = false;
@@ -18,14 +19,9 @@ public class MouseEnterCaderno : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Update()
     {
-        if (isHovered)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.unscaledDeltaTime * scaleSpeed);
-        }
-        else
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.unscaledDeltaTime * scaleSpeed);
-        }
+        Vector3 targetS = isHovered ? targetScale : originalScale;
+
+        transform.localScale = Vector3.Lerp(transform.localScale, targetS, Time.unscaledDeltaTime * Speed);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

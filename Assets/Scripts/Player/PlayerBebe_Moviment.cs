@@ -142,6 +142,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
     private void Update()
     {
+        SaveData.Instance.playTime += Time.deltaTime;
         if (!canMove)
         {
             playerInput.enabled = false;

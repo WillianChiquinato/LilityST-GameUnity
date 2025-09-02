@@ -5,23 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class FadeStartGame : MonoBehaviour
 {
+    public LevelTransicao levelTransicao;
     public bool permissao = false;
-    private fadeUI fadeUI;
 
     [SerializeField]
-    private float fadeTime;
+    private float delayTime;
     public string jsonFilePath = "Assets/Scripts/SaveData/savepoint.json";
     private string OriginalScene = "Altior-Quarto";
 
     void Awake()
     {
+        levelTransicao = FindFirstObjectByType<LevelTransicao>();
         LoadJson();
-    }
-
-    void Start()
-    {
-        fadeUI = GetComponent<fadeUI>();
-        fadeUI.FadeUIOut(fadeTime);
     }
 
     void LoadJson()
@@ -69,19 +64,18 @@ public class FadeStartGame : MonoBehaviour
     IEnumerator FadeParaStartGame()
     {
         permissao = true;
-        fadeUI.FadeUIIn(fadeTime);
-        yield return new WaitForSeconds(fadeTime);
+        yield return new WaitForSeconds(delayTime);
 
         string json = File.ReadAllText(jsonFilePath);
         SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
         if (IsJsonFileEmpty(jsonFilePath))
         {
-            SceneManager.LoadScene(OriginalScene);
+            levelTransicao.Transicao(OriginalScene);
         }
         else
         {
-            SceneManager.LoadScene(saveData.currentScene);
+            levelTransicao.Transicao(saveData.currentScene);
         }
     }
 }

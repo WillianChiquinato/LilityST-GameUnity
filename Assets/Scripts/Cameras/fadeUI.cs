@@ -1,53 +1,90 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class fadeUI : MonoBehaviour
 {
-    CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroupOptions;
+    public CanvasGroup canvasGroupMultipleSaves;
+    public CanvasGroup canvasGroupMainMenu;
 
-    void Awake()
+    private CanvasGroup currentGroup;
+
+    void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        SetCanvasGroup(canvasGroupMainMenu, true);
+        SetCanvasGroup(canvasGroupOptions, false);
+        SetCanvasGroup(canvasGroupMultipleSaves, false);
+
+        currentGroup = canvasGroupMainMenu;
     }
 
-    public void FadeUIOut(float segundos)
+    public void ShowMenu(int index)
     {
-        StartCoroutine(FadeOut(segundos));
-    }
-    public void FadeUIIn(float segundos)
-    {
-        StartCoroutine(FadeIn(segundos));
+        // Desliga todos primeiro
+        SetCanvasGroup(canvasGroupOptions, false);
+        SetCanvasGroup(canvasGroupMultipleSaves, false);
+        SetCanvasGroup(canvasGroupMainMenu, false);
+
+        // Liga o alvo com fade
+        CanvasGroup target = GetCanvasGroupByIndex(index);
+        StartCoroutine(FadeIn(target));
+
+        currentGroup = target;
     }
 
-    IEnumerator FadeIn(float segundos)
+    private CanvasGroup GetCanvasGroupByIndex(int index)
     {
-        canvasGroup.alpha = 0;
-
-        while (canvasGroup.alpha < 1)
+        switch (index)
         {
-            canvasGroup.alpha += Time.unscaledDeltaTime / segundos;
+            case 1: return canvasGroupOptions;
+            case 2: return canvasGroupMultipleSaves;
+            default: return canvasGroupMainMenu;
+        }
+    }
+
+    private void SetCanvasGroup(CanvasGroup group, bool active)
+    {
+        if (active)
+        {
+            group.alpha = 1f;
+            group.interactable = true;
+            group.blocksRaycasts = true;
+            group.gameObject.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(FadeOut(group));
+        }
+    }
+
+    private IEnumerator FadeIn(CanvasGroup group)
+    {
+        group.gameObject.SetActive(true);
+        group.alpha = 0f;
+
+        while (group.alpha < 1f)
+        {
+            group.alpha += Time.unscaledDeltaTime / 0.5f;
             yield return null;
         }
 
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
-        yield return null;
+        group.alpha = 1f;
+        group.interactable = true;
+        group.blocksRaycasts = true;
     }
 
-    IEnumerator FadeOut(float segundos)
+    private IEnumerator FadeOut(CanvasGroup group)
     {
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 1;
-        while (canvasGroup.alpha > 0)
+        group.interactable = false;
+        group.blocksRaycasts = false;
+
+        while (group.alpha > 0f)
         {
-            canvasGroup.alpha -= Time.unscaledDeltaTime / segundos;
+            group.alpha -= Time.unscaledDeltaTime / 0.5f;
             yield return null;
         }
 
-        yield return null;
+        group.alpha = 0f;
+        group.gameObject.SetActive(false);
     }
 }

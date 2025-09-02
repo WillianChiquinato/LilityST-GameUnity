@@ -12,6 +12,8 @@ public class Savepoint : MonoBehaviour
     public Vector2 defaultPosition = Vector2.zero;
     private Transform playerParent;
 
+    public int currentSlot = 1;
+
     private void Awake()
     {
         if (GameManager.instance.playerMoviment == null)
@@ -77,7 +79,7 @@ public class Savepoint : MonoBehaviour
         else
         {
             // Se o arquivo JSON não estiver vazio, carregar os dados salvos
-            saveData = SaveManager.Load();
+            saveData = SaveManager.Load(currentSlot);
             if (saveData != null)
             {
                 if (GameManager.instance.playerMoviment != null)
@@ -139,16 +141,16 @@ public class Savepoint : MonoBehaviour
             WalljumpUnlocked = WalljumpUnlocked,
             attackUnlocked = attackUnlocked,
             XPlayer = XPlayer,
-
             powerUps = new List<PowerUps>(powerUps)
         };
 
-        SaveManager.Save(data);
+        SaveManager.Save(data, currentSlot);
     }
+
 
     public void LoadCheckpoint()
     {
-        SaveData data = SaveManager.Load();
+        SaveData data = SaveManager.Load(currentSlot);
         if (data != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -165,13 +167,9 @@ public class Savepoint : MonoBehaviour
                 {
                     health.Health = data.playerHealth;
                 }
-
-                Debug.Log("Checkpoint restaurado!");
             }
-        }
-        else
-        {
-            Debug.Log("Nenhum checkpoint salvo. Posição padrão usada.");
+
+            Debug.Log($"Checkpoint restaurado do slot {currentSlot}!");
         }
     }
 }
