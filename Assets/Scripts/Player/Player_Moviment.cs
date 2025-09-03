@@ -741,7 +741,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
 
-            Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 4f);
+            Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 3.2f);
             rb.AddForce(force, ForceMode2D.Impulse);
         }
     }

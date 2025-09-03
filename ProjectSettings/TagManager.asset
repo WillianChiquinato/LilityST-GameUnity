@@ -70,8 +70,14 @@ TagManager:
   - name: Background2
     uniqueID: 652321767
     locked: 0
+  - name: BackgroundLightBack
+    uniqueID: 3472905985
+    locked: 0
   - name: Background
     uniqueID: 1171906793
+    locked: 0
+  - name: BackgroundLightFront
+    uniqueID: 3287362699
     locked: 0
   - name: Ground
     uniqueID: 3003573675
@@ -96,3 +102,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Chao

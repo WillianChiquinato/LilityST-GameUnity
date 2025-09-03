@@ -13,7 +13,7 @@ public class attack_espinhos : MonoBehaviour
 
         if (damage != null)
         {
-            Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
+            Vector2 flipknockback = transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
             // ataque ao alvo
             bool goHit = damage.hit(attackDamage, flipknockback);

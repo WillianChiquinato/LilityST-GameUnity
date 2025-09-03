@@ -3,61 +3,54 @@ using UnityEngine;
 
 public class Candelabro : MonoBehaviour
 {
-    [Header("Candelabro constraints")]
-    Rigidbody2D rb;
-    Animator animator;
-    public LayerMask layerMaskPlat;
-    public PlatformEffector2D platformEffector2D;
+    [Header("Configurações")]
+    private float offsetY = 0.2f;
+    private float speed = 5f;
+    private float delay = 0.2f;
 
-    [Header("Candelabro fall")]
-    public float fallDelay;
-    public float fallDelayTime;
-    public bool isFalling = false;
+    private Vector3 startPos;
+    private bool isMoving = false;
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        if (isFalling)
-        {
-            fallDelay += Time.deltaTime;
-            if (fallDelay >= fallDelayTime / 2)
-            {
-                animator.SetBool("PreFall", true);
-            }
-
-            if (fallDelay >= fallDelayTime)
-            {
-                StartCoroutine(FallPlataform());
-            }
-        }
+        startPos = transform.position;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !isMoving)
         {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                Debug.Log("Contact normal: " + contact.normal);
-                // if (contact.normal.y < -0.5f)
-                // {
-                //     isFalling = true;
-                // }
-            }
+            StartCoroutine(MovePlatform());
         }
     }
 
-    IEnumerator FallPlataform()
+    private IEnumerator MovePlatform()
     {
-        yield return new WaitForSeconds(0.2f);
+        isMoving = true;
 
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        animator.SetBool("PreFall", false);
-        Destroy(gameObject, fallDelay + 10f);
+        Vector3 targetPos = startPos + Vector3.down * offsetY;
+
+        // Descer
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * speed;
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            yield return null;
+        }
+
+        // Espera um pouco antes de subir
+        yield return new WaitForSeconds(delay);
+
+        // Subir
+        t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * speed;
+            transform.position = Vector3.Lerp(targetPos, startPos, t);
+            yield return null;
+        }
+
+        isMoving = false;
     }
 }

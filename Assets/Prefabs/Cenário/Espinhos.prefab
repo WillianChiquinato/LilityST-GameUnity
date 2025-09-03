@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 1
-  knockback: {x: 3, y: 12}
+  knockback: {x: 2, y: 35}
 --- !u!60 &8701956278890639625
 PolygonCollider2D:
   m_ObjectHideFlags: 0

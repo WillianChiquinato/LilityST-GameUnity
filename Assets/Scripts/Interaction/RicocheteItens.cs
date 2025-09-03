@@ -5,6 +5,8 @@ public class RicocheteItens : MonoBehaviour
     private Vector2 lastVelocity;
     private Rigidbody2D rb;
 
+    public int countBatidas = 0;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,11 +23,15 @@ public class RicocheteItens : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Richochete"))
         {
-            Vector2 normal = collision.contacts[0].normal;
-            Vector2 reflectDirection = Vector2.Reflect(lastVelocity, normal);
-            reflectDirection.y *= 1.8f;
-            reflectDirection.x += 6f;
-            rb.linearVelocity = reflectDirection;
+            if (countBatidas > 3)
+            {
+                Vector2 normal = collision.contacts[0].normal;
+                Vector2 reflectDirection = Vector2.Reflect(lastVelocity, normal);
+                reflectDirection.y *= 3.2f;
+                reflectDirection.x *= 1.3f;
+                rb.linearVelocity = reflectDirection;
+                countBatidas++;
+            }
 
             Debug.Log($"Ricochete! Velocidade antiga: {lastVelocity}, nova: {rb.linearVelocity}");
         }

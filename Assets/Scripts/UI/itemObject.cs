@@ -57,6 +57,8 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
+        GetComponent<RicocheteItens>().countBatidas = 0;
+
         isItemPegado = true;
         if (itemData != null)
         {

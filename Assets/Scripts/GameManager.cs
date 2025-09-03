@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
         player = FindFirstObjectByType<PlayerMoviment>();
+
     }
 
     void Start()
@@ -100,6 +101,9 @@ public class GameManager : MonoBehaviour
             obj.SetActive(false);
         }
         pauseMenu.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
+        cinemachineVirtualCamera.gameObject.GetComponent<CinemachineConfiner2D>().InvalidateCache();
     }
 
 
