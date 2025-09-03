@@ -69,6 +69,7 @@ public class Checkpoints : MonoBehaviour
                 if (Savepoint.instance != null && GameManager.instance.player != null)
                 {
                     Savepoint.instance.SaveCheckpoint(
+                        SaveData.Instance.playTime,
                         transform.position,
                         GameManager.instance.player.GetComponent<Damage>().maxHealth,
                         SaveData.Instance.DashUnlocked,

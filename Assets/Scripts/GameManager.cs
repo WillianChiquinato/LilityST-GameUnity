@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
+    public static int currentSaveSlot { get; set; }
 
     [Header("Quests")]
     public QuestEvents questEvents;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Debug.LogWarning("GameManager: " + currentSaveSlot);
 
         pauseUI = GameObject.FindFirstObjectByType<UI>();
         UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");

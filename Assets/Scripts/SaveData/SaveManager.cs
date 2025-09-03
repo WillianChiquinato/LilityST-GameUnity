@@ -3,7 +3,7 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    private static string saveFilePath = "Assets/Scripts/SaveData/Saves";
+    private static string saveFilePath = "Assets/Scripts/SaveData/Saves/";
 
     public static void Save(SaveData data, int slot)
     {

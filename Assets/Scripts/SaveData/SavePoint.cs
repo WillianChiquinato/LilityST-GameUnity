@@ -12,20 +12,9 @@ public class Savepoint : MonoBehaviour
     public Vector2 defaultPosition = Vector2.zero;
     private Transform playerParent;
 
-    public int currentSlot = 1;
 
     private void Awake()
     {
-        if (GameManager.instance.playerMoviment == null)
-        {
-            GameManager.instance.playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-            if (GameManager.instance.playerMoviment != null)
-            {
-                playerParent = GameManager.instance.playerMoviment.transform.parent;
-            }
-
-        }
-
         if (instance == null)
         {
             instance = this;
@@ -34,78 +23,69 @@ public class Savepoint : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        // Cenas modificação de spawn
-        if (IsJsonFileEmpty("Assets/Scripts/SaveData/savepoint.json"))
+        int currentSlot = GameManager.currentSaveSlot;
+
+        // Verifica se o save do slot existe
+        if (!SaveManager.SaveExists(currentSlot))
         {
-            if (SaveData.Instance.currentScene == "Altior-Quarto")
-            {
-                Debug.Log("Sem checkpoint, nao salvar nessa cena");
-            }
-
-            if (GameManager.instance.playerMoviment != null)
-            {
-                Transform playerChild = GameManager.instance.playerMoviment.transform; // Obtém o filho do playerParent
-                playerChild.localPosition = Vector3.zero;
-
-                if (GameManager.instance.playerMoviment.currentScene == "Altior-PreFuga")
-                {
-                    instance.defaultPosition = new Vector2(21.4f, 16.6f);
-                    playerParent.transform.position = defaultPosition;
-                }
-                if (GameManager.instance.playerMoviment.currentScene == "Altior-Fuga")
-                {
-                    instance.defaultPosition = new Vector2(-53f, 16.6f);
-                    playerParent.transform.position = defaultPosition;
-                }
-                if (GameManager.instance.playerMoviment.currentScene == "DimensaoTempo")
-                {
-                    instance.defaultPosition = new Vector2(-81.6f, 26f);
-                    playerParent.transform.position = defaultPosition;
-                }
-                if (GameManager.instance.playerMoviment.currentScene == "MontanhaIntro")
-                {
-                    instance.defaultPosition = new Vector2(-85.7f, -25.5f);
-                    playerParent.transform.position = defaultPosition;
-                }
-                if (GameManager.instance.playerMoviment.currentScene == "Boss&NPC")
-                {
-                    instance.defaultPosition = new Vector2(2.4f, -39.1f);
-                    playerParent.transform.position = defaultPosition;
-                }
-            }
+            // Nenhum save ainda, usa posição padrão
+            SetDefaultSpawnPosition();
+            Debug.LogWarning("Checkpoint não encontrado, posição padrão aplicada, nem o slot achou");
         }
         else
         {
-            // Se o arquivo JSON não estiver vazio, carregar os dados salvos
+            // Carrega dados do slot
             saveData = SaveManager.Load(currentSlot);
-            if (saveData != null)
+
+            if (saveData != null && GameManager.instance.playerMoviment != null)
             {
-                if (GameManager.instance.playerMoviment != null)
+                if (saveData.currentScene == SceneManager.GetActiveScene().name)
                 {
-                    // Se o jogador estiver na mesma cena, carregar os dados salvos
-                    if (saveData.currentScene == SceneManager.GetActiveScene().name)
-                    {
-                        GameManager.instance.playerMoviment.transform.position = saveData.playerCheckpoint;
-                    }
-                    else
-                    {
-                        GameManager.instance.playerMoviment.transform.position = defaultPosition;
-
-                        // Se o jogador estiver em uma cena diferente, usar a posição padrão
-                        if (playerParent != null)
-                        {
-                            Transform playerChild = GameManager.instance.playerMoviment.transform;
-                            playerChild.localPosition = Vector3.zero;
-
-                            playerParent.position = GameManager.instance.playerMoviment.transform.position;
-                        }
-                    }
+                    // Se a cena é a mesma, coloca no checkpoint salvo
+                    GameManager.instance.playerMoviment.transform.position = saveData.playerCheckpoint;
                 }
+                else
+                {
+                    SetDefaultSpawnPosition();
+                }
+            }
+            else
+            {
+                //Fallback.
+                Debug.LogWarning("Fallback: Dados de salvamento não encontrados.");
             }
         }
     }
+
+    private void SetDefaultSpawnPosition()
+    {
+        if (GameManager.instance.playerMoviment == null) return;
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Altior-PreFuga":
+                instance.defaultPosition = new Vector2(21.4f, 16.6f);
+                break;
+            case "Altior-Fuga":
+                instance.defaultPosition = new Vector2(-53f, 16.6f);
+                break;
+            case "DimensaoTempo":
+                instance.defaultPosition = new Vector2(-81.6f, 26f);
+                break;
+            case "MontanhaIntro":
+                instance.defaultPosition = new Vector2(-85.7f, -25.5f);
+                break;
+            case "Boss&NPC":
+                instance.defaultPosition = new Vector2(2.4f, -39.1f);
+                break;
+        }
+
+        GameManager.instance.playerMoviment.transform.position = instance.defaultPosition;
+    }
+
 
     void Update()
     {
@@ -115,22 +95,7 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    bool IsJsonFileEmpty(string path)
-    {
-        if (File.Exists(path))
-        {
-            string fileContent = File.ReadAllText(path);
-
-            return string.IsNullOrWhiteSpace(fileContent);
-        }
-        else
-        {
-            Debug.LogError("O arquivo JSON não foi encontrado.");
-            return true;
-        }
-    }
-
-    public void SaveCheckpoint(Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
+    public void SaveCheckpoint(float playTime, Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
     {
         SaveData data = new SaveData
         {
@@ -141,35 +106,57 @@ public class Savepoint : MonoBehaviour
             WalljumpUnlocked = WalljumpUnlocked,
             attackUnlocked = attackUnlocked,
             XPlayer = XPlayer,
-            powerUps = new List<PowerUps>(powerUps)
+            powerUps = new List<PowerUps>(powerUps),
+            playTime = playTime
         };
+        Debug.LogWarning("Salvando no slot " + GameManager.currentSaveSlot);
 
-        SaveManager.Save(data, currentSlot);
+        SaveManager.Save(data, GameManager.currentSaveSlot);
     }
 
-
-    public void LoadCheckpoint()
+    private void OnEnable()
     {
-        SaveData data = SaveManager.Load(currentSlot);
-        if (data != null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                PlayerMoviment PlayerController = player.GetComponent<PlayerMoviment>();
-                if (PlayerController != null)
-                {
-                    player.transform.position = data.playerCheckpoint;
-                }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-                Damage health = player.GetComponent<Damage>();
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Atualiza o player ao carregar a cena
+        LoadCheckpoint();
+    }
+
+    private void LoadCheckpoint()
+    {
+        Debug.LogWarning("Slot: " + GameManager.currentSaveSlot);
+        if (GameManager.instance.playerMoviment == null) return;
+
+        if (!SaveManager.SaveExists(GameManager.currentSaveSlot))
+        {
+            SetDefaultSpawnPosition();
+        }
+        else
+        {
+            saveData = SaveManager.Load(GameManager.currentSaveSlot);
+
+            if (saveData.currentScene == SceneManager.GetActiveScene().name)
+            {
+                GameManager.instance.playerMoviment.transform.position = saveData.playerCheckpoint;
+
+                Damage health = GameManager.instance.playerMoviment.GetComponent<Damage>();
                 if (health != null)
                 {
-                    health.Health = data.playerHealth;
+                    health.Health = saveData.playerHealth;
                 }
             }
-
-            Debug.Log($"Checkpoint restaurado do slot {currentSlot}!");
+            else
+            {
+                SetDefaultSpawnPosition();
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class MouseEnterCaderno : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Vector3 targetScale = new Vector3(1.2f, 1.2f, 1f);
-    public Vector3 positionOffset = Vector3.zero;
     public float Speed = 5f;
 
     private Vector3 originalScale;

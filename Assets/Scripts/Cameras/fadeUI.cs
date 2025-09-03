@@ -3,11 +3,28 @@ using UnityEngine;
 
 public class fadeUI : MonoBehaviour
 {
+    public static fadeUI Instance { get; private set; }
+    public LevelTransicao levelTransicao;
+
     public CanvasGroup canvasGroupOptions;
     public CanvasGroup canvasGroupMultipleSaves;
     public CanvasGroup canvasGroupMainMenu;
 
     private CanvasGroup currentGroup;
+
+    void Awake()
+    {
+        levelTransicao = FindFirstObjectByType<LevelTransicao>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start()
     {
