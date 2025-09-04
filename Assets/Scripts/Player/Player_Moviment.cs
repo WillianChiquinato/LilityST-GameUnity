@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -8,7 +9,6 @@ public class PlayerMoviment : MonoBehaviour
     public string currentScene;
 
     public bool AutoMoveAnimations = false;
-
 
     [Header("Instances")]
     public float currentZRotation;
@@ -101,6 +101,9 @@ public class PlayerMoviment : MonoBehaviour
     [Header("CameraFollowAnimation")]
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] public camerafollowObject camerafollowObject;
+
+    [Header("OpenTab")]
+    public bool OpenCaderno = false;
 
     public float attackCooldown
     {
@@ -278,6 +281,8 @@ public class PlayerMoviment : MonoBehaviour
     {
         SaveData.Instance.playTime += Time.deltaTime;
         animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
+        animacao.SetBool("OpenTab", OpenCaderno);
+
         if (!canMove)
         {
             playerInput.enabled = false;
@@ -733,6 +738,36 @@ public class PlayerMoviment : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OpenTab(InputAction.CallbackContext context)
+    {
+        if (!DamageScript.IsAlive)
+        {
+            Debug.LogWarning("Impossível concluir operação OpenTab");
+            return;
+        }
+
+        // Quando o botão for pressionado
+        if (context.started && touching.IsGrouded && !arcoEffect)
+        {
+            OpenCaderno = !OpenCaderno;
+
+            if (OpenCaderno)
+            {
+                Debug.Log("Abrindo inventário!!!");
+                Invoke(nameof(AbrirHUDelay), 1.7f);
+                canMove = false;
+
+                //Opacidade do canvas group em 0.7 segundos, fade out:
+                StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
+            }
+        }
+    }
+
+    public void AbrirHUDelay()
+    {
+        GameManager.instance.AbrirHUD();
     }
 
     void OnCollisionEnter2D(Collision2D collision)

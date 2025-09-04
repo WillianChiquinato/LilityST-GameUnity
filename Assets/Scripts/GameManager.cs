@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Pause Instances")]
     public UI pauseUI;
+    public GameObject GUI;
     public BossFight bossFight;
     public PlayerMoviment playerMoviment;
     public GameObject pauseMenu;
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         pauseUI.transform.GetChild(1).gameObject.SetActive(false);
         pauseMenu.transform.GetChild(0).gameObject.SetActive(true);
-        ToastMessage.Instance.activeToast.gameObject.SetActive(false);
+        // ToastMessage.Instance.activeToast.gameObject.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
     }
@@ -155,12 +156,13 @@ public class GameManager : MonoBehaviour
     public void AbrirHUD()
     {
         SistemaUI.SetActive(true);
-        pauseMenu.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void AbrirHUDInventário()
+    public void FecharHUD()
     {
-        Debug.Log("Abrir inventário");
+        SistemaUI.SetActive(false);
+        playerMoviment.OpenCaderno = false;
+        StartCoroutine(FadeInCanvasGroup(GUI.GetComponent<CanvasGroup>(), 1.2f));
     }
 
     public void ParaOMenu()
@@ -201,6 +203,39 @@ public class GameManager : MonoBehaviour
     {
         //Atualiza o nome da cena atual quando uma nova cena é carregada
         CurrentSceneName = scene.name;
+    }
+
+    //Canvas group anims.
+    public IEnumerator FadeOutCanvasGroup(CanvasGroup canvasGroup, float duration)
+    {
+        float startAlpha = canvasGroup.alpha;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, 0, time / duration);
+            yield return null;
+        }
+
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public IEnumerator FadeInCanvasGroup(CanvasGroup canvasGroup, float duration)
+    {
+        float startAlpha = canvasGroup.alpha;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, 1, time / duration);
+            yield return null;
+        }
+
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 
     //Parte de reiniciar

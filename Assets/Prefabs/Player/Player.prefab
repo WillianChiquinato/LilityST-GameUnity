@@ -819,6 +819,7 @@ MonoBehaviour:
   LadderScript: {fileID: 0}
   _cameraFollow: {fileID: 0}
   camerafollowObject: {fileID: 0}
+  OpenCaderno: 0
   _IsMoving: 0
   _IsRunning: 0
   _IsAcordada: 0
@@ -1141,6 +1142,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7f26bd4a-ea27-4e50-bb52-da7ac5dcd0b5
     m_ActionName: 'Player/Dash[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3583350418226193328}
+        m_TargetAssemblyTypeName: PlayerMoviment, Assembly-CSharp
+        m_MethodName: OpenTab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7e2a4173-aca7-45b3-998f-25c33e955fc8
+    m_ActionName: 'Player/OpenTab[/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

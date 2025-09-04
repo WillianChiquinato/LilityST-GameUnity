@@ -13,7 +13,7 @@ public class ColiderJump : MonoBehaviour
             {
                 if (enemy != null)
                 {
-                    enemy.jumpForce = 14f;
+                    enemy.jumpForce = 13f;
                 }
             }
         }
