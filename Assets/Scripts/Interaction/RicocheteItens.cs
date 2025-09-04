@@ -23,7 +23,7 @@ public class RicocheteItens : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Richochete"))
         {
-            if (countBatidas > 3)
+            if (countBatidas < 3)
             {
                 Vector2 normal = collision.contacts[0].normal;
                 Vector2 reflectDirection = Vector2.Reflect(lastVelocity, normal);

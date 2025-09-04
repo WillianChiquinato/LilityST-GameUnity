@@ -674,6 +674,10 @@ public class PlayerMoviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         //KNOCKBACK
+        GameManager.instance.FecharHUD();
+        OpenCaderno = false;
+
+        rb.linearVelocity = Vector2.zero;
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
         GameManager.instance.shakeCamera.ShakeHitDamage();
 

@@ -1,9 +1,9 @@
 {
-    "playTime": 0.0,
+    "playTime": 8.797800064086914,
     "XPlayer": 0,
     "playerCheckpoint": {
-        "x": -176.58150091552734,
-        "y": 31.0
+        "x": -284.15000915527345,
+        "y": 36.70000076293945
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
@@ -11,7 +11,6 @@
     "WalljumpUnlocked": true,
     "attackUnlocked": true,
     "powerUps": [
-        0,
         1
     ]
 }

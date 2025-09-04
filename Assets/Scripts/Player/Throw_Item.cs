@@ -4,6 +4,7 @@ using UnityEngine;
 public class Throw_Item : MonoBehaviour
 {
     public ItemData itemData;
+    public PlayerMoviment player;
 
     public Animator animator;
     public GameObject prefabItem;
@@ -18,6 +19,7 @@ public class Throw_Item : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        player = GetComponent<PlayerMoviment>();
 
         itensColetaveis = inventory_System.instance.coletaveis;
     }
@@ -52,7 +54,7 @@ public class Throw_Item : MonoBehaviour
 
         if (itemArremessar != null && stackObjetos > 0)
         {
-            if (arremessar && newDrop == null)
+            if (arremessar && player.touching.IsGrouded && newDrop == null)
             {
                 animator.SetBool("Arremessar", true);
             }
