@@ -47,13 +47,9 @@ public class Damage : MonoBehaviour
         }
     }
 
-    [SerializeField]
     public bool isInvicible = false;
     private float timeSincehit;
-    [SerializeField]
-    private float invicibilityTimer = 0.25f;
-
-
+    public float invicibilityTimer = 0.25f;
 
     [SerializeField]
     private bool _IsAlive = true;

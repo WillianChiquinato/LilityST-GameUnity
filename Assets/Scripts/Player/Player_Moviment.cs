@@ -2,12 +2,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
-
     public bool AutoMoveAnimations = false;
 
     [Header("Instances")]
@@ -40,10 +40,15 @@ public class PlayerMoviment : MonoBehaviour
     //Variaveis
     [Header("Variaveis")]
     public Damage DamageScript;
-    public TouchingDistance touching;
+    public TouchingVariables touching;
     public bool entrar;
     public bool grabAtivo = false;
     public bool grabAnim = false;
+
+    public Vector2 lastLilithSpawn;
+    public GameObject lilithSpawnPoint;
+    public RaycastHit2D LastLocationSpawn;
+    public float offsetSpawn;
 
     [HideInInspector]
     public Animator animacao;
@@ -259,7 +264,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animacao = GetComponent<Animator>();
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         DamageScript = GetComponent<Damage>();
         playerInput = GetComponent<PlayerInput>();
         acorda_Boss = GameObject.FindFirstObjectByType<Acorda_Boss>();
@@ -282,6 +287,9 @@ public class PlayerMoviment : MonoBehaviour
         SaveData.Instance.playTime += Time.deltaTime;
         animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
         animacao.SetBool("OpenTab", OpenCaderno);
+
+        LastLocationSpawn = Physics2D.Raycast(lilithSpawnPoint.transform.position, Vector2.down, 0.4f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(lilithSpawnPoint.transform.position, Vector2.down * 0.4f, Color.red);
 
         if (!canMove)
         {
@@ -317,6 +325,11 @@ public class PlayerMoviment : MonoBehaviour
         if (touching.IsGrouded)
         {
             isWallJumping = false;
+        }
+        if (LastLocationSpawn.collider != null)
+        {
+            lastLilithSpawn = transform.position;
+            offsetSpawn = transform.localScale.x;
         }
 
         canJump = (touching.IsOnWall && wallSlide) ? true : false;
@@ -493,9 +506,12 @@ public class PlayerMoviment : MonoBehaviour
 
         if (IsAlive)
         {
-            IsMoving = moveInput != Vector2.zero;
+            if (!OpenCaderno)
+            {
+                IsMoving = moveInput != Vector2.zero;
 
-            setDirection(moveInput);
+                setDirection(moveInput);
+            }
         }
         else
         {
@@ -526,7 +542,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (context.started && timerDash < 0f)
             {
-                if (!arcoEffect)
+                if (!arcoEffect && !OpenCaderno)
                 {
                     isDashing = true;
                     playerInput.enabled = false;
@@ -544,7 +560,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !OpenCaderno)
         {
             jumpInput = true;
 
@@ -588,7 +604,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
         {
-            if (!arcoEffect)
+            if (!arcoEffect && !OpenCaderno)
             {
                 WallstateTimer -= Time.deltaTime;
                 wallSlide = true;
@@ -628,7 +644,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SaveData.Instance.attackUnlocked)
         {
-            if (context.performed && !arcoEffect)
+            if (context.performed && !arcoEffect && !OpenCaderno)
             {
                 Atacar = true;
                 if (touching.IsGrouded)
@@ -654,7 +670,7 @@ public class PlayerMoviment : MonoBehaviour
     public void OnPowers(InputAction.CallbackContext context)
     {
         //Add Savepoint.PowerUpApress
-        if (context.started && SaveData.Instance.powerUps.Contains(PowerUps.Arco))
+        if (context.started && SaveData.Instance.powerUps.Contains(PowerUps.Arco) && !OpenCaderno)
         {
             if (bow.NewArrow == null)
             {
@@ -710,7 +726,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (context.started && !arcoEffect)
+        if (context.started && !arcoEffect && !OpenCaderno)
         {
             entrar = true;
         }
@@ -724,7 +740,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (context.started && touching.IsGrouded && healingTimer >= 2)
         {
-            if (!arcoEffect)
+            if (!arcoEffect && !OpenCaderno)
             {
                 //Logica para slider
                 if (DamageScript.Health == DamageScript.maxHealth || potion_Script.potionInt <= 0)
@@ -761,10 +777,17 @@ public class PlayerMoviment : MonoBehaviour
             {
                 Debug.Log("Abrindo inventário!!!");
                 Invoke(nameof(AbrirHUDelay), 1.7f);
-                canMove = false;
 
                 //Opacidade do canvas group em 0.7 segundos, fade out:
                 StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
+            }
+            else
+            {
+                Debug.Log("Fechando inventário!!!");
+                GameManager.instance.FecharHUD();
+
+                //Opacidade do canvas group em 0.7 segundos, fade in:
+                StartCoroutine(GameManager.instance.FadeInCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
             }
         }
     }
@@ -776,13 +799,56 @@ public class PlayerMoviment : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("RicochetePlayer"))
+        switch (collision.gameObject.tag)
         {
-            float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
+            case "RicochetePlayer":
+                float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
 
-            Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 3.2f);
-            rb.AddForce(force, ForceMode2D.Impulse);
+                Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 3.2f);
+                rb.AddForce(force, ForceMode2D.Impulse);
+                break;
+            default:
+                break;
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Espinhos":
+                if (DamageScript.IsAlive)
+                {
+                    canMove = false;
+                    DamageScript.invicibilityTimer = 3f;
+                    animacao.SetBool("DanoEspinhosBool", true);
+                    animacao.SetTrigger("DanoEspinhos");
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                    rb.linearVelocity = Vector2.zero;
+                    rb.gravityScale = 0;
+
+                    Invoke(nameof(ResetConstraints), 2f);
+                }
+                else
+                {
+                    Debug.Log("Player já está morto, não pode receber dano de espinhos.");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ResetConstraints()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.gravityScale = 4.5f;
+
+        DamageScript.invicibilityTimer = 0.25f;
+        Vector2 offset = new Vector2(-2.2f * offsetSpawn, 0.5f);
+        transform.position = lastLilithSpawn + offset;
+
+        animacao.SetBool("DanoEspinhosBool", true);
     }
 
     public void PlayerXPRewards(int xp)

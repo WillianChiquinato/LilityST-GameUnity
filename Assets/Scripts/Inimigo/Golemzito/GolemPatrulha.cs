@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class GolemPatrulha_Moviment : PlayerPoco
 {
     private Item_drop dropInimigo;
@@ -11,7 +11,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
     [SerializeField]
     private float IdleTimer;
 
-    TouchingDistance touching;
+    TouchingVariables touching;
     SetBoolBehavior setBoolBehavior;
 
     Rigidbody2D rb;
@@ -97,7 +97,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();

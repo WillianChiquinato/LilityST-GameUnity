@@ -4,7 +4,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables))]
 public class PlayerBebe_Moviment : MonoBehaviour
 {
     public static PlayerBebe_Moviment Instance { get; private set; }
@@ -22,7 +22,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     public Animator animacao;
     [HideInInspector]
     public Rigidbody2D rb;
-    public TouchingDistance touching;
+    public TouchingVariables touching;
     public bool entrar;
     public float jumpImpulso;
     public bool IsJumping;
@@ -127,7 +127,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animacao = GetComponent<Animator>();
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
         cinemachineVirtualCamera = FindFirstObjectByType<CinemachineVirtualCamera>();
         playerInput = GetComponent<PlayerInput>();

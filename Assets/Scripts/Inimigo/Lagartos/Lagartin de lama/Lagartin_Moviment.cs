@@ -7,7 +7,7 @@ public class Lagartin_Moviment : PlayerPoco
     [Header("Instancias")]
     private Item_drop dropInimigo;
     public PlayerMoviment playerMoviment;
-    TouchingDistance touching;
+    TouchingVariables touching;
 
     public DetectionLagartin attackZona1;
     public GameObject attackDetector;
@@ -53,7 +53,7 @@ public class Lagartin_Moviment : PlayerPoco
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         dropInimigo = GetComponent<Item_drop>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();

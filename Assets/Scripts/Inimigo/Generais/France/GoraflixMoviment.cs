@@ -8,7 +8,7 @@ public class GoraflixMoviment : MonoBehaviour
     [Header("Instancias")]
     public GameObject Anelgrab;
 
-    TouchingDistance touching;
+    TouchingVariables touching;
     public PlayerMoviment playerMoviment;
     public grabPlayer grabPlayer;
     public Transform playerTransform;
@@ -64,7 +64,7 @@ public class GoraflixMoviment : MonoBehaviour
     void Start()
     {
         Anelgrab.SetActive(false);
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();

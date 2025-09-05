@@ -1,20 +1,8 @@
 {
     "ChaveTempo": [],
-    "ChaveMovimento": [
-        {
-            "fragmentoNome": "ChaveMovimento",
-            "fragmentoType": 1,
-            "stackSize": 1
-        }
-    ],
+    "ChaveMovimento": [],
     "ChaveVida": [],
-    "ChaveCaos": [
-        {
-            "fragmentoNome": "ChaveCaos",
-            "fragmentoType": 3,
-            "stackSize": 1
-        }
-    ],
+    "ChaveCaos": [],
     "ChaveOrdem": [],
     "DecksPorArma": [
         {
@@ -39,12 +27,23 @@
                     "fragmentoNome": "ChaveMovimento",
                     "fragmentoType": 1,
                     "stackSize": 1
+                },
+                {
+                    "fragmentoNome": "ChaveCaos",
+                    "fragmentoType": 3,
+                    "stackSize": 1
                 }
             ]
         },
         {
             "armaNome": "Marreta",
-            "fragmentos": []
+            "fragmentos": [
+                {
+                    "fragmentoNome": "ChaveMovimento",
+                    "fragmentoType": 1,
+                    "stackSize": 1
+                }
+            ]
         },
         {
             "armaNome": "Luva",
@@ -59,5 +58,5 @@
             "fragmentos": []
         }
     ],
-    "armaSelecionada": "Arco"
+    "armaSelecionada": "Marreta"
 }

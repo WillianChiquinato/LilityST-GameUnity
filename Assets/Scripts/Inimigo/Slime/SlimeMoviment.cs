@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDistance), typeof(Damage))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class SlimeMoviment : PlayerPoco
 {
     [Header("Instancias")]
-    TouchingDistance touching;
+    TouchingVariables touching;
     private Item_drop dropInimigo;
     Rigidbody2D rb;
     Animator animator;
@@ -62,7 +62,7 @@ public class SlimeMoviment : PlayerPoco
 
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
-        touching = GetComponent<TouchingDistance>();
+        touching = GetComponent<TouchingVariables>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();
