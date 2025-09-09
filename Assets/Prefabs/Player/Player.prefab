@@ -785,6 +785,7 @@ MonoBehaviour:
   grabAnim: 0
   lastLilithSpawn: {x: 0, y: 0}
   lilithSpawnPoint: {fileID: 5721179940529059130}
+  offsetSpawn: 0
   animacao: {fileID: 0}
   rb: {fileID: 0}
   RunTiming: 0

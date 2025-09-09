@@ -1,6 +1,12 @@
 {
     "ChaveTempo": [],
-    "ChaveMovimento": [],
+    "ChaveMovimento": [
+        {
+            "fragmentoNome": "ChaveMovimento",
+            "fragmentoType": 1,
+            "stackSize": 1
+        }
+    ],
     "ChaveVida": [],
     "ChaveCaos": [],
     "ChaveOrdem": [],
@@ -37,13 +43,7 @@
         },
         {
             "armaNome": "Marreta",
-            "fragmentos": [
-                {
-                    "fragmentoNome": "ChaveMovimento",
-                    "fragmentoType": 1,
-                    "stackSize": 1
-                }
-            ]
+            "fragmentos": []
         },
         {
             "armaNome": "Luva",

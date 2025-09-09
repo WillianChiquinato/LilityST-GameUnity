@@ -143,6 +143,10 @@ public class PlayerMoviment : MonoBehaviour
                             speed = 4f;
                             airSpeed = 4f;
                         }
+                        else if (OpenCaderno)
+                        {
+                            speed = 0f;
+                        }
                         else
                         {
                             speed += Time.deltaTime * acelerationSpeed;
@@ -373,6 +377,7 @@ public class PlayerMoviment : MonoBehaviour
             arcoEffect = false;
             //ARCO arrumar
             bow.bodyCamera = false;
+            bow.transposer.m_TrackedObjectOffset = new Vector3(0, 0, bow.transposer.m_TrackedObjectOffset.z);
 
             animacao.SetBool(animationstrings.Powers, false);
             bow.playerArco.gameObject.SetActive(false);
@@ -511,6 +516,11 @@ public class PlayerMoviment : MonoBehaviour
                 IsMoving = moveInput != Vector2.zero;
 
                 setDirection(moveInput);
+            }
+            else
+            {
+                moveInput = Vector2.zero;
+                IsMoving = false;
             }
         }
         else
@@ -803,8 +813,9 @@ public class PlayerMoviment : MonoBehaviour
         {
             case "RicochetePlayer":
                 float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
+                float forceItem = collision.gameObject.GetComponent<RicocheteForcePlayer>().forceItem;
 
-                Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * 3.2f);
+                Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * forceItem);
                 rb.AddForce(force, ForceMode2D.Impulse);
                 break;
             default:

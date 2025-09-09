@@ -161,7 +161,6 @@ public class GameManager : MonoBehaviour
     public void FecharHUD()
     {
         SistemaUI.SetActive(false);
-        playerMoviment.OpenCaderno = false;
         StartCoroutine(FadeInCanvasGroup(GUI.GetComponent<CanvasGroup>(), 1.2f));
     }
 

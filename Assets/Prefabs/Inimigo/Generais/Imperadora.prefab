@@ -174,14 +174,16 @@ MonoBehaviour:
   dialogos:
     dialogoTextos:
     - caracter:
-        nome: POHA
-        icone: {fileID: 21300000, guid: 1e836581da6cf8b4695bd88815e3a7b0, type: 3}
-      linhaTexto: boa filho duma puta
+        nome: Rendalla
+        icone: {fileID: 21300000, guid: b7f836f1f51a4f746bae67bcd3379dd1, type: 3}
+      linhaTexto: Lorem ipsum is placeholder text commonly used in the graphic, print,
+        and publishing industries for previewing layouts and visual mockups.
       isLility: 0
     - caracter:
-        nome: POHA
-        icone: {fileID: 21300000, guid: 1e836581da6cf8b4695bd88815e3a7b0, type: 3}
-      linhaTexto: "Krl vc \xE9 mesmo puta"
+        nome: Rendalla
+        icone: {fileID: 21300000, guid: b7f836f1f51a4f746bae67bcd3379dd1, type: 3}
+      linhaTexto: Lorem ipsum is placeholder text commonly used in the graphic, print,
+        and publishing industries for previewing layouts and visual mockups.
       isLility: 1
   playerMoviment: {fileID: 0}
   input_Conversa: {fileID: 0}
@@ -266,7 +268,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1171906793
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.94509804, g: 0.26666668, b: 0.26666668, a: 1}

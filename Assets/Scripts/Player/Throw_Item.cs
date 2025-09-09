@@ -54,7 +54,7 @@ public class Throw_Item : MonoBehaviour
 
         if (itemArremessar != null && stackObjetos > 0)
         {
-            if (arremessar && player.touching.IsGrouded && newDrop == null)
+            if (arremessar && newDrop == null)
             {
                 animator.SetBool("Arremessar", true);
             }

@@ -116,13 +116,21 @@ public class Bow : MonoBehaviour
                 bracoEsquerdo.GetComponent<Animator>().SetTrigger("PowerUp");
                 ArcoAnim.GetComponent<Animator>().SetTrigger("PowerUp");
             }
+
+        }
+
+        if (bodyCamera)
+        {
+            //Segue o mouse
+            Vector2 playerPos = transform.position;
+            Vector2 midPoint = Vector2.Lerp(playerPos, mousePosition, 0.35f);
+            Vector2 camOffset = midPoint - playerPos;
+            transposer.m_TrackedObjectOffset = new Vector3(camOffset.x, camOffset.y, transposer.m_TrackedObjectOffset.z);
         }
 
         if (NewArrow)
         {
             StartCoroutine(DelayAnimation());
-            bodyCamera = false;
-            transposer.m_TrackedObjectOffset = new Vector3(transposer.m_TrackedObjectOffset.x, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
             Time.timeScale = 1f;
             playerMoviment.tempo = false;
             playerMoviment.elapsedTime = 0f;
@@ -133,21 +141,11 @@ public class Bow : MonoBehaviour
         {
             playerMoviment.transform.localScale = new Vector3(1, 1, 1);
             playerMoviment._IsRight = true;
-
-            if (bodyCamera)
-            {
-                transposer.m_TrackedObjectOffset = new Vector3(newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
-            }
         }
         else
         {
             playerMoviment.transform.localScale = new Vector3(-1, 1, 1);
             playerMoviment._IsRight = false;
-
-            if (bodyCamera)
-            {
-                transposer.m_TrackedObjectOffset = new Vector3(-newXOffset, transposer.m_TrackedObjectOffset.y, transposer.m_TrackedObjectOffset.z);
-            }
         }
     }
 
@@ -178,6 +176,8 @@ public class Bow : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
 
+        bodyCamera = false;
+        transposer.m_TrackedObjectOffset = new Vector3(0, 0, transposer.m_TrackedObjectOffset.z);
         playerMoviment.GetComponentInChildren<PernasArcoLogic>().DisableBow();
         playerArco.gameObject.SetActive(false);
         playerMoviment.GetComponent<SpriteRenderer>().enabled = true;
