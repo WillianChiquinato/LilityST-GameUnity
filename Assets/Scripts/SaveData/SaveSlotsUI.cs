@@ -45,12 +45,15 @@ public class SaveSlotsUI : MonoBehaviour
             playerCheckpoint = Vector2.zero,
             playerHealth = 3,
             currentScene = "Altior-Quarto",
-            DashUnlocked = false,
-            WalljumpUnlocked = false,
-            attackUnlocked = false,
-            powerUps = new List<PowerUps>(),
+            DashUnlocked = true,
+            WalljumpUnlocked = true,
+            attackUnlocked = true,
+            powerUps = new List<PowerUps> { PowerUps.Arco },
             XPlayer = 0,
-            playTime = 0f
+            playTime = 0f,
+            inventoryData = new inventory_System.InventorySaveData(),
+            fragmentoData = new FragmentoSystem.FragmentoSaveData(),
+            questData = new QuestManager.QuestSaveData()
         };
 
         SaveManager.Save(newSave, slotIndex);

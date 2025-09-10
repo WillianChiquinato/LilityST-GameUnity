@@ -28,6 +28,9 @@ public class Savepoint : MonoBehaviour
 
         int currentSlot = GameManager.currentSaveSlot;
 
+        //Carrega os itens do SaveData pre setados.
+        SaveData.Instance = SaveManager.Load(currentSlot);
+
         // Verifica se o save do slot existe
         if (!SaveManager.SaveExists(currentSlot))
         {
@@ -37,15 +40,12 @@ public class Savepoint : MonoBehaviour
         }
         else
         {
-            // Carrega dados do slot
-            saveData = SaveManager.Load(currentSlot);
-
-            if (saveData != null && GameManager.instance.playerMoviment != null)
+            if (SaveData.Instance != null && GameManager.instance.playerMoviment != null)
             {
-                if (saveData.currentScene == SceneManager.GetActiveScene().name)
+                if (SaveData.Instance.currentScene == SceneManager.GetActiveScene().name)
                 {
                     // Se a cena é a mesma, coloca no checkpoint salvo
-                    GameManager.instance.playerMoviment.transform.position = saveData.playerCheckpoint;
+                    GameManager.instance.playerMoviment.transform.position = SaveData.Instance.playerCheckpoint;
                 }
                 else
                 {
@@ -55,6 +55,7 @@ public class Savepoint : MonoBehaviour
             else
             {
                 //Fallback.
+                SetDefaultSpawnPosition();
                 Debug.LogWarning("Fallback: Dados de salvamento não encontrados.");
             }
         }
@@ -97,20 +98,29 @@ public class Savepoint : MonoBehaviour
 
     public void SaveCheckpoint(float playTime, Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
     {
-        SaveData data = SaveData.Instance;
+        // 1. Carregar o save atual do slot
+        var currentData = SaveManager.Load(GameManager.currentSaveSlot);
+        if (currentData == null)
+        {
+            currentData = new SaveData();
+        }
 
-        //SavePoint.
-        data.playerCheckpoint = checkpoint;
-        data.playerHealth = health;
-        data.currentScene = SceneManager.GetActiveScene().name;
-        data.DashUnlocked = DashUnlocked;
-        data.WalljumpUnlocked = WalljumpUnlocked;
-        data.attackUnlocked = attackUnlocked;
-        data.XPlayer = XPlayer;
-        data.powerUps = new List<PowerUps>(powerUps);
-        data.playTime = playTime;
+        // 2. Atualizar só os campos do checkpoint
+        currentData.playerCheckpoint = checkpoint;
+        currentData.playerHealth = health;
+        currentData.currentScene = SceneManager.GetActiveScene().name;
+        currentData.DashUnlocked = DashUnlocked;
+        currentData.WalljumpUnlocked = WalljumpUnlocked;
+        currentData.attackUnlocked = attackUnlocked;
+        currentData.XPlayer = XPlayer;
+        currentData.powerUps = new List<PowerUps>(powerUps);
+        currentData.playTime = playTime;
 
-        SaveManager.Save(data, GameManager.currentSaveSlot);
+        // 3. Salvar de volta (preservando inventário e tudo mais)
+        SaveManager.Save(currentData, GameManager.currentSaveSlot);
+
+        // 4. Atualizar também o Instance em memória
+        SaveData.Instance = currentData;
     }
 
     private void OnEnable()

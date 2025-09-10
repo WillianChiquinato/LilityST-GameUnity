@@ -34,53 +34,43 @@ public class PlayerItemDrop : Item_drop
 
     public void LoadPossibleDrops()
     {
-        string path = Application.dataPath + "/Scripts/SaveData/Inventario/inventario.json";
+        var inventoryData = SaveData.Instance.inventoryData;
 
-        if (File.Exists(path))
+        DropsInventoryPlayer.Clear();
+
+        // Adiciona MaterialsItens
+        foreach (var itemData in inventoryData.MaterialsItens)
         {
-            string json = File.ReadAllText(path);
-            inventory_System.InventorySaveData inventoryData = JsonUtility.FromJson<inventory_System.InventorySaveData>(json);
-
-            DropsInventoryPlayer.Clear();
-
-            // Adiciona MaterialsItens
-            foreach (var itemData in inventoryData.MaterialsItens)
+            ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
+            if (item != null)
             {
-                ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
-                if (item != null)
-                {
-                    DropsInventoryPlayer.Add(item);
-                    Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
-                }
+                DropsInventoryPlayer.Add(item);
+                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
             }
-
-            // Adiciona DocumentsItens
-            foreach (var itemData in inventoryData.DocumentsItens)
-            {
-                ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
-                if (item != null)
-                {
-                    DropsInventoryPlayer.Add(item);
-                    Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
-                }
-            }
-
-            // Adiciona ColectItens
-            foreach (var itemData in inventoryData.ColectItens)
-            {
-                ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
-                if (item != null)
-                {
-                    DropsInventoryPlayer.Add(item);
-                    Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
-                }
-            }
-
-            Debug.Log($"[DROP] Total de possíveis drops carregados: {DropsInventoryPlayer.Count}");
         }
-        else
+
+        // Adiciona DocumentsItens
+        foreach (var itemData in inventoryData.DocumentsItens)
         {
-            Debug.LogWarning("[DROP] Arquivo de inventário não encontrado em: " + path);
+            ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
+            if (item != null)
+            {
+                DropsInventoryPlayer.Add(item);
+                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
+            }
         }
+
+        // Adiciona ColectItens
+        foreach (var itemData in inventoryData.ColectItens)
+        {
+            ItemData item = inventory_System.instance.GetItemData(itemData.itemName, itemData.itemType);
+            if (item != null)
+            {
+                DropsInventoryPlayer.Add(item);
+                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
+            }
+        }
+
+        Debug.Log($"[DROP] Total de possíveis drops carregados: {DropsInventoryPlayer.Count}");
     }
 }

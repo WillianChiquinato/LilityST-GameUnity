@@ -15,6 +15,7 @@ public class SaveData
             }
             return instance;
         }
+        set { instance = value; }
     }
 
     public float playTime;
@@ -22,16 +23,16 @@ public class SaveData
     public Vector2 playerCheckpoint;
     public int playerHealth;
     public string currentScene;
-    public bool DashUnlocked = true;
-    public bool WalljumpUnlocked = true;
-    public bool attackUnlocked = true;
+    public bool DashUnlocked = false;
+    public bool WalljumpUnlocked = false;
+    public bool attackUnlocked = false;
     public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
 
     // --- Inventário ---
     public inventory_System.InventorySaveData inventoryData = new inventory_System.InventorySaveData();
 
     // --- Fragmentos ---
-    public FragmentoSystem.FragmentoItemSaveData fragmentoData = new FragmentoSystem.FragmentoItemSaveData();
+    public FragmentoSystem.FragmentoSaveData fragmentoData = new FragmentoSystem.FragmentoSaveData();
 
     // --- Quests ---
     public QuestManager.QuestSaveData questData = new QuestManager.QuestSaveData();

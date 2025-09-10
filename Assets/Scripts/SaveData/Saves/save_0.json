@@ -1,12 +1,12 @@
 {
-    "playTime": 18.097108840942384,
+    "playTime": 0.0,
     "XPlayer": 0,
     "playerCheckpoint": {
-        "x": -164.15000915527345,
-        "y": 36.70000076293945
+        "x": 0.0,
+        "y": 0.0
     },
     "playerHealth": 3,
-    "currentScene": "Altior-Fuga",
+    "currentScene": "Altior-Quarto",
     "DashUnlocked": true,
     "WalljumpUnlocked": true,
     "attackUnlocked": true,
@@ -23,7 +23,7 @@
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
-                "stackSize": 2
+                "stackSize": 1
             }
         ],
         "DocumentsItens": [
@@ -37,14 +37,73 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 4
+                "stackSize": 1
             }
-        ]
+        ],
+        "isInitialized": true
     },
     "fragmentoData": {
-        "fragmentoNome": "",
-        "fragmentoType": 0,
-        "stackSize": 0
+        "ChaveTempo": [
+            {
+                "fragmentoNome": "ChaveTempo2",
+                "fragmentoType": 0,
+                "stackSize": 1
+            }
+        ],
+        "ChaveMovimento": [
+            {
+                "fragmentoNome": "ChaveMovimento",
+                "fragmentoType": 1,
+                "stackSize": 1
+            },
+            {
+                "fragmentoNome": "ChaveMovimento",
+                "fragmentoType": 1,
+                "stackSize": 1
+            }
+        ],
+        "ChaveVida": [],
+        "ChaveCaos": [
+            {
+                "fragmentoNome": "ChaveCaos2",
+                "fragmentoType": 3,
+                "stackSize": 1
+            },
+            {
+                "fragmentoNome": "ChaveCaos",
+                "fragmentoType": 3,
+                "stackSize": 1
+            }
+        ],
+        "ChaveOrdem": [],
+        "DecksPorArma": [
+            {
+                "armaNome": "Bastão",
+                "fragmentos": []
+            },
+            {
+                "armaNome": "Arco",
+                "fragmentos": []
+            },
+            {
+                "armaNome": "Marreta",
+                "fragmentos": []
+            },
+            {
+                "armaNome": "Luva",
+                "fragmentos": []
+            },
+            {
+                "armaNome": "Mascara",
+                "fragmentos": []
+            },
+            {
+                "armaNome": "Sino",
+                "fragmentos": []
+            }
+        ],
+        "armaSelecionada": "Bastão",
+        "isInitialized": true
     },
     "questData": {
         "questIDs": [],

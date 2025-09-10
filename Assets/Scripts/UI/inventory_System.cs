@@ -8,6 +8,7 @@ public class inventory_System : MonoBehaviour
     public static inventory_System instance;
 
     public List<ItemData> startEquipament;
+    public bool inicializacaoItens = false;
 
     public List<Inventory_item> inventory;
     public Dictionary<ItemData, Inventory_item> inventoryDicionary;
@@ -59,46 +60,27 @@ public class inventory_System : MonoBehaviour
 
         int currentSlot = GameManager.currentSaveSlot;
 
-        if (!SaveManager.SaveExists(currentSlot))
+        var loadedData = SaveManager.Load(currentSlot);
+        if (loadedData != null)
+        {
+            SaveData.Instance = loadedData;
+        }
+
+        // Se ainda não inicializou → adiciona os itens iniciais.
+        if (!SaveData.Instance.inventoryData.isInitialized)
         {
             foreach (var item in startEquipament)
             {
                 AddItem(item);
             }
 
+            inicializacaoItens = true;
             SaveInventory();
             Debug.Log("Inventário inicializado com os itens de startEquipament.");
         }
         else
         {
-            var loadedData = SaveManager.Load(GameManager.currentSaveSlot);
-            if (loadedData != null)
-            {
-                SaveData.Instance.inventoryData = loadedData.inventoryData;
-            }
-
-            if (SaveData.Instance != null && SaveData.Instance.inventoryData != null)
-            {
-                LoadInventory();
-            }
-            else
-            {
-                Debug.LogWarning("Não foi possível carregar o inventário. SaveData vazio.");
-            }
-        }
-    }
-
-    public bool IsInventoryJSONFileEmpty(string path)
-    {
-        if (File.Exists(path))
-        {
-            string fileContent = File.ReadAllText(path);
-            return string.IsNullOrWhiteSpace(fileContent);
-        }
-        else
-        {
-            Debug.LogError("O arquivo JSON não foi encontrado.");
-            return true;
+            LoadInventory();
         }
     }
 
@@ -116,6 +98,7 @@ public class inventory_System : MonoBehaviour
         public List<InventoryItemSaveData> MaterialsItens = new List<InventoryItemSaveData>();
         public List<InventoryItemSaveData> DocumentsItens = new List<InventoryItemSaveData>();
         public List<InventoryItemSaveData> ColectItens = new List<InventoryItemSaveData>();
+        public bool isInitialized = false;
     }
 
     public void UpdateInventory()
@@ -264,11 +247,17 @@ public class inventory_System : MonoBehaviour
 
     public void SaveInventory()
     {
-        SaveData.Instance.inventoryData = new InventorySaveData();
+        var currentData = SaveManager.Load(GameManager.currentSaveSlot);
+        if (currentData == null)
+        {
+            currentData = new SaveData();
+        }
 
+        // 2. Atualizar só o inventário
+        currentData.inventoryData.MaterialsItens.Clear();
         foreach (var item in inventory)
         {
-            SaveData.Instance.inventoryData.MaterialsItens.Add(new InventoryItemSaveData
+            currentData.inventoryData.MaterialsItens.Add(new InventoryItemSaveData
             {
                 itemName = item.itemData.name,
                 itemType = item.itemData.itensType,
@@ -276,9 +265,10 @@ public class inventory_System : MonoBehaviour
             });
         }
 
+        currentData.inventoryData.DocumentsItens.Clear();
         foreach (var doc in docs)
         {
-            SaveData.Instance.inventoryData.DocumentsItens.Add(new InventoryItemSaveData
+            currentData.inventoryData.DocumentsItens.Add(new InventoryItemSaveData
             {
                 itemName = doc.itemData.name,
                 itemType = doc.itemData.itensType,
@@ -286,17 +276,19 @@ public class inventory_System : MonoBehaviour
             });
         }
 
+        currentData.inventoryData.ColectItens.Clear();
         foreach (var colet in coletaveis)
         {
-            SaveData.Instance.inventoryData.ColectItens.Add(new InventoryItemSaveData
+            currentData.inventoryData.ColectItens.Add(new InventoryItemSaveData
             {
                 itemName = colet.itemData.name,
                 itemType = colet.itemData.itensType,
                 stackSize = colet.stackSize
             });
         }
+        currentData.inventoryData.isInitialized = inicializacaoItens;
 
-        SaveManager.Save(SaveData.Instance, GameManager.currentSaveSlot);
+        SaveManager.Save(currentData, GameManager.currentSaveSlot);
     }
 
 
@@ -335,7 +327,6 @@ public class inventory_System : MonoBehaviour
 
     public ItemData GetItemData(string itemName, itensType type)
     {
-        Debug.Log("Tentando carregar: Itens/" + itemName);
         ItemData item = Resources.Load<ItemData>("Itens/" + itemName);
         if (item == null)
         {
