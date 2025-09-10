@@ -28,6 +28,7 @@ public class PlayerArco : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(mousePos);
         Vector3 dir = mousePos - transform.position;
 
         int direction = transform.parent.localScale.x > 0 ? 1 : -1;

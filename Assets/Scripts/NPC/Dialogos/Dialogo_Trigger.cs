@@ -50,7 +50,7 @@ public class Dialogo_Trigger : MonoBehaviour
 
     void Update()
     {
-        if (TimerTargetDialogo >= 1f && targetBool)
+        if (TimerDialogo >= 1f && targetBool)
         {
             TimerDialogo += Time.deltaTime;
         }
@@ -86,11 +86,14 @@ public class Dialogo_Trigger : MonoBehaviour
                     return;
                 }
             }
-            else if (playerMoviment.entrar && this.gameObject.CompareTag("Cervo"))
+
+            if (GameManager.instance.cervinhoOnCheckpoint && this.gameObject.CompareTag("Cervo"))
             {
-                StartCoroutine(EsperaLility());
+                Invoke(nameof(DelayDialogoCervo), 0.7f);
+                GameManager.instance.cervinhoOnCheckpoint = false;
             }
-            else if (playerMoviment.entrar)
+
+            if (playerMoviment.entrar && !this.gameObject.CompareTag("Cervo"))
             {
                 TriggerDialogo();
             }
@@ -110,6 +113,12 @@ public class Dialogo_Trigger : MonoBehaviour
         }
     }
 
+    public void DelayDialogoCervo()
+    {
+        TriggerDialogo();
+        animator.SetBool(animationstrings.InicioDialogo, true);
+    }
+
     IEnumerator AnimacaoSair()
     {
         if (input_Conversa != null)
@@ -126,14 +135,6 @@ public class Dialogo_Trigger : MonoBehaviour
         {
             Debug.Log("Sem indicador");
         }
-    }
-
-    IEnumerator EsperaLility()
-    {
-        yield return new WaitForSeconds(3f);
-
-        TriggerDialogo();
-        animator.SetBool(animationstrings.InicioDialogo, true);
     }
 
     public void NotificarDialogoFinalizado()

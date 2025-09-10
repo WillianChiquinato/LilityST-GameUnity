@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     //Savepoint
     public string CurrentSceneName { get; private set; }
     public GameObject UISavePoint;
+    public bool cervinhoOnCheckpoint = false;
 
     void Awake()
     {
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMoviment.GetComponent<Damage>();
         bossFight = FindAnyObjectByType<BossFight>();
 
-
+        UISavePoint.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
         StartCoroutine(DelayStart());
     }
 

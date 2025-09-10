@@ -478,4 +478,52 @@ public class QuestManager : MonoBehaviour
 
         return quest;
     }
+        // Estrutura para serializar o progresso das quests
+        [System.Serializable]
+        public class QuestSaveData
+        {
+            public List<string> questIDs = new List<string>();
+            public List<int> questStepIndices = new List<int>();
+            public List<string> questStepStates = new List<string>();
+        }
+
+        // Salva todas as quests em um slot específico
+        public void SaveAllQuests(int slot)
+        {
+            string path = Path.Combine(questSavePath, $"quests_slot{slot}.json");
+            QuestSaveData saveData = new QuestSaveData();
+            foreach (var quest in questsDictionary.Values)
+            {
+                saveData.questIDs.Add(quest.info.id);
+                saveData.questStepIndices.Add(quest.CurrentStepIndex);
+                saveData.questStepStates.Add(quest.GetStepState());
+            }
+            string json = JsonUtility.ToJson(saveData, true);
+            File.WriteAllText(path, json);
+            Debug.Log($"Quests salvas no slot {slot}.");
+        }
+
+        // Carrega todas as quests de um slot específico
+        public void LoadAllQuests(int slot)
+        {
+            string path = Path.Combine(questSavePath, $"quests_slot{slot}.json");
+            if (!File.Exists(path))
+            {
+                Debug.LogError($"Arquivo de quests do slot {slot} não encontrado.");
+                return;
+            }
+            string json = File.ReadAllText(path);
+            QuestSaveData saveData = JsonUtility.FromJson<QuestSaveData>(json);
+            for (int i = 0; i < saveData.questIDs.Count; i++)
+            {
+                string questID = saveData.questIDs[i];
+                int stepIndex = saveData.questStepIndices[i];
+                string stepState = saveData.questStepStates[i];
+                if (questsDictionary.ContainsKey(questID))
+                {
+                    questsDictionary[questID].LoadStep(stepIndex, stepState);
+                }
+            }
+            Debug.Log($"Quests carregadas do slot {slot}.");
+        }
 }

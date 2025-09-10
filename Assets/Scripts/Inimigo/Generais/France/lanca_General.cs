@@ -9,7 +9,7 @@ public class lanca_General : MonoBehaviour
 
     [Header("Instancias")]
     public Transform player;
-    public GoraflixMoviment objetoSaidaProjetil;
+    public FranceMoviment objetoSaidaProjetil;
     private Vector3 pontoInicial;
     private Vector3 posicaoAnterior;
 
@@ -39,7 +39,7 @@ public class lanca_General : MonoBehaviour
 
         if (objetoSaidaProjetil == null)
         {
-            objetoSaidaProjetil = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+            objetoSaidaProjetil = GameObject.FindFirstObjectByType<FranceMoviment>();
             pontoInicial = objetoSaidaProjetil.transform.position;
         }
         if (player == null)

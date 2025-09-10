@@ -190,7 +190,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   dialogosAnim: {fileID: 0}
   TimerTargetDialogo: 9
-  TimerDialogo: 0
+  TimerDialogo: 1
   targetBool: 0
   tempoDeEspera: 0
   targetEndDialogo: 0

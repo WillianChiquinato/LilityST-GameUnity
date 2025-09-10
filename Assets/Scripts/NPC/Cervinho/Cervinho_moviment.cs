@@ -29,7 +29,7 @@ public class Cervinho_moviment : MonoBehaviour
     {
         animatorInteracao.GetComponent<Animator>().SetBool("isInteracting", true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         animatorInteracao.SetActive(false);
     }
 }

@@ -26,6 +26,15 @@ public class SaveData
     public bool WalljumpUnlocked = true;
     public bool attackUnlocked = true;
     public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
+
+    // --- Inventário ---
+    public inventory_System.InventorySaveData inventoryData = new inventory_System.InventorySaveData();
+
+    // --- Fragmentos ---
+    public FragmentoSystem.FragmentoItemSaveData fragmentoData = new FragmentoSystem.FragmentoItemSaveData();
+
+    // --- Quests ---
+    public QuestManager.QuestSaveData questData = new QuestManager.QuestSaveData();
 }
 
 public enum PowerUps

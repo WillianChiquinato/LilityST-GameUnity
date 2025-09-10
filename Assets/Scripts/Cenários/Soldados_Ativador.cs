@@ -17,7 +17,7 @@ public class Soldados_Ativador : MonoBehaviour
     [Header("Instances")]
     public Collider2D colisor;
     public PlayerMoviment playerMoviment;
-    public GoraflixMoviment goraflixMoviment;
+    public FranceMoviment goraflixMoviment;
     public Animator animator;
 
     [Header("Soldados")]
@@ -84,7 +84,7 @@ public class Soldados_Ativador : MonoBehaviour
         colisor.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
-        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+        goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
         animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 

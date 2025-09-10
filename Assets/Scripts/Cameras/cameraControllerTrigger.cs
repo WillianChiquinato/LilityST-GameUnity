@@ -22,7 +22,7 @@ public class CameraControllerTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerDetect = true;
-            if (customInspectorObje.panCameraContact)
+            if (customInspectorObje.panCameraContact && !collision.gameObject.GetComponent<PlayerMoviment>().arcoEffect)
             {
                 //Executa o efeito da camera
                 CameraManager.instance.PanCameraContact(customInspectorObje.panDistance, customInspectorObje.panTime, customInspectorObje.panDirection, false);

@@ -26,6 +26,7 @@ public class Dialogos_Manager : MonoBehaviour
     public bool isTextComplete = false;
     public Queue<DialogoTexto> linhas;
     public float tempoDeTransicao = 0.4f;
+    public bool finishedDialogo = false;
 
     public bool isDialogoAtivo = false;
     public float speedTexto = 0.2f;
@@ -150,10 +151,12 @@ public class Dialogos_Manager : MonoBehaviour
 
     public void EndDialogo()
     {
+        finishedDialogo = true;
+        
         isDialogoAtivo = false;
         isTextComplete = true;
         animator.SetBool(animationstrings.IsDialogFinish, true);
-        playerMoviment.animacao.SetBool(animationstrings.canMove, true);
+        playerMoviment.canMove = true;
         playerMoviment.grabAtivo = true;
 
         GameObject npc = GameObject.FindGameObjectWithTag("Cervo");
@@ -167,7 +170,7 @@ public class Dialogos_Manager : MonoBehaviour
         }
     }
 
-    public void buttonDialog()
+    public void ButtonDialog()
     {
         if (isTextComplete)
         {

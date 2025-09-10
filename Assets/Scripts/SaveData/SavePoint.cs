@@ -70,7 +70,7 @@ public class Savepoint : MonoBehaviour
                 instance.defaultPosition = new Vector2(21.4f, 16.6f);
                 break;
             case "Altior-Fuga":
-                instance.defaultPosition = new Vector2(-53f, 16.6f);
+                instance.defaultPosition = new Vector2(-16.19f, 16.6f);
                 break;
             case "DimensaoTempo":
                 instance.defaultPosition = new Vector2(-81.6f, 26f);
@@ -97,19 +97,18 @@ public class Savepoint : MonoBehaviour
 
     public void SaveCheckpoint(float playTime, Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, bool attackUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
     {
-        SaveData data = new SaveData
-        {
-            playerCheckpoint = checkpoint,
-            playerHealth = health,
-            currentScene = SceneManager.GetActiveScene().name,
-            DashUnlocked = DashUnlocked,
-            WalljumpUnlocked = WalljumpUnlocked,
-            attackUnlocked = attackUnlocked,
-            XPlayer = XPlayer,
-            powerUps = new List<PowerUps>(powerUps),
-            playTime = playTime
-        };
-        Debug.LogWarning("Salvando no slot " + GameManager.currentSaveSlot);
+        SaveData data = SaveData.Instance;
+
+        //SavePoint.
+        data.playerCheckpoint = checkpoint;
+        data.playerHealth = health;
+        data.currentScene = SceneManager.GetActiveScene().name;
+        data.DashUnlocked = DashUnlocked;
+        data.WalljumpUnlocked = WalljumpUnlocked;
+        data.attackUnlocked = attackUnlocked;
+        data.XPlayer = XPlayer;
+        data.powerUps = new List<PowerUps>(powerUps);
+        data.playTime = playTime;
 
         SaveManager.Save(data, GameManager.currentSaveSlot);
     }

@@ -80,6 +80,25 @@ public class Quests
         }
     }
 
+        public int CurrentStepIndex => currentStepIndex;
+
+        public string GetStepState()
+        {
+            if (currentStepIndex < stepStates.Length)
+                return stepStates[currentStepIndex].state;
+            return string.Empty;
+        }
+
+        // Restaura o progresso de uma etapa específica
+        public void LoadStep(int stepIndex, string stepState)
+        {
+            if (stepIndex < stepStates.Length)
+            {
+                currentStepIndex = stepIndex;
+                stepStates[stepIndex].state = stepState;
+            }
+        }
+
     public QuestData GetQuestData()
     {
         return new QuestData(state, currentStepIndex, stepStates);

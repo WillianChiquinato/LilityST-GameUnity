@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Checkpoints : MonoBehaviour
 {
-    public GameManager gameManager;
-
     [Header("Checkpoints")]
     public List<Collider2D> collidersNoTrigger = new List<Collider2D>();
     public bool playerNoTrigger = false;
     public bool cervoNoTrigger = false;
     public GameObject paiCheckpoint;
+    public Animator animTicket;
 
     [Header("Cinemachine")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -25,7 +24,6 @@ public class Checkpoints : MonoBehaviour
 
     void Awake()
     {
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
         paiCheckpoint = transform.parent != null ? transform.parent.gameObject : gameObject;
 
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
@@ -40,13 +38,14 @@ public class Checkpoints : MonoBehaviour
         {
             Debug.LogError("PlayerMoviment não encontrado! Verifique se o Player tem esse componente.");
         }
+        animTicket.gameObject.SetActive(false);
     }
 
     void Update()
     {
         direcao = (GameManager.instance.player.transform.position.x - transform.position.x) > 0 ? 1f : -1f;
 
-        if (gameManager.UISavePoint.activeSelf == true)
+        if (GameManager.instance.UISavePoint.activeSelf == true)
         {
             triggerCheckpoint = true;
         }
@@ -81,6 +80,8 @@ public class Checkpoints : MonoBehaviour
                     inventory_System.instance.SaveInventory();
                     QuestManager.instance.SaveAllQuests();
                     FragmentoSystem.instance.SaveFragment();
+
+                    SaveManager.Save(SaveData.Instance, GameManager.currentSaveSlot);
                     Debug.Log("Checkpoint salvo na posição: " + transform.position);
                 }
                 else
@@ -89,6 +90,17 @@ public class Checkpoints : MonoBehaviour
                 }
 
                 StartCoroutine(AutoMoveSave());
+            }
+
+            // Se o cervinho está no trigger, ativa a UI do diálogo
+            if (cervoNoTrigger)
+            {
+                GameManager.instance.UISavePoint.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+                Debug.Log("Cervinho no checkpoint, diálogo aberto.");
+            }
+            else
+            {
+                GameManager.instance.UISavePoint.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
             }
         }
     }
@@ -122,6 +134,7 @@ public class Checkpoints : MonoBehaviour
             yield return null;
         }
         GameManager.instance.player.IsMoving = false;
+        animTicket.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.7f);
         GameManager.instance.player.animacao.SetBool("Checkpoint", true);
@@ -133,10 +146,8 @@ public class Checkpoints : MonoBehaviour
         CutSumir.SetActive(false);
         framingPosition.m_TrackedObjectOffset = new Vector3(-5, 0, 0);
 
-        if (!cervoNoTrigger)
-        {
-            yield return new WaitForSeconds(1f);
-            gameManager.UISavePoint.SetActive(true);
-        }
+        yield return new WaitForSeconds(0.5f);
+        animTicket.gameObject.SetActive(false);
+        GameManager.instance.UISavePoint.SetActive(true);
     }
 }

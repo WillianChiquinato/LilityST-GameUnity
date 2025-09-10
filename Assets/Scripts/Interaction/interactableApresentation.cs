@@ -10,7 +10,7 @@ public class interactableApresentation : CollidableObjects
     public SaveData saveData;
 
     public PlayerMoviment playerMoviment;
-    public GoraflixMoviment goraflixMoviment;
+    public FranceMoviment goraflixMoviment;
     public grabPlayer grabPlayer;
     public GameObject ApresInput;
 
@@ -68,7 +68,7 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Dash")
                     {
-                        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+                        goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
                         Time.timeScale = 1f;
                         ApresInput.SetActive(false);
                         goraflixMoviment.Anelgrab.SetActive(false);

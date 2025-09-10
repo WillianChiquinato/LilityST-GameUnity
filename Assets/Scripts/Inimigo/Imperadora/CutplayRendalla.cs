@@ -7,6 +7,7 @@ public class CutplayRendalla : MonoBehaviour
 {
     [Header("Instancias")]
     public PlayerMoviment player;
+    public Animator animacaoRendalla;
     public GameObject interfaceLilith;
     public GameObject Rendalla;
     public RobertMoviment Robert;
@@ -19,6 +20,12 @@ public class CutplayRendalla : MonoBehaviour
     public ShakeCamera shakeCamera;
 
 
+    public GameObject prefabGeneralMelee;
+    public GameObject prefabGeneralLanceiro;
+    public GameObject prefabGeneralLanceiro2;
+    public GameObject spawnSoldados;
+    public GameObject spawnSoldados2;
+    public GameObject spawnSoldados3;
     public GameObject spawnRendallaSecurity;
     private bool IsCutplayAutomatically = false;
 
@@ -26,15 +33,25 @@ public class CutplayRendalla : MonoBehaviour
     public Material shaderCutplay;
     public Material shaderNormal;
 
-
+    public LevelTransicao levelTransicao;
 
     void Start()
     {
         player = FindFirstObjectByType<PlayerMoviment>();
         Robert = FindFirstObjectByType<RobertMoviment>();
+        levelTransicao = FindFirstObjectByType<LevelTransicao>();
 
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
+    }
+
+    void Update()
+    {
+        if (Dialogos_Manager.dialogos_Manager.finishedDialogo && IsCutplayAutomatically)
+        {
+            StartCoroutine(ImperadoraPosDialog());
+            IsCutplayAutomatically = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,7 +115,7 @@ public class CutplayRendalla : MonoBehaviour
         {
             spawnRendallaSecurity = Instantiate(Rendalla, spawnRendalla.transform.position, Quaternion.identity);
         }
-        Animator animacaoRendalla = spawnRendallaSecurity.GetComponent<Animator>();
+        animacaoRendalla = spawnRendallaSecurity.GetComponent<Animator>();
         Animator animacaoRobert = Robert.GetComponent<Animator>();
         yield return new WaitForSeconds(0.14f);
         player.animacao.SetBool("Cutplay", true);
@@ -124,7 +141,27 @@ public class CutplayRendalla : MonoBehaviour
 
         yield return new WaitForSeconds(3.4f);
         animacaoRendalla.SetBool("Desconfiar", true);
+    }
 
-        //Dialogo a seguir.
+    IEnumerator ImperadoraPosDialog()
+    {
+        player.canMove = false;
+
+        yield return new WaitForSeconds(1f);
+        animacaoRendalla.SetBool("Ordem", true);
+        if (prefabGeneralLanceiro != null && prefabGeneralMelee != null && prefabGeneralLanceiro2 != null)
+        {
+            Instantiate(prefabGeneralMelee, spawnSoldados.transform.position, Quaternion.identity);
+            Instantiate(prefabGeneralLanceiro, spawnSoldados2.transform.position, Quaternion.identity);
+            Instantiate(prefabGeneralLanceiro2, spawnSoldados3.transform.position, Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(2f);
+        player.AutoMoveAnimations = true;
+        player.IsRight = false;
+        player.IsMoving = true;
+        player.moveInput = new Vector2(-1f, 0f);
+
+        levelTransicao.Transicao("CutScene-Video");
     }
 }

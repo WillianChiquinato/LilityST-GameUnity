@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class GoraflixMoviment : MonoBehaviour
+public class FranceMoviment : MonoBehaviour
 {
     [Header("Instancias")]
     public GameObject Anelgrab;

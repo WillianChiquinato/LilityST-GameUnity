@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectedGoraflix : MonoBehaviour
+public class DetectedFrance : MonoBehaviour
 {
-    public GoraflixMoviment goraflixMoviment;
+    public FranceMoviment goraflixMoviment;
 
     void Start()
     {
-        goraflixMoviment = GameObject.FindFirstObjectByType<GoraflixMoviment>();
+        goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

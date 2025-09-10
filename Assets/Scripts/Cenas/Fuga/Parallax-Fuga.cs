@@ -13,7 +13,9 @@ public class ParallaxFuga : MonoBehaviour
     void Start()
     {
         if (cam == null)
+        {
             cam = Camera.main.transform;
+        }
 
         lastCamPosition = cam.position;
     }

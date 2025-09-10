@@ -8,6 +8,12 @@ public class UI : MonoBehaviour
 {
     public RectTransform[] Materias;
 
+    public void CervinhoOnTrigger()
+    {
+        GameManager.instance.cervinhoOnCheckpoint = true;
+        GameManager.instance.UISavePoint.SetActive(false);
+    }
+
     public void FlipToPage(int targetPage)
     {
         //Revisao mais para frente
