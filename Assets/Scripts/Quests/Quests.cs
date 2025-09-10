@@ -80,24 +80,33 @@ public class Quests
         }
     }
 
-        public int CurrentStepIndex => currentStepIndex;
+    public int CurrentStepIndex => currentStepIndex;
 
-        public string GetStepState()
+    public string GetStepStateSafe()
+    {
+        if (stepStates == null || stepStates.Length == 0)
         {
-            if (currentStepIndex < stepStates.Length)
-                return stepStates[currentStepIndex].state;
-            return string.Empty;
+            return "NENHUM";
         }
 
-        // Restaura o progresso de uma etapa específica
-        public void LoadStep(int stepIndex, string stepState)
+        int index = currentStepIndex;
+        if (index >= stepStates.Length)
         {
-            if (stepIndex < stepStates.Length)
-            {
-                currentStepIndex = stepIndex;
-                stepStates[stepIndex].state = stepState;
-            }
+            index = stepStates.Length - 1;
         }
+
+        return stepStates[index].state;
+    }
+
+    // Restaura o progresso de uma etapa específica
+    public void LoadStep(int stepIndex, string stepState)
+    {
+        if (stepIndex < stepStates.Length)
+        {
+            currentStepIndex = stepIndex;
+            stepStates[stepIndex].state = stepState;
+        }
+    }
 
     public QuestData GetQuestData()
     {

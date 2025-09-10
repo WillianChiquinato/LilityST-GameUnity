@@ -37,7 +37,13 @@ public class CheckPointQuest : QuestStep
 
     protected override void StoreQuestStepState(string state)
     {
-        this.PontosCheckPoint = System.Int32.Parse(state);
-        UpdateState();
+        if (!string.IsNullOrEmpty(state) && int.TryParse(state, out int value))
+        {
+            this.PontosCheckPoint = value;
+        }
+        else
+        {
+            this.PontosCheckPoint = 0;
+        }
     }
 }

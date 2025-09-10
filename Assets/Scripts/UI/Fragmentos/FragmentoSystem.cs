@@ -361,11 +361,7 @@ public class FragmentoSystem : MonoBehaviour
     public void SaveFragment()
     {
         Debug.Log("SaveFragment iniciado");
-        var currentData = SaveManager.Load(GameManager.currentSaveSlot);
-        if (currentData == null)
-        {
-            currentData = new SaveData();
-        }
+        var currentData = SaveData.Instance;
 
         if (currentData.fragmentoData.DecksPorArma == null || currentData.fragmentoData.DecksPorArma.Count == 0)
         {

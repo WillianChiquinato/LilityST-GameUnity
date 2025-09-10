@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -109,6 +110,7 @@ public class PlayerMoviment : MonoBehaviour
 
     [Header("OpenTab")]
     public bool OpenCaderno = false;
+    public bool canOpenCaderno = true;
 
     public float attackCooldown
     {
@@ -666,10 +668,12 @@ public class PlayerMoviment : MonoBehaviour
                     if (Input.GetKey(KeyCode.S))
                     {
                         animacao.SetTrigger("UpwardTrigger");
+                        Debug.LogWarning("ENTRANDO NO ATTACK DE CIMA");
                     }
                     if (Input.GetKey(KeyCode.W) && !touching.IsGrouded)
                     {
                         animacao.SetTrigger("DownwardTrigger");
+                        Debug.LogWarning("ENTRANDO NO ATTACK DE BAIXO");
                     }
                 }
                 animacao.SetTrigger(animationstrings.attack);
@@ -781,30 +785,36 @@ public class PlayerMoviment : MonoBehaviour
         // Quando o botão for pressionado
         if (context.started && touching.IsGrouded && !arcoEffect)
         {
-            OpenCaderno = !OpenCaderno;
-
-            if (OpenCaderno)
+            if (canOpenCaderno)
             {
-                Debug.Log("Abrindo inventário!!!");
-                Invoke(nameof(AbrirHUDelay), 1.7f);
+                OpenCaderno = !OpenCaderno;
 
-                //Opacidade do canvas group em 0.7 segundos, fade out:
-                StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
-            }
-            else
-            {
-                Debug.Log("Fechando inventário!!!");
-                GameManager.instance.FecharHUD();
+                if (OpenCaderno && canOpenCaderno)
+                {
+                    Debug.Log("Abrindo inventário!!!");
+                    Invoke(nameof(AbrirHUDelay), 1.7f);
 
-                //Opacidade do canvas group em 0.7 segundos, fade in:
-                StartCoroutine(GameManager.instance.FadeInCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
+                    //Opacidade do canvas group em 0.7 segundos, fade out:
+                    canOpenCaderno = false;
+                    StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
+                }
+                else
+                {
+                    Debug.Log("Fechando inventário!!!");
+                    GameManager.instance.FecharHUD();
+
+                    //Opacidade do canvas group em 0.7 segundos, fade in:
+                    StartCoroutine(GameManager.instance.FadeInCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.7f));
+                }
             }
         }
     }
 
-    public void AbrirHUDelay()
+    public async void AbrirHUDelay()
     {
         GameManager.instance.AbrirHUD();
+        await Task.Delay(500);
+        canOpenCaderno = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

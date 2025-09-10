@@ -261,5 +261,6 @@ public class GameManager : MonoBehaviour
     {
         XpPlayer += xp;
         SaveData.Instance.XPlayer += xp;
+        Debug.LogWarning("SALVANDO XP DO JOGADOR " + SaveData.Instance.XPlayer);
     }
 }

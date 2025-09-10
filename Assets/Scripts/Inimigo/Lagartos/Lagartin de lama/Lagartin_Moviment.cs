@@ -80,7 +80,7 @@ public class Lagartin_Moviment : PlayerPoco
                 if (!DamageScript.VelocityLock)
                 {
                     attackDetector.SetActive(false);
-                    if (distanciaAttack < 20)
+                    if (distanciaAttack > 1.5f &&distanciaAttack < 20f)
                     {
                         rb.linearVelocity = new Vector2(direcao * speed, rb.linearVelocity.y);
                     }

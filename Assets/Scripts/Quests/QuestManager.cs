@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -141,6 +141,8 @@ public class QuestManager : MonoBehaviour
 
     void Start()
     {
+        LoadAllQuests();
+
         foreach (Quests quest in questsDictionary.Values)
         {
             if (quest.state == QuestsState.EM_ANDAMENTO)
@@ -309,40 +311,55 @@ public class QuestManager : MonoBehaviour
     {
         Quests quests = GetQuestById(id);
 
+        int currentIndex = quests.CurrentStepIndex;
+        quests.StoreQuestStepState(new QuestsStepState(QuestStepStates.INICIADO), currentIndex);
+
         quests.InstantiateCurrentStep(this.transform);
         ChangeQuestState(quests.info.id, QuestsState.EM_ANDAMENTO);
+        SaveAllQuests();
     }
 
     private void AdvancedQuests(string id)
     {
         Quests quests = GetQuestById(id);
 
+        // Avança para a próxima etapa
         quests.MoveParaProximoPasso();
+        int currentIndex = quests.CurrentStepIndex;
+        quests.StoreQuestStepState(new QuestsStepState(QuestStepStates.EM_ANDAMENTO), currentIndex);
 
         if (quests.CurrentStepExists())
         {
+            // Marca a nova etapa como iniciada
+            quests.StoreQuestStepState(new QuestsStepState(QuestStepStates.INICIADO), currentIndex);
             quests.InstantiateCurrentStep(this.transform);
         }
         else
         {
             ChangeQuestState(quests.info.id, QuestsState.PODE_FINALIZAR);
+            quests.StoreQuestStepState(new QuestsStepState(QuestStepStates.PODE_FINALIZAR), currentIndex - 1);
         }
+
+        SaveAllQuests();
     }
+
 
     private void FinishedQuests(string id)
     {
         Quests quests = GetQuestById(id);
 
-        Debug.Log($"Finalizando quest: {id} - {quests.info.NomeQuest}");
+        // Salva o estado da última etapa como FINALIZADO
+        int lastIndex = quests.CurrentStepIndex >= quests.info.questsEtapasPrefabs.Length
+            ? quests.info.questsEtapasPrefabs.Length - 1
+            : quests.CurrentStepIndex;
 
+        quests.StoreQuestStepState(new QuestsStepState(QuestStepStates.FINALIZADO), lastIndex);
+
+        // Restante do código...
         GameObject grupoParaRemover = questGrupos
             .FirstOrDefault(g => g.GetComponentInChildren<TextMeshProUGUI>()?.text.Trim() == quests.info.NomeQuest.Trim());
 
-        if (grupoParaRemover == null)
-        {
-            Debug.LogWarning($"Nenhum grupo de UI encontrado para a quest {quests.info.NomeQuest}");
-        }
-        else
+        if (grupoParaRemover != null)
         {
             questGrupos.Remove(grupoParaRemover);
             Destroy(grupoParaRemover);
@@ -352,13 +369,16 @@ public class QuestManager : MonoBehaviour
 
         ClaimRewards(quests);
         ChangeQuestState(quests.info.id, QuestsState.FINALIZADO);
+        SaveAllQuests();
 
         Debug.Log($"Quest {quests.info.NomeQuest} finalizada com sucesso!");
     }
 
 
+
     private void ClaimRewards(Quests quest)
     {
+        Debug.LogWarning("Recompensas da quest sendo processadas...");
         Rewards recompensa = quest.info.recompensas;
 
         // XP
@@ -406,7 +426,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                IdQuests.Add(quest.id, LoadQuest(quest));
+                IdQuests.Add(quest.id, new Quests(quest));
             }
         }
         return IdQuests;
@@ -423,107 +443,81 @@ public class QuestManager : MonoBehaviour
         return quests;
     }
 
+    // Estrutura para serializar o progresso das quests
+    [System.Serializable]
+    public class QuestSaveData
+    {
+        public List<string> questIDs = new List<string>();
+        public List<int> questStepIndices = new List<int>();
+        public List<string> questStepStates = new List<string>();
+        public List<string> questStates = new List<string>();
+    }
+
     public void SaveAllQuests()
     {
-        foreach (Quests quest in questsDictionary.Values)
+        var currentData = SaveData.Instance;
+
+        currentData.questData.questIDs.Clear();
+        currentData.questData.questStepIndices.Clear();
+        currentData.questData.questStepStates.Clear();
+        currentData.questData.questStates.Clear();
+
+        foreach (var quest in questsDictionary.Values)
         {
-            SaveQuestData(quest);
+            currentData.questData.questIDs.Add(quest.info.id);
+            currentData.questData.questStepIndices.Add(quest.CurrentStepIndex);
+
+            // Salva o estado do step atual.
+            currentData.questData.questStepStates.Add(quest.GetStepStateSafe());
+            currentData.questData.questStates.Add(quest.state.ToString());
         }
+
+        SaveManager.Save(currentData, GameManager.currentSaveSlot);
+        Debug.Log("Quests salvas com sucesso!");
     }
 
-    private void SaveQuestData(Quests quest)
+    public void LoadAllQuests()
     {
-        try
+        QuestSaveData saveData = SaveData.Instance.questData;
+
+        if (saveData == null || saveData.questIDs.Count == 0)
+            return;
+
+        for (int i = 0; i < saveData.questIDs.Count; i++)
         {
-            // Cria pasta, se não existir
-            if (!Directory.Exists(questSavePath))
-                Directory.CreateDirectory(questSavePath);
+            string questID = saveData.questIDs[i];
+            int stepIndex = saveData.questStepIndices[i];
+            string stepState = saveData.questStepStates[i];
+            string questStateStr = saveData.questStates[i];
 
-            QuestData questData = quest.GetQuestData();
-            string serializedData = JsonUtility.ToJson(questData, true);
-
-            string filePath = Path.Combine(questSavePath, quest.info.id + ".json");
-            File.WriteAllText(filePath, serializedData);
-
-            Debug.Log("Salvando dados da quest em: " + filePath);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Erro ao salvar dados da quest: " + e.Message);
-        }
-    }
-
-    private Quests LoadQuest(QuestsInfoSO questsInfoSO)
-    {
-        Quests quest = null;
-        string filePath = Path.Combine(questSavePath, questsInfoSO.id + ".json");
-
-        try
-        {
-            if (File.Exists(filePath) && loadQuests)
+            if (questsDictionary.ContainsKey(questID))
             {
-                string json = File.ReadAllText(filePath);
-                QuestData questData = JsonUtility.FromJson<QuestData>(json);
-                quest = new Quests(questsInfoSO, questData.state, questData.questStepIndex, questData.questStepStates);
+                var quest = questsDictionary[questID];
+
+                // Restaura o estado da quest
+                if (Enum.TryParse<QuestsState>(questStateStr, out QuestsState loadedState))
+                {
+                    quest.state = loadedState;
+                }
+
+                // Restaura o step atual e seu estado
+                quest.LoadStep(stepIndex, stepState);
+
+                // Se a quest estiver em andamento, instancia o step na cena
+                if (quest.state == QuestsState.EM_ANDAMENTO && quest.CurrentStepExists())
+                {
+                    quest.InstantiateCurrentStep(this.transform);
+                }
+
+                // Atualiza a UI se necessário
+                GameManager.instance.questEvents.QuestStateChange(quest);
             }
             else
             {
-                quest = new Quests(questsInfoSO);
+                Debug.LogWarning($"Quest ID não encontrada ao carregar: {questID}");
             }
         }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Erro ao carregar a quest: " + e.Message);
-        }
 
-        return quest;
+        Debug.Log("Quests carregadas com sucesso!");
     }
-        // Estrutura para serializar o progresso das quests
-        [System.Serializable]
-        public class QuestSaveData
-        {
-            public List<string> questIDs = new List<string>();
-            public List<int> questStepIndices = new List<int>();
-            public List<string> questStepStates = new List<string>();
-        }
-
-        // Salva todas as quests em um slot específico
-        public void SaveAllQuests(int slot)
-        {
-            string path = Path.Combine(questSavePath, $"quests_slot{slot}.json");
-            QuestSaveData saveData = new QuestSaveData();
-            foreach (var quest in questsDictionary.Values)
-            {
-                saveData.questIDs.Add(quest.info.id);
-                saveData.questStepIndices.Add(quest.CurrentStepIndex);
-                saveData.questStepStates.Add(quest.GetStepState());
-            }
-            string json = JsonUtility.ToJson(saveData, true);
-            File.WriteAllText(path, json);
-            Debug.Log($"Quests salvas no slot {slot}.");
-        }
-
-        // Carrega todas as quests de um slot específico
-        public void LoadAllQuests(int slot)
-        {
-            string path = Path.Combine(questSavePath, $"quests_slot{slot}.json");
-            if (!File.Exists(path))
-            {
-                Debug.LogError($"Arquivo de quests do slot {slot} não encontrado.");
-                return;
-            }
-            string json = File.ReadAllText(path);
-            QuestSaveData saveData = JsonUtility.FromJson<QuestSaveData>(json);
-            for (int i = 0; i < saveData.questIDs.Count; i++)
-            {
-                string questID = saveData.questIDs[i];
-                int stepIndex = saveData.questStepIndices[i];
-                string stepState = saveData.questStepStates[i];
-                if (questsDictionary.ContainsKey(questID))
-                {
-                    questsDictionary[questID].LoadStep(stepIndex, stepState);
-                }
-            }
-            Debug.Log($"Quests carregadas do slot {slot}.");
-        }
 }

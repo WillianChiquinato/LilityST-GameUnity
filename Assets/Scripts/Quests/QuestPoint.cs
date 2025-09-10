@@ -55,11 +55,13 @@ public class QuestPoint : MonoBehaviour
             {
                 GameManager.instance.questEvents.FinishedQuest(QuestId);
             }
-        }
 
-        pointStarted = true;
-        QuestManager.instance.SaveAllQuests();
-        Debug.Log($"QuestPoint {QuestId} foi ativado!");
+            // Salva só depois que a quest foi realmente iniciada/avançada
+            QuestManager.instance.SaveAllQuests();
+            pointStarted = true;
+
+            Debug.Log($"QuestPoint {QuestId} foi ativado!");
+        }
     }
 
     void OnDisable()
@@ -93,6 +95,11 @@ public class QuestPoint : MonoBehaviour
         {
             if (GameManager.instance.player.entrar && !pointStarted)
             {
+                if (CurrentQuestState.Equals(QuestsState.FINALIZADO))
+                {
+                    return;
+                }
+                
                 Debug.Log("SubmitPressed adicionado!");
                 SubmitPressed();
             }

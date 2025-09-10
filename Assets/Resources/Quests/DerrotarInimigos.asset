@@ -23,6 +23,10 @@ MonoBehaviour:
   questsEtapasPrefabs:
   - {fileID: 1251639546554871491, guid: eb183f57c738c414fb5cd925fbb3cdfe, type: 3}
   recompensas:
-    TipoRecompensa: 0
-    xpPlayer: 0
-    itensData: []
+    TipoRecompensa: -1
+    xpPlayer: 100
+    itensData:
+    - {fileID: 11400000, guid: 73dfdbd5c822cc64fa6b08c9b9860d20, type: 2}
+    - {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
+    - {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
+    - {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}

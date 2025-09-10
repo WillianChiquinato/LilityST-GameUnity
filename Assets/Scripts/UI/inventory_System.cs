@@ -36,6 +36,7 @@ public class inventory_System : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            inicializacaoItens = SaveData.Instance.inventoryData.isInitialized;
         }
         else
         {
@@ -115,8 +116,6 @@ public class inventory_System : MonoBehaviour
         {
             coletaveisItemSlot[i].CleanUpSlot();
         }
-
-
 
         for (int i = 0; i < inventory.Count; i++)
         {
@@ -247,16 +246,13 @@ public class inventory_System : MonoBehaviour
 
     public void SaveInventory()
     {
-        var currentData = SaveManager.Load(GameManager.currentSaveSlot);
-        if (currentData == null)
-        {
-            currentData = new SaveData();
-        }
+        var currentData = SaveData.Instance;
 
         // 2. Atualizar só o inventário
         currentData.inventoryData.MaterialsItens.Clear();
         foreach (var item in inventory)
         {
+            Debug.LogWarning("items: " + item.itemData.name + " - " + item.stackSize);
             currentData.inventoryData.MaterialsItens.Add(new InventoryItemSaveData
             {
                 itemName = item.itemData.name,
@@ -288,9 +284,9 @@ public class inventory_System : MonoBehaviour
         }
         currentData.inventoryData.isInitialized = inicializacaoItens;
 
+        
         SaveManager.Save(currentData, GameManager.currentSaveSlot);
     }
-
 
     public void LoadInventory()
     {

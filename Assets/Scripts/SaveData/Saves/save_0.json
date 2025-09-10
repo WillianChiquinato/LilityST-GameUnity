@@ -1,12 +1,12 @@
 {
-    "playTime": 0.0,
-    "XPlayer": 0,
+    "playTime": 675.3173828125,
+    "XPlayer": 200,
     "playerCheckpoint": {
-        "x": 0.0,
-        "y": 0.0
+        "x": -164.15000915527345,
+        "y": 36.70000076293945
     },
     "playerHealth": 3,
-    "currentScene": "Altior-Quarto",
+    "currentScene": "Altior-Fuga",
     "DashUnlocked": true,
     "WalljumpUnlocked": true,
     "attackUnlocked": true,
@@ -36,6 +36,11 @@
         "ColectItens": [
             {
                 "itemName": "Pedrinha",
+                "itemType": 2,
+                "stackSize": 4
+            },
+            {
+                "itemName": "Moeda",
                 "itemType": 2,
                 "stackSize": 1
             }
@@ -106,8 +111,25 @@
         "isInitialized": true
     },
     "questData": {
-        "questIDs": [],
-        "questStepIndices": [],
-        "questStepStates": []
+        "questIDs": [
+            "DerrotarInimigos",
+            "NPC",
+            "TestStarQuest"
+        ],
+        "questStepIndices": [
+            1,
+            0,
+            0
+        ],
+        "questStepStates": [
+            "FINALIZADO",
+            "",
+            ""
+        ],
+        "questStates": [
+            "FINALIZADO",
+            "PODE_INICIAR",
+            "PODE_INICIAR"
+        ]
     }
 }

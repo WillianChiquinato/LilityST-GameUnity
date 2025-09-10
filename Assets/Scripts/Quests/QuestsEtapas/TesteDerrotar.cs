@@ -5,9 +5,17 @@ public class TesteDerrotar : MonoBehaviour
 {
     public QuestPoint questPointManual;
     public TesteDerrotarPrefab Instancia;
-
     public List<GameObject> inimigosNoTrigger = new List<GameObject>();
- 
+
+    void Start()
+    {
+        if (questPointManual.CurrentQuestState == QuestsState.FINALIZADO)
+        {
+            this.GetComponent<Collider2D>().enabled = false;
+            Destroy(gameObject, 1f);
+        }
+    }
+
     void Update()
     {
         if (Instancia != null)
@@ -19,6 +27,7 @@ public class TesteDerrotar : MonoBehaviour
             Debug.Log("CheckPointQuest não encontrado!");
             Instancia = GameObject.FindFirstObjectByType<TesteDerrotarPrefab>();
         }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)

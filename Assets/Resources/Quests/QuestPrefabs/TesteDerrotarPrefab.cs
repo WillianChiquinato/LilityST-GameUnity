@@ -37,7 +37,14 @@ public class TesteDerrotarPrefab : QuestStep
 
     protected override void StoreQuestStepState(string state)
     {
-        this.inimigosDerrotados = System.Int32.Parse(state);
-        UpdateState();
+        if (!string.IsNullOrEmpty(state) && int.TryParse(state, out int value))
+        {
+            this.inimigosDerrotados = value;
+        }
+        else
+        {
+            this.inimigosDerrotados = 0;
+            
+        }
     }
 }
