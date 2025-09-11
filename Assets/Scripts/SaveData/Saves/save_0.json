@@ -1,9 +1,9 @@
 {
-    "playTime": 675.3173828125,
+    "playTime": 948.3179321289063,
     "XPlayer": 200,
     "playerCheckpoint": {
-        "x": -164.15000915527345,
-        "y": 36.70000076293945
+        "x": -167.41500854492188,
+        "y": 45.70000076293945
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
@@ -36,11 +36,6 @@
         "ColectItens": [
             {
                 "itemName": "Pedrinha",
-                "itemType": 2,
-                "stackSize": 4
-            },
-            {
-                "itemName": "Moeda",
                 "itemType": 2,
                 "stackSize": 1
             }
@@ -117,12 +112,12 @@
             "TestStarQuest"
         ],
         "questStepIndices": [
-            1,
+            0,
             0,
             0
         ],
         "questStepStates": [
-            "FINALIZADO",
+            "",
             "",
             ""
         ],

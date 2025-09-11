@@ -134,7 +134,6 @@ public class Checkpoints : MonoBehaviour
             yield return null;
         }
         GameManager.instance.player.IsMoving = false;
-        animTicket.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.7f);
         GameManager.instance.player.animacao.SetBool("Checkpoint", true);
@@ -142,12 +141,17 @@ public class Checkpoints : MonoBehaviour
 
         isMovingAutomatically = true;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
+        animTicket.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
         CutSumir.SetActive(false);
         framingPosition.m_TrackedObjectOffset = new Vector3(-5, 0, 0);
 
         yield return new WaitForSeconds(0.5f);
-        animTicket.gameObject.SetActive(false);
         GameManager.instance.UISavePoint.SetActive(true);
+
+        yield return new WaitForSeconds(2.1f);
+        animTicket.gameObject.SetActive(false);
     }
 }

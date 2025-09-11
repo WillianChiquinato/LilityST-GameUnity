@@ -35,10 +35,10 @@ public class SeletorArmas : MonoBehaviour
         switch (currentIndex)
         {
             case 0:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Bastao");
+                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/BastaoIcon");
                 break;
             case 1:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Arco");
+                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/ArcoIcon");
                 break;
             case 2:
                 conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Marreta");

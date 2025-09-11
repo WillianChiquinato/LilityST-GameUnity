@@ -1,0 +1,1019 @@
+fileFormatVersion: 2
+guid: b4fa738226cb6fa4f83ba301b870faa3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8680353160658307714
+    second: vidrassa_upper_salao3_0
+  - first:
+      213: 327583437464398332
+    second: vidrassa_upper_salao3_1
+  - first:
+      213: -7414308877323005371
+    second: vidrassa_upper_salao3_2
+  - first:
+      213: -6114721556862786274
+    second: vidrassa_upper_salao3_3
+  - first:
+      213: -2189459423907385042
+    second: vidrassa_upper_salao3_4
+  - first:
+      213: 3393540367978181707
+    second: vidrassa_upper_salao3_5
+  - first:
+      213: 2963429540557226943
+    second: vidrassa_upper_salao3_6
+  - first:
+      213: -1212626227973933088
+    second: vidrassa_upper_salao3_7
+  - first:
+      213: 8831393649683915138
+    second: vidrassa_upper_salao3_8
+  - first:
+      213: -1655260042609290127
+    second: vidrassa_upper_salao3_9
+  - first:
+      213: 420939227571996993
+    second: vidrassa_upper_salao3_10
+  - first:
+      213: 3590502085336054614
+    second: vidrassa_upper_salao3_11
+  - first:
+      213: 8019887004060191885
+    second: vidrassa_upper_salao3_12
+  - first:
+      213: 7331125778979506389
+    second: vidrassa_upper_salao3_13
+  - first:
+      213: -2255753406845633631
+    second: vidrassa_upper_salao3_14
+  - first:
+      213: -711382327262482923
+    second: vidrassa_upper_salao3_15
+  - first:
+      213: -2408999469984132614
+    second: vidrassa_upper_salao3_16
+  - first:
+      213: 1413019194498081510
+    second: vidrassa_upper_salao3_17
+  - first:
+      213: 5746717440145828949
+    second: vidrassa_upper_salao3_18
+  - first:
+      213: -4456393720041129563
+    second: vidrassa_upper_salao3_19
+  - first:
+      213: -8070054265699994398
+    second: vidrassa_upper_salao3_20
+  - first:
+      213: 4848965987475550341
+    second: vidrassa_upper_salao3_21
+  - first:
+      213: 1589226020043205647
+    second: vidrassa_upper_salao3_22
+  - first:
+      213: 7254367982356060183
+    second: vidrassa_upper_salao3_23
+  - first:
+      213: 3450382584250198278
+    second: vidrassa_upper_salao3_24
+  - first:
+      213: 2663786642641863498
+    second: vidrassa_upper_salao3_25
+  - first:
+      213: -6348331606352298709
+    second: vidrassa_upper_salao3_26
+  - first:
+      213: 5914085824365535255
+    second: vidrassa_upper_salao3_27
+  - first:
+      213: 2329108617103471128
+    second: vidrassa_upper_salao3_28
+  - first:
+      213: -1496797676188621403
+    second: vidrassa_upper_salao3_29
+  - first:
+      213: 486607733026752013
+    second: vidrassa_upper_salao3_30
+  - first:
+      213: -8293698528910868434
+    second: vidrassa_upper_salao3_31
+  - first:
+      213: -1454553567074067662
+    second: vidrassa_upper_salao3_32
+  - first:
+      213: -7926557346287634421
+    second: vidrassa_upper_salao3_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_0
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 283
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a4af9853fc67870800000000000000
+      internalID: 8680353160658307714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 207
+        width: 44
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9ed58966fcb8400800000000000000
+      internalID: 327583437464398332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_2
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 235
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5421328db551b1990800000000000000
+      internalID: -7414308877323005371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_3
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 239
+        width: 42
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1525c62425242ba0800000000000000
+      internalID: -6114721556862786274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_4
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 213
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e217ed3114a7d91e0800000000000000
+      internalID: -2189459423907385042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_5
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 223
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44b9442cf6481f20800000000000000
+      internalID: 3393540367978181707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 148
+        width: 31
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb300d95777302920800000000000000
+      internalID: 2963429540557226943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_7
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 209
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e7ba44ded2eb2fe0800000000000000
+      internalID: -1212626227973933088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_8
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 148
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281ec01dbb96f8a70800000000000000
+      internalID: 8831393649683915138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_9
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 177
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174106dd2c55709e0800000000000000
+      internalID: -1655260042609290127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_10
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 175
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 149c47b4ff977d500800000000000000
+      internalID: 420939227571996993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_11
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 177
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b31c19f9604d130800000000000000
+      internalID: 3590502085336054614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_12
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 123
+        width: 12
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8c87cf2dbc5c4f60800000000000000
+      internalID: 8019887004060191885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_13
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 122
+        width: 45
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d848c3dd046db560800000000000000
+      internalID: 7331125778979506389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_14
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 76
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1abb61c5a34f1b0e0800000000000000
+      internalID: -2255753406845633631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_15
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 57
+        width: 67
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51e670cda89a026f0800000000000000
+      internalID: -711382327262482923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_16
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 95
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af1dd77deb3819ed0800000000000000
+      internalID: -2408999469984132614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_17
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 66
+        width: 23
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e2eddc887d0c9310800000000000000
+      internalID: 1413019194498081510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_18
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 79
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c2f6c701170cf40800000000000000
+      internalID: 5746717440145828949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_19
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 41
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a9baa9c585b722c0800000000000000
+      internalID: -4456393720041129563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 6
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e473def668610090800000000000000
+      internalID: -8070054265699994398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_21
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 57
+        width: 41
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5807e6befdcfa4340800000000000000
+      internalID: 4848965987475550341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 112
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0cab7825a01e0610800000000000000
+      internalID: 1589226020043205647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_23
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 27
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 718dc42ae31bca460800000000000000
+      internalID: 7254367982356060183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_24
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 21
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6096d61fda832ef20800000000000000
+      internalID: 3450382584250198278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_25
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 30
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a43491096dba7f420800000000000000
+      internalID: 2663786642641863498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_26
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 32
+        width: 33
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d7cf6f90236e7a0800000000000000
+      internalID: -6348331606352298709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_27
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 17
+        width: 24
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7102b7c19bd031250800000000000000
+      internalID: 5914085824365535255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_28
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 2
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812f0c572f7a25020800000000000000
+      internalID: 2329108617103471128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_29
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 0
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a5a522a17e4a3be0800000000000000
+      internalID: -1496797676188621403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_30
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 6
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d068400b727c0c600800000000000000
+      internalID: 486607733026752013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_31
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 0
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e20861e312dd6ec80800000000000000
+      internalID: -8293698528910868434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_32
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 4
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23bd5cfbc3360dbe0800000000000000
+      internalID: -1454553567074067662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_upper_salao3_33
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0833ca17163ff190800000000000000
+      internalID: -7926557346287634421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -161,6 +161,10 @@ public class GameManager : MonoBehaviour
 
     public void FecharHUD()
     {
+        if (ToastMessage.Instance.activeToast != null)
+        {
+            ToastMessage.Instance.activeToast.gameObject.SetActive(false);
+        }
         SistemaUI.SetActive(false);
         StartCoroutine(FadeInCanvasGroup(GUI.GetComponent<CanvasGroup>(), 1.2f));
     }

@@ -15,6 +15,7 @@ public class Toast : MonoBehaviour
     [Header("Componentes")]
     public TextMeshProUGUI messageText;
     public Image background;
+    public Image backgroundFixed;
     public Image icon;
     public CanvasGroup canvasGroup;
 
@@ -22,6 +23,9 @@ public class Toast : MonoBehaviour
     public Color successColor = Color.green;
     public Color errorColor = Color.red;
     public Color alertColor = Color.yellow;
+    private string hexSuccess = "#B5FFB5";
+    private string hexError = "#FFB5B5";
+    private string hexAlert = "#FFFFB5";
 
     public Sprite successIcon;
     public Sprite errorIcon;
@@ -62,18 +66,48 @@ public class Toast : MonoBehaviour
                 messageText.color = successColor;
                 messageText.fontStyle = FontStyles.Bold;
                 icon.sprite = successIcon;
+
+                Color parsedColor;
+                if (ColorUtility.TryParseHtmlString(hexSuccess, out parsedColor))
+                {
+                    backgroundFixed.color = parsedColor;
+                }
+                else
+                {
+                    backgroundFixed.color = successColor;
+                }
                 break;
             case ToastType.Error:
                 background.color = errorColor;
                 messageText.color = errorColor;
                 messageText.fontStyle = FontStyles.Bold;
                 icon.sprite = errorIcon;
+
+                Color errorColorFixed;
+                if (ColorUtility.TryParseHtmlString(hexError, out errorColorFixed))
+                {
+                    backgroundFixed.color = errorColorFixed;
+                }
+                else
+                {
+                    backgroundFixed.color = successColor;
+                }
                 break;
             case ToastType.Alert:
                 background.color = alertColor;
                 messageText.color = alertColor;
                 messageText.fontStyle = FontStyles.Bold;
                 icon.sprite = alertIcon;
+
+                Color alertColorFixed;
+                if (ColorUtility.TryParseHtmlString(hexAlert, out alertColorFixed))
+                {
+                    backgroundFixed.color = alertColorFixed;
+                }
+                else
+                {
+                    backgroundFixed.color = successColor;
+                }
                 break;
         }
 

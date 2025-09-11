@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class attack_espinhos : MonoBehaviour
+public class Attack_Espinhos : MonoBehaviour
 {
     public int attackDamage = 1;
     public Vector2 knockback = Vector2.zero;

@@ -82,7 +82,6 @@ public class TouchingVariables : MonoBehaviour
         RaycastHit2D[] WallHits = new RaycastHit2D[1];
         RaycastHit2D[] CeilingHits = new RaycastHit2D[1];
 
-
         // Cast para o chão
         IsGrouded = touchingCol.Cast(Vector2.down, FiltroGround, groundHits, groundDistancia) > 0;
         Debug.DrawRay(touchingCol.bounds.center, Vector2.down * groundDistancia, Color.red);

@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 915756790a8189b47bd8397e4782a645
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 717140054703659241
+    second: vidrassa_teto_upper_salao4_0
+  - first:
+      213: 1682136489697703423
+    second: vidrassa_teto_upper_salao4_1
+  - first:
+      213: -6706236013637447004
+    second: vidrassa_teto_upper_salao4_2
+  - first:
+      213: -1314331018838842919
+    second: vidrassa_teto_upper_salao4_3
+  - first:
+      213: -8860418286747686687
+    second: vidrassa_teto_upper_salao4_4
+  - first:
+      213: -6916261750214292945
+    second: vidrassa_teto_upper_salao4_5
+  - first:
+      213: 6080322055668296902
+    second: vidrassa_teto_upper_salao4_6
+  - first:
+      213: -609160908850989671
+    second: vidrassa_teto_upper_salao4_7
+  - first:
+      213: 5560611407047065682
+    second: vidrassa_teto_upper_salao4_8
+  - first:
+      213: 1501419325253915318
+    second: vidrassa_teto_upper_salao4_9
+  - first:
+      213: -7739175839359191227
+    second: vidrassa_teto_upper_salao4_10
+  - first:
+      213: -2065962597338250126
+    second: vidrassa_teto_upper_salao4_11
+  - first:
+      213: -4331612816377106499
+    second: vidrassa_teto_upper_salao4_12
+  - first:
+      213: -3767143822085449909
+    second: vidrassa_teto_upper_salao4_13
+  - first:
+      213: -5666930002971620670
+    second: vidrassa_teto_upper_salao4_14
+  - first:
+      213: 4715821062805281283
+    second: vidrassa_teto_upper_salao4_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.03144417}
+  spritePixelsToUnits: 25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 308
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8d0d6841bc3f900800000000000000
+      internalID: 717140054703659241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 322
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5772c9936285710800000000000000
+      internalID: 1682136489697703423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 321
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a2553370e9aee2a0800000000000000
+      internalID: -6706236013637447004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_3
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 330
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d165d8e6ee82cde0800000000000000
+      internalID: -1314331018838842919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_4
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 318
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e867014388790580800000000000000
+      internalID: -8860418286747686687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_5
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 327
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2a0bd405908400a0800000000000000
+      internalID: -6916261750214292945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_6
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 302
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cce418d1b4a16450800000000000000
+      internalID: 6080322055668296902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_7
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 316
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 995f1e08163db87f0800000000000000
+      internalID: -609160908850989671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_8
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 303
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25086030d924b2d40800000000000000
+      internalID: 5560611407047065682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_9
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 318
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b29aa4ebec16d410800000000000000
+      internalID: 1501419325253915318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_10
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 296
+        width: 49
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547b5b8f39ce89490800000000000000
+      internalID: -7739175839359191227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_11
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 316
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2740962b6f93453e0800000000000000
+      internalID: -2065962597338250126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_12
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 298
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf2057e71503e3c0800000000000000
+      internalID: -4331612816377106499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_13
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 278
+        width: 8
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b471aca27aa68bbc0800000000000000
+      internalID: -3767143822085449909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_14
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 76
+        width: 146
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca8fdddf250b51b0800000000000000
+      internalID: -5666930002971620670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vidrassa_teto_upper_salao4_15
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 256
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30a50d86546f17140800000000000000
+      internalID: 4715821062805281283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      vidrassa_teto_upper_salao4_0: 717140054703659241
+      vidrassa_teto_upper_salao4_1: 1682136489697703423
+      vidrassa_teto_upper_salao4_10: -7739175839359191227
+      vidrassa_teto_upper_salao4_11: -2065962597338250126
+      vidrassa_teto_upper_salao4_12: -4331612816377106499
+      vidrassa_teto_upper_salao4_13: -3767143822085449909
+      vidrassa_teto_upper_salao4_14: -5666930002971620670
+      vidrassa_teto_upper_salao4_15: 4715821062805281283
+      vidrassa_teto_upper_salao4_2: -6706236013637447004
+      vidrassa_teto_upper_salao4_3: -1314331018838842919
+      vidrassa_teto_upper_salao4_4: -8860418286747686687
+      vidrassa_teto_upper_salao4_5: -6916261750214292945
+      vidrassa_teto_upper_salao4_6: 6080322055668296902
+      vidrassa_teto_upper_salao4_7: -609160908850989671
+      vidrassa_teto_upper_salao4_8: 5560611407047065682
+      vidrassa_teto_upper_salao4_9: 1501419325253915318
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

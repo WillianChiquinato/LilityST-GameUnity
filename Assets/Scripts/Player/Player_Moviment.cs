@@ -703,8 +703,10 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        //KNOCKBACK
+        //KNOCKBACK.
         GameManager.instance.FecharHUD();
+        CancelInvoke(nameof(AbrirHUDelay));
+        canOpenCaderno = true;
         OpenCaderno = false;
 
         rb.linearVelocity = Vector2.zero;
