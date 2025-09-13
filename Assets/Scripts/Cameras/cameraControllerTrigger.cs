@@ -65,7 +65,11 @@ public enum PanDirecao
     Up,
     Down,
     Left,
-    Right
+    Right,
+    UpRight,
+    UpLeft,
+    DownRight,
+    DownLeft
 }
 
 //Aqui so colei, PQP que bgl dificil, mas sao propriedades da UNITY em si;

@@ -88,7 +88,7 @@ public class Soldados_Ativador : MonoBehaviour
         animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.2f);
         if (goraflixMoviment.Target)
         {
             animator.SetBool("Lanca", true);
@@ -113,6 +113,10 @@ public class Soldados_Ativador : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            animator.SetBool("Soldados", false);
         }
 
         yield return new WaitForSeconds(CameraTransitionValue);

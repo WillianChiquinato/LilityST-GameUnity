@@ -12,7 +12,6 @@ public class interactableApresentation : CollidableObjects
     public PlayerMoviment playerMoviment;
     public FranceMoviment goraflixMoviment;
     public grabPlayer grabPlayer;
-    public GameObject ApresInput;
 
     public TextMeshProUGUI texto01;
     public TextMeshProUGUI texto02;
@@ -28,8 +27,7 @@ public class interactableApresentation : CollidableObjects
         base.Start();
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
-
-        ApresInput.SetActive(false);
+        
         saveData = SaveData.Instance;
     }
 
@@ -46,9 +44,7 @@ public class interactableApresentation : CollidableObjects
                 {
                     if (GetInput == "Jump")
                     {
-                        Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
-                        ApresInput.SetActive(false);
 
                         ativo = false;
                         Destroy(gameObject);
@@ -56,9 +52,7 @@ public class interactableApresentation : CollidableObjects
 
                     if (GetInput == "WallJump")
                     {
-                        Time.timeScale = 1f;
                         playerMoviment.playerInput.enabled = true;
-                        ApresInput.SetActive(false);
 
                         ativo = false;
                         Destroy(this.gameObject);
@@ -70,7 +64,6 @@ public class interactableApresentation : CollidableObjects
                     {
                         goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
                         Time.timeScale = 1f;
-                        ApresInput.SetActive(false);
                         goraflixMoviment.Anelgrab.SetActive(false);
 
                         ativo = false;
@@ -112,8 +105,6 @@ public class interactableApresentation : CollidableObjects
                 saveData.WalljumpUnlocked = true;
 
                 ativo = true;
-                Time.timeScale = 0f;
-                ApresInput.SetActive(true);
                 playerMoviment.playerInput.enabled = false;
                 texto01.text = "Vá na parede, press W";
                 texto02.text = "Para WallJump";
@@ -136,8 +127,6 @@ public class interactableApresentation : CollidableObjects
         yield return new WaitForSeconds(2.5f);
 
         ativo = true;
-        Time.timeScale = 0f;
-        ApresInput.SetActive(true);
         playerMoviment.playerInput.enabled = false;
 
         texto01.text = "Pressione SHIFT";

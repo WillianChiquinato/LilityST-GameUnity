@@ -827,7 +827,7 @@ public class PlayerMoviment : MonoBehaviour
                 float direction = transform.localScale.x > 0 ? 1 : transform.localScale.x == 0 ? 1 : -1;
                 float forceItem = collision.gameObject.GetComponent<RicocheteForcePlayer>().forceItem;
 
-                Vector2 force = new Vector2(maxSpeed * direction, maxSpeed * forceItem);
+                Vector2 force = new Vector2(maxSpeed * direction, 11f * forceItem);
                 rb.AddForce(force, ForceMode2D.Impulse);
                 break;
             default:

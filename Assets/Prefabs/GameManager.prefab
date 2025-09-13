@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 278185134336541994}
   - component: {fileID: 6547576418419454379}
   - component: {fileID: 5622534886962911752}
+  - component: {fileID: 2038800772356163303}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: DontDestroy
@@ -232,11 +233,11 @@ MonoBehaviour:
   player: {fileID: 0}
   XpPlayer: 0
   pauseUI: {fileID: 0}
+  GUI: {fileID: 0}
   bossFight: {fileID: 0}
   playerMoviment: {fileID: 0}
   pauseMenu: {fileID: 0}
   MainCamera: {fileID: 0}
-  CutSceneDroggo: {fileID: 0}
   playerHealth: {fileID: 0}
   dialogoCervo: {fileID: 0}
   IsPaused: 0
@@ -245,9 +246,12 @@ MonoBehaviour:
   apresentaocao: []
   SistemaUI: {fileID: 0}
   CutSumir: {fileID: 0}
+  isCameraCorrected: 1
   cinemachineVirtualCamera: {fileID: 0}
   framingPosition: {fileID: 0}
+  shakeCamera: {fileID: 0}
   UISavePoint: {fileID: 0}
+  cervinhoOnCheckpoint: 0
 --- !u!114 &5622534886962911752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +266,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   interactIcon: {fileID: 0}
+--- !u!114 &2038800772356163303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798855544687393476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436c29cb54673a74d871da77187ef47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointPrefab: {fileID: 1143982791982413727, guid: f401119597b7ecb4a892650f79b56d4a, type: 3}
+  canvasParent: {fileID: 0}

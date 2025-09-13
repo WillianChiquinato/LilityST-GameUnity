@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   knockback: {x: 7, y: 2}
+  componentePai: {fileID: 0}
 --- !u!61 &4602707155330089086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ GameObject:
   - component: {fileID: 4939600362580012511}
   - component: {fileID: 1015751370392506130}
   - component: {fileID: 9156327006664606414}
-  - component: {fileID: 2226603975735487900}
+  - component: {fileID: 9209356783058838729}
   m_Layer: 8
   m_Name: SoldadoGeneralMelee
   m_TagString: Inimigos
@@ -393,7 +394,7 @@ MonoBehaviour:
   maxSpeed: 9
   acceleration: 0.8
   _Target: 0
---- !u!114 &2226603975735487900
+--- !u!114 &9209356783058838729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,23 +414,24 @@ MonoBehaviour:
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 5dbc4d72d1aec894e7a3e126015700cfe9e0d9458b2cf1c3abe506b395c84d77000000006b84754dc9a8806f3916f48e9b3bc102
+  m_ApplyToSortingLayers: 5dbc4d72d1aec894e7a3e126015700cfe9e0d9458b2cf1c3abe506b395c84d77000000006b84754dc9a8806f3916f48ee11caba99b3bc102
   m_ShapePath:
-  - {x: 3.7866173, y: -2.1800003, z: 0}
-  - {x: 3.7866173, y: 2.1800003, z: 0}
-  - {x: -2.4533806, y: 2.1800003, z: 0}
-  - {x: -2.4533806, y: -2.1800003, z: 0}
-  m_ShapePathHash: 0
+  - {x: 0.2465744, y: -1.8566303, z: 0}
+  - {x: 0.46782303, y: -0.83244133, z: 0}
+  - {x: 0.16761398, y: 0.29084206, z: 0}
+  - {x: -0.38895798, y: 0.1122551, z: 0}
+  - {x: -0.6493225, y: -1.8055725, z: 0}
+  m_ShapePathHash: 1618831055
   m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 739012391501070067}
+  m_ShadowShape2DComponent: {fileID: 0}
   m_ShadowShape2DProvider:
-    rid: 1648924481325367612
-  m_ShadowCastingSource: 2
+    rid: -2
+  m_ShadowCastingSource: 1
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: -0.2266159, y: -0.73999786, z: 0}
-      m_Extent: {x: 1.159996, y: 1.0400009, z: 0}
+      m_Center: {x: -0.09074974, y: -0.78289413, z: 0}
+      m_Extent: {x: 0.55857277, y: 1.0737362, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.2
     m_FlipX: 1
@@ -438,11 +440,10 @@ MonoBehaviour:
   m_CastingOption: 1
   m_PreviousTrimEdge: 0.2
   m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 2
-  m_PreviousShadowShape2DSource: {fileID: 0}
+  m_PreviousShadowCastingSource: 1
+  m_PreviousShadowShape2DSource: {fileID: 1015751370392506130}
   references:
     version: 2
     RefIds:
-    - rid: 1648924481325367612
-      type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
-      data: 
+    - rid: -2
+      type: {class: , ns: , asm: }

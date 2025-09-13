@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2089429739266318325}
   - component: {fileID: 5669674690904997351}
   - component: {fileID: 8240152802139486809}
-  - component: {fileID: 5488596992983854428}
   m_Layer: 2
   m_Name: LancaProjetil
   m_TagString: Untagged
@@ -212,18 +211,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5488596992983854428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4618734590020294472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9815f556f993015429b2a46f297a18d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Icon: {fileID: 2800000, guid: 1e836581da6cf8b4695bd88815e3a7b0, type: 3}
-  Arrow: {fileID: 2800000, guid: f41ab6ac00bdd204b8f5b2b59cf5de1e, type: 3}
-  Color: {r: 1, g: 1, b: 1, a: 1}

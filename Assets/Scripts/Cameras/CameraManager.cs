@@ -56,6 +56,23 @@ public class CameraManager : MonoBehaviour
                 case PanDirecao.Right:
                     endPos = Vector2.right;
                     break;
+
+                case PanDirecao.UpRight:
+                    endPos = (Vector2.up + Vector2.right).normalized;
+                    break;
+
+                case PanDirecao.UpLeft:
+                    endPos = (Vector2.up + Vector2.left).normalized;
+                    break;
+
+                case PanDirecao.DownRight:
+                    endPos = (Vector2.down + Vector2.right).normalized;
+                    break;
+
+                case PanDirecao.DownLeft:
+                    endPos = (Vector2.down + Vector2.left).normalized;
+                    break;
+
                 default:
                     break;
             }

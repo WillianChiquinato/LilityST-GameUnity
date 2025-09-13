@@ -17,6 +17,7 @@ public class FranceMoviment : MonoBehaviour
     public DetectionZone attackZona;
 
     public GameObject projetilLanca;
+    public GameObject spear;
     public Transform projetilInstance;
 
 
@@ -86,7 +87,7 @@ public class FranceMoviment : MonoBehaviour
                 animator.SetBool("Lanca", true);
                 if (LancaTrigger && shootTempo >= shootTimerTarget)
                 {
-                    Instantiate(projetilLanca, projetilInstance.position, Quaternion.identity);
+                    spear = Instantiate(projetilLanca, projetilInstance.position, Quaternion.identity);
                     shootTempo = 0f;
                     LancaTrigger = false;
                     animator.SetBool("Lanca", false);
@@ -102,6 +103,10 @@ public class FranceMoviment : MonoBehaviour
         FlipDirecao();
         //TODO: Caso querer.
         distanceToPlayer = Mathf.Abs(playerTransform.position.x - transform.position.x);
+        if (spear != null)
+        {
+            WaypointManager.Instance.TrackTarget(spear.transform);
+        }
     }
 
     private void FlipDirecao()

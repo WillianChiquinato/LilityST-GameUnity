@@ -76,8 +76,8 @@ public class Savepoint : MonoBehaviour
             case "DimensaoTempo":
                 instance.defaultPosition = new Vector2(-81.6f, 26f);
                 break;
-            case "MontanhaIntro":
-                instance.defaultPosition = new Vector2(-85.7f, -25.5f);
+            case "SopeInicial":
+                instance.defaultPosition = new Vector2(-132.1f, 24.7f);
                 break;
             case "Boss&NPC":
                 instance.defaultPosition = new Vector2(2.4f, -39.1f);
