@@ -25,7 +25,6 @@ public class SaveData
     public string currentScene;
     public bool DashUnlocked = false;
     public bool WalljumpUnlocked = false;
-    public bool attackUnlocked = false;
     public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
 
     // --- Inventário ---

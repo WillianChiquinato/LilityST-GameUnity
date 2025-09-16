@@ -17,6 +17,8 @@ public class WaypointIndicatorUI : MonoBehaviour
     public Transform target;
 
     private Camera mainCamera;
+    public float maxDistance = 50f;
+    public float minDistance = 0f;
 
     void Start()
     {
@@ -58,8 +60,8 @@ public class WaypointIndicatorUI : MonoBehaviour
 
             clampedPos += offsetIcon;
 
-            float halfWidth = iconUI.rectTransform.rect.width / 2;
-            float halfHeight = iconUI.rectTransform.rect.height / 2;
+            float halfWidth = iconUI.rectTransform.rect.width / 2.6f;
+            float halfHeight = iconUI.rectTransform.rect.height / 2.6f;
 
             clampedPosIcon.x = Mathf.Clamp(clampedPosIcon.x, arrowMargin + halfWidth, Screen.width - arrowMargin - halfWidth);
             clampedPosIcon.y = Mathf.Clamp(clampedPosIcon.y, arrowMargin + halfHeight, Screen.height - arrowMargin - halfHeight);
@@ -71,7 +73,15 @@ public class WaypointIndicatorUI : MonoBehaviour
 
             Vector3 dir = (screenPos - clampedPos).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            arrowUI.rectTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+            arrowUI.rectTransform.rotation = Quaternion.Euler(0, 0, angle - 80f);
+
+            //Aumenta a escala da seta quando o alvo está mais perto.
+            float distance = Vector3.Distance(WaypointManager.Instance.player.position, target.position);
+            float t = Mathf.InverseLerp(maxDistance, minDistance, distance);
+
+            float scale = Mathf.Lerp(0.7f, 1.4f, t);
+            iconUI.rectTransform.localScale = Vector3.one * scale;
+            iconUI.GetComponent<Animator>().speed = Mathf.Lerp(1f, 4f, t);
         }
     }
 }

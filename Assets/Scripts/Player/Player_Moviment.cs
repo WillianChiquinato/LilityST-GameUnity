@@ -654,7 +654,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (SaveData.Instance.attackUnlocked)
+        if (SaveData.Instance.powerUps.Contains(PowerUps.Bastao) && IsAlive)
         {
             if (context.performed && !arcoEffect && !OpenCaderno)
             {
@@ -683,20 +683,24 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnPowers(InputAction.CallbackContext context)
     {
-        //Add Savepoint.PowerUpApress
-        if (context.started && SaveData.Instance.powerUps.Contains(PowerUps.Arco) && !OpenCaderno)
+        if (context.started && !OpenCaderno)
         {
-            if (bow.NewArrow == null)
+            //Para o Arco.
+            if (SaveData.Instance.powerUps.Contains(PowerUps.Arco) && !wallSlide)
             {
-                arcoEffect = true;
-                IsRunning = false;
-                GetComponent<SpriteRenderer>().enabled = false;
-                tempo = true;
-                bow.bodyCamera = true;
-                animacao.SetBool(animationstrings.Powers, true);
-                bow.gameObject.SetActive(true);
-                bow.playerArco.gameObject.SetActive(true);
-                bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+                if (bow.NewArrow == null)
+                {
+                    arcoEffect = true;
+                    IsRunning = false;
+                    GetComponent<SpriteRenderer>().enabled = false;
+                    tempo = true;
+                    bow.bodyCamera = true;
+                    animacao.SetBool(animationstrings.Powers, true);
+                    bow.gameObject.SetActive(true);
+
+                    bow.playerArco.gameObject.SetActive(true);
+                    bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+                }
             }
         }
     }

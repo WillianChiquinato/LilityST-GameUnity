@@ -1,16 +1,16 @@
 {
-    "playTime": 981.0938720703125,
+    "playTime": 1007.2547607421875,
     "XPlayer": 200,
     "playerCheckpoint": {
-        "x": 0.6399999856948853,
-        "y": 22.670000076293947
+        "x": -200.15000915527344,
+        "y": 36.70000076293945
     },
     "playerHealth": 3,
-    "currentScene": "SopeInicial",
-    "DashUnlocked": true,
-    "WalljumpUnlocked": true,
-    "attackUnlocked": true,
+    "currentScene": "Altior-Fuga",
+    "DashUnlocked": false,
+    "WalljumpUnlocked": false,
     "powerUps": [
+        0,
         1
     ],
     "inventoryData": {

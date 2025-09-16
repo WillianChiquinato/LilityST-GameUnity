@@ -7,7 +7,6 @@ public class CollidableObjects : MonoBehaviour
     [SerializeField] private Collider2D z_Collider;
     [SerializeField] private ContactFilter2D z_filtro;
     private List<Collider2D> z_ColliderObjects = new List<Collider2D>(1);
-    public GameObject paredes_pretas;
 
     protected virtual void Start()
     {

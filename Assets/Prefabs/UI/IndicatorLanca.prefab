@@ -52,9 +52,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconUI: {fileID: 262279059948981100}
   arrowUI: {fileID: 6907179181736393810}
-  offsetIcon: {x: -60, y: -50, z: 0}
-  arrowMargin: 50
+  offsetIcon: {x: -20, y: -10, z: 0}
+  arrowMargin: 55
   target: {fileID: 0}
+  maxDistance: 100
+  minDistance: 0
 --- !u!1 &3277131268545017437
 GameObject:
   m_ObjectHideFlags: 0

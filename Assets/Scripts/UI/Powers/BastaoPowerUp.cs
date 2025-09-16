@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class BastaoPowerUp : PowerUp
 {
-    public SaveData saveData;
-
     public TextMeshPro textoAcima;
     public string textoIndicator;
 
@@ -13,7 +11,6 @@ public class BastaoPowerUp : PowerUp
         base.Awake();
         startPosition = transform.position;
 
-        saveData = SaveData.Instance;
         Debug.Log("Lista de PowerUps: " + string.Join(", ", SaveData.Instance.powerUps));
     }
 
@@ -38,8 +35,6 @@ public class BastaoPowerUp : PowerUp
                 if (!SaveData.Instance.powerUps.Contains(PowerUps.Bastao))
                 {
                     SaveData.Instance.powerUps.Add(PowerUps.Bastao);
-                    SaveData.Instance.attackUnlocked = true;
-                    saveData.attackUnlocked = true;
                     Debug.Log("PowerUp adicionado com sucesso!");
                 }
                 else

@@ -73,7 +73,6 @@ public class Checkpoints : MonoBehaviour
                         GameManager.instance.player.GetComponent<Damage>().maxHealth,
                         SaveData.Instance.DashUnlocked,
                         SaveData.Instance.WalljumpUnlocked,
-                        SaveData.Instance.attackUnlocked,
                         SaveData.Instance.powerUps,
                         SaveData.Instance.XPlayer
                     );

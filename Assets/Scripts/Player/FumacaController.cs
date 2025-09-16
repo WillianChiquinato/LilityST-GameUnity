@@ -4,31 +4,59 @@ public class FumacaController : MonoBehaviour
 {
     public PlayerMoviment playerMoviment;
     public Animator animator;
-    public bool fallEffectAnimation = false;
+    private bool wasGrounded = true;
+
+    public GameObject smokePrefabEffectRun;
+    public GameObject smokePrefabEffectJump;
+    public GameObject smokeEffect;
+    public GameObject smokeEffectJump;
+
+    public Vector3 offset;
+    public Vector3 offsetJump;
 
     void Start()
     {
         playerMoviment = GetComponentInParent<PlayerMoviment>();
-        animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
-        animator.SetBool("IsGround", playerMoviment.touching.IsGrouded);
-        animator.SetBool("IsMoving", playerMoviment.IsMoving);
-
-        if (playerMoviment.touching.IsGrouded)
+        if (playerMoviment.touching.IsGrouded && playerMoviment.IsMoving)
         {
-            if (!fallEffectAnimation) // Apenas ativa se ainda não tiver ativado
+            if (smokeEffect == null)
             {
-                fallEffectAnimation = true;
-                animator.SetTrigger("IsGroundTrigger");
+                smokeEffect = Instantiate(smokePrefabEffectRun, playerMoviment.transform.position + offset, Quaternion.identity);
+                Invoke(nameof(ResetSmoke), 0.8f);
             }
         }
-        else
+
+        if (playerMoviment.touching.IsGrouded && !wasGrounded)
         {
-            fallEffectAnimation = false; // Reseta apenas quando o personagem sair do chão
-            animator.ResetTrigger("IsGroundTrigger");
+            if (smokeEffectJump == null)
+            {
+                smokeEffectJump = Instantiate(smokePrefabEffectJump, playerMoviment.transform.position + offsetJump, Quaternion.identity);
+                Invoke(nameof(ResetSmokeJump), 0.3f);
+            }
+        }
+
+        wasGrounded = playerMoviment.touching.IsGrouded;
+    }
+
+    void ResetSmoke()
+    {
+        if (smokeEffect != null)
+        {
+            Destroy(smokeEffect);
+            smokeEffect = null;
+        }
+    }
+
+    void ResetSmokeJump()
+    {
+        if (smokeEffectJump != null)
+        {
+            Destroy(smokeEffectJump);
+            smokeEffectJump = null;
         }
     }
 }

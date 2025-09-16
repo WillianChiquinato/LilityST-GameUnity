@@ -52,7 +52,6 @@ public class InteractableObjectMesa_Robert : CollidableObjects
         if (!z_interacted)
         {
             z_interacted = true;
-            paredes_pretas.SetActive(true);
             playerBebe_Moviment.playerInput.enabled = false;
             playerBebe_Moviment.camerafollowObject.transposer.m_TrackedObjectOffset = new Vector3(0, 1f, 0);
             item_robert.SetActive(true);

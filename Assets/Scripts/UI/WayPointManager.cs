@@ -5,6 +5,8 @@ public class WaypointManager : MonoBehaviour
 {
     public static WaypointManager Instance;
 
+    public Transform player;
+
     [Header("Prefab de Waypoint")]
     public GameObject waypointPrefab;
     public Transform canvasParent;
@@ -15,6 +17,8 @@ public class WaypointManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        player = FindFirstObjectByType<PlayerMoviment>().transform;
     }
 
     // Chame essa função quando spawnar um objeto que precisa de indicador

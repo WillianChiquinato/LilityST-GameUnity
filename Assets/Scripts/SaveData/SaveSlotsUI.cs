@@ -47,8 +47,7 @@ public class SaveSlotsUI : MonoBehaviour
             currentScene = "Altior-Quarto",
             DashUnlocked = true,
             WalljumpUnlocked = true,
-            attackUnlocked = true,
-            powerUps = new List<PowerUps> { PowerUps.Arco },
+            powerUps = new List<PowerUps> { PowerUps.Bastao, PowerUps.Arco },
             XPlayer = 0,
             playTime = 0f,
             inventoryData = new inventory_System.InventorySaveData(),
@@ -119,11 +118,6 @@ public class SaveSlotsUI : MonoBehaviour
             slotItemConteudo.transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().text = $"{data.playerHealth}";
             slotItemConteudo.transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().text = $"{data.XPlayer}";
 
-            //A lista de powerUps.
-            if (data.attackUnlocked)
-            {
-                data.powerUps.Add(PowerUps.Bastao);
-            }
             foreach (var power in data.powerUps)
             {
                 imagensPoderes[(int)power].gameObject.SetActive(true);
