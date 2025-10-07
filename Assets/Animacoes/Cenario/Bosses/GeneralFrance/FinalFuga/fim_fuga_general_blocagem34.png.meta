@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 2c87fa662fbfba94d9e76b7119aeb575
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2896603067532933118
+    second: fim_fuga_general_blocagem34_0
+  - first:
+      213: -7679720980851185753
+    second: fim_fuga_general_blocagem34_1
+  - first:
+      213: 6576604382449878639
+    second: fim_fuga_general_blocagem34_2
+  - first:
+      213: -2795794278130824141
+    second: fim_fuga_general_blocagem34_3
+  - first:
+      213: -7193071737970440200
+    second: fim_fuga_general_blocagem34_4
+  - first:
+      213: 386871479275619521
+    second: fim_fuga_general_blocagem34_5
+  - first:
+      213: 460748043891747718
+    second: fim_fuga_general_blocagem34_6
+  - first:
+      213: -5651792964925643213
+    second: fim_fuga_general_blocagem34_7
+  - first:
+      213: -7481934555839392893
+    second: fim_fuga_general_blocagem34_8
+  - first:
+      213: -6529924410538405769
+    second: fim_fuga_general_blocagem34_9
+  - first:
+      213: 5033550867757280552
+    second: fim_fuga_general_blocagem34_10
+  - first:
+      213: -2778989349239145348
+    second: fim_fuga_general_blocagem34_11
+  - first:
+      213: -2120743518483967475
+    second: fim_fuga_general_blocagem34_12
+  - first:
+      213: -4706606998528143689
+    second: fim_fuga_general_blocagem34_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.628, y: 0.3024}
+  spritePixelsToUnits: 25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 53
+        width: 67
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20884606bd23dc7d0800000000000000
+      internalID: -2896603067532933118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_1
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 84
+        width: 24
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a72042f4762c6590800000000000000
+      internalID: -7679720980851185753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_2
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 31
+        width: 146
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f66c33c67dac44b50800000000000000
+      internalID: 6576604382449878639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 116
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33c41f2bae75339d0800000000000000
+      internalID: -2795794278130824141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_4
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 86
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f7ce566d531d2c90800000000000000
+      internalID: -7193071737970440200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_5
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 70
+        width: 21
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c404f78f817e5500800000000000000
+      internalID: 386871479275619521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_6
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 30
+        width: 64
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68baf1f97e7e46600800000000000000
+      internalID: 460748043891747718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_7
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 33
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3362e8d2e3cc091b0800000000000000
+      internalID: -5651792964925643213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_8
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 32
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38319769924da2890800000000000000
+      internalID: -7481934555839392893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_9
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 31
+        width: 41
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 770d4bb785c0165a0800000000000000
+      internalID: -6529924410538405769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_10
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 63
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82d288768d3cad540800000000000000
+      internalID: 5033550867757280552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_11
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 66
+        width: 29
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7cb10c19eb0f69d0800000000000000
+      internalID: -2778989349239145348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_12
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 47
+        width: 41
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d021d01910b9192e0800000000000000
+      internalID: -2120743518483967475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fim_fuga_general_blocagem34_13
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 30
+        width: 17
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7becc5b1fd5ceaeb0800000000000000
+      internalID: -4706606998528143689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fim_fuga_general_blocagem34_0: -2896603067532933118
+      fim_fuga_general_blocagem34_1: -7679720980851185753
+      fim_fuga_general_blocagem34_10: 5033550867757280552
+      fim_fuga_general_blocagem34_11: -2778989349239145348
+      fim_fuga_general_blocagem34_12: -2120743518483967475
+      fim_fuga_general_blocagem34_13: -4706606998528143689
+      fim_fuga_general_blocagem34_2: 6576604382449878639
+      fim_fuga_general_blocagem34_3: -2795794278130824141
+      fim_fuga_general_blocagem34_4: -7193071737970440200
+      fim_fuga_general_blocagem34_5: 386871479275619521
+      fim_fuga_general_blocagem34_6: 460748043891747718
+      fim_fuga_general_blocagem34_7: -5651792964925643213
+      fim_fuga_general_blocagem34_8: -7481934555839392893
+      fim_fuga_general_blocagem34_9: -6529924410538405769
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,7 +5,7 @@ public class FinalFuga : MonoBehaviour
 {
     [Header("Player & Instances")]
     public LevelTransicao levelTransicao;
-    public PlayerMoviment playerMoviment;
+    public GameObject telaFimFuga;
     public Transform positionGeneral;
     public GameObject generalPrefab;
     public GameObject GeneralInstance;
@@ -14,19 +14,11 @@ public class FinalFuga : MonoBehaviour
     public GameObject LançaGeneral = null;
     public Transform PosicaoLançaGeneral;
     public bool LançaTrigger = false;
-    private bool isMovingAutomatically = false;
+    public bool isMovingAutomatically = false;
 
-    void Awake()
+    void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-    }
-
-    void Update()
-    {
-        if (LançaTrigger && !isMovingAutomatically) 
-        {
-            StartCoroutine(AutoMove(3f));
-        }
+        telaFimFuga.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -38,36 +30,68 @@ public class FinalFuga : MonoBehaviour
             {
                 LançaGeneral = Instantiate(LançaGeneralPrefab, PosicaoLançaGeneral.position, LançaGeneralPrefab.transform.rotation);
             }
+
+            if (LançaTrigger && !isMovingAutomatically)
+            {
+                StartCoroutine(AutoMove(1.7f));
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.instance.playerMoviment.moveInput = new Vector2(-1f, 0f);
         }
     }
 
     IEnumerator AutoMove(float duration)
     {
         isMovingAutomatically = true;
-        playerMoviment.canMove = false;
+        GameManager.instance.playerMoviment.AutoMoveAnimations = true;
+        GameManager.instance.playerMoviment.canMove = false;
+        GameManager.instance.playerMoviment.moveInput = new Vector2(-1f, 0f);
 
         float timer = 0f;
+        Rigidbody2D rb = GameManager.instance.playerMoviment.GetComponent<Rigidbody2D>();
+
         while (timer < duration)
         {
-            playerMoviment.transform.Translate(Vector2.left * playerMoviment.maxSpeed * Time.deltaTime);
+            rb.linearVelocity = new Vector2(GameManager.instance.playerMoviment.maxSpeed, rb.linearVelocity.y);
+            GameManager.instance.playerMoviment.IsMoving = true;
+
             timer += Time.deltaTime;
-            playerMoviment.IsMoving = true;
             yield return null;
         }
-        playerMoviment.IsMoving = false;
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        GameManager.instance.playerMoviment.IsMoving = false;
+        GameManager.instance.playerMoviment.AutoMoveAnimations = false;
 
         yield return new WaitForSeconds(1.5f);
-        playerMoviment.IsRight = true;
+        GameManager.instance.playerMoviment.IsRight = true;
 
         LançaTrigger = false;
+
+        yield return new WaitForSeconds(2f);
         if (GeneralInstance == null)
         {
             GeneralInstance = Instantiate(generalPrefab, positionGeneral.position, generalPrefab.transform.rotation);
         }
 
-        yield return new WaitForSeconds(2f);
+        Vector3 diferrenca = GeneralInstance.transform.position - GameManager.instance.playerMoviment.transform.position;
+        GameManager.instance.framingPosition.m_TrackedObjectOffset = new Vector3(diferrenca.x - 2.5f, GameManager.instance.framingPosition.m_TrackedObjectOffset.y, 0);
 
-        //Trocar posteriormente para a cena final
+        yield return new WaitForSeconds(2f);
+        GeneralInstance.GetComponent<Animator>().SetBool("FinalFuga", true);
+
+        yield return new WaitForSeconds(1.1f);
+        telaFimFuga.SetActive(true);
+
+        yield return new WaitForSeconds(2.8f);
+        GeneralInstance.GetComponent<Animator>().SetBool("FinalFuga", false);
+
+        yield return new WaitForSeconds(1.3f);
         levelTransicao.gameObject.SetActive(true);
         levelTransicao.Transicao("DimensaoTempo");
     }

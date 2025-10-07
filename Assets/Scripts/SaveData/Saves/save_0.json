@@ -2,13 +2,13 @@
     "playTime": 1007.2547607421875,
     "XPlayer": 200,
     "playerCheckpoint": {
-        "x": -200.15000915527344,
-        "y": 36.70000076293945
+        "x": -380.15000915527344,
+        "y": 15.70000076293945
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
-    "DashUnlocked": false,
-    "WalljumpUnlocked": false,
+    "DashUnlocked": true,
+    "WalljumpUnlocked": true,
     "powerUps": [
         0,
         1
@@ -37,7 +37,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 1
+                "stackSize": 3
             }
         ],
         "isInitialized": true

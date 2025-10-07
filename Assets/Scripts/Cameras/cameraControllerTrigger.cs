@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using UnityEditor;
@@ -17,15 +15,22 @@ public class CameraControllerTrigger : MonoBehaviour
         PlayerDetect = false;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             PlayerDetect = true;
+
             if (customInspectorObje.panCameraContact && !collision.gameObject.GetComponent<PlayerMoviment>().arcoEffect)
             {
-                //Executa o efeito da camera
-                CameraManager.instance.PanCameraContact(customInspectorObje.panDistance, customInspectorObje.panTime, customInspectorObje.panDirection, false);
+                Vector2 panValues = GetPanValues(customInspectorObje.panDirection, customInspectorObje.panDistance, customInspectorObje.panDistance2);
+
+                CameraManager.instance.PanCameraContact(
+                    panValues, 
+                    customInspectorObje.panTime, 
+                    customInspectorObje.panDirection, 
+                    false
+                );
             }
         }
     }
@@ -35,11 +40,37 @@ public class CameraControllerTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerDetect = false;
+
             if (customInspectorObje.panCameraContact)
             {
-                //Executa o efeito da camera
-                CameraManager.instance.PanCameraContact(customInspectorObje.panDistance, customInspectorObje.panTime, customInspectorObje.panDirection, true);
+                Vector2 panValues = GetPanValues(customInspectorObje.panDirection, customInspectorObje.panDistance, customInspectorObje.panDistance2);
+
+                CameraManager.instance.PanCameraContact(
+                    panValues, 
+                    customInspectorObje.panTime, 
+                    customInspectorObje.panDirection, 
+                    true
+                );
             }
+        }
+    }
+
+    private Vector2 GetPanValues(PanDirecao dir, float d1, float d2)
+    {
+        // Retorna (x, y) baseado na direção
+        switch (dir)
+        {
+            case PanDirecao.Up: return new Vector2(0, d1);
+            case PanDirecao.Down: return new Vector2(0, -d1);
+            case PanDirecao.Left: return new Vector2(-d1, 0);
+            case PanDirecao.Right: return new Vector2(d1, 0);
+
+            case PanDirecao.UpLeft: return new Vector2(-d2, d1);
+            case PanDirecao.UpRight: return new Vector2(d2, d1);
+            case PanDirecao.DownLeft: return new Vector2(-d2, -d1);
+            case PanDirecao.DownRight: return new Vector2(d2, -d1);
+
+            default: return Vector2.zero;
         }
     }
 }
@@ -55,9 +86,8 @@ public class CustomInspectorObje
 
     [HideInInspector] public PanDirecao panDirection;
     [HideInInspector] public float panDistance = 3f;
+    [HideInInspector] public float panDistance2 = 3f;
     [HideInInspector] public float panTime = 0.35f;
-
-
 }
 
 public enum PanDirecao
@@ -72,7 +102,6 @@ public enum PanDirecao
     DownLeft
 }
 
-//Aqui so colei, PQP que bgl dificil, mas sao propriedades da UNITY em si;
 #if UNITY_EDITOR
 [CustomEditor(typeof(CameraControllerTrigger))]
 public class myScriptEditor : Editor
@@ -86,27 +115,33 @@ public class myScriptEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //dfds
         DrawDefaultInspector();
+
         if (cameraControllerTrigger.customInspectorObje.swapCameras)
         {
             cameraControllerTrigger.customInspectorObje.cameraOnLeft = EditorGUILayout.ObjectField("Camera on Left", cameraControllerTrigger.customInspectorObje.cameraOnLeft, typeof(CinemachineVirtualCamera), true) as CinemachineVirtualCamera;
-
             cameraControllerTrigger.customInspectorObje.cameraOnRight = EditorGUILayout.ObjectField("Camera on Right", cameraControllerTrigger.customInspectorObje.cameraOnRight, typeof(CinemachineVirtualCamera), true) as CinemachineVirtualCamera;
         }
 
         if (cameraControllerTrigger.customInspectorObje.panCameraContact)
         {
             cameraControllerTrigger.customInspectorObje.panDirection = (PanDirecao)EditorGUILayout.EnumPopup("Camera Pan Direction", cameraControllerTrigger.customInspectorObje.panDirection);
+            cameraControllerTrigger.customInspectorObje.panDistance = EditorGUILayout.FloatField("Pan Distance (Primary)", cameraControllerTrigger.customInspectorObje.panDistance);
 
-            cameraControllerTrigger.customInspectorObje.panDistance = EditorGUILayout.FloatField("Pan Distance", cameraControllerTrigger.customInspectorObje.panDistance);
+            // Mostra o segundo campo só se a direção for diagonal
+            if (cameraControllerTrigger.customInspectorObje.panDirection == PanDirecao.UpLeft ||
+                cameraControllerTrigger.customInspectorObje.panDirection == PanDirecao.UpRight ||
+                cameraControllerTrigger.customInspectorObje.panDirection == PanDirecao.DownLeft ||
+                cameraControllerTrigger.customInspectorObje.panDirection == PanDirecao.DownRight)
+            {
+                cameraControllerTrigger.customInspectorObje.panDistance2 = EditorGUILayout.FloatField("Pan Distance 2 (Secondary)", cameraControllerTrigger.customInspectorObje.panDistance2);
+            }
+
             cameraControllerTrigger.customInspectorObje.panTime = EditorGUILayout.FloatField("Pan Time", cameraControllerTrigger.customInspectorObje.panTime);
         }
 
         if (GUI.changed)
-        {
             EditorUtility.SetDirty(cameraControllerTrigger);
-        }
     }
 }
 #endif

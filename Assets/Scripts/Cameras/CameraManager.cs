@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Cinemachine;
 using UnityEngine;
+using Cinemachine;
+using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
@@ -27,50 +25,54 @@ public class CameraManager : MonoBehaviour
         _startTrackedObject = transposer.m_TrackedObjectOffset;
     }
 
-    public void PanCameraContact(float panDistance, float panTime, PanDirecao panDirecao, bool panToStarting)
+    public void PanCameraContact(Vector2 panDistance, float panTime, PanDirecao panDirecao, bool panToStarting)
     {
+        if (_pancameraContact != null)
+            StopCoroutine(_pancameraContact);
+
         _pancameraContact = StartCoroutine(PanCamera(panDistance, panTime, panDirecao, panToStarting));
     }
 
-    private IEnumerator PanCamera(float panDistance, float panTime, PanDirecao panDirecao, bool panToStarting)
+    private IEnumerator PanCamera(Vector2 panDistance, float panTime, PanDirecao panDirecao, bool panToStarting)
     {
         Vector2 endPos = Vector2.zero;
         Vector2 startingPos = Vector2.zero;
 
         if (!panToStarting)
         {
+            // define direção base
             switch (panDirecao)
             {
                 case PanDirecao.Up:
-                    endPos = Vector2.up;
+                    endPos = new Vector2(0, panDistance.y);
                     break;
 
                 case PanDirecao.Down:
-                    endPos = Vector2.down;
+                    endPos = new Vector2(0, -panDistance.y);
                     break;
 
                 case PanDirecao.Left:
-                    endPos = Vector2.left;
+                    endPos = new Vector2(-panDistance.x, 0);
                     break;
 
                 case PanDirecao.Right:
-                    endPos = Vector2.right;
+                    endPos = new Vector2(panDistance.x, 0);
                     break;
 
                 case PanDirecao.UpRight:
-                    endPos = (Vector2.up + Vector2.right).normalized;
+                    endPos = new Vector2(panDistance.x, panDistance.y);
                     break;
 
                 case PanDirecao.UpLeft:
-                    endPos = (Vector2.up + Vector2.left).normalized;
+                    endPos = new Vector2(-panDistance.x, panDistance.y);
                     break;
 
                 case PanDirecao.DownRight:
-                    endPos = (Vector2.down + Vector2.right).normalized;
+                    endPos = new Vector2(panDistance.x, -panDistance.y);
                     break;
 
                 case PanDirecao.DownLeft:
-                    endPos = (Vector2.down + Vector2.left).normalized;
+                    endPos = new Vector2(-panDistance.x, -panDistance.y);
                     break;
 
                 default:
@@ -78,9 +80,7 @@ public class CameraManager : MonoBehaviour
             }
 
             endPos *= panDistance;
-
             startingPos = _startTrackedObject;
-
             endPos += startingPos;
         }
         else

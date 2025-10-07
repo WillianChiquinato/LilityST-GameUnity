@@ -614,26 +614,29 @@ public class PlayerMoviment : MonoBehaviour
 
     private void WallSlide()
     {
-        if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
+        if (SaveData.Instance.WalljumpUnlocked)
         {
-            if (!arcoEffect && !OpenCaderno)
+            if (!touching.IsGrouded && rb.linearVelocity.y < 0f && touching.IsOnWall)
             {
-                WallstateTimer -= Time.deltaTime;
-                wallSlide = true;
-                animacao.SetBool(animationstrings.IsWallSliding, true);
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
-
-                if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
+                if (!arcoEffect && !OpenCaderno)
                 {
-                    WallJump();
+                    WallstateTimer -= Time.deltaTime;
+                    wallSlide = true;
+                    animacao.SetBool(animationstrings.IsWallSliding, true);
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.3f);
+
+                    if (WallstateTimer < 0f && Input.GetKeyDown(KeyCode.W))
+                    {
+                        WallJump();
+                    }
                 }
             }
-        }
-        else
-        {
-            wallSlide = false;
-            animacao.SetBool(animationstrings.IsWallSliding, false);
-            WallstateTimer = 0.2f;
+            else
+            {
+                wallSlide = false;
+                animacao.SetBool(animationstrings.IsWallSliding, false);
+                WallstateTimer = 0.2f;
+            }
         }
     }
 

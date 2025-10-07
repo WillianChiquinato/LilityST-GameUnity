@@ -72,6 +72,7 @@ public class ActiveAnim : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Colidiu com algo");
         //Player logic.
         foreach (string tag in tagToCheck)
         {
@@ -80,12 +81,12 @@ public class ActiveAnim : MonoBehaviour
                 if (this.gameObject.CompareTag("Vidro"))
                 {
                     Debug.Log("Logica no update");
+                    return;
                 }
-                else
-                {
-                    // Lógica para outros objetos.
-                    animator.SetTrigger(animationTrigger);
-                }
+
+                // Lógica para outros objetos.
+                Debug.Log("Colidiu com " + tag);
+                animator.SetTrigger(animationTrigger);
             }
         }
     }
