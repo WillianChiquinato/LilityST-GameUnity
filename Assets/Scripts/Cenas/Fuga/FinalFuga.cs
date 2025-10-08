@@ -88,10 +88,13 @@ public class FinalFuga : MonoBehaviour
         yield return new WaitForSeconds(1.1f);
         telaFimFuga.SetActive(true);
 
-        yield return new WaitForSeconds(2.8f);
+        yield return new WaitForSeconds(0.7f);
+        GameManager.instance.playerMoviment.animacao.SetBool("FinalFuga", true);
+
+        yield return new WaitForSeconds(2.2f);
         GeneralInstance.GetComponent<Animator>().SetBool("FinalFuga", false);
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.5f);
         levelTransicao.gameObject.SetActive(true);
         levelTransicao.Transicao("DimensaoTempo");
     }

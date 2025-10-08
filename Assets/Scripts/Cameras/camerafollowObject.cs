@@ -26,6 +26,11 @@ public class camerafollowObject : MonoBehaviour
         StartCoroutine(ItilializedCamera());
 
         cameraControllerTrigger = Object.FindObjectsByType<CameraControllerTrigger>(FindObjectsSortMode.None);
+
+        if (cameraControllerTrigger.Length == 0)
+        {
+            shouldFlip = true;
+        }
     }
 
     IEnumerator ItilializedCamera()
@@ -60,22 +65,18 @@ public class camerafollowObject : MonoBehaviour
             Debug.LogWarning("_playerTransform ainda não foi atribuído!");
         }
 
-        if (cameraControllerTrigger.Length == 0)
-        {
-            shouldFlip = true;
-        }
-        
+        bool playerInsideAnyTrigger = false;
+
         for (int i = 0; i < cameraControllerTrigger.Length; i++)
         {
             if (cameraControllerTrigger[i].PlayerDetect)
             {
-                shouldFlip = false;
-            }
-            else
-            {
-                shouldFlip = true;
+                playerInsideAnyTrigger = true;
+                break;
             }
         }
+
+        shouldFlip = !playerInsideAnyTrigger;
     }
 
     public void chamarTurn()

@@ -267,26 +267,29 @@ public class GameManager : MonoBehaviour
         SaveData.Instance.XPlayer += xp;
         Debug.LogWarning("SALVANDO XP DO JOGADOR " + SaveData.Instance.XPlayer);
     }
-    
-    public void TriggerNoUseArgument(string message)
-    {
-        switch (message)
-        {
-            case "Dash":
-                playerMoviment.isDashing = false;
-                playerMoviment.timerDash = 1f;
-                break;
-            case "WallJump":
-                player.wallSlide = false;
-                break;
 
-            case "Run":
-                player.RunTiming = 0f;
-                player.IsRunning = false;
-                break;
-            default:
-                Debug.LogWarning("TriggerNoArgument: Mensagem não reconhecida - " + message);
-                break;
+    public void TriggerNoUseArgument(string[] message)
+    {
+        foreach (string msg in message)
+        {
+            switch (msg)
+            {
+                case "Dash":
+                    playerMoviment.isDashing = false;
+                    playerMoviment.timerDash = 1f;
+                    break;
+                case "WallJump":
+                    player.wallSlide = false;
+                    break;
+
+                case "Run":
+                    player.RunTiming = 0f;
+                    player.IsRunning = false;
+                    break;
+                default:
+                    Debug.LogWarning("TriggerNoArgument: Mensagem não reconhecida - " + message);
+                    break;
+            }
         }
     }
 }

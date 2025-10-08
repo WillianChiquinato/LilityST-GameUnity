@@ -6,7 +6,7 @@ public class FinalFugaDisabled : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.TriggerNoUseArgument("Dash");
+            GameManager.instance.TriggerNoUseArgument(new string[] { "Dash", "Run" });
         }
     }
 }
