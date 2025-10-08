@@ -4,7 +4,7 @@ public class EnemyPathing : MonoBehaviour
 {
     [Header("Instancias")]
     private Rigidbody2D rb;
-    private Animator animator;
+    public Animator animator;
     public DetectionZone attackZona;
     public Transform player;
     RaycastHit2D groundFront;
@@ -14,6 +14,7 @@ public class EnemyPathing : MonoBehaviour
     public float direcao;
     public float distanceX;
     public float distancePlayer;
+    public bool distancePlayerYBool = false;
     public float speed;
     public float jumpForce;
     public bool shouldJump;
@@ -21,7 +22,6 @@ public class EnemyPathing : MonoBehaviour
     public float minSpeed;
     public float maxSpeed;
     public float acceleration = 0.8f;
-
 
     public float attackCooldown
     {
@@ -68,7 +68,10 @@ public class EnemyPathing : MonoBehaviour
 
     void Update()
     {
-        distancePlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
+        if (!distancePlayerYBool)
+        {
+            distancePlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
+        }
         distanceX = Mathf.Abs(transform.position.x - player.position.x);
         float velocityY = rb.linearVelocity.y;
 

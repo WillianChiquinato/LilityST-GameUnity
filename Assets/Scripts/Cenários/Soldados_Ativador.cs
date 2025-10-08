@@ -5,7 +5,7 @@ using UnityEngine;
 public class Soldados_Ativador : MonoBehaviour
 {
     [Header("Ativacao Soldados")]
-    public RemovendoTile removendoTile;
+    public bool SoldadosJanela = false;
     public bool isAtivado = false;
     public float timerAtivado = 0f;
     public float timerTargtAtivado;
@@ -21,10 +21,12 @@ public class Soldados_Ativador : MonoBehaviour
     public Animator animator;
 
     [Header("Soldados")]
-    public StopSoldier stopSoldiers;
     public GameObject prefabGeneralMelee;
     public GameObject prefabGeneralLanceiro;
     public GameObject spawnSoldados;
+    public GameObject SpawnSoldadosJanela;
+    public GameObject janelaGO;
+
 
     [Header("Transicao da camera")]
     public CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -37,8 +39,6 @@ public class Soldados_Ativador : MonoBehaviour
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         colisor = GetComponent<Collider2D>();
         localPosition = targetObject.localPosition;
-        removendoTile = GameObject.FindFirstObjectByType<RemovendoTile>();
-        stopSoldiers = FindFirstObjectByType<StopSoldier>();
 
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
@@ -94,23 +94,14 @@ public class Soldados_Ativador : MonoBehaviour
             animator.SetBool("Lanca", true);
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("attackLança"))
             {
-                if (removendoTile != null)
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f)
                 {
-                    removendoTile.RemoverArea();
-                }
-                else
-                {
-                    Debug.LogWarning("RemovendoTile não encontrado!");
-                }
-
-                foreach (EnemyPathing enemy in stopSoldiers.enemyPathing)
-                {
-                    if (enemy != null)
+                    if (SoldadosJanela && prefabGeneralLanceiro != null && prefabGeneralMelee != null)
                     {
-                        enemy.canMove = true;
-                        enemy.speed = enemy.minSpeed;
-                        Debug.Log("Soldados Ativados: " + enemy.name);
+                        Instantiate(prefabGeneralMelee, SpawnSoldadosJanela.transform.position, Quaternion.identity);
+                        Instantiate(prefabGeneralLanceiro, SpawnSoldadosJanela.transform.position, Quaternion.identity);
                     }
+                    SoldadosJanela = false;
                 }
             }
         }
@@ -123,6 +114,9 @@ public class Soldados_Ativador : MonoBehaviour
 
         framingPosition.m_TrackedObjectOffset = new Vector3(0, 0, 0);
         playerMoviment.canMove = true;
+
+        yield return new WaitForSeconds(0.5f);
+        janelaGO.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(this.gameObject);
     }
 }

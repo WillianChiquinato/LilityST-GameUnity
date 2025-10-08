@@ -4,6 +4,7 @@ using UnityEngine;
 public class ColiderJump : MonoBehaviour
 {
     public List<EnemyPathing> enemyPathing = new List<EnemyPathing>();
+    public float jumpForce = 13f;
 
     void Update()
     {
@@ -13,7 +14,7 @@ public class ColiderJump : MonoBehaviour
             {
                 if (enemy != null)
                 {
-                    enemy.jumpForce = 13f;
+                    enemy.jumpForce = jumpForce;
                 }
             }
         }

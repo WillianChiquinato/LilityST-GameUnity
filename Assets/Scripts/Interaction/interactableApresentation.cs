@@ -51,6 +51,21 @@ public class interactableApresentation : CollidableObjects
             StartCoroutine(Countdown());
             if (timerApres)
             {
+                if (GetInput == "Pedrinha")
+                {
+                    imagem.gameObject.SetActive(true);
+
+                    if (playerMoviment.GetComponentInChildren<Throw_Item>().arremessar)
+                    {
+                        if (GetInput == "Pedrinha")
+                        {
+                            ativo = false;
+                            imagem.GetComponent<Animator>().SetBool("Desativar", true);
+                            Destroy(this.gameObject, 1.5f);
+                        }
+                    }
+                }
+
                 if (GetInput == "WallJump")
                 {
                     imagem.gameObject.SetActive(true);
@@ -173,6 +188,11 @@ public class interactableApresentation : CollidableObjects
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (GetInput == "Pedrinha")
+            {
+                ativo = true;
+            }
+
             if (GetInput == "WallJump" && !SaveData.Instance.WalljumpUnlocked)
             {
                 SaveData.Instance.WalljumpUnlocked = true;

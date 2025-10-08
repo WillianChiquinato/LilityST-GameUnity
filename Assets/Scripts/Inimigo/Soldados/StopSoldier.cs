@@ -4,6 +4,8 @@ using UnityEngine;
 public class StopSoldier : MonoBehaviour
 {
     public List<EnemyPathing> enemyPathing = new List<EnemyPathing>();
+    public bool isPlaying = false;
+    public GameObject playerDetect;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,13 +15,6 @@ public class StopSoldier : MonoBehaviour
             if (enemyComponent != null)
             {
                 enemyPathing.Add(enemyComponent);
-            }
-            foreach (EnemyPathing enemy in enemyPathing)
-            {
-                if (enemy != null)
-                {
-                    enemy.canMove = false;
-                }
             }
         }
     }
@@ -32,7 +27,46 @@ public class StopSoldier : MonoBehaviour
             {
                 if (enemy != null)
                 {
-                    enemy.canMove = true;
+                    enemy.distancePlayerYBool = false;
+                }
+            }
+            isPlaying = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Inimigos"))
+        {
+            foreach (EnemyPathing enemy in enemyPathing)
+            {
+                if (enemy != null)
+                {
+                    enemy.distancePlayerYBool = true;
+                    enemy.distancePlayer = 0f;
+                }
+            }
+            enemyPathing.Clear();
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (playerDetect != null && playerDetect.GetComponent<StopSoldierPlayerDetect>().isPlaying)
+            {
+                isPlaying = false;
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (!isPlaying)
+        {
+            foreach (EnemyPathing enemy in enemyPathing)
+            {
+                if (enemy != null)
+                {
+                    enemy.canMove = false;
                 }
             }
         }
