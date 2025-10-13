@@ -1,9 +1,9 @@
 {
-    "playTime": 1007.2547607421875,
+    "playTime": 1051.955810546875,
     "XPlayer": 200,
     "playerCheckpoint": {
-        "x": -370.15000915527344,
-        "y": 20.70000076293945
+        "x": -370.1500244140625,
+        "y": 20.700000762939454
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
@@ -38,6 +38,16 @@
                 "itemName": "Pedrinha",
                 "itemType": 2,
                 "stackSize": 3
+            },
+            {
+                "itemName": "Moeda",
+                "itemType": 2,
+                "stackSize": 5
+            },
+            {
+                "itemName": "Resina",
+                "itemType": 2,
+                "stackSize": 2
             }
         ],
         "isInitialized": true

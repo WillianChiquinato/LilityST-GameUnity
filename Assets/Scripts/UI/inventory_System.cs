@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class inventory_System : MonoBehaviour
@@ -18,6 +16,7 @@ public class inventory_System : MonoBehaviour
 
     public List<Inventory_item> coletaveis;
     public Dictionary<ItemData, Inventory_item> collectDicionary;
+    public List<Inventory_item> selectedItemToUse;
 
 
     [Header("Inventory UI")]
@@ -29,7 +28,7 @@ public class inventory_System : MonoBehaviour
 
     [SerializeField] private Item_SlotUI[] inventoryItemSlot;
     [SerializeField] private Item_SlotUI[] documentosItemSlot;
-    [SerializeField] private Item_SlotUI[] coletaveisItemSlot;
+    [SerializeField] public Item_SlotUI[] coletaveisItemSlot;
 
     void Awake()
     {
@@ -83,6 +82,8 @@ public class inventory_System : MonoBehaviour
         {
             LoadInventory();
         }
+
+        selectedItemToUse.Add(coletaveisItemSlot[0].item);
     }
 
     [System.Serializable]
@@ -114,6 +115,7 @@ public class inventory_System : MonoBehaviour
         }
         for (int i = 0; i < coletaveisItemSlot.Length; i++)
         {
+            coletaveisItemSlot[i].slotIndex = i;
             coletaveisItemSlot[i].CleanUpSlot();
         }
 

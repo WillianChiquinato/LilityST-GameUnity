@@ -44,6 +44,18 @@ public class ToolTipItems : MonoBehaviour
         }
     }
 
+    public void ShowToolTipFragmento(FragmentoData fragmentoData, int stackSize)
+    {
+        if (fragmentoData != null)
+        {
+            itemIcon.sprite = fragmentoData.Icon;
+            itemName.text = fragmentoData.NomeFragmento;
+            itemDescription.text = fragmentoData.DescricaoFragmento;
+            itemStack.text = "x" + stackSize.ToString();
+            toolTipItem.SetActive(true);
+        }
+    }
+
     public void HideToolTip()
     {
         toolTipItem.SetActive(false);

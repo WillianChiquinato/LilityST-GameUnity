@@ -21,14 +21,14 @@ public class Throw_Item : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GetComponent<PlayerMoviment>();
 
-        itensColetaveis = inventory_System.instance.coletaveis;
+        itensColetaveis = inventory_System.instance.selectedItemToUse;
     }
 
     void Update()
     {
         if (inventory_System.instance != null)
         {
-            itensColetaveis = inventory_System.instance.coletaveis;
+            itensColetaveis = inventory_System.instance.selectedItemToUse;
 
             if (itensColetaveis != null && itensColetaveis.Count > 0)
             {

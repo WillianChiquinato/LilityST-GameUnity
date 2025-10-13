@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
+public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image FragmentoImagem;
     [SerializeField] private Sprite originalSprite;
@@ -198,6 +198,28 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler
         {
             Debug.Log("Item ou itemData é null!");
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (Fragmento != null && Fragmento.FragmentoData != null)
+        {
+            ShowToolTip();
+        }
+        else
+        {
+            Debug.Log("Item não encontrado");
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToolTipItems.Instance.HideToolTip();
+    }
+
+    public void ShowToolTip()
+    {
+        ToolTipItems.Instance.ShowToolTipFragmento(Fragmento.FragmentoData, Fragmento.stackSize);
     }
 
     private void MoveFragmentoToDeckBuilder(Transform destino, Action onMoveComplete)
