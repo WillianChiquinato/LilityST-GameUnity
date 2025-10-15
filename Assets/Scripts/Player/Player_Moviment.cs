@@ -947,7 +947,7 @@ public class PlayerMoviment : MonoBehaviour
         rb.gravityScale = 4.5f;
 
         DamageScript.invicibilityTimer = 0.25f;
-        Vector2 offset = new Vector2(-2.2f * offsetSpawn, 0.5f);
+        Vector2 offset = new Vector2(-1.7f * offsetSpawn, 0.5f);
         transform.position = lastLilithSpawn + offset;
 
         animacao.SetBool("DanoEspinhosBool", true);
