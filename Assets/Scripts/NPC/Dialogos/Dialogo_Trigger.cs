@@ -87,7 +87,7 @@ public class Dialogo_Trigger : MonoBehaviour
                 }
             }
 
-            if (GameManager.instance.cervinhoOnCheckpoint && this.gameObject.CompareTag("Cervo"))
+            if (GameManager.instance != null && GameManager.instance.cervinhoOnCheckpoint && this.gameObject.CompareTag("Cervo"))
             {
                 Invoke(nameof(DelayDialogoCervo), 0.7f);
                 GameManager.instance.cervinhoOnCheckpoint = false;

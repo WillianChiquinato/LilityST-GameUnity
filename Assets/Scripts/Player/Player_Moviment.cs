@@ -2,7 +2,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using UnityEngine.Rendering.Universal;
 using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
@@ -63,7 +62,6 @@ public class PlayerMoviment : MonoBehaviour
     public float accelerationTimer;
 
     public SpriteRenderer spriteRenderer;
-    public Material newMaterial;
     public Material originalMaterial;
 
     //Jump
@@ -297,11 +295,13 @@ public class PlayerMoviment : MonoBehaviour
     void Start()
     {
         lastHealth = DamageScript.Health;
-        GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);   
+        }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
-        newMaterial = Resources.Load<Material>("Material/Hit");
     }
 
     private void Update()
@@ -795,11 +795,9 @@ public class PlayerMoviment : MonoBehaviour
 
     IEnumerator OnHitPlayer()
     {
-        spriteRenderer.material = newMaterial;
-
+        originalMaterial.SetFloat("_HitIntensity", 0.7f);
         yield return new WaitForSeconds(0.1f);
-
-        spriteRenderer.material = originalMaterial;
+        originalMaterial.SetFloat("_HitIntensity", 0f);
     }
 
     IEnumerator FlashPulseDamage()

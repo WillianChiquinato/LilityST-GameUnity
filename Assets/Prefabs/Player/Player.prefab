@@ -931,6 +931,8 @@ MonoBehaviour:
   RunTiming: 0
   idleTimingRun: 0
   accelerationTimer: 0
+  spriteRenderer: {fileID: 0}
+  originalMaterial: {fileID: 0}
   jumpInput: 0
   IsJumping: 0
   jumpImpulso: 20
@@ -1078,7 +1080,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9a2008025b8d5294aa72556aa702c849, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

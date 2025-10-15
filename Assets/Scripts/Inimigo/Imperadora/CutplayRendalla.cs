@@ -122,13 +122,17 @@ public class CutplayRendalla : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         shakeCamera.ShakeCutplayRendalla();
 
-        Robert.GetComponent<SpriteRenderer>().material = shaderCutplay;
-        player.GetComponent<SpriteRenderer>().material = shaderCutplay;
+        Robert.GetComponent<SpriteRenderer>().material.SetFloat("_HitIntensity", 1f);
+        Robert.GetComponent<SpriteRenderer>().material.SetColor("_HitColor", Color.black);
+
+        //Cor preta no player e no Robert
+        player.GetComponent<SpriteRenderer>().material.SetFloat("_HitIntensity", 1f);
+        player.GetComponent<SpriteRenderer>().material.SetColor("_HitColor", Color.black);
         chao.GetComponent<TilemapRenderer>().material = shaderCutplay;
 
         yield return new WaitForSeconds(0.25f);
-        player.GetComponent<SpriteRenderer>().material = shaderNormal;
-        Robert.GetComponent<SpriteRenderer>().material = shaderNormal;
+        player.GetComponent<SpriteRenderer>().material.SetFloat("_HitIntensity", 0f);
+        Robert.GetComponent<SpriteRenderer>().material.SetFloat("_HitIntensity", 0f);
         chao.GetComponent<TilemapRenderer>().material = shaderNormal;
 
         yield return new WaitForSeconds(1.4f);
