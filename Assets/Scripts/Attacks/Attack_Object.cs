@@ -15,7 +15,7 @@ public class Attack_Object : MonoBehaviour
             Vector2 calculatedKnockback = new Vector2(direction.x * knockback.x, direction.y * knockback.y);
 
             // ataque ao alvo
-            bool goHit = damage.hit(attackDamage, calculatedKnockback);
+            bool goHit = damage.Hit(attackDamage, calculatedKnockback);
             if (goHit)
             {
                 Debug.Log("AtaqueInimigo");

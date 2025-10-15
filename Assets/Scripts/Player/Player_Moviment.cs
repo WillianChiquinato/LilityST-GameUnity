@@ -41,6 +41,8 @@ public class PlayerMoviment : MonoBehaviour
     //Variaveis
     [Header("Variaveis")]
     public Damage DamageScript;
+    private int lastHealth;
+    private bool isFlashingDamage = false;
     public TouchingVariables touching;
     public bool entrar;
     public bool grabAtivo = false;
@@ -59,6 +61,10 @@ public class PlayerMoviment : MonoBehaviour
     public float RunTiming;
     public float idleTimingRun;
     public float accelerationTimer;
+
+    public SpriteRenderer spriteRenderer;
+    public Material newMaterial;
+    public Material originalMaterial;
 
     //Jump
     [Header("Jump")]
@@ -288,8 +294,23 @@ public class PlayerMoviment : MonoBehaviour
         Debug.Log("Nome da cena atual: " + currentScene);
     }
 
+    void Start()
+    {
+        lastHealth = DamageScript.Health;
+        GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+        newMaterial = Resources.Load<Material>("Material/Hit");
+    }
+
     private void Update()
     {
+        if (!DamageScript.IsAlive)
+        {
+            return;
+        }
+
         SaveData.Instance.playTime += Time.deltaTime;
         animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
         animacao.SetBool("OpenTab", OpenCaderno);
@@ -448,6 +469,20 @@ public class PlayerMoviment : MonoBehaviour
                 maxSpeed = 7f;
                 IsRunning = false;
             }
+        }
+
+        if (!isFlashingDamage && DamageScript.Health != lastHealth)
+        {
+            if (DamageScript.Health <= 1 && DamageScript.IsAlive)
+            {
+                GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 1);
+            }
+            else
+            {
+                GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
+            }
+
+            lastHealth = DamageScript.Health;
         }
     }
 
@@ -711,6 +746,15 @@ public class PlayerMoviment : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         //KNOCKBACK.
+        if (DamageScript.Health != 1)
+        {
+            StartCoroutine(FlashPulseDamage());
+        }
+        else
+        {
+            StopCoroutine(FlashPulseDamage());
+        }
+
         GameManager.instance.FecharHUD();
         CancelInvoke(nameof(AbrirHUDelay));
         canOpenCaderno = true;
@@ -745,7 +789,37 @@ public class PlayerMoviment : MonoBehaviour
         {
             GetComponent<PlayerItemDrop>().GenerateDrop();
         }
+
+        StartCoroutine(OnHitPlayer());
     }
+
+    IEnumerator OnHitPlayer()
+    {
+        spriteRenderer.material = newMaterial;
+
+        yield return new WaitForSeconds(0.1f);
+
+        spriteRenderer.material = originalMaterial;
+    }
+
+    IEnumerator FlashPulseDamage()
+    {
+        isFlashingDamage = true;
+        GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 1);
+        yield return new WaitForSeconds(0.35f);
+        isFlashingDamage = false;
+
+        // Se o player ainda estiver com 1 de vida, mantemos o pulse ativo
+        if (DamageScript.Health <= 1 && DamageScript.IsAlive)
+        {
+            GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 1);
+        }
+        else
+        {
+            GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
+        }
+    }
+
 
     public void OnLook(InputAction.CallbackContext context)
     {

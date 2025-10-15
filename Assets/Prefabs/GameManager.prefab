@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62516d563c1fd6c49ade8df82d3c9c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FullScreenDamageMaterial: {fileID: 2100000, guid: e25287984c68a49459d30427a9dbb891, type: 2}
   player: {fileID: 0}
   XpPlayer: 0
   pauseUI: {fileID: 0}
@@ -278,5 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436c29cb54673a74d871da77187ef47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   waypointPrefab: {fileID: 1143982791982413727, guid: f401119597b7ecb4a892650f79b56d4a, type: 3}
   canvasParent: {fileID: 0}

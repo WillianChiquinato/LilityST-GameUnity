@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public static int currentSaveSlot { get; set; }
 
+    public Material FullScreenDamageMaterial;
+
     [Header("Quests")]
     public QuestEvents questEvents;
 
@@ -292,4 +294,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    private void OnApplicationQuit()
+    {
+        FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
+    }
+#endif
 }

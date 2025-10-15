@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack_Projetil : MonoBehaviour, Defender
@@ -8,6 +6,7 @@ public class Attack_Projetil : MonoBehaviour, Defender
     public Vector2 knockback = Vector2.zero;
     private Rigidbody2D rb;
 
+    public bool IsPlayerTarget = false;
     PlayerMoviment player;
     DroggoScript droggoScript;
 
@@ -20,8 +19,6 @@ public class Attack_Projetil : MonoBehaviour, Defender
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindAnyObjectByType<PlayerMoviment>();
         droggoScript = GameObject.FindAnyObjectByType<DroggoScript>();
-
-        // Destroy(this.gameObject, 3.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D Collision)
@@ -33,7 +30,7 @@ public class Attack_Projetil : MonoBehaviour, Defender
             Vector2 flipknockback = transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
             // ataque ao alvo
-            bool goHit = damage.hit(attackDamage, flipknockback);
+            bool goHit = damage.Hit(attackDamage, flipknockback);
             if (goHit)
             {
                 Debug.Log("AtaqueProject");
@@ -43,6 +40,11 @@ public class Attack_Projetil : MonoBehaviour, Defender
         if (Collision.CompareTag("Parry"))
         {
             Defender(transform.localScale);
+        }
+
+        if (IsPlayerTarget)
+        {
+            GameManager.instance.shakeCamera.ShakeAttackPlayer();
         }
     }
 

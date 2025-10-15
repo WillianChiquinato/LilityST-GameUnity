@@ -100,7 +100,7 @@ public class Damage : MonoBehaviour
         }
     }
 
-    public bool hit(int damage, Vector2 knockback)
+    public bool Hit(int damage, Vector2 knockback)
     {
         //Se tomar dano hit é true, senao é false
         if (IsAlive && !isInvicible)

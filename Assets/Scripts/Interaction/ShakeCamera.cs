@@ -20,4 +20,9 @@ public class ShakeCamera : MonoBehaviour
     {
         impulseSources[1].GenerateImpulse();
     }
+
+    public void ShakeAttackPlayer()
+    {
+        impulseSources[2].GenerateImpulse();
+    }
 }

@@ -22,6 +22,13 @@ public class PlayerAttack : MonoBehaviour
     public bool collided;
     private bool downwardStrike;
 
+    public enum AttackType
+    {
+        Normal,
+        Poderoso,
+        Especial
+    }
+
     private void Start()
     {
         PlayerCaracter = GetComponentInParent<PlayerMoviment>();
@@ -55,6 +62,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 defaultForce += slime.scaleFactor;
             }
+
+            GameManager.instance.shakeCamera.ShakeAttackPlayer();
         }
     }
 
@@ -104,7 +113,7 @@ public class PlayerAttack : MonoBehaviour
     private void ApplyDamage(Damage damage)
     {
         Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
-        bool goHit = damage.hit(attackDamage, flipknockback);
+        bool goHit = damage.Hit(attackDamage, flipknockback);
         if (goHit)
         {
             Debug.Log("AtaqueInimigo");

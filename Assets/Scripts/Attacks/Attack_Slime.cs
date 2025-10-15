@@ -16,7 +16,7 @@ public class Attack_Slime : MonoBehaviour
                 Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
                 // ataque ao alvo
-                bool goHit = damage.hit(attackDamage, flipknockback);
+                bool goHit = damage.Hit(attackDamage, flipknockback);
                 if (goHit)
                 {
                     Debug.Log("AtaqueInimigo");

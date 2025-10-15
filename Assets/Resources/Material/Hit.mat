@@ -32,9 +32,9 @@ Material:
     - _FacingDirection: -1
     - _GlowIntensity: 0.377
     - _HitAlpha: 0.481
-    - _HitIntensity: 0.513
+    - _HitIntensity: 0.7
     - _OutlineWidth: 0.845
     m_Colors:
-    - _HitColor: {r: 0.4627451, g: 0.73333335, b: 0.98039216, a: 0.79607844}
+    - _HitColor: {r: 0.6924528, g: 0.8532162, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
