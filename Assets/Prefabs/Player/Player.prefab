@@ -560,6 +560,9 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
   hitEffectPosition: {fileID: 7028882487633066197}
   hitEffect: {fileID: 0}
+  attackReverseKnockback: 0
+  playerKnockForce: 5
+  playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
   movementTime: 0.1
@@ -872,6 +875,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7699074033498136778}
+  - {fileID: 496069011172445009}
   - {fileID: 5090842335743253934}
   - {fileID: 8198422881181552499}
   - {fileID: 9105351801862964194}
@@ -912,7 +916,7 @@ MonoBehaviour:
   numeroDeAttcks: 3
   Reset: 0
   ResetTimer: 0
-  ResetTimerLimite: 0.6
+  ResetTimerLimite: 0.7
   potion_Script: {fileID: 0}
   healing: 0
   healingTimer: 2
@@ -1724,12 +1728,46 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
   hitEffectPosition: {fileID: 175242638686716585}
   hitEffect: {fileID: 0}
+  attackReverseKnockback: 1
+  playerKnockForce: 2
+  playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
   movementTime: 0.1
-  knockback: {x: 4, y: 2}
+  knockback: {x: 2, y: 1}
   attackDamage: 1
   collided: 0
+--- !u!1 &3352491929287953468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1067279997519777400}
+  m_Layer: 9
+  m_Name: HitEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1067279997519777400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352491929287953468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.67, y: 0.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 496069011172445009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3444493995548045299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +1984,9 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
   hitEffectPosition: {fileID: 498604538243474262}
   hitEffect: {fileID: 0}
+  attackReverseKnockback: 0
+  playerKnockForce: 5
+  playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
   movementTime: 0.1
@@ -1964,7 +2005,7 @@ GameObject:
   - component: {fileID: 861390481258211603}
   - component: {fileID: 5218081472675124013}
   m_Layer: 9
-  m_Name: Attack2
+  m_Name: Attack3
   m_TagString: Parry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2054,11 +2095,14 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
   hitEffectPosition: {fileID: 5803261644193200837}
   hitEffect: {fileID: 0}
+  attackReverseKnockback: 0
+  playerKnockForce: 10
+  playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
   movementTime: 0.1
-  knockback: {x: 7, y: 3}
-  attackDamage: 1
+  knockback: {x: 8, y: 3.5}
+  attackDamage: 2
   collided: 0
 --- !u!1 &4646848358048255676
 GameObject:
@@ -2251,6 +2295,9 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
   hitEffectPosition: {fileID: 2779301435070994219}
   hitEffect: {fileID: 0}
+  attackReverseKnockback: 0
+  playerKnockForce: 5
+  playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
   movementTime: 0.1
@@ -2690,6 +2737,121 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5324127117207884342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7237064503530018588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496069011172445009}
+  - component: {fileID: 3913408469238734758}
+  - component: {fileID: 5813153462711806145}
+  m_Layer: 9
+  m_Name: Attack2
+  m_TagString: Parry
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496069011172445009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237064503530018588}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.010000229, y: -1.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1067279997519777400}
+  m_Father: {fileID: 1915257998463922209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &3913408469238734758
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237064503530018588}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.0563507, y: 1.499054}
+      - {x: 0.09329313, y: 1.6354043}
+      - {x: 1.7034302, y: 1.2886257}
+      - {x: 2.1407013, y: 0.5893917}
+      - {x: 1.4108582, y: 0.0025196075}
+      - {x: 0.23051453, y: -0.14122391}
+      - {x: 1.4377275, y: -0.2088641}
+      - {x: 2.6529846, y: 0.105112076}
+      - {x: 2.8451705, y: 0.54132295}
+      - {x: 2.6526556, y: 1.060606}
+  m_UseDelaunayMesh: 0
+--- !u!114 &5813153462711806145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237064503530018588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc98f0b1f22f11c42bd2e2fa9db0cab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffectPrefab: {fileID: 1271514824466661305, guid: bb5a3b3cf6442dc4c9c19af5de145d2c, type: 3}
+  hitEffectPosition: {fileID: 3352491929287953468}
+  hitEffect: {fileID: 0}
+  attackReverseKnockback: 1
+  playerKnockForce: 5
+  playerKnockDuration: 0.1
+  defaultForce: 15
+  upwardsForce: 15
+  movementTime: 0.1
+  knockback: {x: 3, y: 2}
+  attackDamage: 1
+  collided: 0
 --- !u!1 &7571511527515304135
 GameObject:
   m_ObjectHideFlags: 0

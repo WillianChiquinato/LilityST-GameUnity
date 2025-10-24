@@ -297,7 +297,7 @@ public class PlayerMoviment : MonoBehaviour
         lastHealth = DamageScript.Health;
         if (GameManager.instance != null)
         {
-            GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);   
+            GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -706,17 +706,37 @@ public class PlayerMoviment : MonoBehaviour
                     if (Input.GetKey(KeyCode.S))
                     {
                         animacao.SetTrigger("UpwardTrigger");
-                        Debug.LogWarning("ENTRANDO NO ATTACK DE CIMA");
                     }
                     if (Input.GetKey(KeyCode.W) && !touching.IsGrouded)
                     {
                         animacao.SetTrigger("DownwardTrigger");
-                        Debug.LogWarning("ENTRANDO NO ATTACK DE BAIXO");
                     }
                 }
                 animacao.SetTrigger(animationstrings.attack);
             }
         }
+    }
+
+    public void AttackStep(float force = 2f)
+    {
+        if (!touching.IsGrouded) return;
+        DamageScript.VelocityLock = true;
+
+        float direction = Mathf.Sign(transform.localScale.x);
+        Vector2 attackDir = new Vector2(direction, 0f).normalized;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(attackDir * force, ForceMode2D.Impulse);
+
+        StartCoroutine(StopAfterDelay(0.1f));
+        Debug.Log("AttackStep executado com força: " + force + ", direção: " + direction);
+    }
+
+    private IEnumerator StopAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        DamageScript.VelocityLock = false;
     }
 
     public void OnPowers(InputAction.CallbackContext context)

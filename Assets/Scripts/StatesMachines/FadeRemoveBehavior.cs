@@ -9,6 +9,7 @@ public class FadeRemoveBehavior : StateMachineBehaviour
     private float timerElapsed = 0f;
     private float DelayElapsed = 0f;
 
+    LayerMask layerObj;
     SpriteRenderer spriteRenderer;
     GameObject removeObj;
     Color startCor;
@@ -20,6 +21,8 @@ public class FadeRemoveBehavior : StateMachineBehaviour
         spriteRenderer = animator.GetComponent<SpriteRenderer>();
         startCor = spriteRenderer.color;
         removeObj = animator.gameObject;
+
+        animator.gameObject.layer = LayerMask.NameToLayer("DeathHelper");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -1,6 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack references")]
@@ -9,6 +9,12 @@ public class PlayerAttack : MonoBehaviour
     public GameObject hitEffectPrefab;
     public GameObject hitEffectPosition;
     public GameObject hitEffect;
+
+    [Header("Player Knockback")]
+    public bool attackReverseKnockback;
+    public float playerKnockForce = 5f;
+    public float playerKnockDuration = 0.1f;
+    private bool isKnocked;
 
 
     [Header("Attack Variables")]
@@ -42,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Inimigos"))
+        if (collision.gameObject.CompareTag("Inimigos") || collision.gameObject.CompareTag("Quebraveis"))
         {
             Damage damage = collision.gameObject.GetComponent<Damage>();
             Debug.Log("Pegou " + damage);
@@ -50,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
             PlayerPoco attack = collision.GetComponent<PlayerPoco>();
 
             ApplyDamage(damage);
+            ApplyPlayerKnockback();
 
             if (attack != null)
             {
@@ -124,5 +131,30 @@ public class PlayerAttack : MonoBehaviour
             hitEffect = Instantiate(hitEffectPrefab, hitEffectPosition.transform.position, Quaternion.identity);
             Destroy(hitEffect, 0.3f);
         }
+    }
+
+    private void ApplyPlayerKnockback()
+    {
+        if (isKnocked) return;
+        if (!attackReverseKnockback) return;
+
+        isKnocked = true;
+        PlayerCaracter.DamageScript.VelocityLock = true;
+
+        // Direção inversa à do personagem
+        float direction = Mathf.Sign(transform.parent.localScale.x);
+        Vector2 knockDir = new Vector2(-direction, 0.2f).normalized;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(knockDir * playerKnockForce, ForceMode2D.Impulse);
+
+        StartCoroutine(ResetPlayerKnock());
+    }
+
+    private IEnumerator ResetPlayerKnock()
+    {
+        yield return new WaitForSeconds(playerKnockDuration);
+        isKnocked = false;
+        PlayerCaracter.DamageScript.VelocityLock = false;
     }
 }

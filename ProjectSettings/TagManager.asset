@@ -29,6 +29,7 @@ TagManager:
   - RicochetePlayer
   - Espinhos
   - Vidro
+  - Quebraveis
   layers:
   - Default
   - TransparentFX
@@ -61,7 +62,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - DeathHelper
   m_SortingLayers:
   - name: FundoCor
     uniqueID: 1917697117
