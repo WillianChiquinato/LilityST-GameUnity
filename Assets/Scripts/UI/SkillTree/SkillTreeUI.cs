@@ -6,7 +6,7 @@ using System;
 
 public class SkillTreeUI : MonoBehaviour
 {
-    public skillTreeCheck skillTreeCheck;
+    public ItemDescriptionCheck skillTreeCheck;
 
     public bool unLocked;
     public bool alternativoAtivado = false;
@@ -24,7 +24,7 @@ public class SkillTreeUI : MonoBehaviour
 
     void Start()
     {
-        skillTreeCheck = GameObject.FindFirstObjectByType<skillTreeCheck>();
+        skillTreeCheck = GameObject.FindFirstObjectByType<ItemDescriptionCheck>();
         skillImage = GetComponent<Image>();
         skillImage.color = lockedSkillColor;
 

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class FragmentoSystem : MonoBehaviour
 {
-    public GameObject backContentLivro;
     public List<DeckPorArmaSaveData> DecksPorArma = new();
     public static FragmentoSystem instance;
 
@@ -63,8 +62,6 @@ public class FragmentoSystem : MonoBehaviour
 
     void Start()
     {
-        backContentLivro.SetActive(false);
-
         ChaveTempo = new List<FragmentoItem>();
         ChaveTempoDicionary = new Dictionary<FragmentoData, FragmentoItem>();
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -18,10 +19,24 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public int slotIndex;
 
+    [Header("Animações")]
+    private Vector3 originalScale;
+    private Vector3 targetScale;
+    private Vector3 hoverScale = new Vector3(1.05f, 1.05f, 1.05f);
+    private Vector3 selectedScale = new Vector3(1.15f, 1.15f, 1.15f);
+    private Vector3 originalPosition;
+    private Vector3 hoverOffset = new Vector3(0, 10f, 0);
+    private Coroutine animRoutine;
+
+    public System.Action<int> OnSlotClicked;
+
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
+        originalScale = transform.localScale;
+        originalPosition = transform.localPosition;
     }
 
     public void UpdateInventory(Inventory_item _newItem)
@@ -46,32 +61,84 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         itemTexto.text = "";
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("Isso é um item");
-    }
-
-    //Passar o mouse exibe a descrição do item
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (item != null && item.itemData != null)
-        {
-            ShowToolTip();
-        }
-        else
-        {
-            Debug.Log("Item não encontrado");
-        }
+        // if (item == null) return;
+        // StartAnimation(originalPosition + hoverOffset, hoverScale);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ToolTipItems.Instance.HideToolTip();
+        // StartAnimation(originalPosition, originalScale);
     }
 
-    public void ShowToolTip()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        ToolTipItems.Instance.ShowToolTip(item.itemData, item.stackSize);
+        // if (item == null) return;
+        // if (animRoutine != null) StopCoroutine(animRoutine);
+        // animRoutine = StartCoroutine(PulseEffect());
+
+        OnSlotClicked?.Invoke(slotIndex);
+    }
+
+    private void StartAnimation(Vector3 targetPos, Vector3 targetScale)
+    {
+        if (animRoutine != null) StopCoroutine(animRoutine);
+        animRoutine = StartCoroutine(AnimateTransform(targetPos, targetScale));
+    }
+
+    private IEnumerator AnimateTransform(Vector3 targetPos, Vector3 targetScale)
+    {
+        float duration = 0.15f;
+        float time = 0f;
+
+        Vector3 startPos = transform.localPosition;
+        Vector3 startScale = transform.localScale;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime; // usa tempo independente do Time.timeScale
+            float t = time / duration;
+
+            transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+            yield return null;
+        }
+
+        transform.localPosition = targetPos;
+        transform.localScale = targetScale;
+    }
+
+    private IEnumerator PulseEffect()
+    {
+        Vector3 startScale = transform.localScale;
+        Vector3 peakScale = selectedScale;
+
+        float duration = 0.15f;
+        float time = 0f;
+
+        // Expande
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            float t = time / duration;
+            transform.localScale = Vector3.Lerp(startScale, peakScale, t);
+            yield return null;
+        }
+
+        time = 0f;
+        Vector3 endScale = hoverScale;
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            float t = time / duration;
+            transform.localScale = Vector3.Lerp(peakScale, endScale, t);
+            yield return null;
+        }
+
+        transform.localScale = endScale;
+        animRoutine = null;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -81,7 +148,6 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
 
-        ToolTipItems.Instance.HideToolTip();
         ItemDragGhost.Instance.Show(item.itemData.Icon, eventData.position);
     }
 
@@ -90,7 +156,6 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if (item == null) return;
 
         ItemDragGhost.Instance.Move(eventData.position);
-        ToolTipItems.Instance.HideToolTip();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -109,8 +174,6 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         {
             SwapCollectItems(draggedSlot.slotIndex, this.slotIndex);
         }
-
-        ToolTipItems.Instance.HideToolTip();
     }
 
     private bool IsCollectSlot()

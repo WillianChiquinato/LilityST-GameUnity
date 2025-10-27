@@ -5,23 +5,121 @@ using UnityEngine.UI;
 public class Livro : MonoBehaviour
 {
     public RectTransform[] pages;
+    public Vector3[] pagesInitialRotation;
+    public Button[] pageButtons;
     public float flipSpeed = 2f;
+    public float scaleSpeed = 6f;
 
     private int currentPage = 0;
     public bool rotate = false;
+    private Coroutine scaleRoutine;
 
     void Awake()
     {
         InitialState();
+
+        for (int i = 0; i < pageButtons.Length; i++)
+        {
+            int index = i;
+            pageButtons[i].onClick.AddListener(() => OnPageButtonClick(index));
+        }
     }
 
     public void InitialState()
     {
-        for (int i = 0; i < pages.Length; i++)
+        currentPage = 1;
+        pages[0].SetAsLastSibling();
+        pages[0].localEulerAngles = pagesInitialRotation[0];
+
+        // Botões
+        for (int i = 0; i < pageButtons.Length; i++)
+        {
+            pageButtons[i].transform.localScale = Vector3.one;
+
+            MouseEnterCaderno mouseEnterCaderno = pageButtons[i].GetComponent<MouseEnterCaderno>();
+            if (mouseEnterCaderno != null)
+            {
+                mouseEnterCaderno.isSelected = (i == 0);
+                if (i == 0)
+                {
+                    pageButtons[i].transform.localScale = mouseEnterCaderno.targetScale;
+                    pageButtons[i].transform.localPosition = pageButtons[i].transform.localPosition + mouseEnterCaderno.hoverOffset;
+                }
+            }
+        }
+
+        // Páginas restantes
+        for (int i = 1; i < pages.Length; i++)
         {
             pages[i].transform.rotation = Quaternion.identity;
+            if (i < pagesInitialRotation.Length)
+            {
+                pages[i].localEulerAngles = pagesInitialRotation[i];
+            }
         }
+
         pages[0].SetAsLastSibling();
+    }
+
+    private void OnPageButtonClick(int buttonIndex)
+    {
+        if (rotate) return;
+
+        int targetPage = buttonIndex + 1;
+        if (targetPage == currentPage) return;
+
+        FlipToPage(targetPage);
+        AnimateButtonScale(buttonIndex);
+
+        for (int i = 0; i < pageButtons.Length; i++)
+        {
+            MouseEnterCaderno mouseEnterCaderno = pageButtons[i].GetComponent<MouseEnterCaderno>();
+            if (mouseEnterCaderno != null)
+            {
+                mouseEnterCaderno.isSelected = (i == buttonIndex);
+            }
+        }
+    }
+
+    private void AnimateButtonScale(int selectedIndex)
+    {
+        // Para qualquer animação anterior
+        if (scaleRoutine != null)
+            StopCoroutine(scaleRoutine);
+
+        scaleRoutine = StartCoroutine(ScaleButtonsRoutine(selectedIndex));
+    }
+
+    private IEnumerator ScaleButtonsRoutine(int selectedIndex)
+    {
+        float duration = 0.3f;
+
+        for (int i = 0; i < pageButtons.Length; i++)
+        {
+            Transform btn = pageButtons[i].transform;
+            MouseEnterCaderno mouseEnterCaderno = btn.GetComponent<MouseEnterCaderno>();
+            Vector3 targetScale = (i == selectedIndex) ? mouseEnterCaderno.targetScale : Vector3.one;
+
+            // Suave
+            StartCoroutine(SmoothScale(btn, targetScale, duration));
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator SmoothScale(Transform target, Vector3 targetScale, float duration)
+    {
+        Vector3 startScale = target.localScale;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime * scaleSpeed;
+            target.localScale = Vector3.Lerp(startScale, targetScale, time / duration);
+            yield return null;
+        }
+
+        target.localScale = targetScale;
     }
 
     public void FlipToPage(int targetPage)
@@ -69,8 +167,8 @@ public class Livro : MonoBehaviour
     private IEnumerator FlipPage(RectTransform page, float startAngle, float endAngle)
     {
         rotate = true;
-
         pages[currentPage].SetAsLastSibling();
+
         float time = 0f;
         while (time < 1f)
         {

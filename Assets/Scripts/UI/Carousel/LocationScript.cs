@@ -36,14 +36,6 @@ public class LocationScript : CarouselController<LocationData>
                 uI.FlipToPage(2);
                 Debug.Log("Item 2 clicado");
                 break;
-            case 3:
-                uI.FlipToPage(3);
-                Debug.Log("Item 3 clicado");
-                break;
-            case 4:
-                uI.FlipToPage(4);
-                Debug.Log("Item 4 clicado");
-                break;
             default:
                 Debug.Log("Item desconhecido clicado");
                 break;

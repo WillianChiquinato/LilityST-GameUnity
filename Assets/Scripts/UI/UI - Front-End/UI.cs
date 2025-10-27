@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [DefaultExecutionOrder(100)]
@@ -23,8 +20,6 @@ public class UI : MonoBehaviour
                 Materias[0].SetAsLastSibling();
                 Materias[1].gameObject.SetActive(false);
                 Materias[2].gameObject.SetActive(false);
-                Materias[3].gameObject.SetActive(false);
-                Materias[4].gameObject.SetActive(false);
 
                 Materias[0].gameObject.SetActive(true);
                 break;
@@ -32,8 +27,6 @@ public class UI : MonoBehaviour
                 Materias[1].SetAsLastSibling();
                 Materias[0].gameObject.SetActive(false);
                 Materias[2].gameObject.SetActive(false);
-                Materias[3].gameObject.SetActive(false);
-                Materias[4].gameObject.SetActive(false);
 
                 Materias[1].gameObject.SetActive(true);
                 break;
@@ -41,28 +34,8 @@ public class UI : MonoBehaviour
                 Materias[2].SetAsLastSibling();
                 Materias[0].gameObject.SetActive(false);
                 Materias[1].gameObject.SetActive(false);
-                Materias[3].gameObject.SetActive(false);
-                Materias[4].gameObject.SetActive(false);
 
                 Materias[2].gameObject.SetActive(true);
-                break;
-            case 3:
-                Materias[3].SetAsLastSibling();
-                Materias[0].gameObject.SetActive(false);
-                Materias[1].gameObject.SetActive(false);
-                Materias[2].gameObject.SetActive(false);
-                Materias[4].gameObject.SetActive(false);
-
-                Materias[3].gameObject.SetActive(true);
-                break;
-            case 4:
-                Materias[4].SetAsLastSibling();
-                Materias[0].gameObject.SetActive(false);
-                Materias[1].gameObject.SetActive(false);
-                Materias[2].gameObject.SetActive(false);
-                Materias[3].gameObject.SetActive(false);
-
-                Materias[4].gameObject.SetActive(true);
                 break;
             default:
                 Debug.Log("Nenhum dos itens");

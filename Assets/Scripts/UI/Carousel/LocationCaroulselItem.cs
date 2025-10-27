@@ -18,17 +18,21 @@ public class LocationCaroulselItem : CarouselItem<LocationData>
     {
         base.OnActivated();
 
-        this.CreateSequence()
-            .Join(_image.DOFade(1, 25f).SetEase(Ease.Linear).SetUpdate(true))
-            .Join(_rectTransform.DOScale(.75f, .1f).SetEase(Ease.Linear).SetUpdate(true));
+        _image.DOKill();
+        _rectTransform.DOKill();
+
+        _image.DOFade(1f, 0.25f).SetEase(Ease.Linear).SetUpdate(true);
+        _rectTransform.DOScale(0.75f, 0.1f).SetEase(Ease.Linear).SetUpdate(true);
     }
 
     protected override void OnDeactivated()
     {
         base.OnDeactivated();
 
-        this.CreateSequence()
-            .Join(_image.DOFade(.25f, 25f).SetEase(Ease.Linear).SetUpdate(true))
-            .Join(_rectTransform.DOScale(.50f, .25f).SetEase(Ease.Linear).SetUpdate(true));
+        _image.DOKill();
+        _rectTransform.DOKill();
+
+        _image.DOFade(0.25f, 0.25f).SetEase(Ease.Linear).SetUpdate(true);
+        _rectTransform.DOScale(0.5f, 0.25f).SetEase(Ease.Linear).SetUpdate(true);
     }
 }
