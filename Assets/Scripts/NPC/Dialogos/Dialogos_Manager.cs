@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Dialogos_Manager : MonoBehaviour
 {
     public static Dialogos_Manager dialogos_Manager;
+
     public DialogoTexto linhaAtual;
     private bool personagemAnteriorIsLility = false;
 

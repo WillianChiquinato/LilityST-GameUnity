@@ -141,7 +141,7 @@ public class QuestManager : MonoBehaviour
 
         foreach (Quests quest in questsDictionary.Values)
         {
-            if (quest.state == QuestsState.EM_ANDAMENTO)
+            if (quest.state == QuestsState.EM_ANDAMENTO || quest.state == QuestsState.PODE_FINALIZAR)
             {
                 quest.InstantiateCurrentStep(this.transform);
             }
@@ -150,7 +150,7 @@ public class QuestManager : MonoBehaviour
 
         foreach (Quests quest in questsDictionary.Values)
         {
-            if (quest.state == QuestsState.EM_ANDAMENTO)
+            if (quest.state == QuestsState.EM_ANDAMENTO || quest.state == QuestsState.PODE_FINALIZAR)
             {
                 // Verifica se a quest já está na UI (evita duplicar caso esteja)
                 bool jaExisteNaUI = questGrupos.Any(g => g.GetComponentInChildren<TextMeshProUGUI>()?.text == quest.info.NomeQuest);
@@ -494,7 +494,7 @@ public class QuestManager : MonoBehaviour
                 quest.LoadStep(stepIndex, stepState);
 
                 // Se a quest estiver em andamento, instancia o step na cena
-                if (quest.state == QuestsState.EM_ANDAMENTO && quest.CurrentStepExists())
+                if (quest.state == QuestsState.EM_ANDAMENTO || quest.state == QuestsState.PODE_FINALIZAR && quest.CurrentStepExists())
                 {
                     quest.InstantiateCurrentStep(this.transform);
                 }

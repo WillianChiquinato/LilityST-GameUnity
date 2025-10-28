@@ -1,5 +1,5 @@
 {
-    "playTime": 1161.40185546875,
+    "playTime": 1345.3060302734375,
     "XPlayer": 200,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -53,8 +53,19 @@
         "isInitialized": true
     },
     "fragmentoData": {
-        "ChaveTempo": [],
+        "ChaveTempo": [
+            {
+                "fragmentoNome": "ChaveTempo2",
+                "fragmentoType": 0,
+                "stackSize": 1
+            }
+        ],
         "ChaveMovimento": [
+            {
+                "fragmentoNome": "ChaveMovimento",
+                "fragmentoType": 1,
+                "stackSize": 1
+            },
             {
                 "fragmentoNome": "ChaveMovimento",
                 "fragmentoType": 1,
@@ -78,18 +89,7 @@
         "DecksPorArma": [
             {
                 "armaNome": "Bastão",
-                "fragmentos": [
-                    {
-                        "fragmentoNome": "ChaveTempo2",
-                        "fragmentoType": 0,
-                        "stackSize": 1
-                    },
-                    {
-                        "fragmentoNome": "ChaveMovimento",
-                        "fragmentoType": 1,
-                        "stackSize": 1
-                    }
-                ]
+                "fragmentos": []
             },
             {
                 "armaNome": "Arco",
@@ -113,7 +113,7 @@
             }
         ],
         "armaSelecionada": "Bastão",
-        "isInitialized": false
+        "isInitialized": true
     },
     "questData": {
         "questIDs": [
@@ -132,9 +132,28 @@
             ""
         ],
         "questStates": [
-            "FINALIZADO",
-            "PODE_INICIAR",
-            "PODE_INICIAR"
+            "EM_ANDAMENTO",
+            "EM_ANDAMENTO",
+            "EM_ANDAMENTO"
+        ]
+    },
+    "infoData": {
+        "infoIDs": [
+            "InfoCreate",
+            "InfoTes1",
+            "InfoTes2"
+        ],
+        "infoNome": [
+            "LaEle ProMax",
+            "Tes1"
+        ],
+        "infoCategorias": [
+            1,
+            1
+        ],
+        "infoDescricoes": [
+            "Essa caça é sua, eu sigo você",
+            "accej fnqwem  wemklkwemk lklf wek nekwlkl ekmlml"
         ]
     }
 }

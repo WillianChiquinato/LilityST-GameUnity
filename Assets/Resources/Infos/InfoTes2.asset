@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1636962338d31584789b3f3e88eafd43, type: 3}
+  m_Name: InfoTes2
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: InfoTes2
+  categoriasInfo: 1
+  InfoName: Tes2
+  Icon: {fileID: -562070096, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
+  Ilustration: {fileID: 145569456, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
+  Description: 'afad a a  ds s ss s s '
+  obtida: 1

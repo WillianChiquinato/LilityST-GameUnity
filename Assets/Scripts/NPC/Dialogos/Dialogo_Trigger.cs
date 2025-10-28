@@ -27,7 +27,6 @@ public class Dialogos
 public class Dialogo_Trigger : MonoBehaviour
 {
     public Dialogos dialogos;
-    public PlayerMoviment playerMoviment;
     public Input_Conversa input_Conversa;
     public Animator animator;
 
@@ -42,9 +41,8 @@ public class Dialogo_Trigger : MonoBehaviour
     public delegate void DialogoFinalizado();
     public event DialogoFinalizado OnDialogoFinalizado;
 
-    private void Start()
+    void Awake()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
     }
 
@@ -65,6 +63,11 @@ public class Dialogo_Trigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            if (GetComponent<InfoPoint>() != null && !GetComponent<InfoPoint>().isDialoguePoint)
+            {
+                return;
+            }
+            
             if (dialogosAnim != null)
             {
                 dialogosAnim.SetActive(true);
@@ -85,15 +88,18 @@ public class Dialogo_Trigger : MonoBehaviour
                 }
             }
 
-            if (GameManager.instance != null && GameManager.instance.cervinhoOnCheckpoint && this.gameObject.CompareTag("Cervo"))
+            if (GameManager.instance != null)
             {
-                Invoke(nameof(DelayDialogoCervo), 0.7f);
-                GameManager.instance.cervinhoOnCheckpoint = false;
-            }
+                if (GameManager.instance.cervinhoOnCheckpoint && this.gameObject.CompareTag("Cervo"))
+                {
+                    Invoke(nameof(DelayDialogoCervo), 0.7f);
+                    GameManager.instance.cervinhoOnCheckpoint = false;
+                }
 
-            if (playerMoviment.entrar && !this.gameObject.CompareTag("Cervo"))
-            {
-                TriggerDialogo();
+                if (GameManager.instance.playerMoviment.entrar && !this.gameObject.CompareTag("Cervo"))
+                {
+                    TriggerDialogo();
+                }
             }
         }
 
