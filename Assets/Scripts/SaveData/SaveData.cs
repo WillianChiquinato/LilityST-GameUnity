@@ -35,6 +35,9 @@ public class SaveData
 
     // --- Quests ---
     public QuestManager.QuestSaveData questData = new QuestManager.QuestSaveData();
+
+    // --- Infos ---
+    public InfoManager.InfoSaveData infoData = new InfoManager.InfoSaveData();
 }
 
 public enum PowerUps

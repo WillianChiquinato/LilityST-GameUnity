@@ -13,9 +13,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager instance;
 
     [Header("Configs Load")]
-    [SerializeField] private bool loadQuests = false;
     private int currentPlayerQuest;
-    private string questSavePath => Path.Combine(Application.dataPath, "Scripts", "SaveData", "Quests");
 
 
     [Header("Quests instances")]
@@ -437,7 +435,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // Estrutura para serializar o progresso das quests
-    [System.Serializable]
+    [Serializable]
     public class QuestSaveData
     {
         public List<string> questIDs = new List<string>();

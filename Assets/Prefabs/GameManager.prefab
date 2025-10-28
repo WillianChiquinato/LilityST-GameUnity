@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3646b44a2970b4e97313244be84f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadQuests: 1
   questPoints: []
   QuestsInstancias: []
   questGrupos: []
@@ -55,6 +54,61 @@ MonoBehaviour:
   IlustracaoImage: {fileID: 0}
   descriptionText: {fileID: 0}
   botao: {fileID: 0}
+--- !u!1 &1959515774974411777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8002965214629242646}
+  - component: {fileID: 1740500491743629104}
+  m_Layer: 0
+  m_Name: InfoManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8002965214629242646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959515774974411777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 278185134336541994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1740500491743629104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959515774974411777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d5a752b0b4e3a4c9b9fe090c1616bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infosObtidas: []
+  infoPoints: []
+  infoInstancias: []
+  infoGrupos: []
+  instanciaInfoPrefab: {fileID: 5507420936107461018, guid: de9953ed42576644ca9edd8d0fcfe9b5, type: 3}
+  GrupoInfo: {fileID: 0}
+  InfoContainer: {fileID: 0}
+  titleText: {fileID: 0}
+  IlustracaoImage: {fileID: 0}
+  descriptionText: {fileID: 0}
+  BotaoInfo: {fileID: 0}
 --- !u!1 &2139249922306081799
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +270,7 @@ Transform:
   m_Children:
   - {fileID: 3182009106159546875}
   - {fileID: 2359762986446835566}
+  - {fileID: 8002965214629242646}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6547576418419454379

@@ -79,6 +79,7 @@ public class Checkpoints : MonoBehaviour
                     inventory_System.instance.SaveInventory();
                     QuestManager.instance.SaveAllQuests();
                     FragmentoSystem.instance.SaveFragment();
+                    InfoManager.instance.SaveAllInfos();
 
                     SaveManager.Save(SaveData.Instance, GameManager.currentSaveSlot);
                 }
