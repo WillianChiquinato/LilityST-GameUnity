@@ -55,7 +55,6 @@ public class vidroScript : MonoBehaviour
 
     IEnumerator VidroTimer()
     {
-        Debug.Log("Inimigo SPAWN");
         animator.SetBool("Vidro", true);
 
         yield return new WaitForSeconds(1.3f);

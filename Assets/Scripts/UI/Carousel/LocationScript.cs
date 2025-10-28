@@ -26,15 +26,12 @@ public class LocationScript : CarouselController<LocationData>
         {
             case 0:
                 uI.FlipToPage(0);
-                Debug.Log("Item 0 clicado");
                 break;
             case 1:
                 uI.FlipToPage(1);
-                Debug.Log("Item 1 clicado");
                 break;
             case 2:
                 uI.FlipToPage(2);
-                Debug.Log("Item 2 clicado");
                 break;
             default:
                 Debug.Log("Item desconhecido clicado");

@@ -229,7 +229,6 @@ public class Dialogos_Manager2 : MonoBehaviour
         playerMoviment.IsMoving = false;
 
         Destroy(playerMoviment.gameObject);
-        Debug.Log("Finalizando dialogo");
 
         yield return new WaitForSeconds(1.5f);
         levelTransicao.Transicao("Altior-Fuga");

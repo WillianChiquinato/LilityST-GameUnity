@@ -370,7 +370,6 @@ public class PlayerMoviment : MonoBehaviour
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / duration;
             Time.timeScale = Mathf.Lerp(1f, targetTimeScale, t);
-            // Debug.Log("Current TimeScale: " + Time.timeScale);
         }
 
         if (Reset)
@@ -390,7 +389,6 @@ public class PlayerMoviment : MonoBehaviour
                     Reset = false;
                     ResetTimer = 0;
                     ataqueCounterAtual = 0;
-                    Debug.Log("Combo Resetado por tempo");
                 }
             }
         }
@@ -455,7 +453,6 @@ public class PlayerMoviment : MonoBehaviour
                 speed = 7f;
                 airSpeed = 7f;
                 maxSpeed = 7f;
-                Debug.Log("Está em movimento");
             }
         }
         else
@@ -686,7 +683,6 @@ public class PlayerMoviment : MonoBehaviour
             IsJumping = false;
             isWallJumping = true;
             animacao.SetTrigger(animationstrings.jump);
-            Debug.Log("WallJump executado com direção: " + jumpDirection);
         }
     }
 
@@ -729,7 +725,6 @@ public class PlayerMoviment : MonoBehaviour
         rb.AddForce(attackDir * force, ForceMode2D.Impulse);
 
         StartCoroutine(StopAfterDelay(0.1f));
-        Debug.Log("AttackStep executado com força: " + force + ", direção: " + direction);
     }
 
     private IEnumerator StopAfterDelay(float delay)
@@ -879,7 +874,6 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (!DamageScript.IsAlive)
         {
-            Debug.LogWarning("Impossível concluir operação OpenTab");
             return;
         }
 
@@ -892,7 +886,6 @@ public class PlayerMoviment : MonoBehaviour
 
                 if (OpenCaderno && canOpenCaderno)
                 {
-                    Debug.Log("Abrindo inventário!!!");
                     Invoke(nameof(AbrirHUDelay), 1.7f);
 
                     //Opacidade do canvas group em 0.7 segundos, fade out:
@@ -901,7 +894,6 @@ public class PlayerMoviment : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Fechando inventário!!!");
                     GameManager.instance.FecharHUD();
 
                     //Opacidade do canvas group em 0.7 segundos, fade in:
@@ -978,7 +970,6 @@ public class PlayerMoviment : MonoBehaviour
         if (GameManager.instance != null)
         {
             GameManager.instance.AddXP(xp);
-            Debug.Log("XP Adicionado!");
         }
         else
         {

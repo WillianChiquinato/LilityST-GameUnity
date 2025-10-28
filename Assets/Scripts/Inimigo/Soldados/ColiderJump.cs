@@ -24,7 +24,6 @@ public class ColiderJump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Inimigos"))
         {
-            Debug.Log("Soldado esta seguindo Lility");
             EnemyPathing enemyComponent = collision.gameObject.GetComponent<EnemyPathing>();
             if (enemyComponent != null)
             {

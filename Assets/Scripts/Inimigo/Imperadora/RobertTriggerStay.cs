@@ -23,7 +23,6 @@ public class RobertTriggerStay : MonoBehaviour
             isPlayerStaying = true;
             robertMoviment.CanMove = false;
             robertMoviment.lilithChecked = false;
-            Debug.Log("Player is staying in Robert's trigger area.");
         }
     }
 
@@ -33,7 +32,6 @@ public class RobertTriggerStay : MonoBehaviour
         {
             isPlayerStaying = false;
             robertMoviment.CanMove = true;
-            Debug.Log("Player has exited Robert's trigger area.");
         }
     }
 }

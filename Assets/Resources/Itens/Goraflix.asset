@@ -15,4 +15,6 @@ MonoBehaviour:
   itensType: 1
   ItemName: Goraflix
   Icon: {fileID: 1339708905, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
+  ilustracao: {fileID: 21300000, guid: 738dc2d508fca5c4b886a8497356a527, type: 3}
+  Description: Acabei de inventar essa bosta de item
   dropChance: 20

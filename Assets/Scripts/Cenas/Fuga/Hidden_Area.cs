@@ -30,7 +30,6 @@ public class Hidden_Area : MonoBehaviour
             if (collision.CompareTag("Player"))
             {
                 StartCoroutine(AnimateOrthographicSize(6f, 7f, duration));
-                Debug.Log("Entrou");
             }
         }
 

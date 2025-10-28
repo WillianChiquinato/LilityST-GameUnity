@@ -59,7 +59,6 @@ public class Dialogo_Trigger : MonoBehaviour
     public void TriggerDialogo()
     {
         Dialogos_Manager.dialogos_Manager.StartDialogos(dialogos);
-        Debug.Log("Dialogo iniciado!");
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -80,7 +79,6 @@ public class Dialogo_Trigger : MonoBehaviour
                 targetBool = true;
                 if (TimerDialogo >= TimerTargetDialogo)
                 {
-                    Debug.Log("Dialogo com inimigo iniciado!");
                     TriggerDialogo();
                     TimerDialogo = 0f;
                     return;
@@ -140,7 +138,6 @@ public class Dialogo_Trigger : MonoBehaviour
     public void NotificarDialogoFinalizado()
     {
         OnDialogoFinalizado?.Invoke();
-        Debug.Log("Dialogo finalizado!");
         if (this.gameObject.CompareTag("Cervo"))
         {
             StartCoroutine(AbrirUIComDelay());

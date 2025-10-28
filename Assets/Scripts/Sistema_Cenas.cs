@@ -21,7 +21,6 @@ public class Sistema_Cenas : MonoBehaviour
         {
             transicao.Transicao(sceneName);
             GameManager.instance.player.playerInput.enabled = false;
-            Debug.Log("Esta na cena " + sceneName);
         }
     }
 }

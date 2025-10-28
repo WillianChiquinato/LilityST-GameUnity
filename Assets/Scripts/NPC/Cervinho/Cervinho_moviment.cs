@@ -11,7 +11,6 @@ public class Cervinho_moviment : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player entrou");
             animatorInteracao.SetActive(true);
             animatorInteracao.GetComponent<Animator>().SetBool("isInteracting", false);
         }

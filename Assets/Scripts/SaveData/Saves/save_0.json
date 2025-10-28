@@ -1,5 +1,5 @@
 {
-    "playTime": 1105.1505126953125,
+    "playTime": 1161.40185546875,
     "XPlayer": 200,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -53,19 +53,8 @@
         "isInitialized": true
     },
     "fragmentoData": {
-        "ChaveTempo": [
-            {
-                "fragmentoNome": "ChaveTempo2",
-                "fragmentoType": 0,
-                "stackSize": 1
-            }
-        ],
+        "ChaveTempo": [],
         "ChaveMovimento": [
-            {
-                "fragmentoNome": "ChaveMovimento",
-                "fragmentoType": 1,
-                "stackSize": 1
-            },
             {
                 "fragmentoNome": "ChaveMovimento",
                 "fragmentoType": 1,
@@ -89,7 +78,18 @@
         "DecksPorArma": [
             {
                 "armaNome": "Bastão",
-                "fragmentos": []
+                "fragmentos": [
+                    {
+                        "fragmentoNome": "ChaveTempo2",
+                        "fragmentoType": 0,
+                        "stackSize": 1
+                    },
+                    {
+                        "fragmentoNome": "ChaveMovimento",
+                        "fragmentoType": 1,
+                        "stackSize": 1
+                    }
+                ]
             },
             {
                 "armaNome": "Arco",
@@ -113,7 +113,7 @@
             }
         ],
         "armaSelecionada": "Bastão",
-        "isInitialized": true
+        "isInitialized": false
     },
     "questData": {
         "questIDs": [

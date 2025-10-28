@@ -64,12 +64,10 @@ public class Attack_Projetil : MonoBehaviour, Defender
 
         if (transform.localScale.x == -1)
         {
-            Debug.Log("Esquerda");
             transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            Debug.Log("Direita");
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }

@@ -185,8 +185,6 @@ public class GameManager : MonoBehaviour
 
     public void ExitCheckpoint()
     {
-        Debug.Log("Saindo do checkpoint");
-
         CutSumir.SetActive(true);
         framingPosition.m_TrackedObjectOffset = new Vector3(0, 0, 0);
 
@@ -267,7 +265,6 @@ public class GameManager : MonoBehaviour
     {
         XpPlayer += xp;
         SaveData.Instance.XPlayer += xp;
-        Debug.LogWarning("SALVANDO XP DO JOGADOR " + SaveData.Instance.XPlayer);
     }
 
     public void TriggerNoUseArgument(string[] message)

@@ -81,7 +81,6 @@ public class Checkpoints : MonoBehaviour
                     FragmentoSystem.instance.SaveFragment();
 
                     SaveManager.Save(SaveData.Instance, GameManager.currentSaveSlot);
-                    Debug.Log("Checkpoint salvo na posição: " + transform.position);
                 }
                 else
                 {
@@ -95,7 +94,6 @@ public class Checkpoints : MonoBehaviour
             if (cervoNoTrigger)
             {
                 GameManager.instance.UISavePoint.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-                Debug.Log("Cervinho no checkpoint, diálogo aberto.");
             }
             else
             {

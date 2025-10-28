@@ -232,6 +232,5 @@ public class PlayerBebe_Moviment : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         cinemachineVirtualCamera.GetComponent<CinemachineConfiner2D>().InvalidateCache();
-        Debug.Log($"Camera Invalidate Cache called {cinemachineVirtualCamera.GetComponent<CinemachineConfiner2D>()}");
     }
 }

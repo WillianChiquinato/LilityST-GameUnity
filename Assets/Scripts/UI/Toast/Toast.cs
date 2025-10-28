@@ -56,7 +56,6 @@ public class Toast : MonoBehaviour
 
     public void Show(string message, ToastType type)
     {
-        Debug.Log("Toast chamado!");
         messageText.text = message;
 
         switch (type)
@@ -119,8 +118,6 @@ public class Toast : MonoBehaviour
     private IEnumerator AnimateToast()
     {
         this.gameObject.SetActive(true);
-        Debug.Log("Toast chamado ANIMAÇÃO!");
-        // reset posição e alpha
         rectTransform.anchoredPosition = startPos;
         canvasGroup.alpha = 0;
 

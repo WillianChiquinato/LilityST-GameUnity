@@ -75,7 +75,6 @@ public class QuestManager : MonoBehaviour
                 // Armazena a quest no array de quests iniciais
                 QuestsInstancias[index] = quest.info;
                 GameManager.instance.questEvents.StartQuest(quest.info.id);
-                Debug.Log($"Quest {quest.info.NomeQuest} foi iniciada!");
 
                 if (index < questGrupos.Count)
                 {
@@ -115,7 +114,6 @@ public class QuestManager : MonoBehaviour
     {
         if (GameManager.instance == null)
         {
-            Debug.LogError("Sistema_Pause não foi inicializado! Aguarde.");
             return;
         }
 
@@ -370,15 +368,12 @@ public class QuestManager : MonoBehaviour
         ClaimRewards(quests);
         ChangeQuestState(quests.info.id, QuestsState.FINALIZADO);
         SaveAllQuests();
-
-        Debug.Log($"Quest {quests.info.NomeQuest} finalizada com sucesso!");
     }
 
 
 
     private void ClaimRewards(Quests quest)
     {
-        Debug.LogWarning("Recompensas da quest sendo processadas...");
         Rewards recompensa = quest.info.recompensas;
 
         // XP
@@ -387,7 +382,6 @@ public class QuestManager : MonoBehaviour
             if (recompensa.xpPlayer > 0)
             {
                 GameManager.instance.player.PlayerXPRewards(recompensa.xpPlayer);
-                Debug.Log($"Ganhou {recompensa.xpPlayer} XP!");
             }
         }
 
@@ -399,7 +393,6 @@ public class QuestManager : MonoBehaviour
                 foreach (var item in recompensa.itensData)
                 {
                     inventory_System.instance.AddItem(item);
-                    Debug.Log($"Ganhou carta: {item.name}");
                 }
             }
         }
@@ -473,7 +466,6 @@ public class QuestManager : MonoBehaviour
         }
 
         SaveManager.Save(currentData, GameManager.currentSaveSlot);
-        Debug.Log("Quests salvas com sucesso!");
     }
 
     public void LoadAllQuests()
@@ -517,7 +509,5 @@ public class QuestManager : MonoBehaviour
                 Debug.LogWarning($"Quest ID não encontrada ao carregar: {questID}");
             }
         }
-
-        Debug.Log("Quests carregadas com sucesso!");
     }
 }

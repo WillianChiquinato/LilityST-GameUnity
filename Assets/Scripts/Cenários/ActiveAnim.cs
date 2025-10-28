@@ -47,15 +47,6 @@ public class ActiveAnim : MonoBehaviour
                     PlayerMoviment player = hit.collider.GetComponent<PlayerMoviment>();
                     ItemObject item = hit.collider.GetComponent<ItemObject>();
 
-                    if (item != null)
-                    {
-                        Debug.LogWarning("Item detected");
-                    }
-                    if (player != null)
-                    {
-                        Debug.LogWarning("Player detected");
-                    }
-
                     if (player != null && player.isDashing || item != null)
                     {
                         actionActive = true;
@@ -72,7 +63,6 @@ public class ActiveAnim : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Colidiu com algo");
         //Player logic.
         foreach (string tag in tagToCheck)
         {
@@ -80,12 +70,9 @@ public class ActiveAnim : MonoBehaviour
             {
                 if (this.gameObject.CompareTag("Vidro"))
                 {
-                    Debug.Log("Logica no update");
                     return;
                 }
 
-                // Lógica para outros objetos.
-                Debug.Log("Colidiu com " + tag);
                 animator.SetTrigger(animationTrigger);
             }
         }

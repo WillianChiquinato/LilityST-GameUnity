@@ -22,7 +22,6 @@ public class Attack_Queda : MonoBehaviour
                 //Estático.
                 Collision.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
                 Collision.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                Debug.Log("AtaqueInimigo");
             }
         }
     }

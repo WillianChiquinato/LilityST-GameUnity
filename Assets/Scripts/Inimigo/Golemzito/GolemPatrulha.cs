@@ -175,7 +175,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
             }
             else
             {
-                Debug.LogError("A direcao atual vc vai se fuder");
+                Debug.LogError("A direcao definida nao e valida");
             }
         }
     }

@@ -57,8 +57,6 @@ public class RobertMoviment : MonoBehaviour
             CanMove = false;
             pointToRendalla = true;
         }
-
-        Debug.Log(CanMove ? "Robert is moving." : "Robert is not moving.");
     }
 
     void MoveTowardsPlayer()

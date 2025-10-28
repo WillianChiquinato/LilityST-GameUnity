@@ -106,20 +106,17 @@ public class EnemyPathing : MonoBehaviour
                     if (!gapAhead.collider && !groundFront.collider)
                     {
                         shouldJump = true;
-                        Debug.Log("furo no chao");
                     }
                     else if (groundFront.collider || platformAbove.collider && !wallCheck.collider)
                     {
                         if (wallCheck.collider)
                         {
-                            Debug.Log("parede detectada");
                             direcao *= -1;
                             FlipDirecao();
                         }
                         else
                         {
                             shouldJump = true;
-                            Debug.Log("Apenas plaatforma");
                         }
                     }
                 }

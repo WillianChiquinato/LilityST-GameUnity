@@ -51,7 +51,6 @@ public class PlayerAttack : MonoBehaviour
         if (collision.gameObject.CompareTag("Inimigos") || collision.gameObject.CompareTag("Quebraveis"))
         {
             Damage damage = collision.gameObject.GetComponent<Damage>();
-            Debug.Log("Pegou " + damage);
 
             PlayerPoco attack = collision.GetComponent<PlayerPoco>();
 

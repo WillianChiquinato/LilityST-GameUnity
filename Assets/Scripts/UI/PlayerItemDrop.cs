@@ -18,7 +18,6 @@ public class PlayerItemDrop : Item_drop
     {
         if (DropsInventoryPlayer == null || DropsInventoryPlayer.Count == 0)
         {
-            Debug.LogWarning("[DROP] Nenhum possível drop carregado!");
             return;
         }
 
@@ -27,7 +26,6 @@ public class PlayerItemDrop : Item_drop
             if (Random.Range(0, 100) <= chanceToropItens)
             {
                 DropItem(item);
-                Debug.Log($"[DROP] Item dropado: {item.ItemName}");
             }
         }
     }
@@ -45,7 +43,6 @@ public class PlayerItemDrop : Item_drop
             if (item != null)
             {
                 DropsInventoryPlayer.Add(item);
-                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
             }
         }
 
@@ -56,7 +53,6 @@ public class PlayerItemDrop : Item_drop
             if (item != null)
             {
                 DropsInventoryPlayer.Add(item);
-                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
             }
         }
 
@@ -67,10 +63,7 @@ public class PlayerItemDrop : Item_drop
             if (item != null)
             {
                 DropsInventoryPlayer.Add(item);
-                Debug.Log($"[DROP] Adicionando possível drop: {itemData.itemName}");
             }
         }
-
-        Debug.Log($"[DROP] Total de possíveis drops carregados: {DropsInventoryPlayer.Count}");
     }
 }

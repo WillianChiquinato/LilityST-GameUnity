@@ -120,7 +120,6 @@ public class FilhoteDragão : MonoBehaviour
                     if (groundFrontFuga.collider.gameObject.layer == LayerMask.NameToLayer("Ground2"))
                     {
                         FimDaLinha();
-                        Debug.Log("Fim da linha");
                     }
                     else if (Mathf.Abs(rb.linearVelocity.y) < 0.1f)
                     {
@@ -198,7 +197,6 @@ public class FilhoteDragão : MonoBehaviour
             // Se o jogador quiser deixar o filhote
             if (playerMoviment.entrar && progresso >= 1f)
             {
-                Debug.Log("Deixar filhote");
                 filhoteDevolver = true;
             }
             if (filhoteDevolver)

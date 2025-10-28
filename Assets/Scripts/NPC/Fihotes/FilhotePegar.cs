@@ -21,7 +21,6 @@ public class FilhotePegar : MonoBehaviour
                 textoFilhote.text = "Pressione E para pegar o filhote";
                 if (filhoteDragão.playerMoviment.entrar && filhoteDragão.rb.linearVelocity.x <= 0)
                 {
-                    Debug.Log("Pegou o filhote");
                     filhoteDragão.TimerFindObject = 0f;
                     filhoteDragão.playerMoviment.animacao.SetBool("IsFilhote", true);
                     filhoteDragão.LilityPegarFilhote = true;

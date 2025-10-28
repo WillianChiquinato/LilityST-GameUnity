@@ -11,7 +11,6 @@ public class LevelTransicao : MonoBehaviour
     public void Transicao(string sceneName)
     {
         StartCoroutine(loadScene(sceneName));
-        Debug.Log("iniciando");
     }
 
     IEnumerator loadScene(string sceneName)

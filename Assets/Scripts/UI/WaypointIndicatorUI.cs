@@ -25,7 +25,6 @@ public class WaypointIndicatorUI : MonoBehaviour
         mainCamera = Camera.main;
         if (target == null)
         {
-            Debug.LogWarning("WaypointIndicatorUI: No target assigned!");
             Destroy(gameObject);
         }
     }

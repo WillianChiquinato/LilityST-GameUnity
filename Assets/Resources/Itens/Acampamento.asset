@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6e162a9784df34e8c72e7eb4defc1c, type: 3}
-  m_Name: RobertFile
+  m_Name: Acampamento
   m_EditorClassIdentifier: 
   itensType: 0
-  ItemName: RobertFile
+  ItemName: Acampamento
   Icon: {fileID: 1507808025, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
   ilustracao: {fileID: 435274841, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
-  Description: ola doce morena
-  dropChance: 70
-  documentosType: 0
+  Description: Namoral, do nada 25 pessoas em um acampamento slk
+  dropChance: 100
+  documentosType: 1

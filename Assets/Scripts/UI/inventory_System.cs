@@ -26,9 +26,9 @@ public class inventory_System : MonoBehaviour
     [SerializeField] private Transform coletaveisSlotParent;
 
 
-    [SerializeField] private Item_SlotUI[] inventoryItemSlot;
-    [SerializeField] private Item_SlotUI[] documentosItemSlot;
-    [SerializeField] public Item_SlotUI[] coletaveisItemSlot;
+    public Item_SlotUI[] inventoryItemSlot;
+    public Item_SlotUI[] documentosItemSlot;
+    public Item_SlotUI[] coletaveisItemSlot;
 
     void Awake()
     {
@@ -76,7 +76,6 @@ public class inventory_System : MonoBehaviour
 
             inicializacaoItens = true;
             SaveInventory();
-            Debug.Log("Inventário inicializado com os itens de startEquipament.");
         }
         else
         {
@@ -239,7 +238,6 @@ public class inventory_System : MonoBehaviour
     {
         if (inventory.Count >= inventoryItemSlot.Length)
         {
-            Debug.Log("Atingiu o limite");
             return false;
         }
 
@@ -254,7 +252,6 @@ public class inventory_System : MonoBehaviour
         currentData.inventoryData.MaterialsItens.Clear();
         foreach (var item in inventory)
         {
-            Debug.LogWarning("items: " + item.itemData.name + " - " + item.stackSize);
             currentData.inventoryData.MaterialsItens.Add(new InventoryItemSaveData
             {
                 itemName = item.itemData.name,

@@ -65,7 +65,6 @@ public class TesteDerrotar : MonoBehaviour
                 Instancia.OnInimigosDerrotado();
                 questPointManual.pointStarted = false;
                 Destroy(gameObject, 0.5f);
-                Debug.Log("Todos os inimigos DENTRO do trigger foram derrotados!");
             }
         }
     }

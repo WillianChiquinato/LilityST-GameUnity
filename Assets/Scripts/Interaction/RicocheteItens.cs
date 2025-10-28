@@ -32,8 +32,6 @@ public class RicocheteItens : MonoBehaviour
                 rb.linearVelocity = reflectDirection;
                 countBatidas++;
             }
-
-            Debug.Log($"Ricochete! Velocidade antiga: {lastVelocity}, nova: {rb.linearVelocity}");
         }
     }
 }

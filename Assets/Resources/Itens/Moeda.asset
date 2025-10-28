@@ -15,5 +15,6 @@ MonoBehaviour:
   itensType: 2
   ItemName: Moeda
   Icon: {fileID: 751479589, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
-  Description: 
+  ilustracao: {fileID: 454327615, guid: 65f552d7aa02259489ea0fd2e8e5813a, type: 3}
+  Description: Moedinha krai
   dropChance: 100

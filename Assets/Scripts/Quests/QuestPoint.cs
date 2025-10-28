@@ -36,7 +36,6 @@ public class QuestPoint : MonoBehaviour
 
     private void SubmitPressed()
     {
-        Debug.Log("SubmitPressed chamado!");
         if (!PlayerEstaPerto)
         {
             return;
@@ -59,8 +58,6 @@ public class QuestPoint : MonoBehaviour
             // Salva só depois que a quest foi realmente iniciada/avançada
             QuestManager.instance.SaveAllQuests();
             pointStarted = true;
-
-            Debug.Log($"QuestPoint {QuestId} foi ativado!");
         }
     }
 
@@ -100,7 +97,6 @@ public class QuestPoint : MonoBehaviour
                     return;
                 }
                 
-                Debug.Log("SubmitPressed adicionado!");
                 SubmitPressed();
             }
         }

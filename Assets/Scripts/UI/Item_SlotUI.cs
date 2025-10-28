@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum SlotType
+{
+    Comum,
+    Coletavel,
+    Quest
+}
+
 public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     [SerializeField] private Image itemImagem;
@@ -17,6 +24,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     private Canvas canvas;
     private CanvasGroup canvasGroup;
 
+    public SlotType slotType;
     public int slotIndex;
 
     [Header("Animações")]
@@ -28,7 +36,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     private Vector3 hoverOffset = new Vector3(0, 10f, 0);
     private Coroutine animRoutine;
 
-    public System.Action<int> OnSlotClicked;
+    public System.Action<SlotType, int> OnSlotClicked;
 
     private void Awake()
     {
@@ -78,7 +86,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         // if (animRoutine != null) StopCoroutine(animRoutine);
         // animRoutine = StartCoroutine(PulseEffect());
 
-        OnSlotClicked?.Invoke(slotIndex);
+        OnSlotClicked?.Invoke(slotType, slotIndex);
     }
 
     private void StartAnimation(Vector3 targetPos, Vector3 targetScale)
@@ -189,7 +197,6 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         // Garantir que fromIndex está dentro do limite da lista
         if (fromIndex < 0 || fromIndex >= collectList.Count)
         {
-            Debug.LogWarning($"Índice de origem inválido: {fromIndex}");
             return;
         }
 
@@ -198,14 +205,12 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             var itemToMove = collectList[fromIndex];
             collectList.RemoveAt(fromIndex);
             collectList.Add(itemToMove);
-            Debug.Log($"Movido item de {fromIndex} para slot vazio {toIndex}");
         }
         else
         {
             var temp = collectList[fromIndex];
             collectList[fromIndex] = collectList[toIndex];
             collectList[toIndex] = temp;
-            Debug.Log($"Trocado item {fromIndex} ↔ {toIndex}");
         }
 
         system.UpdateInventory();

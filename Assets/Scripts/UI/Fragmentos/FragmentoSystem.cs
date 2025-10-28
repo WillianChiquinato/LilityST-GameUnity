@@ -108,7 +108,6 @@ public class FragmentoSystem : MonoBehaviour
 
             inicializacaoItens = true;
             SaveFragment();
-            Debug.Log("Fragmento inicializado com os itens de startEquipament.");
         }
         else
         {
@@ -351,7 +350,6 @@ public class FragmentoSystem : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning($"Fragmento {_item.NomeFragmento} não encontrado no inventário para remoção");
         UpdateInventory();
     }
 
@@ -527,7 +525,6 @@ public class FragmentoSystem : MonoBehaviour
 
     private FragmentoData GetFragmentoData(string ChaveName, fragmentoType type)
     {
-        Debug.Log("Tentando carregar: Fragmentos/" + ChaveName);
         FragmentoData fragmento = Resources.Load<FragmentoData>("Fragmentos/" + ChaveName);
         if (fragmento == null)
         {
@@ -548,7 +545,6 @@ public class FragmentoSystem : MonoBehaviour
         var deck = DecksPorArma.FirstOrDefault(d => d.armaNome == armaNome);
         if (deck == null)
         {
-            Debug.LogWarning($"Deck para arma '{armaNome}' não encontrado nos dados salvos. Criando novo deck vazio.");
             deck = new DeckPorArmaSaveData { armaNome = armaNome };
             DecksPorArma.Add(deck);
         }
@@ -590,8 +586,6 @@ public class FragmentoSystem : MonoBehaviour
                 }
 
                 ArmasSystem.instance.deck.Add(fragData);
-
-                Debug.Log($"Carregado para deck '{armaNome}': {fragSave.fragmentoNome}");
             }
         }
 
@@ -610,15 +604,10 @@ public class FragmentoSystem : MonoBehaviour
 
         // Sincronizar com o ArmasSystem
         ArmasSystem.instance.armaSelecionada = armaNome;
-
-        Debug.Log($"Arma '{armaNome}' selecionada com {deckRuntime.Count} fragmentos sincronizados.");
     }
 
     public void UpdateDeckUI(string armaNome, List<FragmentoData> deckAtual)
     {
-        Debug.Log($"UpdateDeckUI chamado - Atualizando UI para arma: {armaNome} com {deckAtual.Count} fragmentos");
-
-        // Sincronizar DeckBuilder com o deck atual
         DeckBuilder.Clear();
         DeckBuilderDicionary.Clear();
 
@@ -647,17 +636,13 @@ public class FragmentoSystem : MonoBehaviour
                 else
                 {
                     slotUI.CleanUpSlot();
-                    Debug.Log($"Slot {i}: fragmento nulo, limpando slot");
                 }
             }
             else
             {
                 slotUI.CleanUpSlot();
-                Debug.Log($"Slot {i}: sem fragmento, limpando slot");
             }
         }
-
-        Debug.Log($"UpdateDeckUI concluído para arma {armaNome}");
     }
 
     public bool AdicionarFragmentoAoDeckAtual(FragmentoData fragmento)

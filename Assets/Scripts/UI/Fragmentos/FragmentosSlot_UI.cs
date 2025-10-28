@@ -65,69 +65,42 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
         // Verificar se este slot está no DeckBuilder
         bool estaNoDeckBuilder = transform.IsChildOf(FragmentoSystem.instance.DeckBuilderSlotParent);
-
-        Debug.Log($"Clique detectado - Fragmento: {Fragmento.FragmentoData.NomeFragmento}, EstáNoDeckBuilder: {estaNoDeckBuilder}");
-
         if (estaNoDeckBuilder)
         {
-            // Remover do deck com animação
             string armaAtual = ArmasSystem.instance.armaSelecionada;
-            Debug.Log($"Removendo fragmento '{Fragmento.FragmentoData.NomeFragmento}' do deck da arma '{armaAtual}'");
-
-            // Salvar referência do fragmento antes da animação
             FragmentoData fragmentoParaRemover = Fragmento.FragmentoData;
 
-            // Determinar slot de destino no inventário baseado no tipo
             Transform slotDestinoInventario = GetSlotDestinoInventario(fragmentoParaRemover.TipoFragmento);
-            Debug.Log($"Slot destino inventário encontrado: {slotDestinoInventario != null}");
 
             if (slotDestinoInventario != null)
             {
-                Debug.Log($"Iniciando animação de volta para inventário");
-                // Animar de volta para o inventário
                 MoveFragmentoToInventario(slotDestinoInventario, () =>
                 {
-                    Debug.Log($"Animação completa, removendo fragmento do deck");
-
-                    // Após a animação, remove do deck
                     bool removido = ArmasSystem.instance.RemoverDoDeck(armaAtual, fragmentoParaRemover);
 
                     if (removido)
                     {
-                        // Adicionar de volta ao inventário
                         FragmentoSystem.instance.AddItem(fragmentoParaRemover);
-                        Debug.Log($"Fragmento '{fragmentoParaRemover.NomeFragmento}' removido do deck e retornado ao inventário.");
-
-                        // Forçar atualização completa da UI
                         FragmentoSystem.instance.UpdateInventory();
                         ArmasSystem.instance.AtualizarDeckUI(armaAtual);
 
                         // Salvar após adicionar ao inventário
                         FragmentoSystem.instance.SaveFragment();
-                        Debug.Log($"Dados salvos após adicionar fragmento ao inventário");
                     }
                 });
             }
             else
             {
-                Debug.LogWarning($"Slot destino não encontrado, fazendo remoção sem animação");
-                // Fallback: remoção sem animação
                 bool removido = ArmasSystem.instance.RemoverDoDeck(armaAtual, fragmentoParaRemover);
 
                 if (removido)
                 {
                     FragmentoSystem.instance.AddItem(fragmentoParaRemover);
-                    Debug.Log($"Fragmento '{fragmentoParaRemover.NomeFragmento}' removido do deck e retornado ao inventário.");
-
-                    // Forçar atualização completa da UI
                     FragmentoSystem.instance.UpdateInventory();
                     ArmasSystem.instance.AtualizarDeckUI(armaAtual);
 
                     // Salvar após adicionar ao inventário
                     FragmentoSystem.instance.SaveFragment();
-                    Debug.Log($"Dados salvos após adicionar fragmento ao inventário (fallback)");
-
-                    // Limpar este slot
                     CleanUpSlot();
                 }
             }
@@ -136,9 +109,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
         // Código original para adicionar ao deck
         string armaAtual2 = SeletorArmas.instance.nomesDasArmas[SeletorArmas.instance.currentIndex];
-        Debug.Log($"Tentando adicionar fragmento '{Fragmento.FragmentoData.NomeFragmento}' ao deck da arma '{armaAtual2}'");
-
-        // Verificar se o deck existe no runtime
         if (!ArmasSystem.instance.decksPorArmaRuntime.ContainsKey(armaAtual2))
         {
             Debug.LogError($"Deck para arma '{armaAtual2}' não encontrado!");
@@ -146,7 +116,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
         }
 
         var deckAtual = ArmasSystem.instance.decksPorArmaRuntime[armaAtual2];
-        Debug.Log($"Deck atual da arma '{armaAtual2}' tem {deckAtual.Count} fragmentos");
 
         if (deckAtual.Count >= ArmasSystem.instance.maxDeckSize)
         {
@@ -163,8 +132,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
         if (Fragmento != null && Fragmento.FragmentoData != null)
         {
             int slotDestinoIndex = ArmasSystem.instance.GetPrimeiroSlotVazioOuFragmentoExistente(deckAtual, Fragmento.FragmentoData);
-            Debug.Log($"Slot destino calculado: {slotDestinoIndex}");
-
             if (slotDestinoIndex == -1)
             {
                 Debug.Log("Deck cheio! Não há slot disponível para este fragmento.");
@@ -178,20 +145,13 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
             }
 
             Transform destinoSlot = FragmentoSystem.instance.DeckBuilderSlotParent.GetChild(slotDestinoIndex).transform;
-            Debug.Log($"Iniciando animação para slot destino: {slotDestinoIndex}");
-
-            // Move a carta para o DeckBuilder antes de adicionar
             MoveFragmentoToDeckBuilder(destinoSlot, () =>
             {
                 Debug.Log($"Animação completa, adicionando fragmento ao deck");
                 AdicionarFragmentoAoDeck(armaAtual2);
 
-                // Forçar atualização da UI após adicionar
                 ArmasSystem.instance.AtualizarDeckUI(armaAtual2);
-
-                // Salvar imediatamente após todas as operações
                 FragmentoSystem.instance.SaveFragment();
-                Debug.Log($"Dados salvos após adicionar fragmento ao deck");
             });
         }
         else
@@ -278,16 +238,12 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     private void AdicionarFragmentoAoDeck(string armaAtual)
     {
-        Debug.Log($"AdicionarFragmentoAoDeck chamado para arma '{armaAtual}' com fragmento '{Fragmento.FragmentoData.NomeFragmento}'");
-
         if (Fragmento.FragmentoData.TipoFragmento == fragmentoType.Tempo || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Movimento || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Vida || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Caos || Fragmento.FragmentoData.TipoFragmento == fragmentoType.Ordem)
         {
-            Debug.Log($"Tipo de fragmento válido: {Fragmento.FragmentoData.TipoFragmento}");
             bool adicionou = ArmasSystem.instance.AdicionarAoDeck(armaAtual, Fragmento.FragmentoData);
 
             if (adicionou)
             {
-                Debug.Log($"Fragmento adicionado com sucesso, removendo do inventário");
                 FragmentoSystem.instance.RemoveItem(Fragmento.FragmentoData);
             }
             else
@@ -331,12 +287,9 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
             {
                 if (slotsArray[i].Fragmento == null)
                 {
-                    Debug.Log($"Encontrado slot vazio na posição {i} para fragmento único");
                     return slotsArray[i].transform;
                 }
             }
-
-            Debug.LogWarning($"Não há slots vazios disponíveis para o tipo {tipoFragmento}");
             return null;
         }
 
@@ -346,9 +299,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     private void MoveFragmentoToInventario(Transform destino, Action onMoveComplete)
     {
-        Debug.Log($"MoveFragmentoToInventario iniciado para destino: {destino.name}");
-
-        // Salvar posição original
         originalParent = transform.parent;
         originalSiblingIndex = transform.GetSiblingIndex();
 
@@ -363,8 +313,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
         Vector2 telaOrigem = RectTransformUtility.WorldToScreenPoint(null, transform.position);
         Vector2 telaDestino = RectTransformUtility.WorldToScreenPoint(null, destino.position);
 
-        Debug.Log($"Posição origem: {telaOrigem}, Posição destino: {telaDestino}");
-
         // Converter posições para coordenadas locais do canvas
         Vector2 origemLocal, destinoLocal;
         RectTransform canvasRect = canvasFragmentoFrente as RectTransform;
@@ -377,8 +325,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
         Vector2 offsetDestino = new Vector2(50f, -100f);
         animCopyRect.anchoredPosition = origemLocal + offsetOrigem;
 
-        Debug.Log($"Iniciando animação de {origemLocal} para {destinoLocal}");
-
         // Limpar o slot original imediatamente (será repovoado pela UI update)
         CleanUpSlot();
 
@@ -388,9 +334,6 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
             .SetUpdate(true)
             .OnComplete(() =>
             {
-                Debug.Log($"Animação para inventário completa");
-
-                // Destruir a cópia de animação
                 Destroy(animationCopy);
 
                 // Executar callback
@@ -403,13 +346,11 @@ public class FragmentosSlot_UI : MonoBehaviour, IPointerDownHandler, IPointerEnt
     {
         yield return new WaitForSeconds(0.1f);
         FragmentoSystem.instance.SaveFragment();
-        Debug.Log($"Salvamento realizado após delay");
     }
 
     private System.Collections.IEnumerator SalvarAposAdicionarAoDeck()
     {
         yield return new WaitForSeconds(0.2f);
         FragmentoSystem.instance.SaveFragment();
-        Debug.Log($"Salvamento realizado após adicionar ao deck");
     }
 }

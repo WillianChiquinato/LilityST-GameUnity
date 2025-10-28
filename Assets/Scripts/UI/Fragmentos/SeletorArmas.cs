@@ -64,8 +64,6 @@ public class SeletorArmas : MonoBehaviour
 
         string armaAtual = nomesDasArmas[currentIndex];
 
-        Debug.Log($"SeletorArmas.SelectArma - Selecionando arma: {armaAtual} (índice: {index})");
-
         // Sincroniza a arma selecionada no ArmasSystem
         ArmasSystem.instance.armaSelecionada = armaAtual;
         
@@ -76,13 +74,10 @@ public class SeletorArmas : MonoBehaviour
             ArmasSystem.instance.decksPorArmaRuntime[armaAtual] = new List<FragmentoData>();
         }
         
-        // Atualiza a UI do deck para a arma selecionada
         ArmasSystem.instance.AtualizarDeckUI(armaAtual);
         
         // Chama o método de seleção no FragmentoSystem
         FragmentoSystem.instance.SelecionarArma(armaAtual);
-        
-        Debug.Log($"Arma '{armaAtual}' selecionada com sucesso");
     }
 
     public void NextArma()

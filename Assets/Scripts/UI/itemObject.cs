@@ -62,17 +62,14 @@ public class ItemObject : MonoBehaviour
         isItemPegado = true;
         if (itemData != null)
         {
-            Debug.Log("Pegou item: " + itemData.ItemName);
             inventory_System.instance.AddItem(itemData);
         }
         else if (fragmentoData != null)
         {
-            Debug.Log("Pegou fragmento: " + fragmentoData.NomeFragmento);
             FragmentoSystem.instance.AddItem(fragmentoData);
         }
         else
         {
-            Debug.LogWarning("Nenhum dado para pegar.");
             return;
         }
 
