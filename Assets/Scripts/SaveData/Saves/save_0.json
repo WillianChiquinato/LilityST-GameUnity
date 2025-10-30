@@ -1,5 +1,5 @@
 {
-    "playTime": 1345.3060302734375,
+    "playTime": 1446.5501708984375,
     "XPlayer": 200,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -75,12 +75,12 @@
         "ChaveVida": [],
         "ChaveCaos": [
             {
-                "fragmentoNome": "ChaveCaos2",
+                "fragmentoNome": "ChaveCaos",
                 "fragmentoType": 3,
                 "stackSize": 1
             },
             {
-                "fragmentoNome": "ChaveCaos",
+                "fragmentoNome": "ChaveCaos2",
                 "fragmentoType": 3,
                 "stackSize": 1
             }
@@ -112,7 +112,7 @@
                 "fragmentos": []
             }
         ],
-        "armaSelecionada": "Bastão",
+        "armaSelecionada": "Arco",
         "isInitialized": true
     },
     "questData": {
@@ -145,15 +145,20 @@
         ],
         "infoNome": [
             "LaEle ProMax",
-            "Tes1"
+            "Tes1",
+            "Tes2"
         ],
         "infoCategorias": [
             1,
+            1,
+            1,
+            0,
             1
         ],
         "infoDescricoes": [
             "Essa caça é sua, eu sigo você",
-            "accej fnqwem  wemklkwemk lklf wek nekwlkl ekmlml"
+            "accej fnqwem  wemklkwemk lklf wek nekwlkl ekmlml",
+            "afad a a  ds s ss s s "
         ]
     }
 }

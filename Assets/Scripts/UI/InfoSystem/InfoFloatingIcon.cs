@@ -2,13 +2,24 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class InfoFloatingIcon : MonoBehaviour
 {
     public static InfoFloatingIcon Instance;
     public GameObject floatingPanel;
     public TextMeshProUGUI texto;
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void MostrarIcone(string titulo)
     {
