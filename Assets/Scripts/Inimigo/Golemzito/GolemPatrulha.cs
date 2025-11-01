@@ -5,31 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class GolemPatrulha_Moviment : PlayerPoco
 {
-    private Item_drop dropInimigo;
-    [SerializeField]
-    private float IdleDuracao;
-    [SerializeField]
-    private float IdleTimer;
-
+    [Header("Instances")]
+    [SerializeField] private Item_drop dropInimigo;
     TouchingVariables touching;
-    SetBoolBehavior setBoolBehavior;
-
     Rigidbody2D rb;
     Animator animator;
     Damage DamageScript;
-    private Vector2 vectorDirecao = Vector2.right;
+    public DetectionZone attackZona;
+    public LayerMask groundCheck;
 
-    //Sobre a piscada do hit
+    [Header("Sobre o Hit")]
+    [SerializeField] private float IdleDuracao;
+    [SerializeField] private float IdleTimer;
+    private Vector2 vectorDirecao = Vector2.right;
     public int contagemHit = 0;
     public float contagemStagger;
     public bool contagemStaggerBool = false;
     public float blinkDuration = 0.1f;
     public int blinkCount = 1;
 
-
     public float speed = 4f;
     public float StopRate = 0.2f;
-    public DetectionZone attackZona;
     public enum WalkAbleDirecao { Right, Left }
 
     private WalkAbleDirecao _WalkDirecao;
@@ -135,13 +131,15 @@ public class GolemPatrulha_Moviment : PlayerPoco
 
     private void FixedUpdate()
     {
-        if (touching.IsGrouded && touching.IsOnWall)
+        RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(vectorDirecao.x * 1.1f, -0.5f, 0), Vector2.down, 2f, groundCheck);
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector2.right * vectorDirecao.x, 2f, groundCheck);
+
+        if (touching.IsGrouded)
         {
-            FlipDirecao();
-        }
-        if (!touching.IsOnWall)
-        {
-            animator.SetBool(animationstrings.IsIdlePatrulha, false);
+            if (wallCheck.collider != null || gapAhead.collider == null)
+            {
+                FlipDirecao();
+            }
         }
 
         if (!DamageScript.VelocityLock)
@@ -163,8 +161,9 @@ public class GolemPatrulha_Moviment : PlayerPoco
         IdleTimer += Time.deltaTime;
         animator.SetBool(animationstrings.IsIdlePatrulha, true);
 
-        if (IdleTimer > IdleDuracao && canMove)
+        if (IdleTimer > IdleDuracao)
         {
+            animator.SetBool(animationstrings.IsIdlePatrulha, false);
             if (WalkDirecao == WalkAbleDirecao.Right)
             {
                 WalkDirecao = WalkAbleDirecao.Left;
@@ -219,5 +218,18 @@ public class GolemPatrulha_Moviment : PlayerPoco
         rb.gravityScale = 1;
         contagemHit = 0;
         animator.SetBool(animationstrings.ContagemHit, false);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 origemParede = transform.position + new Vector3(0, 0.5f, 0);
+        Vector3 direcaoParede = Vector2.right * vectorDirecao.x;
+        Gizmos.DrawRay(origemParede, direcaoParede * 2f);
+
+        Gizmos.color = Color.blue;
+        Vector3 origemLacuna = transform.position + new Vector3(vectorDirecao.x * 1.1f, -0.5f, 0);
+        Vector3 direcaoLacuna = Vector2.down;
+        Gizmos.DrawRay(origemLacuna, direcaoLacuna * 2f);
     }
 }

@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Maga_Movement : MonoBehaviour
+public class Maga_Movement : PlayerPoco
 {
     private Item_drop dropInimigo;
     public Maga_RangedAttack maga_RangedAttack;
@@ -46,6 +45,10 @@ public class Maga_Movement : MonoBehaviour
 
         timingAttack = timingAttackCount;
         timingRolar = timingRolarCounter;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+        newMaterial = Resources.Load<Material>("Material/Hit");
     }
 
     void Update()
@@ -55,12 +58,10 @@ public class Maga_Movement : MonoBehaviour
             if (trigger_Rolar.distanciaRolar)
             {
                 timingRolar -= Time.deltaTime;
-                //Metodo para fazer o inimigo rolar pra tras.
-                StartCoroutine(rolar());
+                StartCoroutine(RolarMaga());
             }
             else
             {
-                //Testes
                 timingRolar = timingRolarCounter;
             }
             if (maga_RangedAttack.rangedAttack)
@@ -114,10 +115,11 @@ public class Maga_Movement : MonoBehaviour
         }
     }
 
-    IEnumerator rolar()
+    IEnumerator RolarMaga()
     {
         if (timingRolar < 0)
         {
+            timingAttack = timingAttackCount;
             Vector2 moveDirection;
 
             if (transform.position.x > Player.transform.position.x)
@@ -134,8 +136,8 @@ public class Maga_Movement : MonoBehaviour
 
             yield return new WaitForSeconds(0.4f);
 
-            animator.SetBool("MakeDash", false);
             timingRolar = timingRolarCounter;
+            animator.SetBool("MakeDash", false);
             trigger_Rolar.distanciaRolar = false;
         }
     }
@@ -151,5 +153,15 @@ public class Maga_Movement : MonoBehaviour
             rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
             timingAttack = timingAttackCount;
         }
+        StartCoroutine(OnHitEnemy());
+    }
+
+    IEnumerator OnHitEnemy()
+    {
+        spriteRenderer.material = newMaterial;
+
+        yield return new WaitForSeconds(0.2f);
+
+        spriteRenderer.material = originalMaterial;
     }
 }

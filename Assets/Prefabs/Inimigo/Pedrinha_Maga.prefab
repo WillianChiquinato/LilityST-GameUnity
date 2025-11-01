@@ -41,6 +41,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2167011075040692782}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -64,7 +65,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.47258663}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -75,7 +77,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 15.929871, y: 4.375616}
   m_EdgeRadius: 0
 --- !u!114 &6014860784147050686
@@ -148,10 +149,13 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +175,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 5524932cf6121864aa9edce65211ed5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -185,7 +189,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!50 &6464499556217680637
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -196,8 +200,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -207,7 +211,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 1
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1151552178255038475
@@ -218,6 +222,7 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6960984656513833924}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -241,9 +246,10 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.0091782, y: -0.57841015}
-  m_Size: {x: 1.4496001, y: 1.970953}
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.03347917, y: -0.34681797}
+  m_Size: {x: 2.0511417, y: 2.4326992}
   m_Direction: 0
 --- !u!114 &3477836576219909279
 MonoBehaviour:
@@ -275,10 +281,10 @@ MonoBehaviour:
   healthChange:
     m_PersistentCalls:
       m_Calls: []
-  _maxHealth: 2
-  _health: 2
+  _maxHealth: 5
+  _health: 5
   isInvicible: 0
-  invicibilityTimer: 0.25
+  invicibilityTimer: 0.2
   _IsAlive: 1
 --- !u!114 &5101386480827167611
 MonoBehaviour:
@@ -292,22 +298,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b889a257fcbb4d4688867c3c38a12f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  giveUpwardForce: 0
+  spriteRenderer: {fileID: 0}
+  newMaterial: {fileID: 0}
+  originalMaterial: {fileID: 0}
   maga_RangedAttack: {fileID: 0}
   damageScript: {fileID: 0}
   objetoInvocacao: {fileID: 7508367049874666806, guid: 0d32994cd4b0492499eae273f30c012b, type: 3}
   Player: {fileID: 0}
   podeInvocar: 0
-  speedRolar: 22
+  speedRolar: 35
   timingRolar: 0
-  timingRolarCounter: 0.7
+  timingRolarCounter: 0.4
   timingAttack: 0
-  timingAttackCount: 4
+  timingAttackCount: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!95 &8488412010279393709
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -321,6 +331,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -384,6 +395,7 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7750721504941771526}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -407,9 +419,10 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -16.54648, y: -4.0996056}
-  m_Size: {x: 21.693308, y: 16.715204}
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -17.642588, y: -1.9776224}
+  m_Size: {x: 21.255016, y: 21.216593}
   m_Direction: 1
 --- !u!114 &8855495412742889970
 MonoBehaviour:

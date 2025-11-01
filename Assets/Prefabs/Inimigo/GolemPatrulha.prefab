@@ -173,6 +173,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giveUpwardForce: 1
+  spriteRenderer: {fileID: 0}
+  newMaterial: {fileID: 2100000, guid: 9bea7367a0eb6144785ebd33016410b8, type: 2}
+  originalMaterial: {fileID: 0}
+  dropInimigo: {fileID: 0}
+  attackZona: {fileID: 5377258394000927251}
+  groundCheck:
+    serializedVersion: 2
+    m_Bits: 10304
   IdleDuracao: 1
   IdleTimer: 0
   contagemHit: 0
@@ -180,10 +188,8 @@ MonoBehaviour:
   contagemStaggerBool: 0
   blinkDuration: 0.1
   blinkCount: 1
-  newMaterial: {fileID: 2100000, guid: 9bea7367a0eb6144785ebd33016410b8, type: 2}
   speed: 3
   StopRate: 0.2
-  attackZona: {fileID: 5377258394000927251}
   _Target: 0
 --- !u!95 &1541492789648868809
 Animator:
@@ -514,3 +520,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   knockback: {x: 6, y: 5}
+  componentePai: {fileID: 0}
