@@ -8,7 +8,6 @@ public class Item_drop : MonoBehaviour
     [SerializeField] private ItemData[] possibleDrop;
     private List<ItemData> droplist = new List<ItemData>();
 
-
     [SerializeField] public GameObject dropPrefab;
 
     public virtual void GenerateDrop()
@@ -36,7 +35,7 @@ public class Item_drop : MonoBehaviour
         }
     }
 
-    protected void DropItem(ItemData _itemData)
+    public virtual void DropItem(ItemData _itemData)
     {
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
 

@@ -109,6 +109,9 @@ MonoBehaviour:
   IlustracaoImage: {fileID: 0}
   descriptionText: {fileID: 0}
   BotaoInfo: {fileID: 0}
+  InfoReferenciaContainer: {fileID: 0}
+  ReferenciaInfo: {fileID: 0}
+  ButtonConfirmInfo: {fileID: 0}
 --- !u!1 &2139249922306081799
 GameObject:
   m_ObjectHideFlags: 0

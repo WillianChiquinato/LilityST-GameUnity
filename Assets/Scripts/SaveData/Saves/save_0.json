@@ -1,6 +1,6 @@
 {
-    "playTime": 1446.5501708984375,
-    "XPlayer": 200,
+    "playTime": 1575.1221923828125,
+    "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
         "y": 45.70000076293945
@@ -36,16 +36,6 @@
         "ColectItens": [
             {
                 "itemName": "Pedrinha",
-                "itemType": 2,
-                "stackSize": 3
-            },
-            {
-                "itemName": "Moeda",
-                "itemType": 2,
-                "stackSize": 5
-            },
-            {
-                "itemName": "Resina",
                 "itemType": 2,
                 "stackSize": 2
             }
@@ -139,26 +129,12 @@
     },
     "infoData": {
         "infoIDs": [
-            "InfoCreate",
-            "InfoTes1",
-            "InfoTes2"
         ],
         "infoNome": [
-            "LaEle ProMax",
-            "Tes1",
-            "Tes2"
         ],
         "infoCategorias": [
-            1,
-            1,
-            1,
-            0,
-            1
         ],
         "infoDescricoes": [
-            "Essa caça é sua, eu sigo você",
-            "accej fnqwem  wemklkwemk lklf wek nekwlkl ekmlml",
-            "afad a a  ds s ss s s "
         ]
     }
 }

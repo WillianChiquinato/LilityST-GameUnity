@@ -234,6 +234,39 @@ public class inventory_System : MonoBehaviour
         UpdateInventory();
     }
 
+    //Perder os itens quando morrer.
+    public void RemoveItemToDeath(ItemData _item, int quantidade)
+    {
+        if (inventoryDicionary.TryGetValue(_item, out Inventory_item value))
+        {
+            for (int i = 0; i < quantidade; i++)
+            {
+                value.RemoveStack();
+            }
+
+            if (value.stackSize <= 0)
+            {
+                inventory.Remove(value);
+                inventoryDicionary.Remove(_item);
+            }
+        }
+
+        if (collectDicionary.TryGetValue(_item, out Inventory_item collectvalue))
+        {
+            for (int i = 0; i < quantidade; i++)
+            {
+                collectvalue.RemoveStack();
+            }
+
+            if (collectvalue.stackSize <= 0)
+            {
+                collectvalue.ResetStack();
+            }
+        }
+
+        UpdateInventory();
+    }
+
     public bool LimiteItens()
     {
         if (inventory.Count >= inventoryItemSlot.Length)
