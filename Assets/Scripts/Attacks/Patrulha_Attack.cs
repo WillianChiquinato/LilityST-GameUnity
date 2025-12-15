@@ -22,7 +22,7 @@ public class Patrulha_Attack : MonoBehaviour
             Vector2 flipknockback = componentePai.transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
             // ataque ao alvo
-            bool goHit = damage.Hit(attackDamage, flipknockback);
+            bool goHit = damage.Hit(attackDamage, flipknockback, componentePai.transform);
             if (goHit)
             {
                 Debug.Log("AtaqueInimigo");

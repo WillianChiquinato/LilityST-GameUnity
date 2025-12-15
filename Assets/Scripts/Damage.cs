@@ -100,23 +100,27 @@ public class Damage : MonoBehaviour
         }
     }
 
-    public bool Hit(int damage, Vector2 knockback)
+    public bool Hit(int damage, Vector2 knockback, Transform attacker)
     {
-        //Se tomar dano hit é true, senao é false
-        if (IsAlive && !isInvicible)
+        if (!IsAlive || isInvicible)
+            return false;
+
+        // Verifica se esse inimigo pode bloquear
+        IBlockDamage block = GetComponent<IBlockDamage>();
+
+        if (block != null && block.CanBlock(attacker))
         {
-            Health -= damage;
-            isInvicible = true;
-
-            // Criando um evento, para quando for chamado esses 2 parametros, o dano e o knockback
-            animator.SetTrigger(animationstrings.hit);
-            VelocityLock = true;
-            DamageHit?.Invoke(damage, knockback);
-
-            return true;
+            block.OnBlock();
+            return false;
         }
 
-        return false;
-    }
+        Health -= damage;
+        isInvicible = true;
 
+        animator.SetTrigger(animationstrings.hit);
+        VelocityLock = true;
+        DamageHit?.Invoke(damage, knockback);
+
+        return true;
+    }
 }

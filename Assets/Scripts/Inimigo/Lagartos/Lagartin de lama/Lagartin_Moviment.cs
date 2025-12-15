@@ -6,7 +6,6 @@ public class Lagartin_Moviment : PlayerPoco
 {
     [Header("Instancias")]
     private Item_drop dropInimigo;
-    public PlayerMoviment playerMoviment;
     TouchingVariables touching;
 
     public DetectionLagartin attackZona1;
@@ -49,7 +48,6 @@ public class Lagartin_Moviment : PlayerPoco
 
     void Start()
     {
-        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         DamageScript = GetComponent<Damage>();
@@ -63,8 +61,8 @@ public class Lagartin_Moviment : PlayerPoco
 
     void Update()
     {
-        distanciaAttack = Mathf.Abs(transform.position.x - playerMoviment.transform.position.x);
-        direcao = Mathf.Sign(playerMoviment.transform.position.x - transform.position.x);
+        distanciaAttack = Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x);
+        direcao = Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x);
 
         Target = attackZona1.detectColliders.Count > 0;
 
@@ -75,12 +73,13 @@ public class Lagartin_Moviment : PlayerPoco
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 animator.SetBool(animationstrings.Comeco, true);
             }
+            
             if (touching.IsGrouded && canMove)
             {
                 if (!DamageScript.VelocityLock)
                 {
                     attackDetector.SetActive(false);
-                    if (distanciaAttack > 1.5f &&distanciaAttack < 20f)
+                    if (distanciaAttack > 1.5f && distanciaAttack < 20f)
                     {
                         rb.linearVelocity = new Vector2(direcao * speed, rb.linearVelocity.y);
                     }
@@ -99,7 +98,7 @@ public class Lagartin_Moviment : PlayerPoco
     {
         if (touching.IsGrouded)
         {
-            if (transform.position.x > playerMoviment.transform.position.x)
+            if (transform.position.x > GameManager.instance.player.transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
                 animator.SetTrigger(animationstrings.DireitaLagartin);

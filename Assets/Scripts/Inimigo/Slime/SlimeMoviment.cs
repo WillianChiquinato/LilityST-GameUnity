@@ -175,7 +175,7 @@ public class SlimeMoviment : PlayerPoco
                     Vector2 flipknockback = new Vector2(direction * knockbackAttack.x * scaleFactor, knockbackAttack.y);
 
                     // ataque ao alvo
-                    bool goHit = DamageScript.Hit(attackDamage, flipknockback);
+                    bool goHit = DamageScript.Hit(attackDamage, flipknockback, transform);
                     if (goHit)
                     {
                         Debug.Log("AtaqueInimigo");

@@ -77,10 +77,13 @@ public class Savepoint : MonoBehaviour
                 instance.defaultPosition = new Vector2(-81.6f, 26f);
                 break;
             case "SopeInicial":
-                instance.defaultPosition = new Vector2(-132.1f, 24.7f);
+                instance.defaultPosition = new Vector2(-95.1f, 25.7f);
                 break;
             case "Boss&NPC":
                 instance.defaultPosition = new Vector2(2.4f, -39.1f);
+                break;
+            default:
+                instance.defaultPosition = new Vector2(GameManager.instance.playerMoviment.transform.position.x, GameManager.instance.playerMoviment.transform.position.y);
                 break;
         }
 

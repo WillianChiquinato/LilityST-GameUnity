@@ -1,5 +1,5 @@
 {
-    "playTime": 1596.220947265625,
+    "playTime": 1635.7781982421875,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -37,7 +37,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 2
+                "stackSize": 4
             }
         ],
         "isInitialized": true
@@ -128,8 +128,7 @@
         ]
     },
     "infoData": {
-        "infoIDs": [
-        ],
+        "infoIDs": [],
         "infoNome": [
             "Tes2"
         ],

@@ -16,7 +16,7 @@ public class Attack_Queda : MonoBehaviour
             Vector2 flipknockback = transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
 
             // ataque ao alvo
-            bool goHit = damage.Hit(attackDamage, flipknockback);
+            bool goHit = damage.Hit(attackDamage, flipknockback, transform);
             if (goHit)
             {
                 //Estático.

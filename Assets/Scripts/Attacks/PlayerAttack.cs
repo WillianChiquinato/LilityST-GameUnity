@@ -119,7 +119,7 @@ public class PlayerAttack : MonoBehaviour
     private void ApplyDamage(Damage damage)
     {
         Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
-        bool goHit = damage.Hit(attackDamage, flipknockback);
+        bool goHit = damage.Hit(attackDamage, flipknockback, transform.parent);
         if (goHit)
         {
             Debug.Log("AtaqueInimigo");
