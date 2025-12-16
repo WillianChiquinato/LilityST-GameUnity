@@ -53,14 +53,14 @@ MonoBehaviour:
   m_HDREmulationScale: 1
   m_LightRenderTextureScale: 0.5
   m_LightBlendStyles:
-  - name: Multiply
+  - name: BackgroundFrente
     maskTextureChannel: 0
     blendMode: 1
-  - name: Additive
+  - name: Background
     maskTextureChannel: 0
-    blendMode: 0
-  - name: Multiply with Mask
-    maskTextureChannel: 1
+    blendMode: 1
+  - name: Background2
+    maskTextureChannel: 0
     blendMode: 1
   - name: Additive with Mask
     maskTextureChannel: 1

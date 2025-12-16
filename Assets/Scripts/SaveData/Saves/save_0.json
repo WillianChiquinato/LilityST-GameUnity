@@ -1,5 +1,5 @@
 {
-    "playTime": 1635.7781982421875,
+    "playTime": 1694.7115478515625,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -128,11 +128,14 @@
         ]
     },
     "infoData": {
-        "infoIDs": [],
+        "infoIDs": [
+            "InfoTes2"
+        ],
         "infoNome": [
             "Tes2"
         ],
         "infoCategorias": [
+            1,
             1
         ],
         "infoDescricoes": [

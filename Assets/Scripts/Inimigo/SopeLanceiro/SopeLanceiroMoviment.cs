@@ -86,8 +86,8 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         {
             if (!DamageScript.VelocityLock)
             {
-                //Moviment Area.
-                if (distanciaXWalk < 10f)
+                //Moviment Área.
+                if (distanciaXWalk > 1.0f && distanciaXWalk < 10f)
                 {
                     timerBackToHome = 0f;
                     returnedToHome = false;
@@ -96,11 +96,13 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                         isWalking = false;
                         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
 
+                        TravarCorpo();
                         FlipDirecao();
                     }
                     else
                     {
                         PerseguirPlayer();
+                        LiberarCorpo();
                     }
                 }
                 else
@@ -108,7 +110,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                     StateIdle();
                 }
 
-                //Ataque Area.
+                //Ataque Área.
                 if (PlayerNaFrente() && !isAttacking)
                 {
                     EscudoGameObject.SetActive(true);
@@ -225,6 +227,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
     {
         isAttacking = false;
         attackTimer = 0f;
+        TravarCorpo();
     }
 
     public void OnHit(int damage, Vector2 knockback)
@@ -257,7 +260,9 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
     public void AttackStep(float force = 2f)
     {
+        LiberarCorpo();
         if (!touching.IsGrouded) return;
+
 
         isAttackStepping = true;
         DamageScript.VelocityLock = true;
@@ -311,5 +316,16 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         animator.SetTrigger("ShieldBlock");
         // - tocar som
         // - gerar partículas
+    }
+
+    void TravarCorpo()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX
+                       | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void LiberarCorpo()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }
