@@ -3,32 +3,33 @@ using UnityEngine;
 
 public class Quebraveis : MonoBehaviour
 {
-    public Damage damageHit;
+    public GameObject OpenQuebraveis;
 
-    public SpriteRenderer spriteRenderer;
-    public Material newMaterial;
-    public Material originalMaterial;
+    public Damage damageHit;
+    public Animator animator;
+    public int QuantityHealth = 0;
 
     void Start()
     {
+        OpenQuebraveis = transform.GetChild(1).gameObject;
         damageHit = GetComponentInChildren<Damage>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        originalMaterial = spriteRenderer.material;
+        animator = GetComponent<Animator>();
 
-        newMaterial = Resources.Load<Material>("Material/Hit");
+        QuantityHealth = damageHit.Health;
+    }
+
+    void Update()
+    {
+        animator.SetInteger("QuantityHit", QuantityHealth);
+
+        if (QuantityHealth == 0)
+        {
+            Destroy(OpenQuebraveis);
+        }
     }
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        StartCoroutine(OnHitEnemy());
-    }
-
-    IEnumerator OnHitEnemy()
-    {
-        spriteRenderer.material = newMaterial;
-
-        yield return new WaitForSeconds(0.2f);
-
-        spriteRenderer.material = originalMaterial;
+        QuantityHealth --;
     }
 }

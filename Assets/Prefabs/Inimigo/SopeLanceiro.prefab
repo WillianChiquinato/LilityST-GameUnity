@@ -204,7 +204,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   isWalking: 0
   EscudoGameObject: {fileID: 1109356679424985612}
-  homePosition: {fileID: 0}
   distanciaXWalk: 0
   speed: 5
   timerBackToHome: 0
@@ -605,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
-  knockback: {x: -8, y: 12}
+  knockback: {x: -15, y: 15}
   componentePai: {fileID: 0}
 --- !u!1 &2914678894278887526
 GameObject:

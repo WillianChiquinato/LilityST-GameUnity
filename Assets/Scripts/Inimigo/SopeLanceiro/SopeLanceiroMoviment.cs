@@ -14,7 +14,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
     public GameObject EscudoGameObject;
 
     [Header("Variaveis de Movimento")]
-    public GameObject homePosition;
+    private Vector2 homePosition;
     public float distanciaXWalk;
     private float direcao;
     public float speed;
@@ -60,6 +60,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         newMaterial = Resources.Load<Material>("Material/Hit");
 
         EscudoGameObject.SetActive(false);
+        homePosition = transform.position;
     }
 
     void Update()
@@ -159,12 +160,12 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
             return;
         }
 
-        float distanciaHome = Mathf.Abs(transform.position.x - homePosition.transform.position.x);
+        float distanciaHome = Mathf.Abs(transform.position.x - homePosition.x);
 
         if (distanciaHome > 0.2f)
         {
             isWalking = true;
-            float direcaoHome = Mathf.Sign(homePosition.transform.position.x - transform.position.x);
+            float direcaoHome = Mathf.Sign(homePosition.x - transform.position.x);
             rb.linearVelocity = new Vector2(direcaoHome * speed, rb.linearVelocity.y);
 
             // Flip olhando pro home

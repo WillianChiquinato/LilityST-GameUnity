@@ -1,5 +1,5 @@
 {
-    "playTime": 1694.7115478515625,
+    "playTime": 1750.931640625,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -37,7 +37,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 4
+                "stackSize": 5
             }
         ],
         "isInitialized": true
@@ -112,17 +112,17 @@
             "TestStarQuest"
         ],
         "questStepIndices": [
-            0,
+            1,
             0,
             0
         ],
         "questStepStates": [
-            "",
+            "PODE_FINALIZAR",
             "",
             ""
         ],
         "questStates": [
-            "EM_ANDAMENTO",
+            "PODE_FINALIZAR",
             "EM_ANDAMENTO",
             "EM_ANDAMENTO"
         ]
