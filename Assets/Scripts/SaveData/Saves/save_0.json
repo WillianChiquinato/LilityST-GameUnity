@@ -1,5 +1,5 @@
 {
-    "playTime": 1750.931640625,
+    "playTime": 1773.8489990234375,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -16,12 +16,17 @@
     "inventoryData": {
         "MaterialsItens": [
             {
+                "itemName": "DocumentoItem",
+                "itemType": 1,
+                "stackSize": 1
+            },
+            {
                 "itemName": "Goraflix",
                 "itemType": 1,
                 "stackSize": 1
             },
             {
-                "itemName": "DocumentoItem",
+                "itemName": "testeItemNovo",
                 "itemType": 1,
                 "stackSize": 1
             }
@@ -31,6 +36,11 @@
                 "itemName": "RobertFile",
                 "itemType": 0,
                 "stackSize": 1
+            },
+            {
+                "itemName": "Acampamento",
+                "itemType": 0,
+                "stackSize": 1
             }
         ],
         "ColectItens": [
@@ -38,6 +48,11 @@
                 "itemName": "Pedrinha",
                 "itemType": 2,
                 "stackSize": 5
+            },
+            {
+                "itemName": "Moeda",
+                "itemType": 2,
+                "stackSize": 3
             }
         ],
         "isInitialized": true
@@ -65,12 +80,12 @@
         "ChaveVida": [],
         "ChaveCaos": [
             {
-                "fragmentoNome": "ChaveCaos",
+                "fragmentoNome": "ChaveCaos2",
                 "fragmentoType": 3,
                 "stackSize": 1
             },
             {
-                "fragmentoNome": "ChaveCaos2",
+                "fragmentoNome": "ChaveCaos",
                 "fragmentoType": 3,
                 "stackSize": 1
             }
@@ -102,7 +117,7 @@
                 "fragmentos": []
             }
         ],
-        "armaSelecionada": "Arco",
+        "armaSelecionada": "Bastão",
         "isInitialized": true
     },
     "questData": {

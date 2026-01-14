@@ -26,6 +26,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public SlotType slotType;
     public int slotIndex;
+    private bool isSelected = false;
 
     [Header("Animações")]
     private Vector3 originalScale;
@@ -54,6 +55,7 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if (item != null)
         {
             itemImagem.sprite = item.itemData.Icon;
+            itemImagem.GetComponent<Image>().color = Color.white;
             itemTexto.text = item.stackSize > 1 ? item.stackSize.ToString() : "";
         }
         else
@@ -82,10 +84,6 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // if (item == null) return;
-        // if (animRoutine != null) StopCoroutine(animRoutine);
-        // animRoutine = StartCoroutine(PulseEffect());
-
         OnSlotClicked?.Invoke(slotType, slotIndex);
     }
 
@@ -118,34 +116,31 @@ public class Item_SlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         transform.localScale = targetScale;
     }
 
-    private IEnumerator PulseEffect()
+    public void SetSelected(bool selected)
     {
-        Vector3 startScale = transform.localScale;
-        Vector3 peakScale = selectedScale;
+        isSelected = selected;
 
-        float duration = 0.15f;
+        if (animRoutine != null) StopCoroutine(animRoutine);
+
+        Vector3 targetScale = selected ? new Vector3(1.1f, 1.1f, 1.1f) : originalScale;
+        animRoutine = StartCoroutine(AnimateToScale(targetScale));
+    }
+
+    private IEnumerator AnimateToScale(Vector3 targetScale)
+    {
+        float duration = 0.2f;
         float time = 0f;
+        Vector3 startScale = transform.localScale;
 
-        // Expande
         while (time < duration)
         {
             time += Time.unscaledDeltaTime;
             float t = time / duration;
-            transform.localScale = Vector3.Lerp(startScale, peakScale, t);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
             yield return null;
         }
 
-        time = 0f;
-        Vector3 endScale = hoverScale;
-        while (time < duration)
-        {
-            time += Time.unscaledDeltaTime;
-            float t = time / duration;
-            transform.localScale = Vector3.Lerp(peakScale, endScale, t);
-            yield return null;
-        }
-
-        transform.localScale = endScale;
+        transform.localScale = targetScale;
         animRoutine = null;
     }
 

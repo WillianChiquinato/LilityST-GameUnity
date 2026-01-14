@@ -10,7 +10,7 @@ public class Attack_Projetil : MonoBehaviour, Defender
     PlayerMoviment player;
     DroggoScript droggoScript;
 
-    [SerializeField]
+    [field: SerializeField]
     public float returnSpeed { get; set; } = 26f;
 
 

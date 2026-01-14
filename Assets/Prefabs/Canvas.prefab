@@ -381,8 +381,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 383.3, y: 3}
-  m_SizeDelta: {x: 619.19, y: 797.5}
+  m_AnchoredPosition: {x: -76.48, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2866017445632481109
 CanvasRenderer:
@@ -406,13 +406,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c1ea18400d842146b79d8085ea63cd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71ffd3c557ec86641bb25983dc57e21f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -684,6 +684,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1038,6 +1039,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1401,6 +1403,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2178,6 +2181,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2652,8 +2656,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 383.3, y: 3}
-  m_SizeDelta: {x: 619.19, y: 797.5}
+  m_AnchoredPosition: {x: -76.48, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6238779754972844744
 CanvasRenderer:
@@ -2677,13 +2681,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c1ea18400d842146b79d8085ea63cd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71ffd3c557ec86641bb25983dc57e21f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3064,6 +3068,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4712,6 +4717,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6276,8 +6282,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 442, y: -18}
+  m_SizeDelta: {x: 574, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5882197241536875512
 Canvas:
@@ -6363,7 +6369,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 18, y: 18}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &3744408250988745557
@@ -6504,6 +6510,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7472,6 +7479,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7800,6 +7808,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8087,6 +8096,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -7.9
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -8578,6 +8588,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -9044,6 +9055,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -9051,7 +9063,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0
-  m_overflowMode: 1
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -9646,8 +9658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 442, y: -18}
+  m_SizeDelta: {x: 574, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6730670707014888875
 Canvas:
@@ -9733,7 +9745,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 18, y: 18}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &5695835258089267247
@@ -10018,6 +10030,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -10186,6 +10199,8 @@ MonoBehaviour:
   - {fileID: 6316972554145913486}
   - {fileID: 3539683446703612075}
   - {fileID: 453651411189991099}
+  selectedSprite: {fileID: 21300000, guid: c6940dd070a090d459579136feb65e2b, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
   selectedIndex: -1
 --- !u!1 &6000615602004141918
 GameObject:
@@ -10831,6 +10846,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11588,8 +11604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 383.3, y: 3}
-  m_SizeDelta: {x: 619.19, y: 797.5}
+  m_AnchoredPosition: {x: -76.48, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7032917514569398866
 CanvasRenderer:
@@ -11613,13 +11629,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c1ea18400d842146b79d8085ea63cd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71ffd3c557ec86641bb25983dc57e21f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11807,6 +11823,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12205,6 +12222,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12629,7 +12647,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &621887642041303041
 CanvasRenderer:
@@ -12787,6 +12805,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12867,8 +12886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 442, y: -18}
+  m_SizeDelta: {x: 574, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1710700681222706453
 Canvas:
@@ -12954,7 +12973,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 18, y: 18}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &7329813592342969828
@@ -13137,6 +13156,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -13144,7 +13164,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0
-  m_overflowMode: 1
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -13273,6 +13293,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -14927,6 +14948,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15274,6 +15296,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15620,6 +15643,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -15917,7 +15941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.69812, y: -1.949707}
+  m_AnchoredPosition: {x: -11.697998, y: -1.949707}
   m_SizeDelta: {x: 155.9692, y: 136.4729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8304435372688099428
@@ -17237,6 +17261,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (6)
@@ -17457,6 +17485,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (11)
@@ -17571,6 +17603,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (7)
@@ -17795,6 +17831,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -17913,6 +17953,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (2)
@@ -18263,6 +18307,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (7)
@@ -18377,6 +18425,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (3)
@@ -18495,6 +18547,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (2)
@@ -18613,6 +18669,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (4)
@@ -18727,6 +18787,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (8)
@@ -18853,7 +18917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.x
-      value: -28.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.y
@@ -18947,6 +19011,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -20031,6 +20099,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -20467,6 +20539,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (5)
@@ -20581,6 +20657,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (5)
@@ -21449,6 +21529,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (10)
@@ -21893,6 +21977,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (12)
@@ -22223,6 +22311,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (7)
@@ -22679,7 +22771,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.x
-      value: -28.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.y
@@ -22781,6 +22873,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: SelectedItemSlot
@@ -23053,7 +23149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.x
-      value: -28.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.y
@@ -23143,6 +23239,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -23375,6 +23475,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -23603,6 +23707,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (4)
@@ -23925,6 +24033,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (8)
@@ -24475,6 +24587,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (2)
@@ -24813,6 +24929,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (8)
@@ -25033,6 +25153,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (13)
@@ -25261,7 +25385,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.x
-      value: -28.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1391478606879952915, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Pivot.y
@@ -25355,6 +25479,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -25795,6 +25923,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (6)
@@ -26345,6 +26477,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (5)
@@ -26459,6 +26595,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (4)
@@ -26679,6 +26819,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (6)
@@ -26797,6 +26941,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (9)
@@ -26915,6 +27063,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (3)
@@ -27461,6 +27613,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5173243328574402439, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a49f8089143ded40a614936be573178, type: 3}
     - target: {fileID: 5634186913840278879, guid: 992de2f31be9fa84ba27fe17514da089, type: 3}
       propertyPath: m_Name
       value: ItemSlot (3)

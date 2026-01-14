@@ -98,6 +98,10 @@ public class PlayerMoviment : MonoBehaviour
     public bool canJump;
     public bool isWallJumping = false;
     public float wallJumpTimer;
+    public float wallJumpControlLockDuration = 0.3f;
+    private float wallJumpControlLockTimer = 0f;
+    public float wallJumpHorizontalForce = 10f;
+    public float wallJumpVerticalForce = 20f;
 
     [Header("Dash States")]
     public bool isDashing;
@@ -490,16 +494,25 @@ public class PlayerMoviment : MonoBehaviour
             if (isWallJumping)
             {
                 wallJumpTimer -= Time.deltaTime;
+                wallJumpControlLockTimer -= Time.deltaTime;
+                
                 if (wallJumpTimer < 0f)
                 {
                     isWallJumping = false;
                     wallJumpTimer = 0.1f;
+                    wallJumpControlLockTimer = 0f;
                     speed = 2f;
                 }
             }
 
+            // Só permite controle se não estiver em walljump OU se o tempo de bloqueio acabou
             if (!isWallJumping && !isDashing)
             {
+                rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+            }
+            else if (isWallJumping && wallJumpControlLockTimer <= 0f && !isDashing)
+            {
+                // Após o tempo de bloqueio, permite controle parcial durante o walljump
                 rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
             }
 
@@ -676,12 +689,19 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && touching.IsOnWall && !touching.IsGrouded)
         {
+            // Determina a direção oposta à parede (impulso automático)
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
-            rb.linearVelocity = new Vector2(jumpDirection * 7f, jumpImpulso);
+            
+            // Aplica força horizontal e vertical automaticamente
+            rb.linearVelocity = new Vector2(jumpDirection * wallJumpHorizontalForce, wallJumpVerticalForce);
 
             coyoteTimeContador = 0f;
             IsJumping = false;
             isWallJumping = true;
+            
+            // Inicia o timer de bloqueio de controle
+            wallJumpControlLockTimer = wallJumpControlLockDuration;
+            
             animacao.SetTrigger(animationstrings.jump);
         }
     }

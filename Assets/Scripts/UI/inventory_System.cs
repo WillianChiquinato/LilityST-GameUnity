@@ -58,6 +58,25 @@ public class inventory_System : MonoBehaviour
         documentosItemSlot = documentosSlotParent.GetComponentsInChildren<Item_SlotUI>();
         coletaveisItemSlot = coletaveisSlotParent.GetComponentsInChildren<Item_SlotUI>();
 
+        // Inicializar slot types
+        for (int i = 0; i < inventoryItemSlot.Length; i++)
+        {
+            inventoryItemSlot[i].slotType = SlotType.Comum;
+            inventoryItemSlot[i].slotIndex = i;
+        }
+
+        for (int i = 0; i < documentosItemSlot.Length; i++)
+        {
+            documentosItemSlot[i].slotType = SlotType.Quest;
+            documentosItemSlot[i].slotIndex = i;
+        }
+
+        for (int i = 0; i < coletaveisItemSlot.Length; i++)
+        {
+            coletaveisItemSlot[i].slotType = SlotType.Coletavel;
+            coletaveisItemSlot[i].slotIndex = i;
+        }
+
         int currentSlot = GameManager.currentSaveSlot;
 
         var loadedData = SaveManager.Load(currentSlot);
@@ -115,6 +134,7 @@ public class inventory_System : MonoBehaviour
         for (int i = 0; i < coletaveisItemSlot.Length; i++)
         {
             coletaveisItemSlot[i].slotIndex = i;
+            coletaveisItemSlot[i].slotType = SlotType.Coletavel;
             coletaveisItemSlot[i].CleanUpSlot();
         }
 

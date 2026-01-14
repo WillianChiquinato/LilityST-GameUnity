@@ -27,7 +27,7 @@ public class PlayerItemDrop : Item_drop
         {
             if (Random.Range(0, 100) <= item.dropChance)
             {
-                DropItem(item);
+                // DropItem(item);
                 inventory_System.instance.RemoveItemToDeath(item, 1);
                 droppedItems.Add(item);
             }

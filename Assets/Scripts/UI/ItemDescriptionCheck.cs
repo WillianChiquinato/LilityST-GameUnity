@@ -12,6 +12,10 @@ public class ItemDescriptionCheck : MonoBehaviour
     private Item_SlotUI[] slotsComunsUI;
     private Item_SlotUI[] slotsQuestUI;
 
+    public Sprite selectedSprite;
+    public Sprite defaultSprite;
+
+    private Item_SlotUI currentSelectedSlot = null;
     public int selectedIndex = -1;
 
     void Awake()
@@ -49,17 +53,40 @@ public class ItemDescriptionCheck : MonoBehaviour
 
     public void OnSlotSelected(SlotType tipo, int slotIndex)
     {
+        Item_SlotUI[] slots = null;
+        int paginaIndex = 0;
+
         switch (tipo)
         {
             case SlotType.Comum:
-                AtualizarDescricao(0, slotsComunsUI, slotIndex);
+                slots = slotsComunsUI;
+                paginaIndex = 0;
                 break;
             case SlotType.Coletavel:
-                AtualizarDescricao(1, slotsColetaveisUI, slotIndex);
+                slots = slotsColetaveisUI;
+                paginaIndex = 1;
                 break;
             case SlotType.Quest:
-                AtualizarDescricao(2, slotsQuestUI, slotIndex);
+                slots = slotsQuestUI;
+                paginaIndex = 2;
                 break;
+        }
+
+        if (slots != null && slotIndex >= 0 && slotIndex < slots.Length)
+        {
+            // Desselecionar o slot anterior
+            if (currentSelectedSlot != null)
+            {
+                currentSelectedSlot.SetSelected(false);
+                currentSelectedSlot.GetComponent<Image>().sprite = defaultSprite;
+            }
+
+            // Selecionar o novo slot
+            currentSelectedSlot = slots[slotIndex];
+            currentSelectedSlot.SetSelected(true);
+            currentSelectedSlot.GetComponent<Image>().sprite = selectedSprite;
+
+            AtualizarDescricao(paginaIndex, slots, slotIndex);
         }
     }
 

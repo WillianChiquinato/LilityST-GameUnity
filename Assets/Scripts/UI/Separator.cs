@@ -36,7 +36,7 @@ public static class HierarchySeparatorManager
 
     private static void CustomizeHierarchy(int instanceID, Rect selectionRect)
     {
-        GameObject obj = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
+        GameObject obj = EditorUtility.EntityIdToObject(instanceID) as GameObject;
 
         // Verifica se o objeto possui o componente Separator
         if (obj == null) return;
