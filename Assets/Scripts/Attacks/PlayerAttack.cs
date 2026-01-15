@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
 
             PlayerPoco attack = collision.GetComponent<PlayerPoco>();
 
-            ApplyDamage(damage);
+            ApplyDamage(damage, collision.transform);
             ApplyPlayerKnockback();
 
             if (attack != null)
@@ -77,7 +77,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (AttackPoco.giveUpwardForce)
         {
-            if (Input.GetKey(KeyCode.W) && !PlayerCaracter.touching.IsGrouded)
+            if (Input.GetKey(KeyCode.W))
             {
                 direction = Vector2.down;
                 downwardStrike = true;
@@ -116,18 +116,25 @@ public class PlayerAttack : MonoBehaviour
         downwardStrike = false;
     }
 
-    private void ApplyDamage(Damage damage)
+    private void ApplyDamage(Damage damage, Transform target)
     {
-        Vector2 flipknockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
+        Vector2 flipknockback = transform.parent.localScale.x > 0
+            ? knockback
+            : new Vector2(-knockback.x, knockback.y);
+
         bool goHit = damage.Hit(attackDamage, flipknockback, transform.parent);
+
         if (goHit)
         {
             Debug.Log("AtaqueInimigo");
-        }
 
-        if (hitEffect == null)
-        {
-            hitEffect = Instantiate(hitEffectPrefab, hitEffectPosition.transform.position, Quaternion.identity);
+            // Spawna o efeito diretamente em cima do inimigo
+            GameObject hitEffect = Instantiate(
+                hitEffectPrefab,
+                target.position,
+                Quaternion.identity
+            );
+
             Destroy(hitEffect, 0.3f);
         }
     }

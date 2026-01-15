@@ -23,6 +23,9 @@ public class EstatuaDrop : MonoBehaviour
         {
             if (GameManager.instance.playerMoviment.entrar)
             {
+                GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+                GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+                
                 EstatuaSystem.Instance.RecoverEstatua(this);
                 Debug.LogWarning("Estátua recuperada!");
             }

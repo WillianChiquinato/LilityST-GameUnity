@@ -7,6 +7,7 @@ public class Alavancas : MonoBehaviour
     public float timerDuration;
     public float timerTiles = 0f;
     public Vector3 offset;
+    public bool alavancaReset = false;
 
     [Header("References")]
     public PlayerMoviment playerMoviment;
@@ -15,17 +16,11 @@ public class Alavancas : MonoBehaviour
     public Tile_AlavancaScript[] tile_AlavancaScript;
     public GameObject objetoSumir;
 
-    void Start()
-    {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        animator = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-    void Update()
+    protected virtual void Update()
     {
         if (TilesBool)
         {
+            alavancaReset = true;
             timerTiles -= Time.deltaTime;
 
             if (tile_AlavancaScript.Length == 0)
@@ -54,17 +49,17 @@ public class Alavancas : MonoBehaviour
             if (timerTiles <= 0f)
             {
                 TilesBool = false;
-                ResetarTiles();
+                ResetarTilesAndAlavanca();
             }
         }
         else
         {
             timerTiles = timerDuration;
-            ResetarTiles();
+            ResetarTilesAndAlavanca();
         }
     }
 
-    void ResetarTiles()
+    void ResetarTilesAndAlavanca()
     {
         foreach (var objeto in tile_AlavancaScript)
         {
@@ -74,6 +69,7 @@ public class Alavancas : MonoBehaviour
         }
 
         animator.SetBool("Ativado", false);
+        alavancaReset = false;
         this.boxCollider.enabled = true;
     }
 

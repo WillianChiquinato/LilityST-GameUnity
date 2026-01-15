@@ -4,7 +4,6 @@ using UnityEngine;
 public class FilhoteDragão : MonoBehaviour
 {
     [Header("Instacias")]
-    public PlayerMoviment playerMoviment;
     public GameObject playerMovimentFilhote;
     public Vector3 OffSetFilhote;
     public GameObject boxColliderFuga;
@@ -51,11 +50,11 @@ public class FilhoteDragão : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         boxColliderFuga = transform.GetChild(3).gameObject;
+        playerMovimentFilhote = GameManager.instance.player.transform.GetChild(13).gameObject;
         posicaoInicial = playerMovimentFilhote.transform.localPosition;
     }
 
@@ -85,8 +84,8 @@ public class FilhoteDragão : MonoBehaviour
             targetObjects = null;
             RaycastHit2D groundFrontFuga = Physics2D.Raycast((Vector2)groundCheckObject.transform.position, Vector2.right * direcao, 1f, groundCheck);
 
-            distanciaPlayer = Vector2.Distance(transform.position, playerMoviment.transform.position);
-            float direcaoTarget = Mathf.Sign(transform.position.x - playerMoviment.transform.position.x);
+            distanciaPlayer = Vector2.Distance(transform.position, GameManager.instance.player.transform.position);
+            float direcaoTarget = Mathf.Sign(transform.position.x - GameManager.instance.player.transform.position.x);
 
             // Ajustar a velocidade: quanto mais próximo, mais rápido
             float velocidade = speed + (8f / (distanciaPlayer + 0.5f));
@@ -173,12 +172,7 @@ public class FilhoteDragão : MonoBehaviour
         if (LilityPegarFilhote)
         {
             targetObjects = null;
-
             animator.SetBool("FilhotePegado", true);
-            for (int i = 0; i <= 4; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
 
             transform.position = playerMovimentFilhote.transform.position + OffSetFilhote;
             if (progresso < 1.5f)
@@ -192,10 +186,10 @@ public class FilhoteDragão : MonoBehaviour
             TimerFindObject = 0f;
             boxColliderFuga.GetComponent<BoxCollider2D>().enabled = false;
 
-            transform.localScale = new Vector3(playerMoviment.transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(GameManager.instance.player.transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
             // Se o jogador quiser deixar o filhote
-            if (playerMoviment.entrar && progresso >= 1f)
+            if (GameManager.instance.player.entrar && progresso >= 1f)
             {
                 filhoteDevolver = true;
             }

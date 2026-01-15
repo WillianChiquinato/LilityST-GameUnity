@@ -272,7 +272,7 @@ public class FadaMoviment : PlayerPoco
         }
         else
         {
-            rb.gravityScale = 0.2f;
+            rb.gravityScale = 1f;
             rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
         }
         StartCoroutine(OnHitEnemy());

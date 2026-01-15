@@ -11,7 +11,6 @@ public class Damage : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    //Teste
     private int _maxHealth = 4;
 
     public int maxHealth
@@ -122,5 +121,11 @@ public class Damage : MonoBehaviour
         DamageHit?.Invoke(damage, knockback);
 
         return true;
+    }
+
+    public void Reset()
+    {
+        Health = maxHealth;
+        IsAlive = true;
     }
 }

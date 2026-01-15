@@ -4,12 +4,19 @@ using UnityEngine;
 public class FilhotePegar : MonoBehaviour
 {
     public FilhoteDragão filhoteDragão;
-    public TextMeshPro textoFilhote;
-
     void Awake()
     {
         filhoteDragão = GameObject.FindFirstObjectByType<FilhoteDragão>();
-        textoFilhote = GetComponentInChildren<TextMeshPro>();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(transform);
+            GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = transform.position + new Vector3(0, 1.2f, 0);
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", true);
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -18,17 +25,17 @@ public class FilhotePegar : MonoBehaviour
         {
             if (filhoteDragão.rb.linearVelocity.x == 0)
             {
-                textoFilhote.text = "Pressione E para pegar o filhote";
-                if (filhoteDragão.playerMoviment.entrar && filhoteDragão.rb.linearVelocity.x <= 0)
+                if (GameManager.instance.player.entrar && filhoteDragão.rb.linearVelocity.x <= 0)
                 {
                     filhoteDragão.TimerFindObject = 0f;
-                    filhoteDragão.playerMoviment.animacao.SetBool("IsFilhote", true);
+                    GameManager.instance.player.animacao.SetBool("IsFilhote", true);
                     filhoteDragão.LilityPegarFilhote = true;
                 }
             }
             else
             {
-                textoFilhote.text = "";
+                GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+                GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
             }
         }
     }
@@ -37,7 +44,8 @@ public class FilhotePegar : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            textoFilhote.text = "";
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         }
     }
 }

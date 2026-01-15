@@ -2,13 +2,31 @@ using UnityEngine;
 
 public class AlavancaScript : Alavancas
 {
-    protected override void OnTriggerStay2D(Collider2D collision)
+    public Damage damageOpenAlavanca;
+
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Player") && playerMoviment.entrar)
+        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        damageOpenAlavanca = GetComponent<Damage>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (!damageOpenAlavanca.IsAlive)
         {
             animator.SetBool("Ativado", true);
             TilesBool = true;
             this.boxCollider.enabled = false;
+            //Sound here.
+        }
+
+        if (alavancaReset)
+        {
+            damageOpenAlavanca.Reset();
         }
     }
 }

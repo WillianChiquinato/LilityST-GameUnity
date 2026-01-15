@@ -1,5 +1,5 @@
 {
-    "playTime": 1773.8489990234375,
+    "playTime": 1892.72998046875,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -16,29 +16,19 @@
     "inventoryData": {
         "MaterialsItens": [
             {
-                "itemName": "DocumentoItem",
-                "itemType": 1,
-                "stackSize": 1
-            },
-            {
                 "itemName": "Goraflix",
                 "itemType": 1,
                 "stackSize": 1
             },
             {
-                "itemName": "testeItemNovo",
+                "itemName": "DocumentoItem",
                 "itemType": 1,
-                "stackSize": 1
+                "stackSize": 2
             }
         ],
         "DocumentsItens": [
             {
                 "itemName": "RobertFile",
-                "itemType": 0,
-                "stackSize": 1
-            },
-            {
-                "itemName": "Acampamento",
                 "itemType": 0,
                 "stackSize": 1
             }
@@ -47,12 +37,12 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 5
+                "stackSize": 3
             },
             {
                 "itemName": "Moeda",
                 "itemType": 2,
-                "stackSize": 3
+                "stackSize": 1
             }
         ],
         "isInitialized": true

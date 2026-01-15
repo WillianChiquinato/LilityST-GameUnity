@@ -57,6 +57,8 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
+        GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+        GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         GetComponent<RicocheteItens>().countBatidas = 0;
 
         isItemPegado = true;
@@ -73,7 +75,6 @@ public class ItemObject : MonoBehaviour
             return;
         }
 
-        GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
         Destroy(this.gameObject);
     }
 

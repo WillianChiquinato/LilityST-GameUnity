@@ -46,6 +46,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8571775693450579417
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64,6 +65,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,9 +88,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e0373d04d9bf4d540a76e528cd89b8f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,7 +102,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &7905021407527829615
 CapsuleCollider2D:
@@ -133,8 +137,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03151703, y: -0.98004055}
-  m_Size: {x: 1.8358917, y: 2.8492336}
+  m_Offset: {x: 0.1821785, y: -1.1123276}
+  m_Size: {x: 1.8969345, y: 2.5846596}
   m_Direction: 0
 --- !u!50 &3972724927153453757
 Rigidbody2D:
@@ -404,8 +408,8 @@ PolygonCollider2D:
       - {x: -14.498176, y: -0.90002847}
       - {x: -14.120567, y: -1.5218468}
       - {x: -11.575951, y: -1.7130127}
-      - {x: -7.1750574, y: -1.354885}
-      - {x: -9.654539, y: -0.7838037}
+      - {x: -10.480584, y: -1.4223441}
+      - {x: -10.27854, y: -0.59828925}
       - {x: -11.501435, y: -0.3661633}
   m_UseDelaunayMesh: 0
 --- !u!114 &5627180023329964654
@@ -420,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c62887fdee05824ba9df5208642a4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
+  attackDamage: 1
   knockback: {x: -4, y: 2}
   componentePai: {fileID: 0}
 --- !u!1 &1109356679424985612
@@ -489,7 +493,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.62570953, y: -1.0914726}
+  m_Offset: {x: -0.62570953, y: -1.1652222}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -499,7 +503,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8588562, y: 2.505455}
+  m_Size: {x: 0.8588562, y: 2.357956}
   m_EdgeRadius: 0
 --- !u!1 &2349579510269464744
 GameObject:
@@ -584,10 +588,10 @@ PolygonCollider2D:
       - {x: -14.112868, y: -0.07882714}
       - {x: -13.482903, y: -1.4773598}
       - {x: -11.027267, y: -2.1430626}
-      - {x: -8.831245, y: -1.628088}
-      - {x: -7.99067, y: -0.8062018}
-      - {x: -9.083008, y: 0.2993641}
-      - {x: -6.4191513, y: 1.7673512}
+      - {x: -10.0275955, y: -1.8656368}
+      - {x: -10.052873, y: -0.6274947}
+      - {x: -9.622688, y: 0.48487854}
+      - {x: -7.749962, y: 2.7289886}
       - {x: -8.980696, y: 3.933079}
       - {x: -11.5495615, y: 3.7972069}
   m_UseDelaunayMesh: 0
@@ -603,7 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c62887fdee05824ba9df5208642a4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
+  attackDamage: 1
   knockback: {x: -15, y: 15}
   componentePai: {fileID: 0}
 --- !u!1 &2914678894278887526
@@ -704,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c62887fdee05824ba9df5208642a4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
+  attackDamage: 1
   knockback: {x: -1, y: 1}
   componentePai: {fileID: 0}
 --- !u!1 &5914123258429477467
