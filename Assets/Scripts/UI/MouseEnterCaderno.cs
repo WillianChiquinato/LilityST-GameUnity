@@ -14,11 +14,15 @@ public class MouseEnterCaderno : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public bool isHovered = false;
 
     public bool isSelected = false;
+    public bool isUiSlots = false;
 
-    void Awake()
+    void Start()
     {
         originalScale = Vector3.one;
-        originalPosition = transform.localPosition;
+        if (!isUiSlots)
+        {
+            originalPosition = transform.localPosition;  
+        }
     }
 
     void Update()
