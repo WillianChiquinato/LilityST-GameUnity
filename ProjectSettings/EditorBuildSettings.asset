@@ -30,12 +30,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Cena-MONTANHA/Boss&NPC.unity
     guid: 03972a7b1b5398a448c8123649601e82
   - enabled: 1
+    path: Assets/Scenes/Mapa.unity
+    guid: 8b021f63d394495488b29320e540b59d
+  - enabled: 0
     path: Assets/Scenes/Introducao.unity
     guid: d76b2fb99ea61ba45972d19317dd75c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NPCs.unity
     guid: 4278abfdeb57ca3499f8511872bab1d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Green_phase.unity
     guid: 262d83753fe4d4646a4447c346fa7a78
   - enabled: 0

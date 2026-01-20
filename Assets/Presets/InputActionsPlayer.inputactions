@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputActionsPlayer",
     "maps": [
         {
@@ -18,7 +19,7 @@
                     "name": "Look",
                     "type": "Value",
                     "id": "90a98bdc-e809-47aa-a73a-22afce986097",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": true
@@ -36,7 +37,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "237b2136-e4a0-4101-af94-4eec311935f4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -72,6 +73,15 @@
                     "name": "OpenTab",
                     "type": "Button",
                     "id": "7e2a4173-aca7-45b3-998f-25c33e955fc8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Map",
+                    "type": "Button",
+                    "id": "f07bf602-839a-4b48-ac35-d96332f3107c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -173,7 +183,7 @@
                     "path": "<Keyboard>/E",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -241,6 +251,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a0835fb-9b68-4874-b9b1-c3638c97b704",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Map",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

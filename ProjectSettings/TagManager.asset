@@ -54,7 +54,7 @@ TagManager:
   - Itens
   - Ladder
   - Ricochete
-  - 
+  - Map
   - 
   - 
   - 
@@ -103,6 +103,9 @@ TagManager:
     locked: 0
   - name: Overlay
     uniqueID: 2846563553
+    locked: 0
+  - name: Map
+    uniqueID: 847009155
     locked: 0
   - name: transicoes
     uniqueID: 46218139

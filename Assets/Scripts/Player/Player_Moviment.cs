@@ -120,6 +120,9 @@ public class PlayerMoviment : MonoBehaviour
     public bool OpenCaderno = false;
     public bool canOpenCaderno = true;
 
+    [Header("Map")]
+    public bool isMapOpened = false;
+
     public float attackCooldown
     {
         get
@@ -306,6 +309,15 @@ public class PlayerMoviment : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
+
+        StartCoroutine(LoadingMap());
+    }
+
+    IEnumerator LoadingMap()
+    {
+        yield return new WaitForSeconds(0.6f);
+        //Map
+        MapBridge.Instance.playerWorld = this.transform;
     }
 
     private void Update()
@@ -710,7 +722,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (SaveData.Instance.powerUps.Contains(PowerUps.Bastao) && IsAlive)
         {
-            if (context.performed && !arcoEffect && !OpenCaderno)
+            if (context.performed && !arcoEffect && !OpenCaderno && !isMapOpened)
             {
                 Atacar = true;
                 if (touching.IsGrouded)
@@ -756,7 +768,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnPowers(InputAction.CallbackContext context)
     {
-        if (context.started && !OpenCaderno)
+        if (context.started && !OpenCaderno && !isMapOpened)
         {
             //Para o Arco.
             if (SaveData.Instance.powerUps.Contains(PowerUps.Arco) && !wallSlide)
@@ -856,7 +868,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (context.started && !arcoEffect && !OpenCaderno)
+        if (context.started && !arcoEffect && !OpenCaderno && !isMapOpened)
         {
             entrar = true;
         }
@@ -868,7 +880,7 @@ public class PlayerMoviment : MonoBehaviour
 
     public void OnHealing(InputAction.CallbackContext context)
     {
-        if (context.started && touching.IsGrouded && healingTimer >= 2)
+        if (context.started && touching.IsGrouded && healingTimer >= 2 && !isMapOpened)
         {
             if (!arcoEffect && !OpenCaderno)
             {
