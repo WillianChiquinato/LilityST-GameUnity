@@ -119,6 +119,7 @@ public class PlayerMoviment : MonoBehaviour
     [Header("OpenTab")]
     public bool OpenCaderno = false;
     public bool canOpenCaderno = true;
+    public bool OpenMapBool = false;
 
     [Header("Map")]
     public bool isMapOpened = false;
@@ -330,6 +331,7 @@ public class PlayerMoviment : MonoBehaviour
         SaveData.Instance.playTime += Time.deltaTime;
         animacao.SetInteger(animationstrings.counterAtt, ataqueCounterAtual);
         animacao.SetBool("OpenTab", OpenCaderno);
+        animacao.SetBool("OpenMap", OpenMapBool);
 
         LastLocationSpawn = Physics2D.Raycast(lilithSpawnPoint.transform.position, Vector2.down, 0.4f, LayerMask.GetMask("Ground"));
         Debug.DrawRay(lilithSpawnPoint.transform.position, Vector2.down * 0.4f, Color.red);

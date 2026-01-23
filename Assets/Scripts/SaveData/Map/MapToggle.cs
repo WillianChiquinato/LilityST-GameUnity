@@ -22,7 +22,7 @@ public class MapToggle : MonoBehaviour
             .transform
             .parent
             .GetComponentInChildren<CanvasGroup>(true);
-    
+
         mapUI = ui;
 
         mapCamera.enabled = false;
@@ -33,11 +33,11 @@ public class MapToggle : MonoBehaviour
         mapToggleMode = FindFirstObjectByType<MapToggleMode>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        if (GameManager.instance != null)
+        if (GameManager.instance != null && mapCamera != null)
         {
-            GameManager.instance.player.isMapOpened = mapCamera.enabled; 
+            GameManager.instance.player.isMapOpened = mapCamera.enabled;
         }
     }
 
@@ -45,20 +45,34 @@ public class MapToggle : MonoBehaviour
     {
         if (context.performed)
         {
-            mapCamera.enabled = !mapCamera.enabled;
             if (!mapCamera.enabled)
             {
-                StartCoroutine(GameManager.instance.FadeInCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.4f));
-                StartCoroutine(GameManager.instance.FadeOutCanvasGroup(mapUI, 0.4f));
+                GameManager.instance.player.OpenMapBool = true;
+                Invoke("OpenMapAnim", 1.4f);
+                return;
+            }
 
-                mapToggleMode.freeMoveEnabled = false;
-                GameManager.instance.player.canMove = true;
-            }
-            else
-            {
-                StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.4f));
-                StartCoroutine(GameManager.instance.FadeInCanvasGroup(mapUI, 0.4f));
-            }
+            OpenMapAnim();
+        }
+    }
+
+    public void OpenMapAnim()
+    {
+        GameManager.instance.player.canMove = true;
+        GameManager.instance.player.OpenMapBool = false;
+
+        mapCamera.enabled = !mapCamera.enabled;
+        if (!mapCamera.enabled)
+        {
+            StartCoroutine(GameManager.instance.FadeInCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.4f));
+            StartCoroutine(GameManager.instance.FadeOutCanvasGroup(mapUI, 0.4f));
+
+            mapToggleMode.freeMoveEnabled = false;
+        }
+        else
+        {
+            StartCoroutine(GameManager.instance.FadeOutCanvasGroup(GameManager.instance.GUI.GetComponent<CanvasGroup>(), 0.4f));
+            StartCoroutine(GameManager.instance.FadeInCanvasGroup(mapUI, 0.4f));
         }
     }
 }

@@ -13,7 +13,8 @@ public enum PuzzlePieceType
     LegRight,
     LegDownRight,
     LegDownLeft,
-    FinalPiece
+    FinalPiece,
+    None
 }
 
 public class PuzzleSystem : MonoBehaviour
