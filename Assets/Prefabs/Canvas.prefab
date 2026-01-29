@@ -1755,6 +1755,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!114 &2254262338523868435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,6 +3500,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!114 &3649976975135014399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6863,6 +6865,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1 &3919566119825259645
 GameObject:
   m_ObjectHideFlags: 0
@@ -7039,6 +7042,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!114 &2119830530151930502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10519,6 +10523,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1 &6083870443800861056
 GameObject:
   m_ObjectHideFlags: 0
@@ -11019,6 +11024,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1 &6293009082992201756
 GameObject:
   m_ObjectHideFlags: 0
@@ -13727,6 +13733,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1 &7560699144811117867
 GameObject:
   m_ObjectHideFlags: 0
@@ -14832,6 +14839,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!114 &5765198062615184879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15892,6 +15900,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!114 &2476902631215641691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16156,6 +16165,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1 &8514135147754698561
 GameObject:
   m_ObjectHideFlags: 0
@@ -16839,6 +16849,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   isHovered: 0
   isSelected: 0
+  isUiSlots: 0
 --- !u!1001 &12464060036626548
 PrefabInstance:
   m_ObjectHideFlags: 0
