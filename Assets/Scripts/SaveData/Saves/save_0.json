@@ -1,5 +1,5 @@
 {
-    "playTime": 1892.72998046875,
+    "playTime": 1949.4593505859375,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -23,7 +23,7 @@
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
-                "stackSize": 2
+                "stackSize": 1
             }
         ],
         "DocumentsItens": [
@@ -36,11 +36,6 @@
         "ColectItens": [
             {
                 "itemName": "Pedrinha",
-                "itemType": 2,
-                "stackSize": 3
-            },
-            {
-                "itemName": "Moeda",
                 "itemType": 2,
                 "stackSize": 1
             }

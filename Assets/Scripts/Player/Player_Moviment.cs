@@ -912,7 +912,7 @@ public class PlayerMoviment : MonoBehaviour
         }
 
         // Quando o botão for pressionado
-        if (context.started && touching.IsGrouded && !arcoEffect)
+        if (context.started && touching.IsGrouded && !arcoEffect && !isMapOpened)
         {
             if (canOpenCaderno)
             {

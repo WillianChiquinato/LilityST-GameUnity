@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 175242638686716585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.67, y: 0.52, z: 0}
+  m_LocalPosition: {x: 1.956, y: 0.476, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -870,6 +870,7 @@ GameObject:
   - component: {fileID: 2785946920860732403}
   - component: {fileID: 878990692150599985}
   - component: {fileID: 8014262254239817579}
+  - component: {fileID: 4711106220008672630}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Player
@@ -932,7 +933,7 @@ MonoBehaviour:
   numeroDeAttcks: 3
   Reset: 0
   ResetTimer: 0
-  ResetTimerLimite: 0.7
+  ResetTimerLimite: 0.5
   potion_Script: {fileID: 0}
   healing: 0
   healingTimer: 2
@@ -990,6 +991,8 @@ MonoBehaviour:
   camerafollowObject: {fileID: 0}
   OpenCaderno: 0
   canOpenCaderno: 1
+  OpenMapBool: 0
+  isMapOpened: 0
   _IsMoving: 0
   _IsRunning: 0
   _IsAcordada: 0
@@ -1332,6 +1335,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7e2a4173-aca7-45b3-998f-25c33e955fc8
     m_ActionName: 'Player/OpenTab[/Keyboard/tab]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4711106220008672630}
+        m_TargetAssemblyTypeName: MapToggle, Assembly-CSharp
+        m_MethodName: OnMap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f07bf602-839a-4b48-ac35-d96332f3107c
+    m_ActionName: 'Player/Map[/Keyboard/capsLock]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1430,7 +1449,7 @@ MonoBehaviour:
   _maxHealth: 3
   _health: 3
   isInvicible: 0
-  invicibilityTimer: 0.5
+  invicibilityTimer: 0.35
   _IsAlive: 1
 --- !u!114 &8028374232826561430
 MonoBehaviour:
@@ -1470,7 +1489,7 @@ MonoBehaviour:
   podeCriar: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8256
 --- !u!114 &2785946920860732403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,6 +1584,21 @@ MonoBehaviour:
     - rid: 2024483881117024413
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &4711106220008672630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793249064160061137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d317c93df9a8ae24c8aeb7b5831a6a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapToggle
+  mapCamera: {fileID: 0}
+  mapUI: {fileID: 0}
+  mapToggleMode: {fileID: 0}
 --- !u!1 &2877492617240880508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,16 +1763,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.0563507, y: 1.499054}
-      - {x: 0.09329313, y: 1.6354043}
-      - {x: 1.7034302, y: 1.2886257}
-      - {x: 2.1407013, y: 0.5893917}
-      - {x: 1.4108582, y: 0.0025196075}
-      - {x: 0.23051453, y: -0.14122391}
-      - {x: 1.4377275, y: -0.2088641}
-      - {x: 2.6529846, y: 0.105112076}
-      - {x: 2.8451705, y: 0.54132295}
-      - {x: 2.6526556, y: 1.060606}
+    - - {x: 1.751091, y: 0.84584045}
+      - {x: 0.5520486, y: 0.5428388}
+      - {x: 0.4659958, y: 0.4012947}
+      - {x: 1.3559875, y: 0.5109215}
+      - {x: 0.27603912, y: 0.1836071}
+      - {x: -0.5125084, y: 0.09592247}
+      - {x: -0.6568146, y: -0.0989418}
+      - {x: 0.5922723, y: -0.08655155}
+      - {x: 1.566452, y: 0.03271103}
+      - {x: 2.094705, y: 0.4221003}
+      - {x: 2.025302, y: 0.73635674}
   m_UseDelaunayMesh: 0
 --- !u!114 &5337161730996367925
 MonoBehaviour:
@@ -1756,7 +1791,7 @@ MonoBehaviour:
   hitEffectPosition: {fileID: 175242638686716585}
   hitEffect: {fileID: 0}
   attackReverseKnockback: 1
-  playerKnockForce: 2
+  playerKnockForce: 1
   playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
@@ -1789,7 +1824,7 @@ Transform:
   m_GameObject: {fileID: 3352491929287953468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.67, y: 0.52, z: 0}
+  m_LocalPosition: {x: 1.806, y: 0.661, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2016,7 +2051,7 @@ MonoBehaviour:
   hitEffectPosition: {fileID: 498604538243474262}
   hitEffect: {fileID: 0}
   attackReverseKnockback: 0
-  playerKnockForce: 5
+  playerKnockForce: 0.7
   playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15
@@ -2104,12 +2139,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.1949463, y: 0.7020359}
-      - {x: 1.5967789, y: 1.148222}
-      - {x: 2.0886621, y: 0.25406435}
-      - {x: 1.534514, y: -0.51930606}
-      - {x: 3.228868, y: -0.088107824}
-      - {x: 3.8751135, y: 0.35618013}
+    - - {x: 1.1768761, y: 1.3690395}
+      - {x: 0.3689537, y: 1.3245583}
+      - {x: 0.48857594, y: 0.11038378}
+      - {x: 1.1426606, y: -0.7348269}
+      - {x: 1.7320557, y: -0.75107}
+      - {x: 1.9677138, y: -0.4393003}
+      - {x: 2.0082474, y: 0.3943615}
+      - {x: 1.7853994, y: 1.0271797}
   m_UseDelaunayMesh: 0
 --- !u!114 &5218081472675124013
 MonoBehaviour:
@@ -2600,7 +2637,7 @@ Transform:
   m_GameObject: {fileID: 5803261644193200837}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.7, y: 0.34, z: 0}
+  m_LocalPosition: {x: 1.97, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2864,16 +2901,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.0563507, y: 1.499054}
-      - {x: 0.09329313, y: 1.6354043}
-      - {x: 1.7034302, y: 1.2886257}
-      - {x: 2.1407013, y: 0.5893917}
-      - {x: 1.4108582, y: 0.0025196075}
-      - {x: 0.23051453, y: -0.14122391}
-      - {x: 1.4377275, y: -0.2088641}
-      - {x: 2.6529846, y: 0.105112076}
-      - {x: 2.8451705, y: 0.54132295}
-      - {x: 2.6526556, y: 1.060606}
+    - - {x: 2.1281662, y: 0.6134796}
+      - {x: 2.0491266, y: 0.9350755}
+      - {x: 1.4102631, y: 0.8679466}
+      - {x: -0.33753967, y: 0.5860691}
+      - {x: -0.48480225, y: 0.34279823}
+      - {x: 0.5550308, y: 0.52471924}
+      - {x: -0.08135605, y: 0.3084488}
+      - {x: 1.4327073, y: 0.4624864}
   m_UseDelaunayMesh: 0
 --- !u!114 &5813153462711806145
 MonoBehaviour:
@@ -2891,7 +2926,7 @@ MonoBehaviour:
   hitEffectPosition: {fileID: 3352491929287953468}
   hitEffect: {fileID: 0}
   attackReverseKnockback: 1
-  playerKnockForce: 5
+  playerKnockForce: 4
   playerKnockDuration: 0.1
   defaultForce: 15
   upwardsForce: 15

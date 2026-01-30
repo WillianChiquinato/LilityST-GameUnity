@@ -37,6 +37,11 @@ public class MapToggle : MonoBehaviour
     {
         if (GameManager.instance != null && mapCamera != null)
         {
+            if (GameManager.instance.player.OpenCaderno)
+            {
+                return;
+            }
+
             GameManager.instance.player.isMapOpened = mapCamera.enabled;
         }
     }

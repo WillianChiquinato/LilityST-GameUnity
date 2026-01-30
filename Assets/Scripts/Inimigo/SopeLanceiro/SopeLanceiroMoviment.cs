@@ -16,6 +16,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
     [Header("Variaveis de Movimento")]
     private Vector2 homePosition;
     public float distanciaXWalk;
+    public float distanciaYWalk;
     private float direcao;
     public float speed;
 
@@ -81,7 +82,16 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         }
 
         distanciaXWalk = Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x);
+        distanciaYWalk = Mathf.Abs(transform.position.y - GameManager.instance.player.transform.position.y);
         direcao = Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x);
+
+        if (distanciaYWalk > 3.5f)
+        {
+            isWalking = false;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            StateIdle();
+            return;
+        }
 
         if (canMove)
         {
@@ -136,7 +146,6 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                 {
                     attackTimer = 0f;
                 }
-
             }
         }
     }
@@ -150,6 +159,13 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
     public void StateIdle()
     {
+        if (distanciaYWalk > 3.5f)
+        {
+            isWalking = false;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
+
         EscudoGameObject.SetActive(true);
         timerBackToHome += Time.deltaTime;
 

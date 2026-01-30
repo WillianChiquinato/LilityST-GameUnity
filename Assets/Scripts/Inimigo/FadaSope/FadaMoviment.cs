@@ -11,6 +11,7 @@ public class FadaMoviment : PlayerPoco
     private Item_drop dropInimigo;
 
     [Header("Orbit")]
+    private float maxYOffset = 2.2f;
     public float orbitRadius = 3f;
     public float orbitSpeed = 2f;
     public float minHeight = 2f;
@@ -153,9 +154,10 @@ public class FadaMoviment : PlayerPoco
         float floating = Mathf.Sin(floatTime * floatFrequency) * floatAmplitude;
         float height = baseHeight + floating;
 
+        float targetY = ClampTargetY(playerPos.y + height);
         Vector2 targetPos = new Vector2(
             playerPos.x + horizontalOffset,
-            playerPos.y + height
+            targetY
         );
 
         Vector2 move = (targetPos - rb.position) * orbitSmoothness;
@@ -168,6 +170,15 @@ public class FadaMoviment : PlayerPoco
             StartCharging();
         }
     }
+
+    float ClampTargetY(float targetY)
+    {
+        float maxY = homePosition.y + maxYOffset;
+        float minY = homePosition.y + minHeight;
+
+        return Mathf.Clamp(targetY, minY, maxY);
+    }
+
 
     void StartCharging()
     {
@@ -236,9 +247,10 @@ public class FadaMoviment : PlayerPoco
         float floating = Mathf.Sin(floatTime * floatFrequency) * floatAmplitude;
         float height = minHeight + floating;
 
+        float targetY = ClampTargetY(playerPos.y + height);
         Vector2 orbitPos = new Vector2(
             playerPos.x + horizontalOffset,
-            playerPos.y + height
+            targetY
         );
 
         rb.linearVelocity = (orbitPos - rb.position) * returnSpeed;
