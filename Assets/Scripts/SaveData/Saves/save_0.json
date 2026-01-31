@@ -1,5 +1,5 @@
 {
-    "playTime": 2373.346435546875,
+    "playTime": 2452.72314453125,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -15,30 +15,25 @@
     ],
     "estatuaDataList": [
         {
-            "estatuaID": "a1be1ab2-0417-4f11-a855-6a9fee8cdc90",
+            "estatuaID": "3424d89f-9250-4b29-acac-a92462a3c47a",
             "position": {
-                "x": -83.80802154541016,
-                "y": 21.100000381469728,
+                "x": -189.2513885498047,
+                "y": 17.005001068115236,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51960
+                    "instanceID": 52056
                 }
             ],
-            "sceneNameRef": "Homolog"
+            "sceneNameRef": "SopeInicial"
         }
     ],
     "inventoryData": {
         "MaterialsItens": [
             {
                 "itemName": "Goraflix",
-                "itemType": 1,
-                "stackSize": 1
-            },
-            {
-                "itemName": "DocumentoItem",
                 "itemType": 1,
                 "stackSize": 1
             }
@@ -54,7 +49,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 0
+                "stackSize": 1
             }
         ],
         "isInitialized": true
