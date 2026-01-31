@@ -101,7 +101,10 @@ public class inventory_System : MonoBehaviour
             LoadInventory();
         }
 
-        selectedItemToUse.Add(coletaveisItemSlot[0].item);
+        if (coletaveisItemSlot.Length == 0)
+        {
+            selectedItemToUse.Add(coletaveisItemSlot[0].item);
+        }
     }
 
     [System.Serializable]

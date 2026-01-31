@@ -28,10 +28,11 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
     private float timeToAttack = 0.5f;
     private float attackTimer;
-    private float attackRange = 2.85f;
+    private float attackRange = 4.55f;
     private bool isAttacking;
     private bool isAttackStepping;
-    private float distanciaEncarar = 2.7f;
+    [SerializeField] private float distanciaParar = 2f;
+    [SerializeField] private float distanciaVoltar = 4f;
 
     public enum AtaqueEscolhido
     {
@@ -102,11 +103,18 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                 {
                     timerBackToHome = 0f;
                     returnedToHome = false;
-                    if (distanciaXWalk < distanciaEncarar)
+                    if (distanciaXWalk <= distanciaParar)
                     {
                         isWalking = false;
-                        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                    }
+                    else if (distanciaXWalk >= distanciaVoltar)
+                    {
+                        isWalking = true;
+                    }
 
+                    if (!isWalking)
+                    {
+                        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
                         TravarCorpo();
                         FlipDirecao();
                     }

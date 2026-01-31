@@ -27,6 +27,9 @@ public class SaveData
     public bool WalljumpUnlocked = false;
     public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
 
+    // --- Estátuas ---
+    public List<EstatuaData> estatuaDataList = new List<EstatuaData>();
+
     // --- Inventário ---
     public inventory_System.InventorySaveData inventoryData = new inventory_System.InventorySaveData();
 

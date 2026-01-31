@@ -509,7 +509,7 @@ public class PlayerMoviment : MonoBehaviour
             {
                 wallJumpTimer -= Time.deltaTime;
                 wallJumpControlLockTimer -= Time.deltaTime;
-                
+
                 if (wallJumpTimer < 0f)
                 {
                     isWallJumping = false;
@@ -705,17 +705,17 @@ public class PlayerMoviment : MonoBehaviour
         {
             // Determina a direção oposta à parede (impulso automático)
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
-            
+
             // Aplica força horizontal e vertical automaticamente
             rb.linearVelocity = new Vector2(jumpDirection * wallJumpHorizontalForce, wallJumpVerticalForce);
 
             coyoteTimeContador = 0f;
             IsJumping = false;
             isWallJumping = true;
-            
+
             // Inicia o timer de bloqueio de controle
             wallJumpControlLockTimer = wallJumpControlLockDuration;
-            
+
             animacao.SetTrigger(animationstrings.jump);
         }
     }

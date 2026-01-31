@@ -7,8 +7,8 @@ public class EstatuaSystem : MonoBehaviour
 {
     public static EstatuaSystem Instance;
 
-    private List<EstatuaDrop> activeEstatuas = new List<EstatuaDrop>();
-    private List<EstatuaData> estatuaDataList = new List<EstatuaData>();
+    [SerializeField] private List<EstatuaDrop> activeEstatuas = new List<EstatuaDrop>();
+    [SerializeField] private List<EstatuaData> estatuaDataList = new List<EstatuaData>();
     private int estatuaLimit = 3;
 
     [SerializeField] private GameObject estatuaPrefab;
@@ -18,8 +18,6 @@ public class EstatuaSystem : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -27,9 +25,9 @@ public class EstatuaSystem : MonoBehaviour
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void Start()
     {
-        RecreateEstatuas();
+        LoadDataEstatua();
     }
 
     public void CreateEstatua(Vector3 position, int xpAmount, List<ItemData> droppedItems)
@@ -52,6 +50,8 @@ public class EstatuaSystem : MonoBehaviour
         };
         estatuaDataList.Add(data);
 
+        SaveDataEstatua();
+
         // Limita a 3 estátuas
         if (activeEstatuas.Count > estatuaLimit)
         {
@@ -71,6 +71,7 @@ public class EstatuaSystem : MonoBehaviour
 
         activeEstatuas.Remove(estatua);
         estatuaDataList.RemoveAll(x => x.estatuaID == estatua.estatuaID);
+        SaveDataEstatua();
         // inventory_System.instance.Add(estatua.storedXP);
         foreach (var item in estatua.dropRecover)
         {
@@ -97,5 +98,18 @@ public class EstatuaSystem : MonoBehaviour
         }
 
         Debug.Log($"Recriou {activeEstatuas.Count} estátuas na cena {SceneManager.GetActiveScene().name}");
+    }
+
+    public void SaveDataEstatua()
+    {
+        SaveData.Instance.estatuaDataList = new List<EstatuaData>(estatuaDataList);
+        SaveData.Instance.estatuaDataList.ForEach(x => x.sceneNameRef = SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadDataEstatua()
+    {
+        // Load apenas as estátuas da cena atual.
+        estatuaDataList = SaveData.Instance.estatuaDataList.FindAll(x => x.sceneNameRef == GameManager.instance.player.currentScene);
+        RecreateEstatuas();
     }
 }

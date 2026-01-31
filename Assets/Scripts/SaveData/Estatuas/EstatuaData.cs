@@ -8,4 +8,5 @@ public class EstatuaData
     public Vector3 position;
     public int storedXP;
     public List<ItemData> droppedItems;
+    public string sceneNameRef;
 }

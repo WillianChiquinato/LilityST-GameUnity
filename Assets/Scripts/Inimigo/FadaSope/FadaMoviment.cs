@@ -51,9 +51,11 @@ public class FadaMoviment : PlayerPoco
         DamageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();
 
+        //Poco ambient.  
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
         newMaterial = Resources.Load<Material>("Material/Hit");
+        enemyReturnToBase = GetComponent<EnemyReturnToBase>();
     }
 
     void Start()
@@ -71,6 +73,11 @@ public class FadaMoviment : PlayerPoco
             rb.gravityScale = 2.1f;
             return;
         }
+
+        // if (enemyReturnToBase != null && enemyReturnToBase.returning)
+        // {
+        //     return;
+        // }
 
         if (!isDashing)
         {
@@ -278,6 +285,7 @@ public class FadaMoviment : PlayerPoco
 
     public void OnHit(int damage, Vector2 knockback)
     {
+        enemyReturnToBase.returning = false;
         if (!DamageScript.IsAlive)
         {
             dropInimigo.GenerateDrop();

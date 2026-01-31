@@ -137,8 +137,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.1821785, y: -1.1123276}
-  m_Size: {x: 1.8969345, y: 2.5846596}
+  m_Offset: {x: 0.25447845, y: -1.0752134}
+  m_Size: {x: 1.8487396, y: 2.5104313}
   m_Direction: 0
 --- !u!50 &3972724927153453757
 Rigidbody2D:
@@ -209,9 +209,12 @@ MonoBehaviour:
   isWalking: 0
   EscudoGameObject: {fileID: 1109356679424985612}
   distanciaXWalk: 0
+  distanciaYWalk: 0
   speed: 5
   timerBackToHome: 0
   returnedToHome: 0
+  distanciaParar: 2.7
+  distanciaVoltar: 4.3
 --- !u!114 &7182967767952639683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2106853770408096371}
-  - component: {fileID: 6110922073898970752}
+  - component: {fileID: 1626420521214442406}
   m_Layer: 6
   m_Name: Escudo
   m_TagString: Untagged
@@ -460,8 +463,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6762366537176169515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6110922073898970752
-BoxCollider2D:
+--- !u!70 &1626420521214442406
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -494,18 +497,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.62570953, y: -1.1652222}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.8588562, y: 2.357956}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.8636055, y: -0.88737965}
+  m_Size: {x: 0.39914703, y: 1.8077488}
+  m_Direction: 0
 --- !u!1 &2349579510269464744
 GameObject:
   m_ObjectHideFlags: 0

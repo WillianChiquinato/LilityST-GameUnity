@@ -7,4 +7,5 @@ public class PlayerPoco : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Material newMaterial;
     public Material originalMaterial;
+    public EnemyReturnToBase enemyReturnToBase;
 }

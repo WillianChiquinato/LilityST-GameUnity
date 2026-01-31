@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 790687078746926973}
   - component: {fileID: 3599564054310579426}
   - component: {fileID: 7017894115568812690}
+  - component: {fileID: 4857660192814133243}
   m_Layer: 8
   m_Name: FadaSope
   m_TagString: Inimigos
@@ -285,6 +286,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   newMaterial: {fileID: 0}
   originalMaterial: {fileID: 0}
+  enemyReturnToBase: {fileID: 0}
   currentState: 0
   orbitRadius: 5.5
   orbitSpeed: 1.4
@@ -356,3 +358,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
   - {fileID: 11400000, guid: 154486c47e47d544590996a51ac1e18e, type: 2}
   dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
+--- !u!114 &4857660192814133243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724626546988523594}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594b0fdcdaf1fe143af11f676e38a816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyReturnToBase
+  maxDistanceFromBase: 20
+  returnSpeed: 3
+  stopDistance: 0.2
+  returning: 0
+  Dist: 0

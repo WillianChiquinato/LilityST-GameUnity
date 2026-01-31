@@ -245,9 +245,13 @@ public class GameManager : MonoBehaviour
     //Parte de reiniciar
     public IEnumerator TempoMorte()
     {
+        if (SceneManager.GetSceneByName("Mapa").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Mapa");
+        }
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene(CurrentSceneName);
+        transicao.Transicao(player.currentScene);
     }
 
     public event Action<int> onPlayerChange;

@@ -25,7 +25,7 @@ public class EstatuaDrop : MonoBehaviour
             {
                 GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
                 GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
-                
+
                 EstatuaSystem.Instance.RecoverEstatua(this);
                 Debug.LogWarning("Estátua recuperada!");
             }
@@ -36,8 +36,11 @@ public class EstatuaDrop : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
-            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+            if (GameManager.instance.player.DamageScript.IsAlive)
+            {
+                GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+                GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+            }
         }
     }
 }
