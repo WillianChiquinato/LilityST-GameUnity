@@ -33,6 +33,8 @@ public class FadaMoviment : PlayerPoco
 
     [Header("Variables")]
     private Vector2 homePosition;
+    [SerializeField] private Vector2 homeLocalScale;
+    private float distanciaHome;
     public float distanciaXWalk;
     public float timerBackToHome;
     public bool returnedToHome = false;
@@ -55,7 +57,6 @@ public class FadaMoviment : PlayerPoco
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
         newMaterial = Resources.Load<Material>("Material/Hit");
-        enemyReturnToBase = GetComponent<EnemyReturnToBase>();
     }
 
     void Start()
@@ -64,6 +65,7 @@ public class FadaMoviment : PlayerPoco
         angle = Random.Range(0f, Mathf.PI);
 
         homePosition = transform.position;
+        homeLocalScale = transform.localScale;
     }
 
     void Update()
@@ -74,11 +76,6 @@ public class FadaMoviment : PlayerPoco
             return;
         }
 
-        // if (enemyReturnToBase != null && enemyReturnToBase.returning)
-        // {
-        //     return;
-        // }
-
         if (!isDashing)
         {
             FlipDirecao();
@@ -86,7 +83,7 @@ public class FadaMoviment : PlayerPoco
 
         distanciaXWalk = Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x);
 
-        if (distanciaXWalk < 10f)
+        if (distanciaXWalk < 8f)
         {
             timerBackToHome = 0f;
             returnedToHome = false;
@@ -118,6 +115,7 @@ public class FadaMoviment : PlayerPoco
 
     public void StartIdle()
     {
+        distanciaHome = 0;
         timerBackToHome += Time.deltaTime;
 
         if (timerBackToHome >= 2f && !returnedToHome)
@@ -127,12 +125,14 @@ public class FadaMoviment : PlayerPoco
 
         if (returnedToHome)
         {
-            float distanciaHome = Vector2.Distance(rb.position, homePosition);
+            distanciaHome = Vector2.Distance(rb.position, homePosition);
 
             if (distanciaHome > 0.2f)
             {
                 Vector2 directionToHome = (homePosition - rb.position).normalized;
                 rb.linearVelocity = directionToHome * returnSpeed;
+
+                currentState = State.Returning;
             }
             else
             {
@@ -246,33 +246,30 @@ public class FadaMoviment : PlayerPoco
     void Returning()
     {
         animator.ResetTrigger("AttackMode");
-        Vector2 playerPos = GameManager.instance.player.transform.position;
+        distanciaHome = Vector2.Distance(rb.position, homePosition);
 
-        float horizontalOffset = Mathf.Cos(angle) * orbitRadius;
-        floatTime += Time.deltaTime;
-
-        float floating = Mathf.Sin(floatTime * floatFrequency) * floatAmplitude;
-        float height = minHeight + floating;
-
-        float targetY = ClampTargetY(playerPos.y + height);
-        Vector2 orbitPos = new Vector2(
-            playerPos.x + horizontalOffset,
-            targetY
-        );
-
-        rb.linearVelocity = (orbitPos - rb.position) * returnSpeed;
-
-        if (Vector2.Distance(rb.position, orbitPos) < 0.5f)
+        if (distanciaHome > 0.2f)
         {
+            Vector2 direcaoRetorno = (homePosition - rb.position).normalized;
+            rb.linearVelocity = direcaoRetorno * returnSpeed;
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
             currentState = State.Orbit;
         }
+
+        chargePosition = rb.position;
+        chargeTimer = 0f;
     }
 
     private void FlipDirecao()
     {
         if (DamageScript.IsAlive)
         {
-            if (transform.position.x > GameManager.instance.player.transform.position.x)
+            Vector2 targetPos = currentState == State.Returning ? homePosition : (Vector2)GameManager.instance.player.transform.position;
+            
+            if (transform.position.x > targetPos.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
@@ -285,7 +282,6 @@ public class FadaMoviment : PlayerPoco
 
     public void OnHit(int damage, Vector2 knockback)
     {
-        enemyReturnToBase.returning = false;
         if (!DamageScript.IsAlive)
         {
             dropInimigo.GenerateDrop();

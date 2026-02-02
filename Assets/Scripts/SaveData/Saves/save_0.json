@@ -1,5 +1,5 @@
 {
-    "playTime": 2452.72314453125,
+    "playTime": 2502.6982421875,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -370.1500244140625,
@@ -15,19 +15,19 @@
     ],
     "estatuaDataList": [
         {
-            "estatuaID": "3424d89f-9250-4b29-acac-a92462a3c47a",
+            "estatuaID": "30811674-e731-4404-8cf6-2b99b466cf91",
             "position": {
-                "x": -189.2513885498047,
-                "y": 17.005001068115236,
+                "x": -80.11650848388672,
+                "y": 21.100000381469728,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 52056
+                    "instanceID": 51964
                 }
             ],
-            "sceneNameRef": "SopeInicial"
+            "sceneNameRef": "Homolog"
         }
     ],
     "inventoryData": {
@@ -49,7 +49,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 1
+                "stackSize": 0
             }
         ],
         "isInitialized": true

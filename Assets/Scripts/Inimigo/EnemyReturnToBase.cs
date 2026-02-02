@@ -11,7 +11,7 @@ public class EnemyReturnToBase : MonoBehaviour
     private Vector2 homePosition;
     private Rigidbody2D rb;
 
-    [HideInInspector] public bool returning;
+    public bool returning;
 
     public float Dist;
 
@@ -28,11 +28,11 @@ public class EnemyReturnToBase : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!returning)
-            return;
-
         if (Dist > maxDistanceFromBase)
             returning = true;
+
+        if (!returning)
+            return;
 
         float direcaoHome = Mathf.Sign(homePosition.x - transform.position.x);
 
