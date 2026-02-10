@@ -13,6 +13,8 @@ public class Attack_Projetil : MonoBehaviour, Defender
     [field: SerializeField]
     public float returnSpeed { get; set; } = 26f;
 
+    public float timerDestroyed = 0f;
+
 
     void Awake()
     {
@@ -45,6 +47,11 @@ public class Attack_Projetil : MonoBehaviour, Defender
         if (IsPlayerTarget)
         {
             GameManager.instance.shakeCamera.ShakeAttackPlayer();
+        }
+
+        if (timerDestroyed > 0f)
+        {
+            Destroy(gameObject, timerDestroyed);
         }
     }
 

@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class TriggerNoRun : MonoBehaviour
 {
-    public PlayerMoviment playerMovement;
     public GameObject[] interfacesMoment;
 
-    void Start()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        playerMovement = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        foreach (GameObject interfaceMoment in interfacesMoment)
+        if (collision.CompareTag("Player"))
         {
-            interfaceMoment.SetActive(false);
+            GameManager.instance.player.IsRunning = false;
+            foreach (GameObject interfaceMoment in interfacesMoment)
+            {
+                if (interfaceMoment.GetComponent<CanvasGroup>())
+                {
+                    StartCoroutine(GameManager.instance.FadeOutCanvasGroup(interfaceMoment.GetComponent<CanvasGroup>(), 0.5f));
+                    return;
+                }
+                interfaceMoment.SetActive(true);
+            }
         }
     }
 
@@ -18,8 +25,8 @@ public class TriggerNoRun : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerMovement.RunTiming = 0f;
-            playerMovement.IsRunning = false;
+            GameManager.instance.player.RunTiming = 0f;
+            GameManager.instance.player.IsRunning = false;
         }
     }
 
@@ -27,7 +34,7 @@ public class TriggerNoRun : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerMovement.IsRunning = true;
+            GameManager.instance.player.IsRunning = true;
         }
     }
 

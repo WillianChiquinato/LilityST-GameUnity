@@ -132,7 +132,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
     private void FixedUpdate()
     {
         RaycastHit2D gapAhead = Physics2D.Raycast(transform.position + new Vector3(vectorDirecao.x * 1.1f, -0.5f, 0), Vector2.down, 2f, groundCheck);
-        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector2.right * vectorDirecao.x, 2f, groundCheck);
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + new Vector3(0, -0.5f, 0), Vector2.right * vectorDirecao.x, 2f, groundCheck);
 
         if (touching.IsGrouded)
         {
@@ -223,7 +223,7 @@ public class GolemPatrulha_Moviment : PlayerPoco
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Vector3 origemParede = transform.position + new Vector3(0, 0.5f, 0);
+        Vector3 origemParede = transform.position + new Vector3(0, -0.5f, 0);
         Vector3 direcaoParede = Vector2.right * vectorDirecao.x;
         Gizmos.DrawRay(origemParede, direcaoParede * 2f);
 
