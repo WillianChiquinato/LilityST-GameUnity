@@ -205,6 +205,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   newMaterial: {fileID: 0}
   originalMaterial: {fileID: 0}
+  enemyReturnToBase: {fileID: 0}
   animator: {fileID: 0}
   isWalking: 0
   EscudoGameObject: {fileID: 1109356679424985612}

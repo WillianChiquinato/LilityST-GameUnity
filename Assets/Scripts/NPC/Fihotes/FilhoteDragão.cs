@@ -180,6 +180,8 @@ public class FilhoteDragão : MonoBehaviour
                 progresso += Time.deltaTime * 1.5f;
                 playerMovimentFilhote.transform.localPosition = Vector3.Lerp(posicaoInicial, destino, progresso);
             }
+            GameManager.instance.player.animacao.SetBool("IsCarryMode", true);
+            GameManager.instance.player.isCarrying = true;
 
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = Vector2.zero;
@@ -203,6 +205,7 @@ public class FilhoteDragão : MonoBehaviour
                     if (progressoDevolver >= 1.5f)
                     {
                         animator.SetBool("FilhotePegado", false);
+                        GameManager.instance.player.isCarrying = false;
                         targetObjects = null;
                         rb.bodyType = RigidbodyType2D.Dynamic;
 

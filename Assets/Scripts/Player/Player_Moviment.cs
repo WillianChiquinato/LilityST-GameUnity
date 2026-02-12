@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Threading.Tasks;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -123,6 +124,32 @@ public class PlayerMoviment : MonoBehaviour
 
     [Header("Map")]
     public bool isMapOpened = false;
+
+    [Header("Objetos")]
+    [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float baseJumpForce;
+    private float weightModifier = 1f;
+
+    public bool canRun;
+    public event Action<bool> OnCarryStateChanged;
+    private bool _isCarrying;
+    public bool isCarrying
+    {
+        get => _isCarrying;
+        set
+        {
+            if (_isCarrying == value) return;
+
+            _isCarrying = value;
+            canRun = !_isCarrying;
+
+            if (_isCarrying)
+            {
+                ForceStopRunning();
+            }
+            OnCarryStateChanged?.Invoke(_isCarrying);
+        }
+    }
 
     public float attackCooldown
     {
@@ -298,15 +325,21 @@ public class PlayerMoviment : MonoBehaviour
         //saber qual cena o jogador esta.
         currentScene = SceneManager.GetActiveScene().name;
         Debug.Log("Nome da cena atual: " + currentScene);
+
+        baseMoveSpeed = maxSpeed;
+        baseJumpForce = jumpImpulso;
     }
 
     void Start()
     {
+        ResetAttributes();
         lastHealth = DamageScript.Health;
         if (GameManager.instance != null)
         {
             GameManager.instance.FullScreenDamageMaterial.SetFloat("_IsPulseActive", 0);
         }
+
+        canRun = !_isCarrying;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
@@ -448,7 +481,7 @@ public class PlayerMoviment : MonoBehaviour
             }
         }
 
-        if (IsMoving && !isDashing && !wallSlide)
+        if (IsMoving && !isDashing && !wallSlide && canRun)
         {
             if (arcoEffect)
             {
@@ -478,11 +511,7 @@ public class PlayerMoviment : MonoBehaviour
             idleTimingRun += Time.deltaTime;
             if (idleTimingRun > 0.15f)
             {
-                RunTiming = 0f;
-                accelerationTimer = 0f;
-                airSpeed = 7f;
-                maxSpeed = 7f;
-                IsRunning = false;
+                ForceStopRunning();
             }
         }
 
@@ -557,12 +586,6 @@ public class PlayerMoviment : MonoBehaviour
         }
 
         animacao.SetFloat(animationstrings.yVelocity, rb.linearVelocity.y);
-
-        var currentStateInfo = animacao.GetCurrentAnimatorStateInfo(0);
-        if (currentStateInfo.IsName("FilhotePegar") && currentStateInfo.normalizedTime >= 0.9f)
-        {
-            animacao.SetBool("IsFilhote", false);
-        }
     }
 
 
@@ -613,7 +636,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (context.started && timerDash < 0f)
             {
-                if (!arcoEffect && !OpenCaderno)
+                if (!arcoEffect && !OpenCaderno && !isMapOpened && !isCarrying)
                 {
                     isDashing = true;
                     playerInput.enabled = false;
@@ -1009,5 +1032,43 @@ public class PlayerMoviment : MonoBehaviour
         {
             Debug.LogWarning("GameManager não encontrado!");
         }
+    }
+
+    public void ApplyWeight(float weightFactor)
+    {
+        weightModifier = weightFactor;
+        RecalculateAttributes();
+    }
+
+    public void ResetAttributes()
+    {
+        weightModifier = 1f;
+        RecalculateAttributes();
+    }
+
+    private void RecalculateAttributes()
+    {
+        if (weightModifier <= 0f)
+        {
+            Debug.LogError("Weight modifier must be greater than zero.");
+            weightModifier = 1f;
+        }
+        
+        maxSpeed = baseMoveSpeed / weightModifier;
+        jumpImpulso = baseJumpForce / weightModifier;
+        speed = Mathf.Min(speed, maxSpeed);
+        airSpeed = maxSpeed;
+
+        Debug.LogWarning("Recalculated Attributes - Speed: " + speed + ", Jump Impulse: " + jumpImpulso);
+    }
+
+    private void ForceStopRunning()
+    {
+        RunTiming = 0f;
+        accelerationTimer = 0f;
+        maxSpeed = baseMoveSpeed / weightModifier;
+        airSpeed = maxSpeed;
+        speed = Mathf.Min(speed, maxSpeed);
+        IsRunning = false;
     }
 }

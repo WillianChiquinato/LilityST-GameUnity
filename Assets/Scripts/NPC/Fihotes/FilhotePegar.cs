@@ -28,7 +28,7 @@ public class FilhotePegar : MonoBehaviour
                 if (GameManager.instance.player.entrar && filhoteDragão.rb.linearVelocity.x <= 0)
                 {
                     filhoteDragão.TimerFindObject = 0f;
-                    GameManager.instance.player.animacao.SetBool("IsFilhote", true);
+                    GameManager.instance.player.animacao.SetTrigger("TakeObjeto");
                     filhoteDragão.LilityPegarFilhote = true;
                 }
             }

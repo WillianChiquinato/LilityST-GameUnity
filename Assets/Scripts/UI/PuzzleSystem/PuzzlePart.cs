@@ -1,9 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
+public class ObjectResponse
+{
+    public float peso;
+    public PuzzlePieceType pieceType;
+
+    public ObjectResponse(float peso, PuzzlePieceType pieceType)
+    {
+        this.peso = peso;
+        this.pieceType = pieceType;
+    }
+}
+
 public class PuzzlePart : MonoBehaviour
 {
+    [Header("Atributos da peça do puzzle")]
+    public float peso;
     public PuzzlePieceType pieceType;
+
+    [Header("Configurações de coleta e colocação")]
     public bool isCollected = false;
     public bool isPlaced = false;
     public bool isInPuzzleSlot = false;
@@ -29,6 +45,15 @@ public class PuzzlePart : MonoBehaviour
 
     void Update()
     {
+        if (isCollected && !isPlaced)
+        {
+            GameManager.instance.player.isCarrying = true;
+        }
+        else if (isPlaced)
+        {
+            GameManager.instance.player.isCarrying = false;
+        }
+
         if (progressBool && !isCollected && !isPlaced)
         {
             Collect();
@@ -59,7 +84,7 @@ public class PuzzlePart : MonoBehaviour
 
     public void Collect()
     {
-        GameManager.instance.player.animacao.SetBool("IsFilhote", true);
+        GameManager.instance.player.animacao.SetTrigger("TakeObjeto");
 
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
@@ -67,7 +92,7 @@ public class PuzzlePart : MonoBehaviour
         pieceTargetPos = GameManager.instance.player.transform.position + OffSetPosition;
         pieceTargetPos.z = 0f;
 
-        progressTake += Time.deltaTime * 2f; // velocidade da animação
+        progressTake += Time.deltaTime * 5f; // velocidade da animação
         progressTake = Mathf.Clamp01(progressTake);
 
         transform.position = Vector3.Lerp(pieceStartPos, pieceTargetPos, progressTake);
@@ -85,6 +110,12 @@ public class PuzzlePart : MonoBehaviour
             // Agora SIM pode virar filho do player
             transform.SetParent(GameManager.instance.player.transform);
             transform.localPosition = OffSetPosition;
+
+            GameManager.instance.player.animacao.SetBool("IsCarryMode", true);
+            GameManager.instance.player.isCarrying = true;
+
+            var response = GetAtributesInObject();
+            GameManager.instance.player.ApplyWeight(response.peso);
         }
     }
 
@@ -95,6 +126,11 @@ public class PuzzlePart : MonoBehaviour
         // Desvincula do player
         transform.SetParent(null);
         this.rb.bodyType = RigidbodyType2D.Dynamic;
+        GameManager.instance.player.animacao.ResetTrigger("TakeObjeto");
+        GameManager.instance.player.animacao.SetBool("IsCarryMode", false);
+        GameManager.instance.player.isCarrying = false;
+
+        GameManager.instance.player.ResetAttributes();
         StartCoroutine(ResetTakeItem());
     }
 
@@ -105,6 +141,11 @@ public class PuzzlePart : MonoBehaviour
         progressTake = 0f;
         isPlaced = false;
         isCollected = false;
+    }
+
+    public ObjectResponse GetAtributesInObject()
+    {
+        return new ObjectResponse(peso, pieceType);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

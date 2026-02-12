@@ -796,7 +796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7443416100161607551}
   m_Layer: 7
-  m_Name: Fillhotes
+  m_Name: CarryPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,6 +993,9 @@ MonoBehaviour:
   canOpenCaderno: 1
   OpenMapBool: 0
   isMapOpened: 0
+  baseMoveSpeed: 0
+  baseJumpForce: 0
+  canRun: 0
   _IsMoving: 0
   _IsRunning: 0
   _IsAcordada: 0
