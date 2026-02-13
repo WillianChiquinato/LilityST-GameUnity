@@ -182,6 +182,7 @@ public class FilhoteDragão : MonoBehaviour
             }
             GameManager.instance.player.animacao.SetBool("IsCarryMode", true);
             GameManager.instance.player.isCarrying = true;
+            transform.SetParent(GameManager.instance.player.CarryParentPlayer);
 
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = Vector2.zero;

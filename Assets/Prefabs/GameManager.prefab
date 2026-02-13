@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4177972302233015041}
   - component: {fileID: 8380791716326028494}
+  - component: {fileID: 7654409368258043272}
   m_Layer: 0
   m_Name: MapSystem
   m_TagString: Untagged
@@ -288,6 +289,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f741a05e8419e4345a44262321830740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapLoader
+--- !u!114 &7654409368258043272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517597509633644401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553d7da7b4351a248971cd7d8e6d8313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldSpriteChunkLoader
+  worldMapData: {fileID: 11400000, guid: 47fcdc0606509914abf5aa308be012b5, type: 2}
+  chunkRendererPrefab: {fileID: 8509583584880687238, guid: 756d7822cca520845af4bc17e801309a, type: 3}
+  chunkSize: {x: 64, y: 64}
+  cellSize: 1
+  activeChunkRadius: 1
+  refreshInterval: 0.2
 --- !u!1 &3675045888267503176
 GameObject:
   m_ObjectHideFlags: 0

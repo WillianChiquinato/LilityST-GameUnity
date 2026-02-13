@@ -108,7 +108,7 @@ public class PuzzlePart : MonoBehaviour
             progressBool = false;
 
             // Agora SIM pode virar filho do player
-            transform.SetParent(GameManager.instance.player.transform);
+            transform.SetParent(GameManager.instance.player.CarryParentPlayer);
             transform.localPosition = OffSetPosition;
 
             GameManager.instance.player.animacao.SetBool("IsCarryMode", true);
@@ -116,6 +116,8 @@ public class PuzzlePart : MonoBehaviour
 
             var response = GetAtributesInObject();
             GameManager.instance.player.ApplyWeight(response.peso);
+
+            this.GetComponent<Collider2D>().enabled = false;
         }
     }
 
@@ -131,6 +133,7 @@ public class PuzzlePart : MonoBehaviour
         GameManager.instance.player.isCarrying = false;
 
         GameManager.instance.player.ResetAttributes();
+        this.GetComponent<Collider2D>().enabled = true;
         StartCoroutine(ResetTakeItem());
     }
 

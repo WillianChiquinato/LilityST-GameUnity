@@ -126,6 +126,8 @@ public class PlayerMoviment : MonoBehaviour
     public bool isMapOpened = false;
 
     [Header("Objetos")]
+    public Transform CarryParentPlayer;
+
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseJumpForce;
     private float weightModifier = 1f;

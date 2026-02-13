@@ -38,6 +38,10 @@ public class PuzzleSlot : MonoBehaviour
         Destroy(part.GetComponent<PuzzlePart>());
 
         puzzleData.CheckPuzzle(part);
+        GameManager.instance.player.animacao.ResetTrigger("TakeObjeto");
+        GameManager.instance.player.animacao.SetBool("IsCarryMode", false);
+        GameManager.instance.player.isCarrying = false;
+        GameManager.instance.player.ResetAttributes();
         return true;
     }
 }

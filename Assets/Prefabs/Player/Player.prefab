@@ -465,6 +465,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1677544410930884818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3664709080082593412}
+  m_Layer: 7
+  m_Name: ComponentCarryParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3664709080082593412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677544410930884818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16, y: 0.203, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1915257998463922209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2257722455093298294
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +936,7 @@ Transform:
   - {fileID: 9076710696975144262}
   - {fileID: 8844949802469335203}
   - {fileID: 7443416100161607551}
+  - {fileID: 3664709080082593412}
   - {fileID: 8430821536121684210}
   m_Father: {fileID: 3979624237456724338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -993,6 +1025,7 @@ MonoBehaviour:
   canOpenCaderno: 1
   OpenMapBool: 0
   isMapOpened: 0
+  CarryParentPlayer: {fileID: 3664709080082593412}
   baseMoveSpeed: 0
   baseJumpForce: 0
   canRun: 0
@@ -1569,8 +1602,8 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0.08000183, y: -0.76000214, z: 0}
-      m_Extent: {x: 0.2599945, y: 0.77999115, z: 0}
+      m_Center: {x: 0.100746155, y: -0.7439804, z: 0}
+      m_Extent: {x: 0.29999542, y: 0.859993, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.2
     m_FlipX: 0
