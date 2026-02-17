@@ -47,6 +47,7 @@ public class ImpMoviment : PlayerPoco
     [SerializeField] private float fleeSpeed = 4.2f;
     [SerializeField] private float runAttackSpeed = 6.5f;
     [SerializeField] private float runAttackDuration = 0.35f;
+    [SerializeField] private float runAttackDistanceStart = 3.5f;
 
     [Header("Attacks")]
     [SerializeField] private float lightAttackCooldown = 1.1f;
@@ -84,6 +85,7 @@ public class ImpMoviment : PlayerPoco
     private bool pendingScream;
     private bool pendingPostScreamThrow;
     private bool forceFleeAfterHit;
+    private bool hasTakenHitAggro;
     private bool hasScreamedAfterHit;
     private Coroutine runAttackCoroutine;
 
@@ -92,6 +94,10 @@ public class ImpMoviment : PlayerPoco
         get
         {
             return animator.GetBool(animationstrings.canMove);
+        }
+        set
+        {
+            animator.SetBool(animationstrings.canMove, value);
         }
     }
 
@@ -119,13 +125,13 @@ public class ImpMoviment : PlayerPoco
     {
         if (!damageScript.IsAlive)
         {
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
         if (currentState == ImpState.RunningAttack)
         {
             UpdateAnimatorMovement();
-            return;
         }
 
         distanceX = Mathf.Abs(GameManager.instance.player.transform.position.x - transform.position.x);
@@ -203,15 +209,21 @@ public class ImpMoviment : PlayerPoco
 
     private void UpdateStateLogic()
     {
-        if (forceFleeAfterHit)
+        if (currentState == ImpState.RunningAttack)
+            return;
+
+        if (forceFleeAfterHit && currentState != ImpState.Flee && currentState != ImpState.Scream)
         {
             currentState = ImpState.Flee;
         }
 
-        if (distanceX > 30f)
+        if (!pendingScream && !hasTakenHitAggro)
         {
-            ReturnHomePosition();
-            return;
+            if (distanceX > 30f)
+            {
+                ReturnHomePosition();
+                return;
+            }
         }
 
         if (currentState == ImpState.Flee)
@@ -339,20 +351,24 @@ public class ImpMoviment : PlayerPoco
 
         bool lostSight = distanceX > loseSightRange || distanceY > maxVerticalDistance;
 
-        if (currentState == ImpState.Attack || currentState == ImpState.Engage)
+        if (!hasTakenHitAggro)
         {
-            if (lostSight)
+            if (currentState == ImpState.Attack || currentState == ImpState.Engage)
             {
-                lostSightTimer += Time.deltaTime;
-                if (lostSightTimer >= lostSightDelay)
+                if (lostSight)
                 {
-                    currentState = ImpState.Idle;
+                    lostSightTimer += Time.deltaTime;
+
+                    if (lostSightTimer >= lostSightDelay)
+                    {
+                        currentState = ImpState.Idle;
+                        lostSightTimer = 0f;
+                    }
+                }
+                else
+                {
                     lostSightTimer = 0f;
                 }
-            }
-            else
-            {
-                lostSightTimer = 0f;
             }
         }
     }
@@ -360,48 +376,35 @@ public class ImpMoviment : PlayerPoco
     private void TryAttack(float distanceX, bool allowRunAttack)
     {
         if (attackLockTimer > 0f || damageScript.VelocityLock || attackDecisionTimer > 0f)
-        {
             return;
-        }
-        if (currentState == ImpState.RunningAttack)
-        {
-            return;
-        }
 
+        if (currentState == ImpState.RunningAttack)
+            return;
+
+        // CLOSE
         if (distanceX <= closeRange)
         {
             TriggerLightAttack();
             return;
         }
 
-        if (distanceX <= midRange && distanceX > closeRange)
+        // MID
+        if (distanceX <= midRange)
         {
-            if (allowRunAttack)
-            {
-                TriggerThrowAttack();
-            }
-            return;
-        }
-
-        if (distanceX > closeRange && distanceX <= midRange)
-        {
-            if (allowRunAttack && runCooldownTimer <= 0f && Random.value <= runAttackChance)
+            if (allowRunAttack && runCooldownTimer <= 0f && distanceX > runAttackDistanceStart && Random.value <= runAttackChance)
             {
                 runAttackCoroutine = StartCoroutine(RunAttackRoutine());
                 return;
             }
-            if (allowRunAttack)
-            {
-                TriggerThrowAttack();
-                return;
-            }
 
+            TriggerThrowAttack();
             return;
         }
 
-        if (distanceX > midRange && allowRunAttack && runCooldownTimer <= 0f)
+        // FAR
+        if (allowRunAttack)
         {
-            if (Random.value <= runAttackChance)
+            if (runCooldownTimer <= 0f && distanceX > runAttackDistanceStart && Random.value <= runAttackChance)
             {
                 runAttackCoroutine = StartCoroutine(RunAttackRoutine());
                 return;
@@ -472,18 +475,35 @@ public class ImpMoviment : PlayerPoco
 
         currentState = ImpState.RunningAttack;
         isAttacking = true;
-
-        animator.SetTrigger(runAttackTrigger);
         animator.SetBool(runBool, true);
 
-        float direction = Mathf.Sign(
-            GameManager.instance.player.transform.position.x - transform.position.x
-        );
+        float chaseElapsed = 0f;
+        float maxChaseDuration = 1.5f;
+
+        while (
+    Mathf.Abs(GameManager.instance.player.transform.position.x - transform.position.x)
+    > runAttackDistanceStart
+    && chaseElapsed < maxChaseDuration)
+        {
+            float chaseDirection = Mathf.Sign(
+                GameManager.instance.player.transform.position.x - transform.position.x
+            );
+
+            rb.linearVelocity = new Vector2(chaseDirection * runAttackSpeed, rb.linearVelocity.y);
+
+            chaseElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        animator.SetTrigger(runAttackTrigger);
 
         float elapsed = 0f;
-
         while (elapsed < runAttackDuration)
         {
+            float direction = Mathf.Sign(
+                GameManager.instance.player.transform.position.x - transform.position.x
+            );
+
             rb.linearVelocity = new Vector2(direction * runAttackSpeed, rb.linearVelocity.y);
             elapsed += Time.deltaTime;
             yield return null;
@@ -544,17 +564,14 @@ public class ImpMoviment : PlayerPoco
 
     private void StartScream()
     {
-        if (!pendingScream)
-        {
-            return;
-        }
-
         ResetAttackState();
         animator.SetTrigger(screamTrigger);
         animator.SetBool(moveBool, false);
         screamTimer = screamDuration;
         currentState = ImpState.Scream;
         forceFleeAfterHit = false;
+
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
     private void ResetAttackState()
@@ -627,6 +644,8 @@ public class ImpMoviment : PlayerPoco
         if (runAttackCoroutine != null)
         {
             StopCoroutine(runAttackCoroutine);
+            currentState = ImpState.Flee;
+            animator.SetBool(runBool, false);
             runAttackCoroutine = null;
         }
 
@@ -637,6 +656,7 @@ public class ImpMoviment : PlayerPoco
             pendingPostScreamThrow = true;
             currentState = ImpState.Flee;
             forceFleeAfterHit = true;
+            hasTakenHitAggro = true;
             hasScreamedAfterHit = true;
         }
         animator.SetBool(moveBool, false);

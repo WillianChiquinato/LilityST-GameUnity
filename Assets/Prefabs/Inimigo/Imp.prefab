@@ -461,6 +461,7 @@ MonoBehaviour:
   fleeSpeed: 7.8
   runAttackSpeed: 13
   runAttackDuration: 1
+  runAttackDistanceStart: 3.5
   lightAttackCooldown: 0.4
   throwAttackCooldown: 5
   runAttackCooldown: 2
@@ -468,7 +469,7 @@ MonoBehaviour:
   throwAttackLock: 0.25
   attackDecisionDelay: 0.35
   runAttackChance: 0.45
-  screamDuration: 3
+  screamDuration: 1.7
   stoneProjectilePrefab: {fileID: 8474828127461439148, guid: 33333d6b1bac2f343bf636d304e9b826, type: 3}
   stoneSpawnPoint: {fileID: 3916828365580352814}
   stoneSpeed: 25

@@ -6,6 +6,8 @@ using UnityEngine;
 public class Checkpoints : MonoBehaviour
 {
     [Header("Checkpoints")]
+    public Vector2 offSetCheckpointIcon;
+
     public List<Collider2D> collidersNoTrigger = new List<Collider2D>();
     public bool playerNoTrigger = false;
     public bool cervoNoTrigger = false;
@@ -51,6 +53,17 @@ public class Checkpoints : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(transform);
+            GameManagerInteract.Instance.interactIcon.transform.localPosition = offSetCheckpointIcon;
+            GameManagerInteract.Instance.interactIcon.GetComponent<IconIdle>().startPosition = transform.position + new Vector3(0, 1.2f, 0);
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", true);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collidersNoTrigger.Contains(collision))
@@ -82,16 +95,19 @@ public class Checkpoints : MonoBehaviour
                     InfoManager.instance.SaveAllInfos();
 
                     SaveManager.Save(SaveData.Instance, GameManager.currentSaveSlot);
+
+                    GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+                    GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
                 }
                 else
                 {
                     Debug.LogError("Savepoint.instance ou player está null. O checkpoint não foi salvo.");
                 }
 
-                StartCoroutine(AutoMoveSave());
+                StartCoroutine(AutoMoveSave(paiCheckpoint.transform.position.x, direcao < 0));
             }
 
-            // Se o cervinho está no trigger, ativa a UI do diálogo
+            // Se o cervinho está no trigger, ativa a UI do diálogo.
             if (cervoNoTrigger)
             {
                 GameManager.instance.UISavePoint.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
@@ -109,35 +125,51 @@ public class Checkpoints : MonoBehaviour
         {
             collidersNoTrigger.Remove(collision);
         }
+
+        if (collision.CompareTag("Player"))
+        {
+            GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
+            GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);
+        }
     }
 
-    IEnumerator AutoMoveSave()
+    IEnumerator AutoMoveSave(float targetX, bool faceRightToCheckpoint)
     {
         isMovingAutomatically = true;
+        GameManager.instance.player.AutoMoveAnimations = true;
         GameManager.instance.player.canMove = false;
-        if (direcao == -1)
-        {
-            GameManager.instance.player.IsRight = true;
-        }
-        else
-        {
-            GameManager.instance.player.IsRight = false;
-        }
+        Transform playerTransform = GameManager.instance.player.transform;
+        Rigidbody2D playerRb = GameManager.instance.player.rb;
+        GameManager.instance.player.IsRight = faceRightToCheckpoint;
+        
+        GameManager.instance.player.moveInput = Vector2.zero;
+        GameManager.instance.player.rb.linearVelocity = new Vector2(0f, GameManager.instance.player.rb.linearVelocity.y);
 
-        while (paiCheckpoint.transform.position.x != GameManager.instance.player.transform.position.x)
+        while (Mathf.Abs(playerRb.position.x - targetX) > 0.05f)
         {
-            float step = GameManager.instance.player.speed * Time.deltaTime;
-            GameManager.instance.player.transform.position = Vector3.MoveTowards(GameManager.instance.player.transform.position, new Vector3(paiCheckpoint.transform.position.x, GameManager.instance.player.transform.position.y, GameManager.instance.player.transform.position.z), step);
+            float newX = Mathf.MoveTowards(playerRb.position.x, targetX, GameManager.instance.player.maxSpeed * Time.fixedDeltaTime);
+            playerRb.MovePosition(new Vector2(newX, playerRb.position.y));
+
             GameManager.instance.player.IsMoving = true;
             yield return null;
         }
+
+        GameManager.instance.player.rb.linearVelocity = new Vector2(0f, GameManager.instance.player.rb.linearVelocity.y);
+        GameManager.instance.player.moveInput = Vector2.zero;
         GameManager.instance.player.IsMoving = false;
+        GameManager.instance.player.IsRight = faceRightToCheckpoint;
+        playerTransform.position = new Vector3(
+            targetX,
+            playerTransform.position.y,
+            playerTransform.position.z
+        );
 
         yield return new WaitForSeconds(0.7f);
         GameManager.instance.player.animacao.SetBool("Checkpoint", true);
         GameManager.instance.player.IsRight = false;
 
-        isMovingAutomatically = true;
+        isMovingAutomatically = false;
+        GameManager.instance.player.AutoMoveAnimations = false;
 
         yield return new WaitForSeconds(0.5f);
         animTicket.gameObject.SetActive(true);
@@ -149,7 +181,7 @@ public class Checkpoints : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameManager.instance.UISavePoint.SetActive(true);
 
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(1.85f);
         animTicket.gameObject.SetActive(false);
     }
 }

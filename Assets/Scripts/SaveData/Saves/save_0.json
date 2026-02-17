@@ -1,9 +1,9 @@
 {
-    "playTime": 2749.84912109375,
+    "playTime": 2921.9521484375,
     "XPlayer": 500,
     "playerCheckpoint": {
-        "x": -370.1500244140625,
-        "y": 45.70000076293945
+        "x": -41.439998626708987,
+        "y": -0.05999999865889549
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
@@ -15,19 +15,34 @@
     ],
     "estatuaDataList": [
         {
-            "estatuaID": "4c30832c-3b46-4efb-8b15-9f5cac99e617",
+            "estatuaID": "c702d4f3-8f8b-4bf5-8c46-0dae60fe3653",
             "position": {
-                "x": -115.27346801757813,
-                "y": 18.89499855041504,
+                "x": -96.9423599243164,
+                "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51106
+                    "instanceID": 51122
                 }
             ],
-            "sceneNameRef": "SopeInicial"
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "4338cef0-cea2-4c85-8c14-7ca71d018977",
+            "position": {
+                "x": -115.90315246582031,
+                "y": -23.059999465942384,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51122
+                }
+            ],
+            "sceneNameRef": "Homolog"
         }
     ],
     "inventoryData": {
@@ -129,12 +144,12 @@
             "TestStarQuest"
         ],
         "questStepIndices": [
-            1,
+            0,
             0,
             0
         ],
         "questStepStates": [
-            "PODE_FINALIZAR",
+            "",
             "",
             ""
         ],
@@ -152,6 +167,15 @@
             "Tes2"
         ],
         "infoCategorias": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
             1,
             1
         ],
