@@ -1,5 +1,5 @@
 {
-    "playTime": 2921.9521484375,
+    "playTime": 3071.251708984375,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -41.439998626708987,
@@ -43,15 +43,54 @@
                 }
             ],
             "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "1408da5c-440b-4309-a4bf-d997c1522a89",
+            "position": {
+                "x": -88.9980697631836,
+                "y": 21.100000381469728,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "83ebca16-6f3c-408f-8056-4d1736d97b5a",
+            "position": {
+                "x": -85.40003204345703,
+                "y": 21.099998474121095,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 49888
+                },
+                {
+                    "instanceID": 51122
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "07cf1df4-4542-4920-b3ea-ac28276f2045",
+            "position": {
+                "x": -85.7785415649414,
+                "y": 21.100000381469728,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51122
+                }
+            ],
+            "sceneNameRef": "Homolog"
         }
     ],
     "inventoryData": {
         "MaterialsItens": [
-            {
-                "itemName": "Goraflix",
-                "itemType": 1,
-                "stackSize": 1
-            },
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
@@ -69,7 +108,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 1
+                "stackSize": 2
             }
         ],
         "isInitialized": true

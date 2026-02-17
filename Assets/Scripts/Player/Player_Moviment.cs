@@ -360,6 +360,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (!DamageScript.IsAlive)
         {
+            canMove = false;
             return;
         }
 
@@ -843,6 +844,10 @@ public class PlayerMoviment : MonoBehaviour
             //JUMP
             IsJumping = false;
 
+            //DASH
+            isDashing = false;
+            timerDash = dashCooldown;
+
             //ARCO
             bow.bodyCamera = false;
             bow.newOffset = new Vector3(0, 0, 0);
@@ -1055,7 +1060,7 @@ public class PlayerMoviment : MonoBehaviour
             Debug.LogError("Weight modifier must be greater than zero.");
             weightModifier = 1f;
         }
-        
+
         maxSpeed = baseMoveSpeed / weightModifier;
         jumpImpulso = baseJumpForce / weightModifier;
         speed = Mathf.Min(speed, maxSpeed);
