@@ -448,20 +448,20 @@ MonoBehaviour:
   damageScript: {fileID: 0}
   dropInimigo: {fileID: 0}
   distanceX: 0
-  detectRange: 10
-  loseSightRange: 11
+  detectRange: 14
+  loseSightRange: 25
   maxVerticalDistance: 3
   lostSightDelay: 1.5
-  fleeThrowDelay: 1
+  fleeThrowDelay: 0.5
   closeRange: 2.2
-  midRange: 5
-  safeDistance: 8
+  midRange: 6
+  safeDistance: 10
   isThrowing: 0
   chaseSpeed: 5.5
   fleeSpeed: 7.8
   runAttackSpeed: 13
   runAttackDuration: 1
-  runAttackDistanceStart: 3.5
+  runAttackDistanceStart: 5
   lightAttackCooldown: 0.4
   throwAttackCooldown: 5
   runAttackCooldown: 2

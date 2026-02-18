@@ -1,5 +1,5 @@
 {
-    "playTime": 3071.251708984375,
+    "playTime": 3321.257080078125,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -41.439998626708987,
@@ -15,40 +15,58 @@
     ],
     "estatuaDataList": [
         {
-            "estatuaID": "c702d4f3-8f8b-4bf5-8c46-0dae60fe3653",
+            "estatuaID": "afe6a65b-69fd-4f73-a934-11dd92e8e445",
             "position": {
-                "x": -96.9423599243164,
+                "x": -113.75242614746094,
                 "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51122
+                    "instanceID": 49896
+                },
+                {
+                    "instanceID": 51132
                 }
             ],
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "4338cef0-cea2-4c85-8c14-7ca71d018977",
+            "estatuaID": "b50509a3-57ac-445a-a63c-56263110453f",
             "position": {
-                "x": -115.90315246582031,
+                "x": -149.02565002441407,
                 "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51122
+                    "instanceID": 51132
                 }
             ],
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "1408da5c-440b-4309-a4bf-d997c1522a89",
+            "estatuaID": "77ba7923-669a-4169-a565-8ab8846e6376",
             "position": {
-                "x": -88.9980697631836,
-                "y": 21.100000381469728,
+                "x": -92.87738037109375,
+                "y": -23.059999465942384,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51132
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "795fa6ce-bd1b-4650-b15f-33db7d8c5fcf",
+            "position": {
+                "x": -120.5206298828125,
+                "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
@@ -56,41 +74,35 @@
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "83ebca16-6f3c-408f-8056-4d1736d97b5a",
+            "estatuaID": "f764ce24-5129-4eba-93bb-6473fa731dce",
             "position": {
-                "x": -85.40003204345703,
-                "y": 21.099998474121095,
+                "x": -131.1480712890625,
+                "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 49888
-                },
-                {
-                    "instanceID": 51122
-                }
-            ],
+            "droppedItems": [],
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "07cf1df4-4542-4920-b3ea-ac28276f2045",
+            "estatuaID": "d1dfb35e-e39f-4c7e-bcd2-9a89ceb826bd",
             "position": {
-                "x": -85.7785415649414,
-                "y": 21.100000381469728,
+                "x": -81.71671295166016,
+                "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 51122
-                }
-            ],
+            "droppedItems": [],
             "sceneNameRef": "Homolog"
         }
     ],
     "inventoryData": {
         "MaterialsItens": [
+            {
+                "itemName": "Goraflix",
+                "itemType": 1,
+                "stackSize": 1
+            },
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
@@ -108,7 +120,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 2
+                "stackSize": 1
             }
         ],
         "isInitialized": true

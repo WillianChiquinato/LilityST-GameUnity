@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1e4081a060ef13745aef4166f423b4dd
+guid: 96ba3215928604c498bacf029ffc9c33
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4652429500037979598
-    second: dragao_acordado_idle1_0
+      213: -1447542827833601035
+    second: dragao_idle6_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dragao_acordado_idle1_0
+      name: dragao_idle6_0
       rect:
         serializedVersion: 2
         x: 6
         y: 0
         width: 784
-        height: 229
+        height: 231
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecddf4c0bffb09040800000000000000
-      internalID: 4652429500037979598
+      spriteID: 5f350dda77b49ebe0800000000000000
+      internalID: -1447542827833601035
       vertices: []
       indices: 
       edges: []

@@ -245,6 +245,7 @@ public class ImpMoviment : PlayerPoco
                     TriggerThrowAttack();
                     pendingPostScreamThrow = false;
                 }
+                attackDecisionTimer = 0.4f;
                 currentState = ImpState.Engage;
             }
             return;
@@ -343,6 +344,11 @@ public class ImpMoviment : PlayerPoco
         float distanceY = Mathf.Abs(GameManager.instance.player.transform.position.y - transform.position.y);
         bool canSeePlayer = distanceX <= detectRange && distanceY <= maxVerticalDistance;
 
+        if (currentState == ImpState.RunningAttack || currentState == ImpState.Scream)
+        {
+            return;
+        }
+
         if (currentState == ImpState.Idle && canSeePlayer)
         {
             currentState = ImpState.Attack;
@@ -375,6 +381,9 @@ public class ImpMoviment : PlayerPoco
 
     private void TryAttack(float distanceX, bool allowRunAttack)
     {
+        if (isAttacking)
+            return;
+
         if (attackLockTimer > 0f || damageScript.VelocityLock || attackDecisionTimer > 0f)
             return;
 
@@ -475,21 +484,30 @@ public class ImpMoviment : PlayerPoco
 
         currentState = ImpState.RunningAttack;
         isAttacking = true;
+
         animator.SetBool(runBool, true);
+
+        // 🔴 CAPTURA DIREÇÃO UMA ÚNICA VEZ
+        float lockedDirection = Mathf.Sign(
+            GameManager.instance.player.transform.position.x - transform.position.x
+        );
+
+        // Garante que não seja 0
+        if (Mathf.Abs(lockedDirection) < 0.01f)
+            lockedDirection = transform.localScale.x > 0 ? -1 : 1;
 
         float chaseElapsed = 0f;
         float maxChaseDuration = 1.5f;
 
         while (
-    Mathf.Abs(GameManager.instance.player.transform.position.x - transform.position.x)
-    > runAttackDistanceStart
-    && chaseElapsed < maxChaseDuration)
+            Mathf.Abs(GameManager.instance.player.transform.position.x - transform.position.x)
+            > runAttackDistanceStart
+            && chaseElapsed < maxChaseDuration)
         {
-            float chaseDirection = Mathf.Sign(
-                GameManager.instance.player.transform.position.x - transform.position.x
+            rb.linearVelocity = new Vector2(
+                lockedDirection * runAttackSpeed,
+                rb.linearVelocity.y
             );
-
-            rb.linearVelocity = new Vector2(chaseDirection * runAttackSpeed, rb.linearVelocity.y);
 
             chaseElapsed += Time.deltaTime;
             yield return null;
@@ -500,16 +518,15 @@ public class ImpMoviment : PlayerPoco
         float elapsed = 0f;
         while (elapsed < runAttackDuration)
         {
-            float direction = Mathf.Sign(
-                GameManager.instance.player.transform.position.x - transform.position.x
+            rb.linearVelocity = new Vector2(
+                lockedDirection * runAttackSpeed,
+                rb.linearVelocity.y
             );
 
-            rb.linearVelocity = new Vector2(direction * runAttackSpeed, rb.linearVelocity.y);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // 🔴 ESSENCIAL
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
 
         animator.SetBool(runBool, false);
@@ -518,6 +535,7 @@ public class ImpMoviment : PlayerPoco
         runCooldownTimer = runAttackCooldown;
         attackDecisionTimer = attackDecisionDelay;
 
+        isApproaching = true;
         currentState = ImpState.Engage;
         runAttackCoroutine = null;
     }
@@ -551,7 +569,6 @@ public class ImpMoviment : PlayerPoco
         {
             MoveHorizontal(0f, 0f);
             animator.SetBool(moveBool, false);
-            animator.SetBool(searchBool, true);
         }
     }
 
@@ -570,15 +587,30 @@ public class ImpMoviment : PlayerPoco
         screamTimer = screamDuration;
         currentState = ImpState.Scream;
         forceFleeAfterHit = false;
+        attackLockTimer = screamDuration;
+        attackDecisionTimer = screamDuration;
 
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
     private void ResetAttackState()
     {
+        lostSightTimer = 0f;
+
         isAttacking = false;
         isAttackStepping = false;
         isThrowing = false;
+
+        if (runAttackCoroutine != null)
+        {
+            StopCoroutine(runAttackCoroutine);
+            runAttackCoroutine = null;
+        }
+
+        animator.ResetTrigger(lightAttackTrigger);
+        animator.ResetTrigger(throwAttackTrigger);
+        animator.ResetTrigger(runAttackTrigger);
+
         animator.SetBool(runBool, false);
     }
 
@@ -662,6 +694,7 @@ public class ImpMoviment : PlayerPoco
         animator.SetBool(moveBool, false);
         ResetAttackState();
         ResetFleeThrowTimer();
+
         lightCooldownTimer = 0f;
         throwCooldownTimer = 0f;
         runCooldownTimer = 0f;

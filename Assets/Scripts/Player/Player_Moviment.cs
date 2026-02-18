@@ -361,6 +361,11 @@ public class PlayerMoviment : MonoBehaviour
         if (!DamageScript.IsAlive)
         {
             canMove = false;
+
+            if (isDashing)
+            {
+                rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * 5f);
+            }
             return;
         }
 
