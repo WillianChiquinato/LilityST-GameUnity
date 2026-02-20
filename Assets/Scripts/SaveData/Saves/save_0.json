@@ -1,5 +1,5 @@
 {
-    "playTime": 3321.257080078125,
+    "playTime": 3415.3623046875,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -41.439998626708987,
@@ -24,10 +24,10 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 49896
+                    "instanceID": 0
                 },
                 {
-                    "instanceID": 51132
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -42,7 +42,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51132
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -57,31 +57,9 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51132
+                    "instanceID": 0
                 }
             ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "795fa6ce-bd1b-4650-b15f-33db7d8c5fcf",
-            "position": {
-                "x": -120.5206298828125,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "f764ce24-5129-4eba-93bb-6473fa731dce",
-            "position": {
-                "x": -131.1480712890625,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [],
             "sceneNameRef": "Homolog"
         },
         {
@@ -93,6 +71,36 @@
             },
             "storedXP": 0,
             "droppedItems": [],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "4ba3df68-0980-461d-b66b-02b59370a55a",
+            "position": {
+                "x": -118.64845275878906,
+                "y": -23.059999465942384,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51138
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "3c56edb2-3f20-4e9d-a541-16d1a400ab71",
+            "position": {
+                "x": -131.59165954589845,
+                "y": -23.059999465942384,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51138
+                }
+            ],
             "sceneNameRef": "Homolog"
         }
     ],

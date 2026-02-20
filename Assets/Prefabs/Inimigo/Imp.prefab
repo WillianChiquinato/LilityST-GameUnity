@@ -451,7 +451,7 @@ MonoBehaviour:
   detectRange: 14
   loseSightRange: 25
   maxVerticalDistance: 3
-  lostSightDelay: 1.5
+  lostSightDelay: 0.5
   fleeThrowDelay: 0.5
   closeRange: 2.2
   midRange: 6
