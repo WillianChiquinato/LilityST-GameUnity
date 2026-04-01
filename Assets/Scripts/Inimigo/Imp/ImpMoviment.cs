@@ -156,16 +156,17 @@ public class ImpMoviment : PlayerPoco
                 FlipTowards(Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x));
             }
 
-            UpdateStateLogic();
             UpdateTimers();
             UpdatePerception();
+            UpdateStateLogic();
             UpdateAnimatorMovement();
             if (attackLockTimer <= 0f && currentState != ImpState.RunningAttack)
             {
                 isAttacking = false;
+                isThrowing = false;
             }
 
-            if (isAttacking && !isAttackStepping)
+            if (isAttacking && !isAttackStepping && currentState != ImpState.RunningAttack)
             {
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             }
@@ -217,7 +218,7 @@ public class ImpMoviment : PlayerPoco
             currentState = ImpState.Flee;
         }
 
-        if (!pendingScream && !hasTakenHitAggro)
+        if (!pendingScream && !hasTakenHitAggro && currentState == ImpState.Idle)
         {
             if (distanceX > 30f)
             {
@@ -226,42 +227,44 @@ public class ImpMoviment : PlayerPoco
             }
         }
 
-        if (currentState == ImpState.Flee)
+        switch (currentState)
         {
-            if (distanceX >= safeDistance)
-            {
-                StartScream();
-            }
-            return;
-        }
+            case ImpState.Flee:
+                if (!IsStateActionLocked() && distanceX >= safeDistance)
+                {
+                    StartScream();
+                }
+                return;
 
-        if (currentState == ImpState.Scream)
-        {
-            if (screamTimer <= 0f && pendingScream)
-            {
+            case ImpState.Scream:
+                if (screamTimer > 0f)
+                    return;
+
                 pendingScream = false;
                 if (pendingPostScreamThrow)
                 {
                     TriggerThrowAttack();
-                    pendingPostScreamThrow = false;
                 }
+                pendingPostScreamThrow = false;
                 attackDecisionTimer = 0.4f;
                 currentState = ImpState.Engage;
-            }
-            return;
-        }
+                return;
 
-        if (currentState == ImpState.Attack)
-        {
-            UpdateFleeThrowTimer();
-            TryAttack(distanceX, allowRunAttack: false);
-            return;
-        }
+            case ImpState.Attack:
+                if (IsStateActionLocked())
+                    return;
 
-        if (currentState == ImpState.Engage)
-        {
-            ResetFleeThrowTimer();
-            TryAttack(distanceX, allowRunAttack: true);
+                UpdateFleeThrowTimer();
+                TryAttack(distanceX, allowRunAttack: false);
+                return;
+
+            case ImpState.Engage:
+                if (IsStateActionLocked())
+                    return;
+
+                ResetFleeThrowTimer();
+                TryAttack(distanceX, allowRunAttack: true);
+                return;
         }
     }
 
@@ -344,14 +347,20 @@ public class ImpMoviment : PlayerPoco
         float distanceY = Mathf.Abs(GameManager.instance.player.transform.position.y - transform.position.y);
         bool canSeePlayer = distanceX <= detectRange && distanceY <= maxVerticalDistance;
 
-        if (currentState == ImpState.RunningAttack || currentState == ImpState.Scream)
+        if (currentState == ImpState.RunningAttack || currentState == ImpState.Scream || currentState == ImpState.Flee)
         {
             return;
         }
 
-        if (currentState == ImpState.Idle && canSeePlayer)
+        if (isAttacking || isThrowing)
+        {
+            return;
+        }
+
+        if (currentState == ImpState.Idle && (canSeePlayer || hasTakenHitAggro))
         {
             currentState = ImpState.Attack;
+            lostSightTimer = 0f;
             return;
         }
 
@@ -468,7 +477,7 @@ public class ImpMoviment : PlayerPoco
         {
             return;
         }
-        // isThrowing = true;
+        isThrowing = true;
 
         isAttacking = true;
         animator.SetTrigger(throwAttackTrigger);
@@ -484,6 +493,8 @@ public class ImpMoviment : PlayerPoco
 
         currentState = ImpState.RunningAttack;
         isAttacking = true;
+        isThrowing = false;
+        lostSightTimer = 0f;
 
         animator.SetBool(runBool, true);
 
@@ -534,6 +545,7 @@ public class ImpMoviment : PlayerPoco
         isAttacking = false;
         runCooldownTimer = runAttackCooldown;
         attackDecisionTimer = attackDecisionDelay;
+        lostSightTimer = 0f;
 
         isApproaching = true;
         currentState = ImpState.Engage;
@@ -561,9 +573,17 @@ public class ImpMoviment : PlayerPoco
                 GameManager.instance.player.transform.position.x - transform.position.x
             );
 
-            MoveHorizontal(direction, chaseSpeed);
-            animator.SetBool(moveBool, true);
-            animator.SetBool(searchBool, false);
+            if (Mathf.Abs(direction) < 0.01f)
+            {
+                MoveHorizontal(0f, 0f);
+                animator.SetBool(moveBool, false);
+            }
+            else
+            {
+                MoveHorizontal(direction, chaseSpeed);
+                animator.SetBool(moveBool, true);
+                animator.SetBool(searchBool, false);
+            }
         }
         else
         {
@@ -612,6 +632,14 @@ public class ImpMoviment : PlayerPoco
         animator.ResetTrigger(runAttackTrigger);
 
         animator.SetBool(runBool, false);
+    }
+
+    private bool IsStateActionLocked()
+    {
+        return currentState == ImpState.RunningAttack
+            || currentState == ImpState.Scream
+            || (isAttacking && attackLockTimer > 0f)
+            || attackDecisionTimer > 0f;
     }
 
     public void SpawnStone()

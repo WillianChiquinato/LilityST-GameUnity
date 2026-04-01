@@ -1,9 +1,9 @@
 {
-    "playTime": 3415.3623046875,
+    "playTime": 3668.439453125,
     "XPlayer": 500,
     "playerCheckpoint": {
-        "x": -41.439998626708987,
-        "y": -0.05999999865889549
+        "x": -164.15000915527345,
+        "y": 36.70000076293945
     },
     "playerHealth": 3,
     "currentScene": "Altior-Fuga",
@@ -15,90 +15,52 @@
     ],
     "estatuaDataList": [
         {
-            "estatuaID": "afe6a65b-69fd-4f73-a934-11dd92e8e445",
+            "estatuaID": "19bc5453-f69f-422e-a71b-be1a5b90f586",
             "position": {
-                "x": -113.75242614746094,
+                "x": -114.93013763427735,
                 "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 0
+                    "instanceID": 51144
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "e568ee75-0df7-49b7-9f4e-b495875929a2",
+            "position": {
+                "x": -136.8736572265625,
+                "y": -23.05999755859375,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 52700
                 },
                 {
-                    "instanceID": 0
+                    "instanceID": 51144
                 }
             ],
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "b50509a3-57ac-445a-a63c-56263110453f",
+            "estatuaID": "86aa83d9-65d5-4c18-ae9e-6fc33db7e039",
             "position": {
-                "x": -149.02565002441407,
+                "x": -121.55137634277344,
                 "y": -23.059999465942384,
                 "z": 0.0
             },
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "77ba7923-669a-4169-a565-8ab8846e6376",
-            "position": {
-                "x": -92.87738037109375,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
+                    "instanceID": 49906
+                },
                 {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "d1dfb35e-e39f-4c7e-bcd2-9a89ceb826bd",
-            "position": {
-                "x": -81.71671295166016,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "4ba3df68-0980-461d-b66b-02b59370a55a",
-            "position": {
-                "x": -118.64845275878906,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 51138
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "3c56edb2-3f20-4e9d-a541-16d1a400ab71",
-            "position": {
-                "x": -131.59165954589845,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 51138
+                    "instanceID": 51144
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -106,11 +68,6 @@
     ],
     "inventoryData": {
         "MaterialsItens": [
-            {
-                "itemName": "Goraflix",
-                "itemType": 1,
-                "stackSize": 1
-            },
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
@@ -128,7 +85,7 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 1
+                "stackSize": 0
             }
         ],
         "isInitialized": true
@@ -203,12 +160,12 @@
             "TestStarQuest"
         ],
         "questStepIndices": [
-            0,
+            1,
             0,
             0
         ],
         "questStepStates": [
-            "",
+            "PODE_FINALIZAR",
             "",
             ""
         ],
@@ -226,6 +183,7 @@
             "Tes2"
         ],
         "infoCategorias": [
+            1,
             1,
             1,
             1,
