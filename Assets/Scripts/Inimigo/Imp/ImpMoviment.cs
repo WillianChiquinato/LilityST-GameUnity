@@ -160,15 +160,16 @@ public class ImpMoviment : PlayerPoco
             UpdatePerception();
             UpdateStateLogic();
             UpdateAnimatorMovement();
-            if (attackLockTimer <= 0f && currentState != ImpState.RunningAttack)
+
+            if (attackLockTimer <= 0f && currentState != ImpState.RunningAttack && !HasBlockingCombatAnimation())
             {
                 isAttacking = false;
                 isThrowing = false;
             }
 
-            if (isAttacking && !isAttackStepping && currentState != ImpState.RunningAttack)
+            if (HasBlockingCombatAnimation() && !isAttackStepping && currentState != ImpState.RunningAttack)
             {
-                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                StopHorizontalMovement();
             }
         }
         else
@@ -193,13 +194,13 @@ public class ImpMoviment : PlayerPoco
 
         if (currentState == ImpState.Attack)
         {
-            HandleApproach(safeDistance);
+            HandleApproach(closeRange + 0.2f);
             return;
         }
 
         if (currentState == ImpState.Engage)
         {
-            HandleApproach(midRange);
+            HandleApproach(Mathf.Max(closeRange + 1f, runAttackDistanceStart - 0.4f));
         }
 
         if (currentState == ImpState.RunningAttack)
@@ -230,9 +231,22 @@ public class ImpMoviment : PlayerPoco
         switch (currentState)
         {
             case ImpState.Flee:
+                if (pendingScream)
+                {
+                    if (!IsStateActionLocked() && distanceX >= safeDistance)
+                    {
+                        StartScream();
+                    }
+
+                    return;
+                }
+
                 if (!IsStateActionLocked() && distanceX >= safeDistance)
                 {
-                    StartScream();
+                    ResetFleeThrowTimer();
+                    attackDecisionTimer = 0f;
+                    isApproaching = true;
+                    currentState = distanceX <= midRange ? ImpState.Attack : ImpState.Engage;
                 }
                 return;
 
@@ -300,6 +314,7 @@ public class ImpMoviment : PlayerPoco
             MoveHorizontal(direction, chaseSpeed);
             FlipTowards(direction);
             animator.SetBool(moveBool, true);
+            animator.SetBool(searchBool, false);
         }
         else
         {
@@ -366,24 +381,20 @@ public class ImpMoviment : PlayerPoco
 
         bool lostSight = distanceX > loseSightRange || distanceY > maxVerticalDistance;
 
-        if (!hasTakenHitAggro)
+        if (currentState == ImpState.Attack || currentState == ImpState.Engage)
         {
-            if (currentState == ImpState.Attack || currentState == ImpState.Engage)
+            if (lostSight)
             {
-                if (lostSight)
-                {
-                    lostSightTimer += Time.deltaTime;
+                lostSightTimer += Time.deltaTime;
 
-                    if (lostSightTimer >= lostSightDelay)
-                    {
-                        currentState = ImpState.Idle;
-                        lostSightTimer = 0f;
-                    }
-                }
-                else
+                if (lostSightTimer >= lostSightDelay)
                 {
-                    lostSightTimer = 0f;
+                    EnterIdleState();
                 }
+            }
+            else
+            {
+                lostSightTimer = 0f;
             }
         }
     }
@@ -464,6 +475,10 @@ public class ImpMoviment : PlayerPoco
             return;
         }
 
+        StopHorizontalMovement();
+        animator.SetBool(moveBool, false);
+        animator.SetBool(searchBool, false);
+
         isAttacking = true;
         animator.SetTrigger(lightAttackTrigger);
         lightCooldownTimer = lightAttackCooldown;
@@ -477,8 +492,12 @@ public class ImpMoviment : PlayerPoco
         {
             return;
         }
-        isThrowing = true;
 
+        StopHorizontalMovement();
+        animator.SetBool(moveBool, false);
+        animator.SetBool(searchBool, false);
+
+        isThrowing = true;
         isAttacking = true;
         animator.SetTrigger(throwAttackTrigger);
         throwCooldownTimer = throwAttackCooldown;
@@ -541,28 +560,29 @@ public class ImpMoviment : PlayerPoco
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
 
         animator.SetBool(runBool, false);
+        animator.SetBool(searchBool, false);
 
         isAttacking = false;
         runCooldownTimer = runAttackCooldown;
-        attackDecisionTimer = attackDecisionDelay;
+        attackDecisionTimer = 0f;
         lostSightTimer = 0f;
 
-        isApproaching = true;
-        currentState = ImpState.Engage;
+        float currentDistanceToPlayer = Mathf.Abs(GameManager.instance.player.transform.position.x - transform.position.x);
+        isApproaching = currentDistanceToPlayer > closeRange;
+        currentState = currentDistanceToPlayer <= closeRange ? ImpState.Attack : ImpState.Engage;
         runAttackCoroutine = null;
     }
 
 
     private void HandleApproach(float desiredRange)
     {
-        float enterRange = desiredRange;
-        float exitRange = desiredRange + 6f;
+        float tolerance = 0.2f;
 
-        if (!isApproaching && distanceX > 1.5f && distanceX < enterRange)
+        if (distanceX > desiredRange + tolerance)
         {
             isApproaching = true;
         }
-        else if (isApproaching && distanceX > exitRange)
+        else if (distanceX <= desiredRange - tolerance)
         {
             isApproaching = false;
         }
@@ -597,6 +617,7 @@ public class ImpMoviment : PlayerPoco
         float direction = Mathf.Sign(transform.position.x - GameManager.instance.player.transform.position.x);
         MoveHorizontal(direction, fleeSpeed);
         animator.SetBool(moveBool, true);
+        animator.SetBool(searchBool, false);
     }
 
     private void StartScream()
@@ -604,13 +625,14 @@ public class ImpMoviment : PlayerPoco
         ResetAttackState();
         animator.SetTrigger(screamTrigger);
         animator.SetBool(moveBool, false);
+        animator.SetBool(searchBool, false);
         screamTimer = screamDuration;
         currentState = ImpState.Scream;
         forceFleeAfterHit = false;
         attackLockTimer = screamDuration;
         attackDecisionTimer = screamDuration;
 
-        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        StopHorizontalMovement();
     }
 
     private void ResetAttackState()
@@ -663,8 +685,58 @@ public class ImpMoviment : PlayerPoco
 
     private void UpdateAnimatorMovement()
     {
-        bool isMoving = Mathf.Abs(rb.linearVelocity.x) > 0.05f;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        bool inLockedAttackState = stateInfo.IsName("AttackBasic")
+            || stateInfo.IsName("throwImp")
+            || stateInfo.IsName("screamImp")
+            || stateInfo.IsName("hitImp");
+
+        bool isMoving = !inLockedAttackState && Mathf.Abs(rb.linearVelocity.x) > 0.05f;
+        bool isSearching = currentState == ImpState.Idle
+            && !isMoving
+            && !pendingScream
+            && currentState != ImpState.Scream
+            && currentState != ImpState.RunningAttack
+            && !stateInfo.IsName("RunningAttack")
+            && !inLockedAttackState
+            && damageScript.IsAlive;
+
         animator.SetBool(moveBool, isMoving);
+        animator.SetBool(searchBool, isSearching);
+    }
+
+    private bool HasBlockingCombatAnimation()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        return stateInfo.IsName("AttackBasic")
+            || stateInfo.IsName("throwImp")
+            || stateInfo.IsName("screamImp")
+            || stateInfo.IsName("hitImp");
+    }
+
+    private void StopHorizontalMovement()
+    {
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
+
+    private void EnterIdleState()
+    {
+        lostSightTimer = 0f;
+        forceFleeAfterHit = false;
+        hasTakenHitAggro = false;
+        pendingScream = false;
+        pendingPostScreamThrow = false;
+        isApproaching = false;
+        currentState = ImpState.Idle;
+
+        ResetAttackState();
+        ResetFleeThrowTimer();
+        StopHorizontalMovement();
+
+        animator.SetBool(moveBool, false);
+        animator.SetBool(searchBool, true);
     }
 
     private void MoveHorizontal(float direction, float speed)
@@ -704,9 +776,18 @@ public class ImpMoviment : PlayerPoco
         if (runAttackCoroutine != null)
         {
             StopCoroutine(runAttackCoroutine);
-            currentState = ImpState.Flee;
             animator.SetBool(runBool, false);
             runAttackCoroutine = null;
+
+            if (!hasScreamedAfterHit)
+            {
+                currentState = ImpState.Flee;
+            }
+            else
+            {
+                currentState = distanceX <= midRange ? ImpState.Attack : ImpState.Engage;
+                isApproaching = true;
+            }
         }
 
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
@@ -718,6 +799,20 @@ public class ImpMoviment : PlayerPoco
             forceFleeAfterHit = true;
             hasTakenHitAggro = true;
             hasScreamedAfterHit = true;
+        }
+        else
+        {
+            pendingScream = false;
+            pendingPostScreamThrow = false;
+            forceFleeAfterHit = false;
+            hasTakenHitAggro = true;
+
+            if (currentState != ImpState.Attack && currentState != ImpState.Engage)
+            {
+                currentState = distanceX <= midRange ? ImpState.Attack : ImpState.Engage;
+            }
+
+            isApproaching = distanceX > closeRange;
         }
         animator.SetBool(moveBool, false);
         ResetAttackState();

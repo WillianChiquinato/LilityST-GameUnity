@@ -1,5 +1,5 @@
 {
-    "playTime": 3668.439453125,
+    "playTime": 4046.818603515625,
     "XPlayer": 500,
     "playerCheckpoint": {
         "x": -164.15000915527345,
@@ -48,10 +48,40 @@
             "sceneNameRef": "Homolog"
         },
         {
-            "estatuaID": "86aa83d9-65d5-4c18-ae9e-6fc33db7e039",
+            "estatuaID": "846beba1-3ef6-4733-868c-e289fb2c8175",
             "position": {
-                "x": -121.55137634277344,
+                "x": -154.96951293945313,
+                "y": 21.100000381469728,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51144
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "ebe70cb7-b1bc-49d9-8b3a-267819ebffd6",
+            "position": {
+                "x": -145.77700805664063,
                 "y": -23.059999465942384,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51144
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "b047bcc3-16da-4456-8ab0-e63f5e6bcef0",
+            "position": {
+                "x": -153.88589477539063,
+                "y": 21.100000381469728,
                 "z": 0.0
             },
             "storedXP": 0,
@@ -64,10 +94,45 @@
                 }
             ],
             "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "e7f637c7-62c5-4e77-b6b7-b6a65efca038",
+            "position": {
+                "x": -153.77304077148438,
+                "y": 21.100000381469728,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51144
+                }
+            ],
+            "sceneNameRef": "Homolog"
+        },
+        {
+            "estatuaID": "c6bd2ad2-cf08-48cf-97c7-65693b6dbecc",
+            "position": {
+                "x": -171.79791259765626,
+                "y": 21.100000381469728,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 51144
+                }
+            ],
+            "sceneNameRef": "Homolog"
         }
     ],
     "inventoryData": {
         "MaterialsItens": [
+            {
+                "itemName": "Goraflix",
+                "itemType": 1,
+                "stackSize": 1
+            },
             {
                 "itemName": "DocumentoItem",
                 "itemType": 1,
@@ -88,7 +153,7 @@
                 "stackSize": 0
             }
         ],
-        "isInitialized": true
+        "isInitialized": false
     },
     "fragmentoData": {
         "ChaveTempo": [

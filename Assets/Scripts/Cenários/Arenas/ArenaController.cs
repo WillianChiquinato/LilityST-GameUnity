@@ -17,6 +17,7 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private List<GameObject> closesDoors = new List<GameObject>();
     [SerializeField] private List<Animator> animatorsDoors = new List<Animator>();
     [SerializeField] private bool startedArena;
+    public bool AuthorizeSpawn { get; private set; }
 
     [Header("Camera Intro")]
     [SerializeField] private Transform cameraFocusPoint;
@@ -36,10 +37,14 @@ public class ArenaController : MonoBehaviour
     private Coroutine arenaIntroCameraCoroutine;
     private Coroutine lensTransitionCoroutine;
     private Transform defaultFollowTarget;
+    private Transform targetEnemyCameraCenterPoint;
     private float defaultOrthographicSize;
     private bool stayCameraLocked;
+    private bool targetEnemyCameraLocked;
     private bool enforceLensSize;
     private float enforcedLensSize;
+    private Collider2D arenaBoundsCollider;
+    private readonly List<Damage> arenaEnemies = new List<Damage>();
 
     public ArenaTypes arenaType;
 
@@ -61,6 +66,7 @@ public class ArenaController : MonoBehaviour
 
         playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
         cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        arenaBoundsCollider = GetComponent<Collider2D>();
 
         if (cinemachineVirtualCamera != null)
         {
@@ -71,6 +77,8 @@ public class ArenaController : MonoBehaviour
 
         if (defaultFollowTarget == null && playerMoviment != null)
             defaultFollowTarget = playerMoviment.transform;
+
+        RefreshArenaEnemies();
     }
 
     void Update()
@@ -80,6 +88,9 @@ public class ArenaController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (targetEnemyCameraLocked)
+            UpdateTargetEnemyCameraCenterPoint();
+
         if (!enforceLensSize || cinemachineVirtualCamera == null)
             return;
 
@@ -103,6 +114,7 @@ public class ArenaController : MonoBehaviour
         closesDoors.ForEach(door => door.GetComponent<BoxCollider2D>().enabled = false);
         ResetCameraTypeBehavior();
         startedArena = false;
+        AuthorizeSpawn = false;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -184,6 +196,7 @@ public class ArenaController : MonoBehaviour
             playerMoviment.canMove = true;
 
         arenaIntroCameraCoroutine = null;
+        AuthorizeSpawn = true;
     }
 
     private void ApplyCameraTypeBehavior()
@@ -220,7 +233,18 @@ public class ArenaController : MonoBehaviour
                 break;
 
             case ArenaTypes.TargetEnemyCamera:
-                // TODO: focar no inimigo/inimigos da arena.
+                if (cinemachineVirtualCamera != null)
+                {
+                    EnsureTargetEnemyCameraCenterPoint();
+                    RefreshArenaEnemies();
+                    UpdateTargetEnemyCameraCenterPoint();
+
+                    cinemachineVirtualCamera.Follow = targetEnemyCameraCenterPoint;
+                    if (framingTransposer != null)
+                        framingTransposer.m_TrackedObjectOffset = Vector3.zero;
+
+                    targetEnemyCameraLocked = true;
+                }
                 break;
         }
     }
@@ -230,7 +254,7 @@ public class ArenaController : MonoBehaviour
         if (cinemachineVirtualCamera == null)
             return;
 
-        if (stayCameraLocked)
+        if (stayCameraLocked || targetEnemyCameraLocked)
             cinemachineVirtualCamera.Follow = defaultFollowTarget;
 
         StartLensTransition(defaultOrthographicSize, false);
@@ -239,6 +263,98 @@ public class ArenaController : MonoBehaviour
             framingTransposer.m_TrackedObjectOffset = Vector3.zero;
 
         stayCameraLocked = false;
+        targetEnemyCameraLocked = false;
+    }
+
+    private void EnsureTargetEnemyCameraCenterPoint()
+    {
+        if (targetEnemyCameraCenterPoint != null)
+            return;
+
+        GameObject centerPointObject = new GameObject($"{name}_TargetEnemyCameraCenter");
+        targetEnemyCameraCenterPoint = centerPointObject.transform;
+        targetEnemyCameraCenterPoint.position = defaultFollowTarget != null ? defaultFollowTarget.position : transform.position;
+    }
+
+    private void RefreshArenaEnemies()
+    {
+        arenaEnemies.Clear();
+
+        Damage[] damagesInScene = FindObjectsByType<Damage>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (Damage damage in damagesInScene)
+        {
+            if (IsArenaEnemyCandidate(damage))
+                arenaEnemies.Add(damage);
+        }
+    }
+
+    public void RegisterArenaEnemy(GameObject enemyObject)
+    {
+        if (enemyObject == null)
+            return;
+
+        Damage damage = enemyObject.GetComponent<Damage>();
+        if (damage == null)
+            damage = enemyObject.GetComponentInChildren<Damage>();
+
+        if (damage == null || !IsArenaEnemyCandidate(damage) || arenaEnemies.Contains(damage))
+            return;
+
+        arenaEnemies.Add(damage);
+
+        if (targetEnemyCameraLocked)
+            UpdateTargetEnemyCameraCenterPoint();
+    }
+
+    private bool IsArenaEnemyCandidate(Damage damage)
+    {
+        if (damage == null || !damage.gameObject.scene.IsValid())
+            return false;
+
+        if (playerMoviment != null && damage.gameObject == playerMoviment.gameObject)
+            return false;
+
+        if (damage.CompareTag("Player"))
+            return false;
+
+        bool isInsideArena = damage.transform.IsChildOf(transform)
+            || (arenaBoundsCollider != null && arenaBoundsCollider.bounds.Contains(damage.transform.position));
+
+        if (!isInsideArena)
+            return false;
+
+        return damage.CompareTag("Inimigos")
+            || damage.GetComponent<PlayerPoco>() != null
+            || damage.GetComponent<EnemyPathing>() != null
+            || damage.GetComponent<EnemyReturnToBase>() != null;
+    }
+
+    private bool IsValidArenaEnemyTarget(Damage damage)
+    {
+        return IsArenaEnemyCandidate(damage)
+            && damage.gameObject.activeInHierarchy
+            && damage.IsAlive;
+    }
+
+    private void UpdateTargetEnemyCameraCenterPoint()
+    {
+        if (targetEnemyCameraCenterPoint == null)
+            return;
+
+        Vector3 fallbackPosition = playerMoviment != null ? playerMoviment.transform.position : transform.position;
+        Bounds combatBounds = new Bounds(fallbackPosition, Vector3.zero);
+
+        foreach (Damage enemy in arenaEnemies)
+        {
+            if (!IsValidArenaEnemyTarget(enemy))
+                continue;
+
+            combatBounds.Encapsulate(enemy.transform.position);
+        }
+
+        Vector3 centerPosition = combatBounds.center;
+        centerPosition.z = fallbackPosition.z;
+        targetEnemyCameraCenterPoint.position = centerPosition;
     }
 
     private Vector3 GetStayCameraCenterPosition()

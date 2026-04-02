@@ -29,10 +29,10 @@ public class Attack_Projetil : MonoBehaviour, Defender
 
         if (damage != null)
         {
-            Vector2 flipknockback = transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
+            Vector2 projectileKnockback = GetProjectileKnockback(Collision);
 
             // ataque ao alvo
-            bool goHit = damage.Hit(attackDamage, flipknockback, transform);
+            bool goHit = damage.Hit(attackDamage, projectileKnockback, transform);
             if (goHit)
             {
                 Debug.Log("AtaqueProject");
@@ -53,6 +53,27 @@ public class Attack_Projetil : MonoBehaviour, Defender
         {
             Destroy(gameObject, timerDestroyed);
         }
+    }
+
+    private Vector2 GetProjectileKnockback(Collider2D collision)
+    {
+        float horizontalDirection = 0f;
+
+        if (rb != null && Mathf.Abs(rb.linearVelocity.x) > 0.01f)
+        {
+            horizontalDirection = Mathf.Sign(rb.linearVelocity.x);
+        }
+        else
+        {
+            horizontalDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
+        }
+
+        if (horizontalDirection == 0f)
+        {
+            horizontalDirection = transform.position.x <= collision.transform.position.x ? 1f : -1f;
+        }
+
+        return new Vector2(Mathf.Abs(knockback.x) * horizontalDirection, knockback.y);
     }
 
     public void TrocarLayer(GameObject obj, int novaLayer)

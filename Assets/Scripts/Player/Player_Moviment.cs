@@ -864,6 +864,8 @@ public class PlayerMoviment : MonoBehaviour
             tempo = false;
             elapsedTime = 0f;
             bow.NewArrow = null;
+
+            GetComponent<SpriteRenderer>().enabled = true;
             foreach (var nuss in bow.points)
             {
                 nuss.SetActive(false);
