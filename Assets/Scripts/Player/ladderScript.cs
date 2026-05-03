@@ -27,6 +27,7 @@ public class ladderScript : MonoBehaviour
 
     void Update()
     {
+        GameManager.instance.player.HorizontalMovementBlocked = isClimbing;
         vertical = Input.GetAxis("Vertical");
 
         if (playerMoviment == null)

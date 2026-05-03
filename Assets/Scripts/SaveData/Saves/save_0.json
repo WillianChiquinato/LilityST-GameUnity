@@ -24,7 +24,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -39,10 +39,10 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 52700
+                    "instanceID": 0
                 },
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -57,7 +57,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -72,7 +72,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -87,10 +87,10 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 49906
+                    "instanceID": 0
                 },
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -105,7 +105,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -120,7 +120,7 @@
             "storedXP": 0,
             "droppedItems": [
                 {
-                    "instanceID": 51144
+                    "instanceID": 0
                 }
             ],
             "sceneNameRef": "Homolog"
@@ -150,10 +150,10 @@
             {
                 "itemName": "Pedrinha",
                 "itemType": 2,
-                "stackSize": 0
+                "stackSize": 1
             }
         ],
-        "isInitialized": false
+        "isInitialized": true
     },
     "fragmentoData": {
         "ChaveTempo": [

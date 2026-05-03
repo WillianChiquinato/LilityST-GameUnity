@@ -9,7 +9,11 @@ using System;
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;
+
+    [Header("Block States")]
     public bool AutoMoveAnimations = false;
+    public bool HorizontalMovementBlocked = false;
+    public bool VerticalMovementBlocked = false;
 
     [Header("Instances")]
     public float currentZRotation;
@@ -557,14 +561,16 @@ public class PlayerMoviment : MonoBehaviour
             }
 
             // Só permite controle se não estiver em walljump OU se o tempo de bloqueio acabou
+            float horizontalVelocity = HorizontalMovementBlocked ? 0 : moveInput.x * CurrentMoveSpeed;
+            
             if (!isWallJumping && !isDashing)
             {
-                rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(horizontalVelocity, rb.linearVelocity.y);
             }
             else if (isWallJumping && wallJumpControlLockTimer <= 0f && !isDashing)
             {
                 // Após o tempo de bloqueio, permite controle parcial durante o walljump
-                rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(horizontalVelocity, rb.linearVelocity.y);
             }
 
             if (touching.IsGrouded && rb.linearVelocity.y <= 0f)
@@ -696,6 +702,9 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Jump()
     {
+        if (VerticalMovementBlocked)
+            return;
+        
         animacao.SetTrigger(animationstrings.jump);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
@@ -734,6 +743,9 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && touching.IsOnWall && !touching.IsGrouded)
         {
+            if (VerticalMovementBlocked)
+                return;
+            
             // Determina a direção oposta à parede (impulso automático)
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
 
