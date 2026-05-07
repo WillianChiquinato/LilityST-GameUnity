@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,8 @@ public class SeletorArmas : MonoBehaviour
     public int currentIndex = 0;
 
     [Header("Conteudo UI")]
-    public Image conteudoUI;
+    public Image imagemUI;
+    public TextMeshProUGUI tituloUI;
 
     public string[] nomesDasArmas = { "Bastão", "Arco", "Marreta", "Luva", "Mascara", "Sino" };
 
@@ -35,19 +37,24 @@ public class SeletorArmas : MonoBehaviour
         switch (currentIndex)
         {
             case 0:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/BastaoIcon");
+                imagemUI.sprite = Resources.Load<Sprite>("Sprites/Armas/BastaoIcon");
+                tituloUI.text = PowerUpCategory.ArmaPrimaria.GetStringCategory();
                 break;
             case 1:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/ArcoIcon");
+                imagemUI.sprite = Resources.Load<Sprite>("Sprites/Armas/ArcoIcon");
+                tituloUI.text = PowerUpCategory.ArmaSecundaria.GetStringCategory();
                 break;
             case 2:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Marreta");
+                imagemUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Marreta");
+                tituloUI.text = PowerUpCategory.ArmaPrimaria.GetStringCategory();
                 break;
             case 3:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Mascara");
+                imagemUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Mascara");
+                tituloUI.text = PowerUpCategory.ArmaSecundaria.GetStringCategory();
                 break;
             case 4:
-                conteudoUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Sino");
+                imagemUI.sprite = Resources.Load<Sprite>("Sprites/Armas/Sino");
+                tituloUI.text = PowerUpCategory.ArmaSecundaria.GetStringCategory();
                 break;
         }
     }

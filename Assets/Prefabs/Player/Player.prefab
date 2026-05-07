@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 878990692150599985}
   - component: {fileID: 8014262254239817579}
   - component: {fileID: 4711106220008672630}
+  - component: {fileID: 6020662810869485299}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Player
@@ -917,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 2793249064160061137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.86, y: 0.14, z: 0}
+  m_LocalPosition: {x: 77.5, y: -43.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -954,6 +955,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScene: 
   AutoMoveAnimations: 0
+  HorizontalMovementBlocked: 0
+  VerticalMovementBlocked: 0
   currentZRotation: 0
   maxSpeed: 7
   speed: 2
@@ -1635,6 +1638,55 @@ MonoBehaviour:
   mapCamera: {fileID: 0}
   mapUI: {fileID: 0}
   mapToggleMode: {fileID: 0}
+--- !u!114 &6020662810869485299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793249064160061137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a107c9741eaf454189d93e1d75c85e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRopeController
+  currentRope: {fileID: 0}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  climbUpSpeed: 3
+  climbDownSpeed: 6
+  isClimbing: 0
+  climbOverDuration: 0.4
+  climbCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  topOffset: {x: 0, y: 0.5, z: 0}
+  topReachDistance: 0.5
+  topTransitionSpeedMultiplier: 2
+  climbAnimatorBool: IsClimbing
+  useTopTransitionTrigger: 0
+  topTransitionTrigger: ClimbOverTop
 --- !u!1 &2877492617240880508
 GameObject:
   m_ObjectHideFlags: 0

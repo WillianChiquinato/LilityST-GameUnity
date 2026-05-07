@@ -32,9 +32,9 @@ public class BastaoPowerUp : PowerUp
             if (GameManager.instance.playerMoviment.entrar)
             {
                 GameManager.instance.playerMoviment.animacao.SetBool("isPowerUp", true);
-                if (!SaveData.Instance.powerUps.Contains(PowerUps.Bastao))
+                if (!SaveData.Instance.powerUps.Exists(p => p.name == PowerUps.Bastao))
                 {
-                    SaveData.Instance.powerUps.Add(PowerUps.Bastao);
+                    SaveData.Instance.powerUps.Add(new PowerUpData(PowerUps.Bastao));
                     Debug.Log("PowerUp adicionado com sucesso!");
                 }
                 else

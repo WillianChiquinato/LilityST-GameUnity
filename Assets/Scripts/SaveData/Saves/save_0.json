@@ -1,131 +1,35 @@
 {
-    "playTime": 4046.818603515625,
-    "XPlayer": 500,
+    "playTime": 12.797248840332032,
+    "XPlayer": 0,
     "playerCheckpoint": {
-        "x": -164.15000915527345,
-        "y": 36.70000076293945
+        "x": 0.0,
+        "y": 0.0
     },
-    "playerHealth": 3,
-    "currentScene": "Altior-Fuga",
-    "DashUnlocked": true,
-    "WalljumpUnlocked": true,
+    "playerHealth": 0,
+    "currentScene": "",
+    "DashUnlocked": false,
+    "WalljumpUnlocked": false,
     "powerUps": [
-        0,
-        1
-    ],
-    "estatuaDataList": [
         {
-            "estatuaID": "19bc5453-f69f-422e-a71b-be1a5b90f586",
-            "position": {
-                "x": -114.93013763427735,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
+            "name": 0,
+            "category": 0
         },
         {
-            "estatuaID": "e568ee75-0df7-49b7-9f4e-b495875929a2",
-            "position": {
-                "x": -136.8736572265625,
-                "y": -23.05999755859375,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                },
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
+            "name": 1,
+            "category": 1
         },
         {
-            "estatuaID": "846beba1-3ef6-4733-868c-e289fb2c8175",
-            "position": {
-                "x": -154.96951293945313,
-                "y": 21.100000381469728,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
+            "name": 2,
+            "category": 0
         },
         {
-            "estatuaID": "ebe70cb7-b1bc-49d9-8b3a-267819ebffd6",
-            "position": {
-                "x": -145.77700805664063,
-                "y": -23.059999465942384,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "b047bcc3-16da-4456-8ab0-e63f5e6bcef0",
-            "position": {
-                "x": -153.88589477539063,
-                "y": 21.100000381469728,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                },
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "e7f637c7-62c5-4e77-b6b7-b6a65efca038",
-            "position": {
-                "x": -153.77304077148438,
-                "y": 21.100000381469728,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
-        },
-        {
-            "estatuaID": "c6bd2ad2-cf08-48cf-97c7-65693b6dbecc",
-            "position": {
-                "x": -171.79791259765626,
-                "y": 21.100000381469728,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 0
-                }
-            ],
-            "sceneNameRef": "Homolog"
+            "name": 3,
+            "category": 1
         }
     ],
+    "equippedPrimary": "",
+    "equippedSecondary": "",
+    "estatuaDataList": [],
     "inventoryData": {
         "MaterialsItens": [
             {
@@ -219,50 +123,15 @@
         "isInitialized": true
     },
     "questData": {
-        "questIDs": [
-            "DerrotarInimigos",
-            "NPC",
-            "TestStarQuest"
-        ],
-        "questStepIndices": [
-            1,
-            0,
-            0
-        ],
-        "questStepStates": [
-            "PODE_FINALIZAR",
-            "",
-            ""
-        ],
-        "questStates": [
-            "PODE_FINALIZAR",
-            "EM_ANDAMENTO",
-            "EM_ANDAMENTO"
-        ]
+        "questIDs": [],
+        "questStepIndices": [],
+        "questStepStates": [],
+        "questStates": []
     },
     "infoData": {
-        "infoIDs": [
-            "InfoTes2"
-        ],
-        "infoNome": [
-            "Tes2"
-        ],
-        "infoCategorias": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-        ],
-        "infoDescricoes": [
-            "afad a a  ds s ss s s "
-        ]
+        "infoIDs": [],
+        "infoNome": [],
+        "infoCategorias": [],
+        "infoDescricoes": []
     }
 }

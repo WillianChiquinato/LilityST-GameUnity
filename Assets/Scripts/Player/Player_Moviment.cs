@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
 public class PlayerMoviment : MonoBehaviour
@@ -562,7 +563,7 @@ public class PlayerMoviment : MonoBehaviour
 
             // Só permite controle se não estiver em walljump OU se o tempo de bloqueio acabou
             float horizontalVelocity = HorizontalMovementBlocked ? 0 : moveInput.x * CurrentMoveSpeed;
-            
+
             if (!isWallJumping && !isDashing)
             {
                 rb.linearVelocity = new Vector2(horizontalVelocity, rb.linearVelocity.y);
@@ -704,7 +705,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (VerticalMovementBlocked)
             return;
-        
+
         animacao.SetTrigger(animationstrings.jump);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulso);
         coyoteTimeContador = 0f;
@@ -745,7 +746,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             if (VerticalMovementBlocked)
                 return;
-            
+
             // Determina a direção oposta à parede (impulso automático)
             float jumpDirection = (facingDirecao == 1) ? -1 : 1;
 
@@ -763,11 +764,14 @@ public class PlayerMoviment : MonoBehaviour
         }
     }
 
+    //Para armas primárias.
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (SaveData.Instance.powerUps.Contains(PowerUps.Bastao) && IsAlive)
+        PowerUps? primaria = WeaponEquipSelector.instance.GetEquippedPrimary();
+
+        if (context.performed && !arcoEffect && !OpenCaderno && !isMapOpened)
         {
-            if (context.performed && !arcoEffect && !OpenCaderno && !isMapOpened)
+            if (primaria == PowerUps.Bastao && IsAlive)
             {
                 Atacar = true;
                 if (touching.IsGrouded)
@@ -786,6 +790,11 @@ public class PlayerMoviment : MonoBehaviour
                     }
                 }
                 animacao.SetTrigger(animationstrings.attack);
+            }
+
+            if (primaria == PowerUps.Marreta && IsAlive)
+            {
+                Debug.LogWarning("Marreta não implementada ainda!");
             }
         }
     }
@@ -811,12 +820,14 @@ public class PlayerMoviment : MonoBehaviour
         DamageScript.VelocityLock = false;
     }
 
+    //Para armas secundárias.
     public void OnPowers(InputAction.CallbackContext context)
     {
+        PowerUps? secundaria = WeaponEquipSelector.instance.GetEquippedSecondary();
+
         if (context.started && !OpenCaderno && !isMapOpened)
         {
-            //Para o Arco.
-            if (SaveData.Instance.powerUps.Contains(PowerUps.Arco) && !wallSlide)
+            if (secundaria == PowerUps.Arco && !wallSlide)
             {
                 if (bow.NewArrow == null)
                 {
@@ -831,6 +842,16 @@ public class PlayerMoviment : MonoBehaviour
                     bow.playerArco.gameObject.SetActive(true);
                     bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
                 }
+            }
+
+            if (secundaria == PowerUps.Sino)
+            {
+                Debug.LogWarning("Sino não implementado ainda!");
+            }
+
+            if (secundaria == PowerUps.Mascara)
+            {
+                Debug.LogWarning("Máscara não implementada ainda!");
             }
         }
     }

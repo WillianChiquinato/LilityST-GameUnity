@@ -29,7 +29,7 @@ public class ArmasSystem : MonoBehaviour
 
     private void InicializarDecksRuntime()
     {
-        string[] armas = new[] { "Bastão", "Arco", "Marreta", "Luva", "Mascara", "Sino" };
+        string[] armas = new[] { "Bastão", "Arco", "Marreta", "Mascara", "Sino" };
         foreach (var arma in armas)
         {
             if (!decksPorArmaRuntime.ContainsKey(arma))

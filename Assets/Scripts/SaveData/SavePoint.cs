@@ -99,7 +99,7 @@ public class Savepoint : MonoBehaviour
         }
     }
 
-    public void SaveCheckpoint(float playTime, Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, List<PowerUps> powerUps, int XPlayer = 0)
+    public void SaveCheckpoint(float playTime, Vector2 checkpoint, int health, bool DashUnlocked, bool WalljumpUnlocked, List<PowerUpData> powerUps, int XPlayer = 0)
     {
         // 1. Carregar o save atual do slot
         var currentData = SaveManager.Load(GameManager.currentSaveSlot);
@@ -115,7 +115,7 @@ public class Savepoint : MonoBehaviour
         currentData.DashUnlocked = DashUnlocked;
         currentData.WalljumpUnlocked = WalljumpUnlocked;
         currentData.XPlayer = XPlayer;
-        currentData.powerUps = new List<PowerUps>(powerUps);
+        currentData.powerUps = new List<PowerUpData>(powerUps);
         currentData.playTime = playTime;
 
         // 3. Salvar de volta (preservando inventário e tudo mais)

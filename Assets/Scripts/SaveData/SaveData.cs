@@ -25,7 +25,11 @@ public class SaveData
     public string currentScene;
     public bool DashUnlocked = false;
     public bool WalljumpUnlocked = false;
-    public List<PowerUps> powerUps = new List<PowerUps> { PowerUps.Arco };
+    public List<PowerUpData> powerUps = new List<PowerUpData> { new PowerUpData(PowerUps.Bastao), new PowerUpData(PowerUps.Arco) };
+
+    // Arma equipada atualmente por categoria
+    public string equippedPrimary = "";
+    public string equippedSecondary = "";
 
     // --- Estátuas ---
     public List<EstatuaData> estatuaDataList = new List<EstatuaData>();
@@ -43,6 +47,12 @@ public class SaveData
     public InfoManager.InfoSaveData infoData = new InfoManager.InfoSaveData();
 }
 
+public enum PowerUpCategory
+{
+    ArmaPrimaria,
+    ArmaSecundaria
+}
+
 public enum PowerUps
 {
     Bastao,
@@ -50,4 +60,51 @@ public enum PowerUps
     Marreta,
     Sino,
     Mascara
+}
+
+public static class PowerUpsExtensions
+{
+    public static Dictionary<PowerUps, PowerUpCategory> powerUpCategories = new Dictionary<PowerUps, PowerUpCategory>
+    {
+        { PowerUps.Bastao, PowerUpCategory.ArmaPrimaria },
+        { PowerUps.Marreta, PowerUpCategory.ArmaPrimaria },
+        { PowerUps.Arco, PowerUpCategory.ArmaSecundaria },
+        { PowerUps.Sino, PowerUpCategory.ArmaSecundaria },
+        { PowerUps.Mascara, PowerUpCategory.ArmaSecundaria }
+    };
+
+    public static string GetStringCategory(this PowerUpCategory powerUpCCategory)
+    {
+        //Trasnformar o enum em string legível
+        switch (powerUpCCategory)
+        {
+            case PowerUpCategory.ArmaPrimaria:
+                return "Arma Primária";
+            case PowerUpCategory.ArmaSecundaria:
+                return "Arma Secundária";
+            default:
+                return powerUpCCategory.ToString();
+        }
+    }
+}
+
+[System.Serializable]
+public class PowerUpData
+{
+    public PowerUps name;
+    public PowerUpCategory category;
+
+    public PowerUpData(PowerUps powerUp)
+    {
+        name = powerUp;
+        category = PowerUpsExtensions.powerUpCategories[powerUp];
+    }
+}
+
+public class HasPowerUp
+{
+    public static bool HasPowerUps(PowerUps powerUp)
+    {
+        return SaveData.Instance.powerUps.Exists(p => p.name == powerUp);
+    }
 }

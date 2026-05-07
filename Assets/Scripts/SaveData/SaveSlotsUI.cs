@@ -47,7 +47,7 @@ public class SaveSlotsUI : MonoBehaviour
             currentScene = "Altior-Quarto",
             DashUnlocked = true,
             WalljumpUnlocked = true,
-            powerUps = new List<PowerUps> { PowerUps.Bastao, PowerUps.Arco },
+            powerUps = new List<PowerUpData> { new PowerUpData(PowerUps.Bastao), new PowerUpData(PowerUps.Arco) },
             XPlayer = 0,
             playTime = 0f,
             inventoryData = new inventory_System.InventorySaveData(),
@@ -120,7 +120,7 @@ public class SaveSlotsUI : MonoBehaviour
 
             foreach (var power in data.powerUps)
             {
-                imagensPoderes[(int)power].gameObject.SetActive(true);
+                imagensPoderes[(int)power.name].gameObject.SetActive(true);
             }
         }
         else

@@ -9,6 +9,7 @@ public enum RopeType
 
 public class RopeController : MonoBehaviour
 {
+    public Transform topPoint;
     public RopeType ropeType = RopeType.Normal;
 
     private void OnTriggerEnter2D(Collider2D collision)
