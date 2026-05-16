@@ -11,6 +11,7 @@ public class Savepoint : MonoBehaviour
 
     public Vector2 defaultPosition = Vector2.zero;
     private Transform playerParent;
+    private bool pendingCheckpointLoad;
 
 
     private void Awake()
@@ -35,35 +36,28 @@ public class Savepoint : MonoBehaviour
         if (!SaveManager.SaveExists(currentSlot))
         {
             // Nenhum save ainda, usa posição padrão
-            SetDefaultSpawnPosition();
+            pendingCheckpointLoad = !TrySetDefaultSpawnPosition();
             Debug.LogWarning("Checkpoint não encontrado, posição padrão aplicada, nem o slot achou");
         }
         else
         {
-            if (SaveData.Instance != null && GameManager.instance.playerMoviment != null)
+            if (SaveData.Instance != null)
             {
-                if (SaveData.Instance.currentScene == SceneManager.GetActiveScene().name)
-                {
-                    // Se a cena é a mesma, coloca no checkpoint salvo
-                    GameManager.instance.playerMoviment.transform.position = SaveData.Instance.playerCheckpoint;
-                }
-                else
-                {
-                    SetDefaultSpawnPosition();
-                }
+                pendingCheckpointLoad = !TryApplyInitialSpawn();
             }
             else
             {
                 //Fallback.
-                SetDefaultSpawnPosition();
+                pendingCheckpointLoad = !TrySetDefaultSpawnPosition();
                 Debug.LogWarning("Fallback: Dados de salvamento não encontrados.");
             }
         }
     }
 
-    private void SetDefaultSpawnPosition()
+    private bool TrySetDefaultSpawnPosition()
     {
-        if (GameManager.instance.playerMoviment == null) return;
+        PlayerMoviment playerMoviment = GetPlayerMoviment();
+        if (playerMoviment == null) return false;
 
         switch (SceneManager.GetActiveScene().name)
         {
@@ -83,19 +77,27 @@ public class Savepoint : MonoBehaviour
                 instance.defaultPosition = new Vector2(2.4f, -39.1f);
                 break;
             default:
-                instance.defaultPosition = new Vector2(GameManager.instance.playerMoviment.transform.position.x, GameManager.instance.playerMoviment.transform.position.y);
+                instance.defaultPosition = new Vector2(playerMoviment.transform.position.x, playerMoviment.transform.position.y);
                 break;
         }
 
-        GameManager.instance.playerMoviment.transform.position = instance.defaultPosition;
+        playerMoviment.transform.position = instance.defaultPosition;
+        return true;
     }
 
 
     void Update()
     {
-        if (GameManager.instance.playerMoviment == null)
+        PlayerMoviment playerMoviment = GetPlayerMoviment();
+
+        if (pendingCheckpointLoad && playerMoviment != null)
         {
-            GameManager.instance.playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+            pendingCheckpointLoad = !LoadCheckpoint();
+        }
+
+        if (GameManager.instance != null && GameManager.instance.playerMoviment == null && playerMoviment != null)
+        {
+            GameManager.instance.playerMoviment = playerMoviment;
         }
     }
 
@@ -138,17 +140,20 @@ public class Savepoint : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Atualiza o player ao carregar a cena
+        pendingCheckpointLoad = true;
         LoadCheckpoint();
     }
 
-    private void LoadCheckpoint()
+    private bool LoadCheckpoint()
     {
         Debug.LogWarning("Slot: " + GameManager.currentSaveSlot);
-        if (GameManager.instance.playerMoviment == null) return;
+        PlayerMoviment playerMoviment = GetPlayerMoviment();
+        if (playerMoviment == null) return false;
 
         if (!SaveManager.SaveExists(GameManager.currentSaveSlot))
         {
-            SetDefaultSpawnPosition();
+            pendingCheckpointLoad = !TrySetDefaultSpawnPosition();
+            return !pendingCheckpointLoad;
         }
         else
         {
@@ -156,18 +161,58 @@ public class Savepoint : MonoBehaviour
 
             if (saveData.currentScene == SceneManager.GetActiveScene().name)
             {
-                GameManager.instance.playerMoviment.transform.position = saveData.playerCheckpoint;
+                playerMoviment.transform.position = saveData.playerCheckpoint;
 
-                Damage health = GameManager.instance.playerMoviment.GetComponent<Damage>();
+                Damage health = playerMoviment.GetComponent<Damage>();
                 if (health != null)
                 {
                     health.Health = saveData.playerHealth;
                 }
+
+                pendingCheckpointLoad = false;
+                return true;
             }
             else
             {
-                SetDefaultSpawnPosition();
+                pendingCheckpointLoad = !TrySetDefaultSpawnPosition();
+                return !pendingCheckpointLoad;
             }
         }
+    }
+
+    private bool TryApplyInitialSpawn()
+    {
+        if (SaveData.Instance.currentScene == SceneManager.GetActiveScene().name)
+        {
+            PlayerMoviment playerMoviment = GetPlayerMoviment();
+            if (playerMoviment == null) return false;
+
+            playerMoviment.transform.position = SaveData.Instance.playerCheckpoint;
+            return true;
+        }
+
+        return TrySetDefaultSpawnPosition();
+    }
+
+    private PlayerMoviment GetPlayerMoviment()
+    {
+        PlayerMoviment playerMoviment = null;
+
+        if (GameManager.instance != null)
+        {
+            playerMoviment = GameManager.instance.playerMoviment;
+        }
+
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        }
+
+        if (GameManager.instance != null && GameManager.instance.playerMoviment == null && playerMoviment != null)
+        {
+            GameManager.instance.playerMoviment = playerMoviment;
+        }
+
+        return playerMoviment;
     }
 }

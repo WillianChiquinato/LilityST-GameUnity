@@ -6,6 +6,7 @@ public class PlayerRopeController : MonoBehaviour
     [SerializeField] private RopeController currentRope;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerMoviment playerMoviment;
 
     public float climbUpSpeed = 3f;
     public float climbDownSpeed = 6f;
@@ -28,12 +29,19 @@ public class PlayerRopeController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         defaultGravityScale = rb.gravityScale;
+        CachePlayerReference();
     }
 
     void Update()
     {
-        GameManager.instance.player.HorizontalMovementBlocked = isClimbing;
-        GameManager.instance.player.VerticalMovementBlocked = isClimbing;
+        CachePlayerReference();
+
+        if (playerMoviment != null)
+        {
+            playerMoviment.HorizontalMovementBlocked = isClimbing;
+            playerMoviment.VerticalMovementBlocked = isClimbing;
+        }
+
         if (currentRope == null) return;
         if (isTransitioning) return;
 
@@ -66,7 +74,7 @@ public class PlayerRopeController : MonoBehaviour
     void HandleInputClimbingRope()
     {
         if (currentRope == null) return;
-        if (GameManager.instance.player.entrar)
+        if (playerMoviment != null && playerMoviment.entrar)
         {
             EnterInputRope();
         }
@@ -174,8 +182,11 @@ public class PlayerRopeController : MonoBehaviour
 
         SetClimbAnimation(false);
 
-        GameManager.instance.player.HorizontalMovementBlocked = false;
-        GameManager.instance.player.VerticalMovementBlocked = false;
+        if (playerMoviment != null)
+        {
+            playerMoviment.HorizontalMovementBlocked = false;
+            playerMoviment.VerticalMovementBlocked = false;
+        }
 
         currentRope = null;
     }
@@ -186,7 +197,10 @@ public class PlayerRopeController : MonoBehaviour
 
         rb.gravityScale = defaultGravityScale;
         isClimbing = false;
-        GameManager.instance.player.VerticalMovementBlocked = false;
+        if (playerMoviment != null)
+        {
+            playerMoviment.VerticalMovementBlocked = false;
+        }
         SetClimbAnimation(false);
     }
 
@@ -204,8 +218,19 @@ public class PlayerRopeController : MonoBehaviour
         rb.gravityScale = defaultGravityScale;
         isClimbing = false;
         SetClimbAnimation(false);
-        GameManager.instance.player.HorizontalMovementBlocked = false;
-        GameManager.instance.player.VerticalMovementBlocked = false;
+        if (playerMoviment != null)
+        {
+            playerMoviment.HorizontalMovementBlocked = false;
+            playerMoviment.VerticalMovementBlocked = false;
+        }
+    }
+
+    private void CachePlayerReference()
+    {
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        }
     }
 
     private void SetClimbAnimation(bool value)

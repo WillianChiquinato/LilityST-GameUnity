@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingVariables), typeof(Damage))]
+[DefaultExecutionOrder(0)]
 public class PlayerMoviment : MonoBehaviour
 {
     public string currentScene;

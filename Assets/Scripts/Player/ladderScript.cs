@@ -15,19 +15,18 @@ public class ladderScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        if (playerMoviment == null)
-        {
-            playerBebe_Moviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
-        }
-        else if (playerBebe_Moviment == null)
-        {
-            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        }
+        CachePlayerReferences();
     }
 
     void Update()
     {
-        GameManager.instance.player.HorizontalMovementBlocked = isClimbing;
+        CachePlayerReferences();
+
+        if (playerMoviment != null)
+        {
+            playerMoviment.HorizontalMovementBlocked = isClimbing;
+        }
+
         vertical = Input.GetAxis("Vertical");
 
         if (playerMoviment == null)
@@ -49,6 +48,19 @@ public class ladderScript : MonoBehaviour
                     isClimbing = true;
                 }
             }
+        }
+    }
+
+    private void CachePlayerReferences()
+    {
+        if (playerMoviment == null)
+        {
+            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        }
+
+        if (playerBebe_Moviment == null)
+        {
+            playerBebe_Moviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
         }
     }
 
