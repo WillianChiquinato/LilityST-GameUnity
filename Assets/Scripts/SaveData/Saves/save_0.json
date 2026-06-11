@@ -1,14 +1,14 @@
 {
-    "playTime": 12.797248840332032,
+    "playTime": 200.66644287109376,
     "XPlayer": 0,
     "playerCheckpoint": {
-        "x": 0.0,
-        "y": 0.0
+        "x": -164.15000915527345,
+        "y": 36.70000076293945
     },
-    "playerHealth": 0,
-    "currentScene": "",
-    "DashUnlocked": false,
-    "WalljumpUnlocked": false,
+    "playerHealth": 3,
+    "currentScene": "Altior-Fuga",
+    "DashUnlocked": true,
+    "WalljumpUnlocked": true,
     "powerUps": [
         {
             "name": 0,
@@ -29,7 +29,26 @@
     ],
     "equippedPrimary": "",
     "equippedSecondary": "",
-    "estatuaDataList": [],
+    "estatuaDataList": [
+        {
+            "estatuaID": "b78f28db-7c84-4df0-ac8b-5663327095e5",
+            "position": {
+                "x": -397.3826904296875,
+                "y": 15.114997863769532,
+                "z": 0.0
+            },
+            "storedXP": 0,
+            "droppedItems": [
+                {
+                    "instanceID": 52716
+                },
+                {
+                    "instanceID": 51160
+                }
+            ],
+            "sceneNameRef": "Altior-Fuga"
+        }
+    ],
     "inventoryData": {
         "MaterialsItens": [
             {
@@ -123,10 +142,26 @@
         "isInitialized": true
     },
     "questData": {
-        "questIDs": [],
-        "questStepIndices": [],
-        "questStepStates": [],
-        "questStates": []
+        "questIDs": [
+            "DerrotarInimigos",
+            "NPC",
+            "TestStarQuest"
+        ],
+        "questStepIndices": [
+            0,
+            0,
+            0
+        ],
+        "questStepStates": [
+            "",
+            "",
+            ""
+        ],
+        "questStates": [
+            "PODE_INICIAR",
+            "PODE_INICIAR",
+            "PODE_INICIAR"
+        ]
     },
     "infoData": {
         "infoIDs": [],

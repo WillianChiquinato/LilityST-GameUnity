@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
         player = FindFirstObjectByType<PlayerMoviment>();
-
     }
 
     void Start()

@@ -9,6 +9,10 @@ public class PlayerBebe_Moviment : MonoBehaviour
 {
     public static PlayerBebe_Moviment Instance { get; private set; }
 
+    [Header("Block States")]
+    public bool HorizontalMovementBlocked = false;
+    public bool VerticalMovementBlocked = false;
+
     [Header("Instances")]
     public PlayerInput playerInput;
     public float speed;
@@ -157,7 +161,8 @@ public class PlayerBebe_Moviment : MonoBehaviour
             IsJumping = false;
         }
 
-        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
+        var horizontalVelocity = HorizontalMovementBlocked ? 0 : moveInput.x * CurrentMoveSpeed;
+        rb.linearVelocity = new Vector2(horizontalVelocity, rb.linearVelocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)

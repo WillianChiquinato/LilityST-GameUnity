@@ -62,7 +62,7 @@ public class Savepoint : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Altior-PreFuga":
-                instance.defaultPosition = new Vector2(21.4f, 16.6f);
+                instance.defaultPosition = new Vector2(42.2f, 15.61f);
                 break;
             case "Altior-Fuga":
                 instance.defaultPosition = new Vector2(-16.19f, 16.6f);

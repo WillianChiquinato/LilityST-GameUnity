@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class inventory_System : MonoBehaviour
 {
     public static inventory_System instance;
@@ -101,7 +102,7 @@ public class inventory_System : MonoBehaviour
             LoadInventory();
         }
 
-        if (coletaveisItemSlot.Length == 0)
+        if (coletaveisItemSlot.Length > 0)
         {
             selectedItemToUse.Add(coletaveisItemSlot[0].item);
         }

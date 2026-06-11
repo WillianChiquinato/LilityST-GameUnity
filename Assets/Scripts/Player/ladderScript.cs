@@ -27,6 +27,11 @@ public class ladderScript : MonoBehaviour
             playerMoviment.HorizontalMovementBlocked = isClimbing;
         }
 
+        if (playerBebe_Moviment != null)
+        {
+            playerBebe_Moviment.HorizontalMovementBlocked = isClimbing;
+        }
+
         vertical = Input.GetAxis("Vertical");
 
         if (playerMoviment == null)
@@ -93,6 +98,7 @@ public class ladderScript : MonoBehaviour
                 playerBebe_Moviment.animacao.SetBool("IsClimbing", false);
                 playerBebe_Moviment.animacao.speed = 1f;
                 rb.gravityScale = 2f;
+                playerBebe_Moviment.HorizontalMovementBlocked = false;
             }
         }
         else if (playerBebe_Moviment == null)
@@ -120,6 +126,7 @@ public class ladderScript : MonoBehaviour
                 playerMoviment.animacao.SetBool("IsClimbing", false);
                 playerMoviment.animacao.speed = 1f;
                 rb.gravityScale = 4.5f;
+                playerMoviment.HorizontalMovementBlocked = false;
             }
         }
     }
@@ -150,11 +157,13 @@ public class ladderScript : MonoBehaviour
             {
                 playerBebe_Moviment.touching.groundDistancia = 0.36f;
                 playerBebe_Moviment.animacao.SetBool("IsClimbing", false);
+                playerBebe_Moviment.HorizontalMovementBlocked = false;
             }
             else if (playerBebe_Moviment == null)
             {
                 playerMoviment.touching.groundDistancia = 0.36f;
                 playerMoviment.animacao.SetBool("IsClimbing", false);
+                playerMoviment.HorizontalMovementBlocked = false;
             }
         }
     }
