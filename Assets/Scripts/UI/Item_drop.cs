@@ -1,46 +1,96 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class DropEntry
+{
+    [Range(0, 100)]
+    public float dropChance = 100;
+
+    public ItemData itemData;
+    public GameObject objectPrefab;
+}
+
 public class Item_drop : MonoBehaviour
 {
-    [SerializeField] private int amountOfItens;
-    [SerializeField] private ItemData[] possibleDrop;
-    private List<ItemData> droplist = new List<ItemData>();
+    [SerializeField] private int amountOfItems = 1;
 
-    [SerializeField] public GameObject dropPrefab;
+    [SerializeField] private List<DropEntry> possibleDrops = new();
+
+    public GameObject dropPrefab;
+
+    private readonly List<DropEntry> dropList = new();
 
     public virtual void GenerateDrop()
     {
-        for (int i = 0; i < possibleDrop.Length; i++)
+        dropList.Clear();
+
+        foreach (var drop in possibleDrops)
         {
-            if (Random.Range(0, 100) <= possibleDrop[i].dropChance)
+            if (Random.Range(0f, 100f) <= drop.dropChance)
             {
-                droplist.Add(possibleDrop[i]);
+                dropList.Add(drop);
             }
         }
 
-        int dropsToGenerate = Mathf.Min(amountOfItens, droplist.Count);
+        int dropsToGenerate = Mathf.Min(amountOfItems, dropList.Count);
 
         for (int i = 0; i < dropsToGenerate; i++)
         {
-            if (droplist.Count > 0)
-            {
-                int randomIndex = Random.Range(0, droplist.Count);
-                ItemData randomIten = droplist[randomIndex];
+            int randomIndex = Random.Range(0, dropList.Count);
 
-                droplist.RemoveAt(randomIndex);
-                DropItem(randomIten);
+            DropEntry selectedDrop = dropList[randomIndex];
+
+            dropList.RemoveAt(randomIndex);
+
+            if (selectedDrop.itemData != null)
+            {
+                DropItemData(selectedDrop.itemData);
+            }
+            else if (selectedDrop.objectPrefab != null)
+            {
+                DropObjectItem(selectedDrop.objectPrefab);
             }
         }
     }
 
-    public virtual void DropItem(ItemData _itemData)
+    public virtual void DropItemData(ItemData itemData)
     {
-        GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+        GameObject newDrop = Instantiate(
+            dropPrefab,
+            transform.position,
+            Quaternion.identity
+        );
 
-        Vector2 randomVelo = new Vector2(Random.Range(-5, 5), Random.Range(10, 15));
+        Vector2 randomVelocity = new Vector2(
+            Random.Range(-5f, 5f),
+            Random.Range(10f, 15f)
+        );
 
-        newDrop.GetComponent<ItemObject>().SetupItem(_itemData, randomVelo);
+        ItemObject itemObject = newDrop.GetComponent<ItemObject>();
+
+        if (itemObject != null)
+        {
+            itemObject.SetupItem(itemData, randomVelocity);
+        }
+    }
+
+    public virtual void DropObjectItem(GameObject objectPrefab)
+    {
+        GameObject spawnedObject = Instantiate(
+            objectPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(
+                Random.Range(-3f, 3f),
+                Random.Range(5f, 7f)
+            );
+        }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "playTime": 200.66644287109376,
+    "playTime": 260.3826904296875,
     "XPlayer": 0,
     "playerCheckpoint": {
         "x": -164.15000915527345,
@@ -29,26 +29,7 @@
     ],
     "equippedPrimary": "",
     "equippedSecondary": "",
-    "estatuaDataList": [
-        {
-            "estatuaID": "b78f28db-7c84-4df0-ac8b-5663327095e5",
-            "position": {
-                "x": -397.3826904296875,
-                "y": 15.114997863769532,
-                "z": 0.0
-            },
-            "storedXP": 0,
-            "droppedItems": [
-                {
-                    "instanceID": 52716
-                },
-                {
-                    "instanceID": 51160
-                }
-            ],
-            "sceneNameRef": "Altior-Fuga"
-        }
-    ],
+    "estatuaDataList": [],
     "inventoryData": {
         "MaterialsItens": [
             {

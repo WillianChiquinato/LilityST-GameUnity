@@ -163,7 +163,7 @@ public class PuzzlePart : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision != null && collision.gameObject != null && collision.gameObject.CompareTag("Player"))
         {
             if (GameManager.instance.player.entrar && !isCollected && !progressBool && !isPlaced)
             {
@@ -179,7 +179,7 @@ public class PuzzlePart : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision != null && collision.gameObject != null && collision.gameObject.CompareTag("Player"))
         {
             GameManagerInteract.Instance.interactIcon.transform.SetParent(GameManagerInteract.Instance.transform);
             GameManagerInteract.Instance.interactIcon.GetComponent<Animator>().SetBool("Visivel", false);

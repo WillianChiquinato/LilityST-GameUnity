@@ -447,6 +447,7 @@ MonoBehaviour:
   touching: {fileID: 0}
   damageScript: {fileID: 0}
   dropInimigo: {fileID: 0}
+  isArenaStates: 1
   distanceX: 0
   detectRange: 18
   loseSightRange: 35
@@ -522,9 +523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item_drop
-  amountOfItens: 1
-  possibleDrop:
-  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
+  amountOfItems: 1
+  possibleDrops:
+  - dropChance: 100
+    itemData: {fileID: 0}
+    objectPrefab: {fileID: 6704397449059755604, guid: 6b620bc74736981428fb442b7f543a28, type: 3}
   dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
 --- !u!114 &1537554461729724335
 MonoBehaviour:

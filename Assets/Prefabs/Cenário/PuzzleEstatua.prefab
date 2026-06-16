@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 485129696249830243}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.055145264, y: -6.950001, z: 0}
+  m_LocalPosition: {x: -0.05, y: -5.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80,10 +80,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1171906793
-  m_SortingLayer: -4
+  m_SortingLayer: -3
   m_SortingOrder: 8
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 1bb639f1a4468d644a43b02915039122, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c638de20ae9f5fe4c8cb2e7a67bbfbfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,17 +127,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -1.3088579}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.078125, y: 1.546875}
+    oldSize: {x: 5.76, y: 5}
     newSize: {x: 2.0390625, y: 0.7734375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.078125, y: 1.546875}
+  m_Size: {x: 4.078125, y: 2.5810337}
   m_EdgeRadius: 0
 --- !u!114 &4753248071265255661
 MonoBehaviour:
@@ -152,100 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleEnvolved
   verifyPartWithPlayer: 0
---- !u!1 &691989161644790402
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7775263593717916993}
-  - component: {fileID: 4636112572128955224}
-  m_Layer: 0
-  m_Name: Pedaco8
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7775263593717916993
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691989161644790402}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.552002, y: -3.316, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4636112572128955224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691989161644790402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 5
-  isFilled: 0
-  targetPosition: {x: -1.552002, y: -3.316}
---- !u!1 &989064197606914051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1714047050099152229}
-  - component: {fileID: 3344169676512559092}
-  m_Layer: 0
-  m_Name: Pedaco10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1714047050099152229
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989064197606914051}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3344169676512559092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989064197606914051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 0
-  isFilled: 0
-  targetPosition: {x: 0, y: 0}
 --- !u!1 &1500641999954637119
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 1500641999954637119}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.894989, y: -5.459999, z: 0}
+  m_LocalPosition: {x: -0.66, y: -6.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,9 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 8
+  correctPiece: 2
   isFilled: 0
-  targetPosition: {x: 0.894989, y: -5.459999}
+  targetPosition: {x: -0.66, y: -6.59}
 --- !u!1 &2170233405954163987
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 2170233405954163987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.084991455, y: -3.5, z: 0}
+  m_LocalPosition: {x: -1.12, y: -4.381, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -337,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 10
+  correctPiece: 3
   isFilled: 1
-  targetPosition: {x: 0.08499146, y: -3.5}
+  targetPosition: {x: -1.12, y: -4.381}
 --- !u!1 &2757288798876983885
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,13 +280,6 @@ Transform:
   - {fileID: 1414033205710182851}
   - {fileID: 3175493685855664343}
   - {fileID: 6044780153418235420}
-  - {fileID: 2527196335787320893}
-  - {fileID: 7292253246180684154}
-  - {fileID: 2634740149493849965}
-  - {fileID: 1963545581396544146}
-  - {fileID: 7775263593717916993}
-  - {fileID: 3356951684156536196}
-  - {fileID: 1714047050099152229}
   - {fileID: 2310558312792083746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -396,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28c1e31c8e67144b5c463444591fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleData
-  puzzleID: EstatuaMecanica
+  puzzleID: EstatuaPrimeiro
   isCompleted: 0
   slots: []
 --- !u!1 &3177302881321381923
@@ -425,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 3177302881321381923}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7380066, y: -5.4680004, z: 0}
+  m_LocalPosition: {x: -0.121, y: -7.373, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,150 +342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 9
+  correctPiece: 1
   isFilled: 0
-  targetPosition: {x: -0.7380066, y: -5.468}
---- !u!1 &4317913444386584025
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2527196335787320893}
-  - component: {fileID: 6452354438430203321}
-  m_Layer: 0
-  m_Name: Pedaco4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2527196335787320893
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317913444386584025}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.7010193, y: -3.9689999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &6452354438430203321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317913444386584025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 7
-  isFilled: 0
-  targetPosition: {x: 0.7010193, y: -3.969}
---- !u!1 &5409705419935977851
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7292253246180684154}
-  - component: {fileID: 3178306291611996554}
-  m_Layer: 0
-  m_Name: Pedaco5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7292253246180684154
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5409705419935977851}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.54599, y: -3.973999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &3178306291611996554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5409705419935977851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 6
-  isFilled: 0
-  targetPosition: {x: -0.54599, y: -3.973999}
---- !u!1 &6001759153959683093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1963545581396544146}
-  - component: {fileID: 603879144598766100}
-  m_Layer: 0
-  m_Name: Pedaco7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1963545581396544146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6001759153959683093}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6629944, y: -1.769001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &603879144598766100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6001759153959683093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 3
-  isFilled: 0
-  targetPosition: {x: 1.662994, y: -1.769001}
+  targetPosition: {x: -0.121, y: -7.373}
 --- !u!1 &7171410690168633201
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +371,7 @@ Transform:
   m_GameObject: {fileID: 7171410690168633201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.084991455, y: -2.0650005, z: 0}
+  m_LocalPosition: {x: -0.755, y: -5.449, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -631,100 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 1
+  correctPiece: 0
   isFilled: 0
-  targetPosition: {x: 0.08499146, y: -2.065001}
---- !u!1 &7308697532788300376
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2634740149493849965}
-  - component: {fileID: 6251631559802883421}
-  m_Layer: 0
-  m_Name: Pedaco6
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2634740149493849965
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7308697532788300376}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.553009, y: -1.7819996, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6251631559802883421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7308697532788300376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 2
-  isFilled: 0
-  targetPosition: {x: -1.553009, y: -1.782}
---- !u!1 &7603961068276706641
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3356951684156536196}
-  - component: {fileID: 721827023843850030}
-  m_Layer: 0
-  m_Name: Pedaco9
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3356951684156536196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7603961068276706641}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7149963, y: -3.2810001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1997732380099481791}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &721827023843850030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7603961068276706641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c20f279a0fe78341896f9731b61488e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuzzleSlot
-  correctPiece: 4
-  isFilled: 0
-  targetPosition: {x: 1.714996, y: -3.281}
+  targetPosition: {x: -0.755, y: -5.449}

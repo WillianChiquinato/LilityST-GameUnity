@@ -3,17 +3,10 @@ using UnityEngine;
 
 public enum PuzzlePieceType
 {
-    Head,
-    Body,
-    ArmLeft,
-    ArmRight,
-    ArmDownRight,
-    ArmDownLeft,
-    LegLeft,
-    LegRight,
-    LegDownRight,
-    LegDownLeft,
-    FinalPiece,
+    HandBase,
+    LongBase,
+    MidBase,
+    FinalPieceEye,
     None
 }
 

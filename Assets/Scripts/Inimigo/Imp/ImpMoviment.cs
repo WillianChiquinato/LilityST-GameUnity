@@ -23,6 +23,8 @@ public class ImpMoviment : PlayerPoco
 
     private Vector2 homePosition;
 
+    public bool isArenaStates = false;
+
     [Header("Perception")]
     [SerializeField] private float distanceX;
 
@@ -33,7 +35,7 @@ public class ImpMoviment : PlayerPoco
     [SerializeField] private float fleeThrowDelay = 2.2f;
 
     [Header("Distances")]
-    [SerializeField] private float closeRange = 1.3f;
+    [SerializeField] private float closeRange = 1.6f;
     [SerializeField] private float midRange = 4f;
     [SerializeField] private float safeDistance = 6f;
     private bool isApproaching;
@@ -119,6 +121,9 @@ public class ImpMoviment : PlayerPoco
         animator.SetBool(searchBool, true);
 
         homePosition = transform.position;
+
+        if (isArenaStates)
+            hasScreamedAfterHit = true;
     }
 
     private void Update()
@@ -194,13 +199,13 @@ public class ImpMoviment : PlayerPoco
 
         if (currentState == ImpState.Attack)
         {
-            HandleApproach(closeRange + 0.2f);
+            HandleApproach(closeRange);
             return;
         }
 
         if (currentState == ImpState.Engage)
         {
-            HandleApproach(Mathf.Max(closeRange + 1f, runAttackDistanceStart - 0.4f));
+            HandleApproach(closeRange);
         }
 
         if (currentState == ImpState.RunningAttack)
@@ -374,7 +379,7 @@ public class ImpMoviment : PlayerPoco
 
         if (currentState == ImpState.Idle && (canSeePlayer || hasTakenHitAggro))
         {
-            currentState = ImpState.Attack;
+            currentState = isArenaStates ? ImpState.Engage : ImpState.Attack;
             lostSightTimer = 0f;
             return;
         }
@@ -809,7 +814,7 @@ public class ImpMoviment : PlayerPoco
 
             if (currentState != ImpState.Attack && currentState != ImpState.Engage)
             {
-                currentState = distanceX <= midRange ? ImpState.Attack : ImpState.Engage;
+                currentState = (isArenaStates || distanceX > midRange) ? ImpState.Engage : ImpState.Attack;
             }
 
             isApproaching = distanceX > closeRange;

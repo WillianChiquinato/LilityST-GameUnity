@@ -92,7 +92,7 @@ public class PlayerItemDrop : Item_drop
         }
     }
 
-    public override void DropItem(ItemData _itemData)
+    public override void DropItemData(ItemData _itemData)
     {
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
 

@@ -3,11 +3,11 @@ using UnityEditor;
 [CustomEditor(typeof(Item_drop), true)]
 public class ItemDropEditor : Editor
 {
-    SerializedProperty possibleDrop;
+    SerializedProperty possibleDrops;
 
     void OnEnable()
     {
-        possibleDrop = serializedObject.FindProperty("possibleDrop");
+        possibleDrops = serializedObject.FindProperty("possibleDrops");
     }
 
     public override void OnInspectorGUI()
@@ -15,12 +15,12 @@ public class ItemDropEditor : Editor
         serializedObject.Update();
 
         // Desenha o Inspector padrão
-        DrawPropertiesExcluding(serializedObject, "m_Script", "possibleDrop");
+        DrawPropertiesExcluding(serializedObject, "m_Script", "possibleDrops");
 
-        // Só mostra o possibleDrop se NÃO for PlayerItemDrop
+        // Só mostra o possibleDrops se NÃO for PlayerItemDrop
         if (!(target is PlayerItemDrop))
         {
-            EditorGUILayout.PropertyField(possibleDrop);
+            EditorGUILayout.PropertyField(possibleDrops, true);
         }
 
         serializedObject.ApplyModifiedProperties();

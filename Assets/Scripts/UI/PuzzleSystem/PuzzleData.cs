@@ -17,7 +17,7 @@ public class PuzzleData : MonoBehaviour
 
     public void CheckPuzzle(PuzzlePart part)
     {
-        if (part.pieceType != PuzzlePieceType.FinalPiece)
+        if (part.pieceType != PuzzlePieceType.FinalPieceEye)
         {
             Debug.Log("Peça colocada, mas não é a peça final.");
             return;

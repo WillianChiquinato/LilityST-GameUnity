@@ -302,6 +302,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldSpriteChunkLoader
   worldMapData: {fileID: 11400000, guid: 47fcdc0606509914abf5aa308be012b5, type: 2}
+  sourceTilemap: {fileID: 0}
+  replicateLoadedSceneTilemaps: 1
+  clearDataOnReplicate: 0
+  ignoredSceneName: Mapa
   chunkRendererPrefab: {fileID: 8509583584880687238, guid: 756d7822cca520845af4bc17e801309a, type: 3}
   chunkSize: {x: 64, y: 64}
   cellSize: 1
@@ -336,8 +340,7 @@ Transform:
   m_LocalPosition: {x: -339.043, y: 33.37, z: 0.63714755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6565043923708230903}
+  m_Children: []
   m_Father: {fileID: 278185134336541994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6401014419316684391
@@ -502,65 +505,3 @@ MonoBehaviour:
   player: {fileID: 0}
   waypointPrefab: {fileID: 1143982791982413727, guid: f401119597b7ecb4a892650f79b56d4a, type: 3}
   canvasParent: {fileID: 0}
---- !u!1001 &4657539680765946952
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4750119490517375252}
-    m_Modifications:
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2757288798876983885, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-      propertyPath: m_Name
-      value: PuzzleEstatua
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
---- !u!4 &6565043923708230903 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1997732380099481791, guid: c43efaba665d50c43b55e7078bf9250a, type: 3}
-  m_PrefabInstance: {fileID: 4657539680765946952}
-  m_PrefabAsset: {fileID: 0}
