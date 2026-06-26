@@ -20,7 +20,7 @@ public class Hidden_Area : MonoBehaviour
     void Awake()
     {
         virtualCamera.m_Lens.OrthographicSize = 6f;
-        cameras = FindFirstObjectByType<Camera>();
+        cameras = FindAnyObjectByType<Camera>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

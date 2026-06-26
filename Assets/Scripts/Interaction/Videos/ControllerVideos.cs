@@ -8,7 +8,7 @@ public class ControllerVideos : MonoBehaviour
 
     void Start()
     {
-        levelTransicao = FindFirstObjectByType<LevelTransicao>();
+        levelTransicao = FindAnyObjectByType<LevelTransicao>();
         videoPlayer = GetComponent<VideoPlayer>();
         videoPlayer.loopPointReached += EndReached;
     }

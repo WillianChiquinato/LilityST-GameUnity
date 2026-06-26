@@ -14,7 +14,7 @@ public class vidroScript : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
+        player = GameObject.FindAnyObjectByType<PlayerMoviment>().transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
 

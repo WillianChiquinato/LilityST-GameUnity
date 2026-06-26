@@ -229,7 +229,7 @@ public class PlayerRopeController : MonoBehaviour
     {
         if (playerMoviment == null)
         {
-            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+            playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         }
     }
 

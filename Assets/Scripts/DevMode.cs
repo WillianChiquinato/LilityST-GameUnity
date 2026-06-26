@@ -32,7 +32,7 @@ public class DevMode : MonoBehaviour
     {
         if (player == null)
         {
-            player = GameObject.FindFirstObjectByType<PlayerMoviment>().gameObject;
+            player = GameObject.FindAnyObjectByType<PlayerMoviment>().gameObject;
         }
 
         if (player != null)

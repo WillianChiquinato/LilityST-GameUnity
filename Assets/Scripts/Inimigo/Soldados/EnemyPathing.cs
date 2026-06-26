@@ -63,7 +63,7 @@ public class EnemyPathing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
+        player = GameObject.FindAnyObjectByType<PlayerMoviment>().transform;
     }
 
     void Update()

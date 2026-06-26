@@ -96,7 +96,7 @@ public class DroggoScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         droggoHits = GetComponent<CapsuleCollider2D>();
         damage = GetComponent<Damage>();
-        acorda_Boss = GameObject.FindFirstObjectByType<Acorda_Boss>();
+        acorda_Boss = GameObject.FindAnyObjectByType<Acorda_Boss>();
         player = GameObject.FindAnyObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
 
         Fireball2 = Fireball.GetComponentInChildren<Transform>();

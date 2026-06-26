@@ -68,8 +68,8 @@ public class FranceMoviment : MonoBehaviour
         touching = GetComponent<TouchingVariables>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        grabPlayer = GameObject.FindAnyObjectByType<grabPlayer>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
 
         attackCooldown = 1f;
         playerTransform = playerMoviment.transform;

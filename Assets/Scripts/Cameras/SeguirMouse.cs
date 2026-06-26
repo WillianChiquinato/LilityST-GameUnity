@@ -9,7 +9,7 @@ public class SeguirMouse : MonoBehaviour
 
     void Start()
     {
-        cameraMouse = FindFirstObjectByType<Camera>();
+        cameraMouse = FindAnyObjectByType<Camera>();
     }
     
     void Update()

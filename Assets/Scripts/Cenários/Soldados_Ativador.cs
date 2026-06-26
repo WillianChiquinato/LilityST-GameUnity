@@ -36,7 +36,7 @@ public class Soldados_Ativador : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         colisor = GetComponent<Collider2D>();
         localPosition = targetObject.localPosition;
 
@@ -84,7 +84,7 @@ public class Soldados_Ativador : MonoBehaviour
         colisor.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
-        goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
+        goraflixMoviment = GameObject.FindAnyObjectByType<FranceMoviment>();
         animator = goraflixMoviment.GetComponent<Animator>();
         animator.SetBool("Soldados", true);
 

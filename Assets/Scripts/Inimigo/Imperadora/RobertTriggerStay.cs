@@ -7,7 +7,7 @@ public class RobertTriggerStay : MonoBehaviour
 
     void Awake()
     {
-        robertMoviment = GameObject.FindFirstObjectByType<RobertMoviment>();
+        robertMoviment = GameObject.FindAnyObjectByType<RobertMoviment>();
         isPlayerStaying = false;
     }
 

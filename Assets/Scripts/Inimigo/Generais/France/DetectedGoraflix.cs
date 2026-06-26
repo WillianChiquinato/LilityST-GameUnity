@@ -8,7 +8,7 @@ public class DetectedFrance : MonoBehaviour
 
     void Start()
     {
-        goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
+        goraflixMoviment = GameObject.FindAnyObjectByType<FranceMoviment>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

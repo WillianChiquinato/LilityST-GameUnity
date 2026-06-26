@@ -15,7 +15,7 @@ public class playerOneWay : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         oficialOneWayPlat = GameObject.FindGameObjectsWithTag("OneWayPlataforma");
     }
 

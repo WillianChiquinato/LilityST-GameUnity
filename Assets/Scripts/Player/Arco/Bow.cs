@@ -52,13 +52,13 @@ public class Bow : MonoBehaviour
 
     void Start()
     {
-        playerArco = GameObject.FindFirstObjectByType<PlayerArco>();
+        playerArco = GameObject.FindAnyObjectByType<PlayerArco>();
         playerArco.gameObject.SetActive(false);
         gameObject.SetActive(false);
 
-        cameraArco = FindFirstObjectByType<Camera>();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        cameraArco = FindAnyObjectByType<Camera>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         points = new GameObject[numeroDePoints];

@@ -205,7 +205,7 @@ public class Savepoint : MonoBehaviour
 
         if (playerMoviment == null)
         {
-            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+            playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         }
 
         if (GameManager.instance != null && GameManager.instance.playerMoviment == null && playerMoviment != null)

@@ -39,7 +39,7 @@ public class Dialogo_LilityPqna : MonoBehaviour
 
     private void Start()
     {
-        playerBebe = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+        playerBebe = GameObject.FindAnyObjectByType<PlayerBebe_Moviment>();
         animator = GetComponent<Animator>();
         robert = GameObject.Find("Robert");
     }

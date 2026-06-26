@@ -60,7 +60,7 @@ public class SlimeMoviment : PlayerPoco
     {
         scaleFactor = boxCollider != null ? boxCollider.bounds.size.x : 1f;
 
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         rb = GetComponent<Rigidbody2D>();
         touching = GetComponent<TouchingVariables>();
         animator = GetComponent<Animator>();

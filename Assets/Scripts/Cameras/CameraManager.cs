@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour
             instance = this;
         }
 
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         transposer.m_TrackedObjectOffset = new Vector3(0, 0, 0);

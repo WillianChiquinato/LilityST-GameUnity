@@ -69,15 +69,15 @@ public class GameManager : MonoBehaviour
         }
         Debug.LogWarning("GameManager: " + currentSaveSlot);
 
-        pauseUI = GameObject.FindFirstObjectByType<UI>();
+        pauseUI = GameObject.FindAnyObjectByType<UI>();
         UISavePoint = GameObject.FindGameObjectWithTag("SavePointUI");
         UISavePoint.SetActive(false);
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");
 
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();
-        player = FindFirstObjectByType<PlayerMoviment>();
+        player = FindAnyObjectByType<PlayerMoviment>();
     }
 
     void Start()
@@ -85,9 +85,9 @@ public class GameManager : MonoBehaviour
         DOTween.Init();
         apresentaocao = GameObject.FindGameObjectsWithTag("Apresentacao");
 
-        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
+        transicao = GameObject.FindAnyObjectByType<LevelTransicao>();
         MainCamera = GameObject.FindWithTag("MainCamera");
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         playerHealth = playerMoviment.GetComponent<Damage>();
         bossFight = FindAnyObjectByType<BossFight>();
 
@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour
     public void PlayerChange(int level)
     {
         level = 0;
-        QuestPoint questAtual = FindFirstObjectByType<QuestPoint>();
+        QuestPoint questAtual = FindAnyObjectByType<QuestPoint>();
         // if (onPlayerChange != null && questAtual.questInfopoint.tipoMissao.Equals("CriaturaFolclorica"))
         // {
         //     onPlayerChange(level);

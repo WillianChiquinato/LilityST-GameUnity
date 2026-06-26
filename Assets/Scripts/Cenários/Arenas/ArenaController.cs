@@ -64,8 +64,8 @@ public class ArenaController : MonoBehaviour
     {
         closesDoors.ForEach(door => door.GetComponent<BoxCollider2D>().enabled = false);
 
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         arenaBoundsCollider = GetComponent<Collider2D>();
 
         if (cinemachineVirtualCamera != null)
@@ -280,7 +280,7 @@ public class ArenaController : MonoBehaviour
     {
         arenaEnemies.Clear();
 
-        Damage[] damagesInScene = FindObjectsByType<Damage>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        Damage[] damagesInScene = FindObjectsByType<Damage>(FindObjectsInactive.Include);
         foreach (Damage damage in damagesInScene)
         {
             if (IsArenaEnemyCandidate(damage))

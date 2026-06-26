@@ -25,7 +25,7 @@ public class camerafollowObject : MonoBehaviour
     {
         StartCoroutine(ItilializedCamera());
 
-        cameraControllerTrigger = Object.FindObjectsByType<CameraControllerTrigger>(FindObjectsSortMode.None);
+        cameraControllerTrigger = Object.FindObjectsByType<CameraControllerTrigger>();
 
         if (cameraControllerTrigger.Length == 0)
         {
@@ -37,10 +37,10 @@ public class camerafollowObject : MonoBehaviour
     {
         yield return null; // Espera um frame para garantir que todos os objetos estejam carregados.
 
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
 
         _playerTransform = playerMoviment.GetComponentInChildren<Transform>();
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         _isfacingRight = playerMoviment.IsRight;

@@ -37,9 +37,9 @@ public class CutplayRendalla : MonoBehaviour
 
     void Start()
     {
-        player = FindFirstObjectByType<PlayerMoviment>();
-        Robert = FindFirstObjectByType<RobertMoviment>();
-        levelTransicao = FindFirstObjectByType<LevelTransicao>();
+        player = FindAnyObjectByType<PlayerMoviment>();
+        Robert = FindAnyObjectByType<RobertMoviment>();
+        levelTransicao = FindAnyObjectByType<LevelTransicao>();
 
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         shakeCamera = cinemachineVirtualCamera.GetComponent<ShakeCamera>();

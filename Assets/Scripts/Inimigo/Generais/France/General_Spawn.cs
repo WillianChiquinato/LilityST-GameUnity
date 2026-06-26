@@ -29,8 +29,8 @@ public class General_Spawn : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        vidroScript = GameObject.FindFirstObjectByType<vidroScript>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
+        vidroScript = GameObject.FindAnyObjectByType<vidroScript>();
         colisor = GetComponent<Collider2D>();
         targetObject = transform.GetChild(0);
         colisor.enabled = true;
@@ -63,7 +63,7 @@ public class General_Spawn : MonoBehaviour
                         Debug.Log("General já instanciado");
                     }
 
-                    goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
+                    goraflixMoviment = GameObject.FindAnyObjectByType<FranceMoviment>();
                     grabPlayer = goraflixMoviment.GetComponent<grabPlayer>();
 
                     if (TimerSpawnGeneral >= 8f)

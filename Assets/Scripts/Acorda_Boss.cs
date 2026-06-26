@@ -30,9 +30,9 @@ public class Acorda_Boss : MonoBehaviour
 
     private void Awake() 
     {
-        droggoScript = GameObject.FindFirstObjectByType<DroggoScript>();
-        bossFight = GameObject.FindFirstObjectByType<BossFight>();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        droggoScript = GameObject.FindAnyObjectByType<DroggoScript>();
+        bossFight = GameObject.FindAnyObjectByType<BossFight>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
 
         Camera_Size = GameObject.FindWithTag("MainCamera");
         Size_Camera = Camera_Size.GetComponentInChildren<Animator>();

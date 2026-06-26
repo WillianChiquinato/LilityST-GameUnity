@@ -320,12 +320,12 @@ public class PlayerMoviment : MonoBehaviour
         touching = GetComponent<TouchingVariables>();
         DamageScript = GetComponent<Damage>();
         playerInput = GetComponent<PlayerInput>();
-        acorda_Boss = GameObject.FindFirstObjectByType<Acorda_Boss>();
-        bow = GameObject.FindFirstObjectByType<Bow>();
-        healthBar = GameObject.FindFirstObjectByType<HealthBar>();
-        potion_Script = GameObject.FindFirstObjectByType<potion_script>();
+        acorda_Boss = GameObject.FindAnyObjectByType<Acorda_Boss>();
+        bow = GameObject.FindAnyObjectByType<Bow>();
+        healthBar = GameObject.FindAnyObjectByType<HealthBar>();
+        potion_Script = GameObject.FindAnyObjectByType<potion_script>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
-        LadderScript = GameObject.FindFirstObjectByType<ladderScript>();
+        LadderScript = GameObject.FindAnyObjectByType<ladderScript>();
 
         camerafollowObject = _cameraFollow.GetComponent<camerafollowObject>();
         stateTimerDash = dashDuration;

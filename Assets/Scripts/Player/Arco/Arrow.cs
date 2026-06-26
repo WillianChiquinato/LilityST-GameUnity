@@ -13,7 +13,7 @@ public class Arrow : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ColliderArrow = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        tiles_Entrelacados = GameObject.FindFirstObjectByType<Tiles_Entrelacados>();
+        tiles_Entrelacados = GameObject.FindAnyObjectByType<Tiles_Entrelacados>();
 
         Destroy(this.gameObject, 2f);
     }

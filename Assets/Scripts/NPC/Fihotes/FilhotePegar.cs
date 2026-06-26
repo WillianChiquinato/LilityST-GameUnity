@@ -6,7 +6,7 @@ public class FilhotePegar : MonoBehaviour
     public FilhoteDragão filhoteDragão;
     void Awake()
     {
-        filhoteDragão = GameObject.FindFirstObjectByType<FilhoteDragão>();
+        filhoteDragão = GameObject.FindAnyObjectByType<FilhoteDragão>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

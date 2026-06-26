@@ -48,7 +48,7 @@ public class QuestManager : MonoBehaviour
         }
 
         questsDictionary = CreateQuestMap();
-        questPoints = FindObjectsByType<QuestPoint>(FindObjectsSortMode.None);
+        questPoints = FindObjectsByType<QuestPoint>();
         questGrupos = GameObject.FindGameObjectsWithTag("QuestContainer").OrderBy(quest => ExtractNumberFromName(quest.name)).ToList();
 
 

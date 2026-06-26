@@ -19,8 +19,8 @@ public class InteractableObjectMesa_Robert : CollidableObjects
     protected override void Start()
     {
         base.Start();
-        dialogos_Manager2 = GameObject.FindFirstObjectByType<Dialogos_Manager2>();
-        transicao = GameObject.FindFirstObjectByType<LevelTransicao>();
+        dialogos_Manager2 = GameObject.FindAnyObjectByType<Dialogos_Manager2>();
+        transicao = GameObject.FindAnyObjectByType<LevelTransicao>();
 
         item_robert.SetActive(false);
     }

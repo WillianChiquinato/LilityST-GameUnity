@@ -25,7 +25,7 @@ public class TesteDerrotar : MonoBehaviour
         else
         {
             Debug.Log("CheckPointQuest não encontrado!");
-            Instancia = GameObject.FindFirstObjectByType<TesteDerrotarPrefab>();
+            Instancia = GameObject.FindAnyObjectByType<TesteDerrotarPrefab>();
         }
         
     }

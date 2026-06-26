@@ -30,8 +30,8 @@ public class interactableApresentation : CollidableObjects
         base.Start();
 
         currentTime = startTime;
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
-        grabPlayer = GameObject.FindFirstObjectByType<grabPlayer>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
+        grabPlayer = GameObject.FindAnyObjectByType<grabPlayer>();
 
         imagem = GetComponentInChildren<SpriteRenderer>();
         imagem.gameObject.SetActive(false);
@@ -87,7 +87,7 @@ public class interactableApresentation : CollidableObjects
                 }
                 if (GetInput == "Dash")
                 {
-                    goraflixMoviment = GameObject.FindFirstObjectByType<FranceMoviment>();
+                    goraflixMoviment = GameObject.FindAnyObjectByType<FranceMoviment>();
 
                     imagem.gameObject.SetActive(true);
                     textContagem.gameObject.SetActive(true);

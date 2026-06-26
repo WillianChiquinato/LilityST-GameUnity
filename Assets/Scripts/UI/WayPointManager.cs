@@ -18,7 +18,7 @@ public class WaypointManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        player = FindFirstObjectByType<PlayerMoviment>().transform;
+        player = FindAnyObjectByType<PlayerMoviment>().transform;
     }
 
     // Chame essa função quando spawnar um objeto que precisa de indicador

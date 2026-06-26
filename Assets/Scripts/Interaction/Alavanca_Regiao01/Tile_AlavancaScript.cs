@@ -13,7 +13,7 @@ public class Tile_AlavancaScript : MonoBehaviour
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
 

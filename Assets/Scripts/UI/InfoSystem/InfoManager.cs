@@ -49,7 +49,7 @@ public class InfoManager : MonoBehaviour
         InfoReferenciaContainer.SetActive(false);
 
         infoDictionary = CreateInfoMap();
-        infoPoints = FindObjectsByType<InfoPoint>(FindObjectsSortMode.None);
+        infoPoints = FindObjectsByType<InfoPoint>();
         infoGrupos = GameObject.FindGameObjectsWithTag("InfoContainer").OrderBy(info => ExtractNumberFromName(info.name)).ToList();
 
         infoInstancias = new ScriptableObject[infoGrupos.Count];

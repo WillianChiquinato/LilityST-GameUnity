@@ -35,11 +35,11 @@ public class Maga_Movement : PlayerPoco
 
     void Start()
     {
-        Player = GameObject.FindFirstObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
+        Player = GameObject.FindAnyObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        maga_RangedAttack = GameObject.FindFirstObjectByType<Maga_RangedAttack>();
-        trigger_Rolar = GameObject.FindFirstObjectByType<Trigger_Rolar>();
+        maga_RangedAttack = GameObject.FindAnyObjectByType<Maga_RangedAttack>();
+        trigger_Rolar = GameObject.FindAnyObjectByType<Trigger_Rolar>();
         damageScript = GetComponent<Damage>();
         dropInimigo = GetComponent<Item_drop>();
 

@@ -27,19 +27,16 @@ public static class HierarchySeparatorManager
 
     static HierarchySeparatorManager()
     {
-        // Carrega o ícone para os separadores
         icon = EditorGUIUtility.IconContent("d_FilterByLabel").image as Texture2D;
 
-        // Registra o evento para customizar a Hierarchy
-        EditorApplication.hierarchyWindowItemOnGUI += CustomizeHierarchy;
+        EditorApplication.hierarchyWindowItemByEntityIdOnGUI += CustomizeHierarchy;
     }
 
-    private static void CustomizeHierarchy(int instanceID, Rect selectionRect)
+    private static void CustomizeHierarchy(EntityId entityId, Rect selectionRect)
     {
-        GameObject obj = EditorUtility.EntityIdToObject(instanceID) as GameObject;
-
-        // Verifica se o objeto possui o componente Separator
+        GameObject obj = EditorUtility.EntityIdToObject(entityId) as GameObject;
         if (obj == null) return;
+
         Separator config = obj.GetComponent<Separator>();
         if (config == null) return;
 

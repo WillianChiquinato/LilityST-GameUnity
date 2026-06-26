@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        player = FindFirstObjectByType<PlayerMoviment>();
+        player = FindAnyObjectByType<PlayerMoviment>();
         playerDamage = player.GetComponent<Damage>();
         slider.value = CalcularPorcentagem(playerDamage.Health, playerDamage.maxHealth);
         playerDamage.healthChange.AddListener(OnPlayerChange);

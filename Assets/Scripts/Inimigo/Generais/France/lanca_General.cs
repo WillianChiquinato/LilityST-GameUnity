@@ -39,12 +39,12 @@ public class lanca_General : MonoBehaviour
 
         if (objetoSaidaProjetil == null)
         {
-            objetoSaidaProjetil = GameObject.FindFirstObjectByType<FranceMoviment>();
+            objetoSaidaProjetil = GameObject.FindAnyObjectByType<FranceMoviment>();
             pontoInicial = objetoSaidaProjetil.transform.position;
         }
         if (player == null)
         {
-            player = GameObject.FindFirstObjectByType<PlayerMoviment>().transform;
+            player = GameObject.FindAnyObjectByType<PlayerMoviment>().transform;
         }
 
         if (seguindoPlayer)

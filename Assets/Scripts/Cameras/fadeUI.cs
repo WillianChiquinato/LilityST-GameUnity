@@ -14,7 +14,7 @@ public class fadeUI : MonoBehaviour
 
     void Awake()
     {
-        levelTransicao = FindFirstObjectByType<LevelTransicao>();
+        levelTransicao = FindAnyObjectByType<LevelTransicao>();
         if (Instance == null)
         {
             Instance = this;

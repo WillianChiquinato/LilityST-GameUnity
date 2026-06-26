@@ -28,7 +28,7 @@ public class Checkpoints : MonoBehaviour
     {
         paiCheckpoint = transform.parent != null ? transform.parent.gameObject : gameObject;
 
-        cinemachineVirtualCamera = GameObject.FindFirstObjectByType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         framingPosition = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         CutSumir = GameObject.FindGameObjectWithTag("Sumir");

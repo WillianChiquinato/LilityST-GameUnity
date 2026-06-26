@@ -24,7 +24,7 @@ public class RobertMoviment : MonoBehaviour
     {
         animacao = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        playerMovement = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMovement = GameObject.FindAnyObjectByType<PlayerMoviment>();
     }
 
     void Update()

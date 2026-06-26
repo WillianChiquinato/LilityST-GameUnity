@@ -6,7 +6,7 @@ public class AlavancaScript : Alavancas
 
     void Start()
     {
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         damageOpenAlavanca = GetComponent<Damage>();

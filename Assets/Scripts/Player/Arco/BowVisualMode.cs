@@ -18,7 +18,7 @@ public class BowVisualMode : MonoBehaviour
 
     void Start()
     {
-        tilemapRenderer = GameObject.FindObjectsOfType<TilemapRenderer>();
+        tilemapRenderer = GameObject.FindObjectsByType<TilemapRenderer>();
         GameObject[] backgrounds = GameObject.FindGameObjectsWithTag("Background");
 
         foreach (var obj in backgrounds)

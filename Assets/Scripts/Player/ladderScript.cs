@@ -60,12 +60,12 @@ public class ladderScript : MonoBehaviour
     {
         if (playerMoviment == null)
         {
-            playerMoviment = GameObject.FindFirstObjectByType<PlayerMoviment>();
+            playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         }
 
         if (playerBebe_Moviment == null)
         {
-            playerBebe_Moviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+            playerBebe_Moviment = GameObject.FindAnyObjectByType<PlayerBebe_Moviment>();
         }
     }
 

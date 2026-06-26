@@ -25,8 +25,8 @@ public class Parallax : MonoBehaviour
 
     void Start()
     {
-        cam = GameObject.FindFirstObjectByType<Camera>();
-        PersoSeguir = GameObject.FindFirstObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
+        cam = GameObject.FindAnyObjectByType<Camera>();
+        PersoSeguir = GameObject.FindAnyObjectByType<PlayerMoviment>().GetComponentInChildren<Transform>();
 
         startingPosition = transform.position;
         starting = transform.position.z;

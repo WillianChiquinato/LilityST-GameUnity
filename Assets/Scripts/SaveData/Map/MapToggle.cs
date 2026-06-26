@@ -17,7 +17,7 @@ public class MapToggle : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
 
-        mapCamera = FindFirstObjectByType<MapCameraZoom>().mapCamera;
+        mapCamera = FindAnyObjectByType<MapCameraZoom>().mapCamera;
         CanvasGroup ui = mapCamera
             .transform
             .parent
@@ -30,7 +30,7 @@ public class MapToggle : MonoBehaviour
         mapUI.interactable = false;
         mapUI.blocksRaycasts = false;
 
-        mapToggleMode = FindFirstObjectByType<MapToggleMode>();
+        mapToggleMode = FindAnyObjectByType<MapToggleMode>();
     }
 
     void LateUpdate()

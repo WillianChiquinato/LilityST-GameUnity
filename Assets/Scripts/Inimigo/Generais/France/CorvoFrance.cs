@@ -10,7 +10,7 @@ public class CorvoFrance : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        player = FindFirstObjectByType<PlayerMoviment>();
+        player = FindAnyObjectByType<PlayerMoviment>();
     }
 
     void Update()

@@ -14,7 +14,7 @@ public class grabPlayer : MonoBehaviour
 
     private void Start()
     {
-        grabandoObject = GameObject.FindFirstObjectByType<PlayerMoviment>();
+        grabandoObject = GameObject.FindAnyObjectByType<PlayerMoviment>();
     }
 
     void Update()

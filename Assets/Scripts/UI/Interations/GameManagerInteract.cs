@@ -23,7 +23,7 @@ public class GameManagerInteract : MonoBehaviour
     {
         if (GameManager.instance == null)
         {
-            player = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
+            player = GameObject.FindAnyObjectByType<PlayerBebe_Moviment>();
         }
 
         interactIcon = transform.GetChild(0).gameObject;

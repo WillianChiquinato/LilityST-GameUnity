@@ -41,8 +41,8 @@ public class Dialogos_Manager2 : MonoBehaviour
         Robert = GameObject.Find("Robert");
         animator = GetComponent<Animator>();
         linhas = new Queue<DialogoTextoRobert>();
-        playerMoviment = GameObject.FindFirstObjectByType<PlayerBebe_Moviment>();
-        levelTransicao = GameObject.FindFirstObjectByType<LevelTransicao>();
+        playerMoviment = GameObject.FindAnyObjectByType<PlayerBebe_Moviment>();
+        levelTransicao = GameObject.FindAnyObjectByType<LevelTransicao>();
 
         if (dialogos_Manager == null)
         {

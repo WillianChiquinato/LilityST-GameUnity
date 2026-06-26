@@ -133,7 +133,7 @@ public class PlayerBebe_Moviment : MonoBehaviour
         animacao = GetComponent<Animator>();
         touching = GetComponent<TouchingVariables>();
         _cameraFollow = GameObject.FindGameObjectWithTag("CameraFollow");
-        cinemachineVirtualCamera = FindFirstObjectByType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera = FindAnyObjectByType<CinemachineVirtualCamera>();
         playerInput = GetComponent<PlayerInput>();
         ladderScript = GetComponent<ladderScript>();
 
