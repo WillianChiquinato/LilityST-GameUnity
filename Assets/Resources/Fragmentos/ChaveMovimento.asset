@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ChaveMovimento
   m_EditorClassIdentifier: 
   <id>k__BackingField: ChaveMovimento
+  animatorController: {fileID: 0}
+  particulaPegarPrefab: {fileID: 0}
   NomeFragmento: ChaveMovimento
   TipoFragmento: 1
   Icon: {fileID: 21300000, guid: 84608cfbaa35d3d4991ad870b5ead436, type: 3}

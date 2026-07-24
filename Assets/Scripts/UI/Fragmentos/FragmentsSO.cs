@@ -14,6 +14,9 @@ public class FragmentoData : ScriptableObject
 {
     [field: SerializeField] public string id { get; private set; }
 
+    public RuntimeAnimatorController animatorController;
+    public GameObject particulaPegarPrefab;
+
     [Header("Geral")]
     public string NomeFragmento;
     public fragmentoType TipoFragmento;

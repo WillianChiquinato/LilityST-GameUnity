@@ -4,15 +4,15 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour
 {
     public bool isItemPegado = false;
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
     [SerializeField] private TextMeshPro texto;
     [SerializeField] public ItemData itemData;
-    [SerializeField] public FragmentoData fragmentoData;
     public bool itemIsGrounded;
     private LayerMask groundLayer;
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         texto = GetComponentInChildren<TextMeshPro>();
         groundLayer = LayerMask.GetMask("Ground");
         SetupVisual();
@@ -30,11 +30,6 @@ public class ItemObject : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = itemData.Icon;
             gameObject.name = "Item - " + itemData.ItemName;
         }
-        else if (fragmentoData != null)
-        {
-            GetComponent<SpriteRenderer>().sprite = fragmentoData.Icon;
-            gameObject.name = "Fragmento - " + fragmentoData.NomeFragmento;
-        }
         else
         {
             Debug.LogWarning("itemObject não possui dados de item ou fragmento.");
@@ -44,13 +39,6 @@ public class ItemObject : MonoBehaviour
     public void SetupItem(ItemData _itemData, Vector2 _velocity)
     {
         itemData = _itemData;
-        rb.linearVelocity = _velocity;
-        SetupVisual();
-    }
-
-    public void SetupFragmento(FragmentoData _fragmentoData, Vector2 _velocity)
-    {
-        fragmentoData = _fragmentoData;
         rb.linearVelocity = _velocity;
         SetupVisual();
     }
@@ -65,10 +53,6 @@ public class ItemObject : MonoBehaviour
         if (itemData != null)
         {
             inventory_System.instance.AddItem(itemData);
-        }
-        else if (fragmentoData != null)
-        {
-            FragmentoSystem.instance.AddItem(fragmentoData);
         }
         else
         {

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ChaveVida
   m_EditorClassIdentifier: 
   <id>k__BackingField: ChaveVida
+  animatorController: {fileID: 9100000, guid: dc03bb33522875b4c89e40d89c80220b, type: 2}
+  particulaPegarPrefab: {fileID: 0}
   NomeFragmento: ChaveVida
   TipoFragmento: 2
   Icon: {fileID: 21300000, guid: 84608cfbaa35d3d4991ad870b5ead436, type: 3}
