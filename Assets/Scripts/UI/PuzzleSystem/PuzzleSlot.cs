@@ -27,6 +27,9 @@ public class PuzzleSlot : MonoBehaviour
         part.isCollected = false;
         part.isPlaced = true;
 
+        //Fica invisivel para override em sprite conjunta.
+        part.GetComponent<SpriteRenderer>().enabled = false;
+
         // posiciona visualmente a peça
         part.transform.position = (Vector3)targetPosition;
         part.transform.SetParent(transform);

@@ -6,6 +6,7 @@ public class PuzzleData : MonoBehaviour
     [Header("Puzzle Info")]
     public string puzzleID;
     public bool isCompleted;
+    public GameObject Reference;
 
     [Header("Slots")]
     public List<PuzzleSlot> slots = new();
