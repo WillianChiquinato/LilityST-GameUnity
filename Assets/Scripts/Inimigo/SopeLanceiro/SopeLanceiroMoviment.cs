@@ -12,6 +12,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
     private Item_drop dropInimigo;
     public bool isWalking;
     public GameObject EscudoGameObject;
+    private VisionDetectPlayer Detector;
 
     [Header("Variaveis de Movimento")]
     private Vector2 homePosition;
@@ -63,6 +64,8 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
         EscudoGameObject.SetActive(false);
         homePosition = transform.position;
+
+        Detector = GetComponent<VisionDetectPlayer>();
     }
 
     void Update()
@@ -85,6 +88,8 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         distanciaXWalk = Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x);
         distanciaYWalk = Mathf.Abs(transform.position.y - GameManager.instance.player.transform.position.y);
         direcao = Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x);
+        float direcaoOlhando = transform.localScale.x > 0 ? -1 : 1;
+        bool viuPlayer = Detector.Detectar(new Vector2(direcaoOlhando, 0f));
 
         if (distanciaYWalk > 4.5f)
         {
@@ -99,7 +104,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
             if (!DamageScript.VelocityLock)
             {
                 //Moviment Área.
-                if (distanciaXWalk > 1.0f && distanciaXWalk < 10f)
+                if (viuPlayer)
                 {
                     timerBackToHome = 0f;
                     returnedToHome = false;
@@ -116,7 +121,6 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                     {
                         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
                         TravarCorpo();
-                        FlipDirecao();
                     }
                     else
                     {
@@ -130,7 +134,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
                 }
 
                 //Ataque Área.
-                if (PlayerNaFrente() && !isAttacking)
+                if (viuPlayer && PlayerNaFrente() && !isAttacking)
                 {
                     EscudoGameObject.SetActive(true);
                     if (counterAttackPending)
@@ -188,6 +192,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
         if (distanciaHome > 0.2f)
         {
+            LiberarCorpo();
             isWalking = true;
             float direcaoHome = Mathf.Sign(homePosition.x - transform.position.x);
             rb.linearVelocity = new Vector2(direcaoHome * speed, rb.linearVelocity.y);
@@ -202,12 +207,17 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             returnedToHome = true;
             timerBackToHome = 0f;
+
+            Detector.ResetDetection();
             FlipDirecao();
         }
     }
 
     private void FlipDirecao()
     {
+        if (!Detector.viuPlayerPrimeiravez)
+            return;
+
         if (touching.IsGrouded)
         {
             if (transform.position.x > GameManager.instance.player.transform.position.x)
@@ -281,6 +291,7 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
         yield return new WaitForSeconds(0.2f);
 
         spriteRenderer.material = originalMaterial;
+        DamageScript.VelocityLock = false;
     }
 
     public void AttackStep(float force = 2f)

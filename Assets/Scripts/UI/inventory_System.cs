@@ -17,7 +17,7 @@ public class inventory_System : MonoBehaviour
 
     public List<Inventory_item> coletaveis;
     public Dictionary<ItemData, Inventory_item> collectDicionary;
-    public List<Inventory_item> selectedItemToUse;
+    public List<Inventory_item> selectedItemToUse = new List<Inventory_item>();
 
 
     [Header("Inventory UI")]

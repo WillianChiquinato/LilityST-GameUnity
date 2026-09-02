@@ -16,11 +16,8 @@ public class Throw_Item : MonoBehaviour
     public bool TimerArremessar;
     public float ForceArremesso;
 
-    void Start()
+    void Awake()
     {
-        animator = GetComponent<Animator>();
-        player = GetComponent<PlayerMoviment>();
-
         if (inventory_System.instance != null)
         {
             if (inventory_System.instance.selectedItemToUse.Count > 0 && inventory_System.instance.selectedItemToUse[0].itemData != null)
@@ -30,15 +27,16 @@ public class Throw_Item : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        player = GetComponent<PlayerMoviment>();
+    }
+
     void LateUpdate()
     {
         if (inventory_System.instance != null)
         {
-            if (inventory_System.instance.selectedItemToUse.Count > 0 && inventory_System.instance.selectedItemToUse[0].itemData != null)
-            {
-                itensColetaveis = inventory_System.instance.selectedItemToUse;
-            }
-
             if (itensColetaveis != null && itensColetaveis.Count > 0)
             {
                 itemArremessar = new GameObject[itensColetaveis.Count];
@@ -52,10 +50,6 @@ public class Throw_Item : MonoBehaviour
                     stackObjetos = itensColetaveis[0].stackSize;
                     itemArremessar[i].GetComponent<ItemObject>().itemData = itemData;
                 }
-            }
-            else
-            {
-                Debug.LogWarning("Nenhum item coletável encontrado no inventário.");
             }
         }
 
@@ -95,10 +89,6 @@ public class Throw_Item : MonoBehaviour
                     newDrop = null;
                 }
             }
-        }
-        else
-        {
-            Debug.Log("Nenhum item coletável encontrado no inventário.");
         }
     }
 }

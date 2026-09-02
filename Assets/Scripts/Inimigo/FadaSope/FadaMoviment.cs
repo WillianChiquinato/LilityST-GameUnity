@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class FadaMoviment : PlayerPoco
 {
+    [Header("References")]
     Rigidbody2D rb;
     Animator animator;
     Damage DamageScript;
+    VisionDetectPlayer Detector;
     public enum State { Orbit, Charging, Dash, Returning }
     public State currentState;
     private Item_drop dropInimigo;
@@ -57,6 +59,8 @@ public class FadaMoviment : PlayerPoco
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
         newMaterial = Resources.Load<Material>("Material/Hit");
+
+        Detector = GetComponent<VisionDetectPlayer>();
     }
 
     void Start()
@@ -76,17 +80,26 @@ public class FadaMoviment : PlayerPoco
             return;
         }
 
-        if (!isDashing)
-        {
-            FlipDirecao();
-        }
-
         distanciaXWalk = Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x);
+        float direcaoOlhando = transform.localScale.x > 0 ? -1 : 1;
+        bool viuPlayer = Detector.Detectar(new Vector2(direcaoOlhando, 0f));
 
-        if (distanciaXWalk < 8f)
+        if (viuPlayer || (Detector.PlayerDetectado && Detector.manterAggroAoPerderVisao))
         {
+            bool estavaNaBase = returnedToHome;
+
+            if (!isDashing && currentState != State.Returning)
+            {
+                FlipDirecao(State.Orbit);
+            }
+
             timerBackToHome = 0f;
             returnedToHome = false;
+
+            if (estavaNaBase)
+            {
+                currentState = State.Orbit;
+            }
 
             switch (currentState)
             {
@@ -130,13 +143,17 @@ public class FadaMoviment : PlayerPoco
             if (distanciaHome > 0.2f)
             {
                 Vector2 directionToHome = (homePosition - rb.position).normalized;
+                FlipDirecao(State.Returning);
                 rb.linearVelocity = directionToHome * returnSpeed;
 
                 currentState = State.Returning;
             }
             else
             {
+                currentState = State.Returning;
+                transform.localScale = homeLocalScale;
                 rb.linearVelocity = Vector2.zero;
+                Detector.ResetDetection();
             }
         }
         else
@@ -238,13 +255,14 @@ public class FadaMoviment : PlayerPoco
 
         if (dashTimer >= dashDuration)
         {
-            currentState = State.Returning;
+            currentState = State.Orbit;
             isDashing = false;
         }
     }
 
     void Returning()
     {
+        FlipDirecao(State.Returning);
         animator.ResetTrigger("AttackMode");
         distanciaHome = Vector2.Distance(rb.position, homePosition);
 
@@ -256,18 +274,20 @@ public class FadaMoviment : PlayerPoco
         else
         {
             rb.linearVelocity = Vector2.zero;
-            currentState = State.Orbit;
+            currentState = State.Returning;
+            
+            Detector.ResetDetection();
         }
 
         chargePosition = rb.position;
         chargeTimer = 0f;
     }
 
-    private void FlipDirecao()
+    private void FlipDirecao(State currentStateFlip)
     {
         if (DamageScript.IsAlive)
         {
-            Vector2 targetPos = currentState == State.Returning ? homePosition : (Vector2)GameManager.instance.player.transform.position;
+            Vector2 targetPos = currentStateFlip == State.Returning ? homePosition : (Vector2)GameManager.instance.player.transform.position;
             
             if (transform.position.x > targetPos.x)
             {
