@@ -4,6 +4,7 @@ public class SpawnSystem : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     public Transform[] spawnPoints;
+    public GameObject[] spawnedEnemies;
     public float spawnInterval = 1f;
     [Min(0)] public int maxEnemiesToSpawn = 2;
     public ArenaController arenaController;
@@ -15,6 +16,9 @@ public class SpawnSystem : MonoBehaviour
     void Awake()
     {
         arenaController = GetComponent<ArenaController>();
+
+        if (spawnedEnemies == null || spawnedEnemies.Length < maxEnemiesToSpawn)
+            System.Array.Resize(ref spawnedEnemies, maxEnemiesToSpawn);
     }
 
     void Update()
@@ -39,6 +43,7 @@ public class SpawnSystem : MonoBehaviour
         if (spawnedEnemiesCount >= maxEnemiesToSpawn)
         {
             StopSpawnLoop();
+            arenaController.NotifySpawningFinished();
             return;
         }
 
@@ -73,14 +78,15 @@ public class SpawnSystem : MonoBehaviour
             return;
         }
 
-        int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+        int spawnPointIndex = spawnedEnemiesCount % spawnPoints.Length;
         int randomEnemyIndex = Random.Range(0, enemyPrefabs.Length);
 
         GameObject spawnedEnemy = Instantiate(
             enemyPrefabs[randomEnemyIndex],
-            spawnPoints[randomSpawnPointIndex].position,
+            spawnPoints[spawnPointIndex].position,
             Quaternion.identity);
 
+        spawnedEnemies[spawnedEnemiesCount] = spawnedEnemy;
         spawnedEnemiesCount++;
 
         if (arenaController != null)
@@ -90,6 +96,9 @@ public class SpawnSystem : MonoBehaviour
         }
 
         if (spawnedEnemiesCount >= maxEnemiesToSpawn)
+        {
             StopSpawnLoop();
+            arenaController.NotifySpawningFinished();
+        }
     }
 }

@@ -267,6 +267,8 @@ public class SopeLanceiroMoviment : PlayerPoco, IBlockDamage
 
     public void OnHit(int damage, Vector2 knockback)
     {
+        Detector.DetectarPlayerDeCostas();
+
         if (!DamageScript.IsAlive)
         {
             dropInimigo.GenerateDrop();

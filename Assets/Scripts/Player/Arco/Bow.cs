@@ -125,7 +125,11 @@ public class Bow : MonoBehaviour
             Vector2 playerPos = transform.position;
             Vector2 midPoint = Vector2.Lerp(playerPos, mousePosition, 0.35f);
             Vector2 camOffset = midPoint - playerPos;
-            transposer.m_TrackedObjectOffset = new Vector3(camOffset.x, camOffset.y, transposer.m_TrackedObjectOffset.z);
+
+            if (playerMoviment.IsCameraFollowing)
+            {
+                transposer.m_TrackedObjectOffset = new Vector3(camOffset.x, camOffset.y, transposer.m_TrackedObjectOffset.z);
+            }
         }
 
         if (NewArrow)
@@ -177,7 +181,11 @@ public class Bow : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         bodyCamera = false;
-        transposer.m_TrackedObjectOffset = new Vector3(0, 0, transposer.m_TrackedObjectOffset.z);
+
+        if (playerMoviment.IsCameraFollowing)
+        {
+            transposer.m_TrackedObjectOffset = new Vector3(0, 0, transposer.m_TrackedObjectOffset.z);
+        }
         playerMoviment.GetComponentInChildren<PernasArcoLogic>().DisableBow();
         playerArco.gameObject.SetActive(false);
         playerMoviment.GetComponent<SpriteRenderer>().enabled = true;

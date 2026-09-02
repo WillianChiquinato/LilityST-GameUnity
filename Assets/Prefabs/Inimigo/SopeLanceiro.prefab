@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7182967767952639683}
   - component: {fileID: 109737406340832852}
   - component: {fileID: 7496541759438389535}
+  - component: {fileID: 5982110302942611791}
   m_Layer: 8
   m_Name: SopeLanceiro
   m_TagString: Inimigos
@@ -46,7 +47,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8571775693450579417
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,6 +104,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!70 &7905021407527829615
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -263,11 +265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfItens: 2
-  possibleDrop:
-  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
-  - {fileID: 11400000, guid: 3a61ad32ffb2fec4bb1f1efd813e1a6e, type: 2}
-  - {fileID: 11400000, guid: 4791ff3c9d2fc414298ec05cc4cbbab3, type: 2}
+  amountOfItems: 1
+  possibleDrops:
+  - dropChance: 100
+    itemData: {fileID: 11400000, guid: 4791ff3c9d2fc414298ec05cc4cbbab3, type: 2}
+    objectPrefab: {fileID: 0}
   dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
 --- !u!114 &7496541759438389535
 MonoBehaviour:
@@ -329,6 +331,29 @@ MonoBehaviour:
   _IsGrouded: 0
   _IsOnWall: 0
   _IsOnCeiling: 0
+--- !u!114 &5982110302942611791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203135416686747009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd94ded8cb16c04fae8e5a18d12885d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisionDetectPlayer
+  tipoDeteccao: 1
+  raioDeteccao: 8
+  anguloVisao: 10
+  distanciaVisao: 10
+  obstaculoLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  viuPlayerPrimeiravez: 0
+  manterAggroAoPerderVisao: 1
+  tempoPerderAggro: 3
+  timerSemVisao: 0
 --- !u!1 &448451612648354673
 GameObject:
   m_ObjectHideFlags: 0

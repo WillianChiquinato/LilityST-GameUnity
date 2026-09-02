@@ -89,6 +89,14 @@ public class VisionDetectPlayer : MonoBehaviour
         return detectadoAgora;
     }
 
+    //Se o player dar dano no inimigo com ele de costas, tem que aggrar.
+    public void DetectarPlayerDeCostas()
+    {
+        viuPlayerPrimeiravez = true;
+        playerDetectado = true;
+        timerSemVisao = 0f;
+    }
+
     void OnDrawGizmosSelected()
     {
         if (tipoDeteccao == TipoDeteccao.Range)

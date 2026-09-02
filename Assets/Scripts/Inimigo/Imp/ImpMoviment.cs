@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Damage))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Damage), typeof(VisionDetectPlayer))]
 public class ImpMoviment : PlayerPoco
 {
     private enum ImpState
@@ -20,6 +20,7 @@ public class ImpMoviment : PlayerPoco
     [SerializeField] private TouchingVariables touching;
     [SerializeField] private Damage damageScript;
     [SerializeField] private Item_drop dropInimigo;
+    private VisionDetectPlayer Detector;
 
     private Vector2 homePosition;
 
@@ -28,7 +29,6 @@ public class ImpMoviment : PlayerPoco
     [Header("Perception")]
     [SerializeField] private float distanceX;
 
-    [SerializeField] private float detectRange = 8f;
     [SerializeField] private float loseSightRange = 12f;
     [SerializeField] private float maxVerticalDistance = 3f;
     [SerializeField] private float lostSightDelay = 1.5f;
@@ -89,6 +89,7 @@ public class ImpMoviment : PlayerPoco
     private bool forceFleeAfterHit;
     private bool hasTakenHitAggro;
     private bool hasScreamedAfterHit;
+    private float stoneTargetX;
     private Coroutine runAttackCoroutine;
 
     public bool canMove
@@ -109,6 +110,7 @@ public class ImpMoviment : PlayerPoco
         damageScript = GetComponent<Damage>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        Detector = GetComponent<VisionDetectPlayer>();
 
         dropInimigo = GetComponent<Item_drop>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -128,6 +130,9 @@ public class ImpMoviment : PlayerPoco
 
     private void Update()
     {
+        float facingDirection = transform.localScale.x > 0f ? -1f : 1f;
+        bool viuPlayer = Detector.Detectar(new Vector2(facingDirection, 0f));
+
         if (!damageScript.IsAlive)
         {
             rb.linearVelocity = Vector2.zero;
@@ -158,11 +163,15 @@ public class ImpMoviment : PlayerPoco
                 {
                     return;
                 }
-                FlipTowards(Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x));
+
+                if (viuPlayer || (Detector.PlayerDetectado && Detector.manterAggroAoPerderVisao))
+                {
+                    FlipTowards(Mathf.Sign(GameManager.instance.player.transform.position.x - transform.position.x));
+                }
             }
 
             UpdateTimers();
-            UpdatePerception();
+            UpdatePerception(viuPlayer);
             UpdateStateLogic();
             UpdateAnimatorMovement();
 
@@ -362,10 +371,11 @@ public class ImpMoviment : PlayerPoco
         }
     }
 
-    private void UpdatePerception()
+    private void UpdatePerception(bool playerDetected)
     {
         float distanceY = Mathf.Abs(GameManager.instance.player.transform.position.y - transform.position.y);
-        bool canSeePlayer = distanceX <= detectRange && distanceY <= maxVerticalDistance;
+        
+        bool canSeePlayer = playerDetected && distanceY <= maxVerticalDistance;
 
         if (currentState == ImpState.RunningAttack || currentState == ImpState.Scream || currentState == ImpState.Flee)
         {
@@ -384,7 +394,7 @@ public class ImpMoviment : PlayerPoco
             return;
         }
 
-        bool lostSight = distanceX > loseSightRange || distanceY > maxVerticalDistance;
+        bool lostSight = !playerDetected || distanceY > maxVerticalDistance;
 
         if (currentState == ImpState.Attack || currentState == ImpState.Engage)
         {
@@ -502,6 +512,7 @@ public class ImpMoviment : PlayerPoco
         animator.SetBool(moveBool, false);
         animator.SetBool(searchBool, false);
 
+        stoneTargetX = GameManager.instance.player.transform.position.x;
         isThrowing = true;
         isAttacking = true;
         animator.SetTrigger(throwAttackTrigger);
@@ -683,7 +694,7 @@ public class ImpMoviment : PlayerPoco
 
         if (stoneRb != null)
         {
-            float direction = Mathf.Sign(GameManager.instance.player.transform.position.x - spawnPoint.position.x);
+            float direction = Mathf.Sign(stoneTargetX - spawnPoint.position.x);
             stoneRb.linearVelocity = new Vector2(direction * stoneSpeed, stoneRb.linearVelocity.y);
         }
     }
@@ -769,6 +780,11 @@ public class ImpMoviment : PlayerPoco
 
     public void OnHit(int damage, Vector2 knockback)
     {
+        if (Detector != null)
+        {
+            Detector.DetectarPlayerDeCostas();
+        }
+
         if (!damageScript.IsAlive)
         {
             if (dropInimigo != null)

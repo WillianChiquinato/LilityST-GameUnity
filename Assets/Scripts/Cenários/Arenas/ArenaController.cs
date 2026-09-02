@@ -17,6 +17,7 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private List<GameObject> closesDoors = new List<GameObject>();
     [SerializeField] private List<Animator> animatorsDoors = new List<Animator>();
     [SerializeField] private bool startedArena;
+    [SerializeField] private bool finishedArena;
     public bool AuthorizeSpawn { get; private set; }
 
     [Header("Camera Intro")]
@@ -28,12 +29,11 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private float distanceCameraLensIncrease = 2f;
     [SerializeField] private float lensTransitionTime = 0.35f;
 
-    private float timeToStartArena = 2f;
+    private float timeToStartArena = 1.2f;
     private float timer;
 
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private CinemachineFramingTransposer framingTransposer;
-    private PlayerMoviment playerMoviment;
     private Coroutine arenaIntroCameraCoroutine;
     private Coroutine lensTransitionCoroutine;
     private Transform defaultFollowTarget;
@@ -43,6 +43,7 @@ public class ArenaController : MonoBehaviour
     private bool targetEnemyCameraLocked;
     private bool enforceLensSize;
     private float enforcedLensSize;
+    private bool spawningFinished;
     private Collider2D arenaBoundsCollider;
     private readonly List<Damage> arenaEnemies = new List<Damage>();
 
@@ -63,8 +64,6 @@ public class ArenaController : MonoBehaviour
     void Start()
     {
         closesDoors.ForEach(door => door.GetComponent<BoxCollider2D>().enabled = false);
-
-        playerMoviment = GameObject.FindAnyObjectByType<PlayerMoviment>();
         cinemachineVirtualCamera = GameObject.FindAnyObjectByType<CinemachineVirtualCamera>();
         arenaBoundsCollider = GetComponent<Collider2D>();
 
@@ -75,15 +74,24 @@ public class ArenaController : MonoBehaviour
             defaultOrthographicSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
         }
 
-        if (defaultFollowTarget == null && playerMoviment != null)
-            defaultFollowTarget = playerMoviment.transform;
+        if (defaultFollowTarget == null && GameManager.instance.player != null)
+            defaultFollowTarget = GameManager.instance.player.transform;
 
         RefreshArenaEnemies();
     }
 
     void Update()
     {
-        animatorsDoors.ForEach(door => door.SetBool("IsActive", startedArena));
+        if (startedArena && spawningFinished && AreAllArenaEnemiesDefeated())
+        {
+            animatorsDoors.ForEach(door => door.SetBool("IsActive", false));
+            animatorsDoors.ForEach(door => door.SetTrigger("TriggerStarted"));
+            EndArena();
+        }
+        else
+        {
+            animatorsDoors.ForEach(door => door.SetBool("IsActive", startedArena));
+        }
     }
 
     void LateUpdate()
@@ -103,6 +111,7 @@ public class ArenaController : MonoBehaviour
 
         closesDoors.ForEach(door => door.GetComponent<BoxCollider2D>().enabled = true);
         startedArena = true;
+        spawningFinished = false;
 
         StartArenaCameraIntro();
     }
@@ -115,10 +124,20 @@ public class ArenaController : MonoBehaviour
         ResetCameraTypeBehavior();
         startedArena = false;
         AuthorizeSpawn = false;
+        spawningFinished = false;
+        finishedArena = true;
+    }
+
+    public void NotifySpawningFinished()
+    {
+        spawningFinished = true;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if (finishedArena)
+            return;
+
         if (other.CompareTag("Player") && !startedArena)
         {
             timer += Time.deltaTime;
@@ -147,8 +166,8 @@ public class ArenaController : MonoBehaviour
 
     private IEnumerator ArenaCameraIntroCoroutine()
     {
-        if (lockPlayerDuringCamera && playerMoviment != null)
-            playerMoviment.canMove = false;
+        if (lockPlayerDuringCamera && GameManager.instance.player != null)
+            GameManager.instance.player.canMove = false;
 
         yield return new WaitForSeconds(1.2f);
 
@@ -157,7 +176,7 @@ public class ArenaController : MonoBehaviour
         Transform followTarget = cinemachineVirtualCamera != null ? cinemachineVirtualCamera.Follow : null;
         Vector3 followTargetPosition = followTarget != null
             ? followTarget.position
-            : (playerMoviment != null ? playerMoviment.transform.position : transform.position);
+            : (GameManager.instance.player != null ? GameManager.instance.player.transform.position : transform.position);
 
         Vector3 targetOffset = cameraFocusPoint.position - followTargetPosition;
 
@@ -192,8 +211,8 @@ public class ArenaController : MonoBehaviour
 
         ApplyCameraTypeBehavior();
 
-        if (lockPlayerDuringCamera && playerMoviment != null)
-            playerMoviment.canMove = true;
+        if (lockPlayerDuringCamera && GameManager.instance.player != null)
+            GameManager.instance.player.canMove = true;
 
         arenaIntroCameraCoroutine = null;
         AuthorizeSpawn = true;
@@ -311,7 +330,7 @@ public class ArenaController : MonoBehaviour
         if (damage == null || !damage.gameObject.scene.IsValid())
             return false;
 
-        if (playerMoviment != null && damage.gameObject == playerMoviment.gameObject)
+        if (GameManager.instance.player != null && damage.gameObject == GameManager.instance.player.gameObject)
             return false;
 
         if (damage.CompareTag("Player"))
@@ -336,12 +355,23 @@ public class ArenaController : MonoBehaviour
             && damage.IsAlive;
     }
 
+    private bool AreAllArenaEnemiesDefeated()
+    {
+        foreach (Damage enemy in arenaEnemies)
+        {
+            if (IsValidArenaEnemyTarget(enemy))
+                return false;
+        }
+
+        return arenaEnemies.Count > 0;
+    }
+
     private void UpdateTargetEnemyCameraCenterPoint()
     {
         if (targetEnemyCameraCenterPoint == null)
             return;
 
-        Vector3 fallbackPosition = playerMoviment != null ? playerMoviment.transform.position : transform.position;
+        Vector3 fallbackPosition = GameManager.instance.player != null ? GameManager.instance.player.transform.position : transform.position;
         Bounds combatBounds = new Bounds(fallbackPosition, Vector3.zero);
 
         foreach (Damage enemy in arenaEnemies)
@@ -370,10 +400,12 @@ public class ArenaController : MonoBehaviour
         if (framingTransposer == null)
             yield break;
 
+        GameManager.instance.player.IsCameraFollowing = false;
+
         Transform followTarget = cinemachineVirtualCamera != null ? cinemachineVirtualCamera.Follow : null;
         Vector3 followTargetPosition = followTarget != null
             ? followTarget.position
-            : (playerMoviment != null ? playerMoviment.transform.position : transform.position);
+            : (GameManager.instance.player != null ? GameManager.instance.player.transform.position : transform.position);
 
         Vector3 startOffset = framingTransposer.m_TrackedObjectOffset;
 

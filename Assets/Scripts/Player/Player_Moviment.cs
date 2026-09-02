@@ -16,6 +16,7 @@ public class PlayerMoviment : MonoBehaviour
     public bool AutoMoveAnimations = false;
     public bool HorizontalMovementBlocked = false;
     public bool VerticalMovementBlocked = false;
+    public bool IsCameraFollowing = true;
 
     [Header("Instances")]
     public float currentZRotation;
@@ -27,8 +28,6 @@ public class PlayerMoviment : MonoBehaviour
 
     public bool Atacar;
     public bool RecuarAtirar;
-    [SerializeField]
-    private int numeroDeAttcks;
     public bool Reset = false;
     public float ResetTimer;
     public float ResetTimerLimite;
@@ -841,7 +840,10 @@ public class PlayerMoviment : MonoBehaviour
                     bow.gameObject.SetActive(true);
 
                     bow.playerArco.gameObject.SetActive(true);
-                    bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+                    if (IsCameraFollowing)
+                    {
+                        bow.cinemachineVirtualCamera.LookAt = bow.FollowArco;
+                    }
                 }
             }
 

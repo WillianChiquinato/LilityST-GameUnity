@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 790687078746926973}
   - component: {fileID: 3599564054310579426}
   - component: {fileID: 7017894115568812690}
+  - component: {fileID: 4264737706919005063}
   m_Layer: 8
   m_Name: FadaSope
   m_TagString: Inimigos
@@ -126,7 +127,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1826910017597470826
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -183,6 +184,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!95 &5296790617414086358
 Animator:
   serializedVersion: 7
@@ -300,6 +302,7 @@ MonoBehaviour:
   dashCooldown: 2.7
   returnSpeed: 5
   isDashing: 0
+  homeLocalScale: {x: 0, y: 0}
   distanciaXWalk: 0
   timerBackToHome: 0
   returnedToHome: 0
@@ -350,10 +353,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fbb199ec566f84c81c2ebaa97a8f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfItens: 3
-  possibleDrop:
-  - {fileID: 11400000, guid: 73dfdbd5c822cc64fa6b08c9b9860d20, type: 2}
-  - {fileID: 11400000, guid: 7f5da9e40e84db4468593af890f6584a, type: 2}
-  - {fileID: 11400000, guid: 2c87352f548e66d4297998aedf44f71a, type: 2}
-  - {fileID: 11400000, guid: 154486c47e47d544590996a51ac1e18e, type: 2}
+  amountOfItems: 1
+  possibleDrops: []
   dropPrefab: {fileID: 7119994593037785999, guid: 1aca92845634b9248a8c542f5c8e0a32, type: 3}
+--- !u!114 &4264737706919005063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724626546988523594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd94ded8cb16c04fae8e5a18d12885d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisionDetectPlayer
+  tipoDeteccao: 0
+  raioDeteccao: 7
+  anguloVisao: 60
+  distanciaVisao: 10
+  obstaculoLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  viuPlayerPrimeiravez: 0
+  manterAggroAoPerderVisao: 1
+  tempoPerderAggro: 6
+  timerSemVisao: 0
